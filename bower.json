@@ -27,6 +27,7 @@
     "jquery-easing": "*",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "satellizer": "^0.15.5"
   }
 }
