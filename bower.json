@@ -1,0 +1,32 @@
+{
+  "name": "Intern-On",
+  "authors": [
+    "sequena-alex <sequena.alex@gmail.com>"
+  ],
+  "description": "front-end",
+  "main": "index.html",
+  "keywords": [
+    "Intern"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.0",
+    "angular-resource": "^1.6.0",
+    "angular-bootstrap": "^2.3.1",
+    "angular-ui-router": "^0.3.2",
+    "jquery": "^3.1.1",
+    "jquery-easing": "*",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "ngstorage": "^0.3.11"
+  }
+}
