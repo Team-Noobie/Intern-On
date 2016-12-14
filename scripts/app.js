@@ -23,15 +23,12 @@
     })());
 
 
-    internon.run(['$rootScope','$state', '$stateParams','$localStorage',function($rootScope,$state, $stateParams,$localStorage) {
-
-    }]);
+    internon.run(function($auth,$http,$rootScope,$state, $stateParams,$localStorage) {
+        $http.defaults.headers.common.Authorization = 'Bearer: ' + $auth.getToken();
+    });
 
     internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider) {
-
         $authProvider.loginUrl = urls.API_HOST + '/auth';
-
-
         $urlRouterProvider.otherwise('index');
 
         var states = [
@@ -41,6 +38,12 @@
             templateUrl:  'partials/index.html',
             controller:'index_controller'
             },
+            {
+            name: 'user',
+            url: '/user',
+            templateUrl:  'partials/user.html',
+            controller:'user_controller'
+            },
         ]
 
         states.forEach(function(state) {
@@ -48,7 +51,8 @@
         });
     });
 
-    internon.controller('index_controller',function($state,$scope,User,$localStorage,$auth){
+
+    internon.controller('index_controller',function(User,$state,$scope,$localStorage,$auth){
         $scope.login = function() {
 
             var credentials = {
@@ -59,18 +63,25 @@
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
                 // If login is successful, redirect to the users state
-                // $state.go('users', {});
-                console.log($auth.isAuthenticated());
+                // User.get().$promise.then(function (response) {
+                //     $localStorage.user = {
+                //         id:response.user.id,
+                //     };
+                //     $state.go('user');
+                // });
+                $state.go('user');
+            }).catch(function(error){
+
             });
         }
 
 	});
 
-
     internon.factory('User', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/user/:id', {
+        return $resource(urls.API_HOST + '/auth/me/:id', {
             id: '@id'
         });
     }
     ]);
+
 })();
