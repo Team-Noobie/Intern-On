@@ -3,6 +3,36 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('../assets/fonts/Roboto_Slab/RobotoSlab-Bold.ttf'),
+       url('../assets/fonts/Roboto_Slab/RobotoSlab-Light.ttf'),
+       url('../assets/fonts/Roboto_Slab/RobotoSlab-Regular.ttf'),
+       url('../assets/fonts/Roboto_Slab/RobotoSlab-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf'),
+       url('../assets/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Kaushan Script';
+  src: url('../assets/fonts/Kaushan_Script/KaushanScript-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: url('../assets/fonts/Droid_Serif/DroidSerif.ttf'),
+       url('../assets/fonts/Droid_Serif/DroidSerif-Bold.ttf'),
+       url('../assets/fonts/Droid_Serif/DroidSerif-BoldItalic.ttf'),
+       url('../assets/fonts/Droid_Serif/DroidSerif-Italic.ttf');
+}
+
+
+
 body {
   overflow-x: hidden;
   font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
