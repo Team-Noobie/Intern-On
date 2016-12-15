@@ -27,10 +27,10 @@
         $http.defaults.headers.common.Authorization = 'Bearer: ' + $auth.getToken();
     });
 
-    internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider) {
+    internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
         $authProvider.loginUrl = urls.API_HOST + '/auth';
         $urlRouterProvider.otherwise('index');
-
+        // $qProvider.errorOnUnhandledRejections(false);
         var states = [
             {
             name: 'index',
@@ -52,9 +52,34 @@
     });
 
 
-    internon.controller('index_controller',function(User,$state,$scope,$localStorage,$auth){
-        $scope.login = function() {
+    internon.controller('index_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal){
+        $scope.openModal = function(){
+            var type;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'Login.html',
+                controller: 'index_modal_controller',
+                size: 'lg',
+                resolve: {
+                        type: function () {
+                            return type;
+                        }
+                    }
+                });
 
+                modalInstance.result.then(function (type) {
+					return 1;
+				});
+        };
+	});
+
+    internon.controller('index_modal_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+
+        $scope.cancelModal = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+        $scope.login = function() {
             var credentials = {
                 email: $scope.email,
                 password: $scope.password
@@ -62,23 +87,37 @@
 
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
-                // If login is successful, redirect to the users state
-                // User.get().$promise.then(function (response) {
-                //     $localStorage.user = {
-                //         id:response.user.id,
-                //     };
-                //     $state.go('user');
-                // });
                 $state.go('user');
             }).catch(function(error){
 
             });
         }
 
-	});
+        $scope.register = function(){
+            $scope.formdata = {
+                message: 'Hello World',
+                user: 'alex'
+            };
+            Register.save($scope.formdata).$promise.then(function (response) {
+                console.log(response);
+            });
+        };
+        $scope.text = "Register";
 
-    internon.factory('User', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/auth/me/:id', {
+        $scope.toggleRegister = function(){
+            if($scope.text == "Register"){
+                $scope.text = "Log in";
+            }else{
+                $scope.text = "Register";
+            }
+            console.log($scope.text);
+        };
+
+    });
+
+
+    internon.factory('Register', ['urls', '$resource', function (urls, $resource) {
+        return $resource(urls.API_HOST + '/register/:id', {
             id: '@id'
         });
     }

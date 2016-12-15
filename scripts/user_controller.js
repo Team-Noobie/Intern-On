@@ -1,10 +1,13 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('user_controller',function(User,$auth,$state,$scope,$localStorage){
+    internon.controller('user_controller',function(urls,$http,$auth,$state,$scope,$localStorage){
 
-        User.get().$promise.then(function (response) {
-            $scope.user = response.user;
+        $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
+          $scope.user = response.user;
         });
+
+
+
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();

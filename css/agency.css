@@ -613,7 +613,7 @@ section#contact ::-webkit-input-placeholder {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
-  color: #eeeeee;
+  color: #b3b3b3;
 }
 section#contact :-moz-placeholder {
   /* Firefox 18- */
@@ -683,12 +683,12 @@ ul.social-buttons li a:active {
 .btn:active:focus {
   outline: none;
 }
-.portfolio-modal .modal-dialog {
+.modal .modal-dialog {
   margin: 0;
   height: 100%;
   width: auto;
 }
-.portfolio-modal .modal-content {
+.modal .modal-content {
   border-radius: 0;
   background-clip: border-box;
   -webkit-box-shadow: none;
@@ -698,27 +698,27 @@ ul.social-buttons li a:active {
   padding: 100px 0;
   text-align: center;
 }
-.portfolio-modal .modal-content h2 {
+.modal .modal-content h2 {
   margin-bottom: 15px;
-  font-size: 3em;
+  /*font-size: 3em;*/
 }
-.portfolio-modal .modal-content p {
+.modal .modal-content p {
   margin-bottom: 30px;
 }
-.portfolio-modal .modal-content p.item-intro {
+.modal .modal-content p.item-intro {
   margin: 20px 0 30px;
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
   font-size: 16px;
 }
-.portfolio-modal .modal-content ul.list-inline {
+.modal .modal-content ul.list-inline {
   margin-bottom: 30px;
   margin-top: 0;
 }
-.portfolio-modal .modal-content img {
+.modal .modal-content img {
   margin-bottom: 30px;
 }
-.portfolio-modal .close-modal {
+.modal .close-modal {
   position: absolute;
   width: 75px;
   height: 75px;
@@ -727,10 +727,10 @@ ul.social-buttons li a:active {
   right: 25px;
   cursor: pointer;
 }
-.portfolio-modal .close-modal:hover {
+.modal .close-modal:hover {
   opacity: 0.3;
 }
-.portfolio-modal .close-modal .lr {
+.modal .close-modal .lr {
   height: 75px;
   width: 1px;
   margin-left: 35px;
@@ -742,7 +742,7 @@ ul.social-buttons li a:active {
   /* Safari and Chrome */
   z-index: 1051;
 }
-.portfolio-modal .close-modal .lr .rl {
+.modal .close-modal .lr .rl {
   height: 75px;
   width: 1px;
   background-color: #222222;
@@ -753,7 +753,7 @@ ul.social-buttons li a:active {
   /* Safari and Chrome */
   z-index: 1052;
 }
-.portfolio-modal .modal-backdrop {
+.modal .modal-backdrop {
   opacity: 0;
   display: none;
 }
@@ -773,4 +773,8 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #fed136;
+}
+
+.team-row-2{
+  margin-left: 220px;
 }
