@@ -336,43 +336,18 @@
             </div>
         </div>
     </footer>
-
     <script src="js/agency.js"></script>
 
     <script type="text/ng-template" id="Login.html">
-    <link href="css/login.css" rel="stylesheet">
+        <link href="css/agency.css" rel="stylesheet">
 
-            <div class="close-modal" ng-click="cancelModal()">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
+            <form action="">
+                <input type="text" placeholder="E-Mail">
+                <input class="password" type="password" placeholder = "Password">
+                <a ng-click="openModal()" class="btn btn-xl">Submit</a>
+            </form>
 
-            <div class="module form-module">
-                <div class="toggle" ng-click="toggleRegister()">{{text}}</div>
-                <div class="form">
-                    <h2>Login to your account</h2>
-                    <form>
-                    <input type="text" placeholder="Username"/>
-                    <input type="password" placeholder="Password"/>
-                    <button class="button">Login</button>
-                    </form>
-                </div>
-                <div class="form">
-                    <h2>Create an account</h2>
-                    <form>
-                    <input type="text" placeholder="Username"/>
-                    <input type="password" placeholder="Password"/>
-                    <input type="email" placeholder="Email Address"/>
-                    <input type="tel" placeholder="Phone Number"/>
-                    <button>Register</button>
-                    </form>
-                </div>
-                <div class="cta"><a href="">Forgot your password?</a></div>
-            </div>
-
-        <script src="js/login.js"></script>
+        <script src="js/agency.js"></script>
     </script>
 
 

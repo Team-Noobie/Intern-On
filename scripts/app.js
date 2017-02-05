@@ -10,10 +10,10 @@
 
     internon.constant('urls', (function () {
         // Serve the laravel
-        var server = "localhost:8000";
+        var server = "localhost/public/";
         return {
             SERVER_IP: server,
-            API_HOST: 'http://' + server + '/api/internon'
+            API_HOST: server + '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -25,6 +25,10 @@
 
     internon.run(function($auth,$http,$rootScope,$state, $stateParams,$localStorage) {
         $http.defaults.headers.common.Authorization = 'Bearer: ' + $auth.getToken();
+
+        $rootScope.$on('$stateChangeStart', function($state,event, toState, toParams, fromState, fromParams){
+            // put here codes for security log in first :)
+        });
     });
 
     internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
@@ -59,7 +63,7 @@
                 animation: true,
                 templateUrl: 'Login.html',
                 controller: 'index_modal_controller',
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                         type: function () {
                             return type;
@@ -71,6 +75,11 @@
 					return 1;
 				});
         };
+
+        $scope.goUser = function(){
+            $state.go('user')
+        };
+
 	});
 
     internon.controller('index_modal_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
@@ -78,6 +87,7 @@
         $scope.cancelModal = function () {
             $uibModalInstance.dismiss('cancel');
         };
+
 
         $scope.login = function() {
             var credentials = {
