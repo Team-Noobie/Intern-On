@@ -10,10 +10,9 @@
 
     internon.constant('urls', (function () {
         // Serve the laravel
-        var server = "localhost/public/";
+        var server = "Intern-On-DB/public";
         return {
-            SERVER_IP: server,
-            API_HOST: server + '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -57,11 +56,18 @@
 
 
     internon.controller('index_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal){
-        $scope.openModal = function(){
+        $scope.openModal = function(type){
             var type;
+            var template="";
+
+            if(type==1)
+                template="Login.html";
+            else if(type==2)
+                template="Register.html";
+
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'Login.html',
+                templateUrl: template,
                 controller: 'index_modal_controller',
                 size: 'sm',
                 resolve: {
@@ -84,8 +90,8 @@
 
     internon.controller('index_modal_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
 
-        $scope.cancelModal = function () {
-            $uibModalInstance.dismiss('cancel');
+        $scope.close = function () {
+            $uibModalInstance.close();
         };
 
 
@@ -98,29 +104,22 @@
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
                 $state.go('user');
+                $uibModalInstance.close();
+                
             }).catch(function(error){
 
             });
         }
 
-        $scope.register = function(){
-            $scope.formdata = {
-                message: 'Hello World',
-                user: 'alex'
-            };
-            Register.save($scope.formdata).$promise.then(function (response) {
-                console.log(response);
-            });
-        };
-        $scope.text = "Register";
+        $scope.formdata = {
+                type : 'student'
+        }
 
-        $scope.toggleRegister = function(){
-            if($scope.text == "Register"){
-                $scope.text = "Log in";
-            }else{
-                $scope.text = "Register";
-            }
-            console.log($scope.text);
+        $scope.register = function(){
+            
+            Register.save($scope.formdata).$promise.then(function (response) {
+                $uibModalInstance.close();
+            });
         };
 
     });
@@ -129,6 +128,27 @@
     internon.factory('Register', ['urls', '$resource', function (urls, $resource) {
         return $resource(urls.API_HOST + '/register/:id', {
             id: '@id'
+        },{
+            update:{
+                method:'PUT',
+            },
+            save:{
+                method:'POST'
+            }
+        });
+    }
+    ]);
+
+    internon.factory('Student_User', ['urls', '$resource', function (urls, $resource) {
+        return $resource(urls.API_HOST + '/register/:id', {
+            id: '@id'
+        },{
+            update:{
+                method:'PUT',
+            },
+            save:{
+                method:'POST'
+            }
         });
     }
     ]);
