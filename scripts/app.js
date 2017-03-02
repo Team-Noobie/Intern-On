@@ -42,11 +42,83 @@
             controller:'index_controller'
             },
             {
-            name: 'user',
-            url: '/user',
-            templateUrl:  'partials/user.html',
+            name: 'getUser',
+            url: '/index',
+            templateUrl:  '',
             controller:'user_controller'
             },
+
+            // Company routes
+            {
+            name: 'user_company',
+            url: '/user-company',
+            templateUrl:  'partials/user_company.html',
+            controller:'user_company_controller'
+            },
+            {
+            name: 'user_company.company_ads',
+            url: '',
+            templateUrl:  'company_ads.html',
+            controller:'user_company_controller'
+            },
+            {
+            name: 'user_company.company_create_ads',
+            url: '',
+            templateUrl:  'company_create_ads.html',
+            controller:'user_company_controller'
+            },
+            {
+            name: 'user_company.company_application',
+            url: '',
+            templateUrl:  'company_application.html',
+            controller:'application_controller'
+            },
+
+            
+            // Student routes
+            {
+            name: 'user_student',
+            url: '/user',
+            templateUrl:  'partials/user_student.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_search',
+            url: '',
+            templateUrl:  'searchinternship.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_profile',
+            url: '',
+            templateUrl:  'studentprofile.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_application',
+            url: '',
+            templateUrl:  'studentapplication.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_schedule',
+            url: '',
+            templateUrl:  'studentschedule.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_setting',
+            url: '',
+            templateUrl:  'studentsetting.html',
+            controller:'user_students_controller'
+            },
+            {
+            name: 'user_student.student_message',
+            url: '',
+            templateUrl:  'studentmessage.html',
+            controller:'user_students_controller'
+            }
+            
         ]
 
         states.forEach(function(state) {
@@ -55,7 +127,7 @@
     });
 
 
-    internon.controller('index_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal){
+    internon.controller('index_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal){
         $scope.openModal = function(type){
             var type;
             var template="";
@@ -64,6 +136,8 @@
                 template="Login.html";
             else if(type==2)
                 template="Register.html";
+             else if(type==3)
+                template="CompanyLogin.html";
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -82,18 +156,14 @@
 				});
         };
 
-        $scope.goUser = function(){
-            $state.go('user')
-        };
 
 	});
 
-    internon.controller('index_modal_controller',function(Register,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+    internon.controller('index_modal_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
 
         $scope.close = function () {
             $uibModalInstance.close();
         };
-
 
         $scope.login = function() {
             var credentials = {
@@ -103,7 +173,7 @@
 
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
-                $state.go('user');
+                $state.go('getUser')
                 $uibModalInstance.close();
                 
             }).catch(function(error){
@@ -111,21 +181,10 @@
             });
         }
 
-        $scope.formdata = {
-                type : 'student'
-        }
-
-        $scope.register = function(){
-            
-            Register.save($scope.formdata).$promise.then(function (response) {
-                $uibModalInstance.close();
-            });
-        };
-
     });
 
 
-    internon.factory('Register', ['urls', '$resource', function (urls, $resource) {
+    internon.factory('Account', ['urls', '$resource', function (urls, $resource) {
         return $resource(urls.API_HOST + '/register/:id', {
             id: '@id'
         },{
@@ -139,15 +198,26 @@
     }
     ]);
 
-    internon.factory('Student_User', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/register/:id', {
-            id: '@id'
-        },{
+    internon.factory('Ads', ['urls', '$resource', function (urls, $resource) {
+        return $resource(urls.API_HOST + '/ads/:id',{
             update:{
                 method:'PUT',
             },
             save:{
-                method:'POST'
+                method:'POST',
+                isArray: true,
+            }
+        });
+    }
+    ]);
+
+    internon.factory('Application', ['urls', '$resource', function (urls, $resource) {
+        return $resource(urls.API_HOST + '/application/:id',{
+            update:{
+                method:'PUT',
+            },
+            save:{
+                method:'POST',               
             }
         });
     }

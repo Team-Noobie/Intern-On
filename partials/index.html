@@ -1,5 +1,3 @@
-
-
 <link href="css/agency.css" rel="stylesheet">
 <link href="css/modal.css" rel="stylesheet" >
 <!-- Navigation -->
@@ -31,6 +29,10 @@
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
                 </li>
+                <!-- <a style="margin-left:5px;margin-top:10px;" ng-click="openModal(2)" class="btn btn-primary">Register</a> -->
+                
+                <a style="margin-top:10px; margin-left:10px;" ng-click="openModal(1)" class="btn btn-primary">Login</a>
+                <!--<a style="margin-top:10px;" ng-click="openModal(3)" class="btn btn-success">Company</a>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -69,10 +71,6 @@
                                 </div>
                             </div>
                         </div>
-          
-                        <div>  <a ng-click="openModal(2)" class="btn btn-xl">Register</a>
-            <a ng-click="openModal(1)" class="btn btn-xl">Log-In</a>
-            </div>
         </div>
 
     </div>
@@ -377,11 +375,53 @@
             <div class="main-center">
                 <form class="form-horizontal" method="post">
                     <div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label">E-mail Address</label>
+                        <label for="username" class="cols-sm-2 control-label">Username</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" ng-model="email"  placeholder="Enter your Username" required/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" ng-model="password"  placeholder="Enter your Password" required/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" ng-click="login()">Login</button>
+                    </div>
+
+                    <div class="login-register">
+                        <a href="" ng-click="create_account()">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </script>
+    <script type="text/ng-template" id="CompanyLogin.html">       
+ 
+        <div class="modal-header">
+            <a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="modal-body">
+            <div class="main-center">
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Company Username</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" ng-model="email"  placeholder="Enter your E-mail" required/>
+                                <input type="text" class="form-control" ng-model="text"  placeholder="Enter your Company Username" required/>
                             </div>
                         </div>
                     </div>
@@ -436,7 +476,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control input-name" ng-model="formdata.firstn"  plameaceholder="Enter your Firstname" required/>
+                            <input type="text" class="form-control input-name" ng-model="formdata.firstname"  placeholder="Enter your Firstname" required/>
                         </div>
                     </div>
                 </div>
