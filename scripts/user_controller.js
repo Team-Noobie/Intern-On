@@ -85,6 +85,7 @@
             $state.go('index');
         };
         $scope.id;
+
         $scope.init = function () {
             $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
                 $scope.id = response.data.user.id;
@@ -94,13 +95,28 @@
                 });
             });
         };
+
         $scope.formdata={ 
             id:$scope.id,
-            type:'save'
+            type:'save',
+            ad_requirements:["",],
+            ad_responsibilities:["",],
+            ad_contacts:["",],
         };
+
+
+        $scope.addReq = function() {
+                $scope.formdata.ad_requirements.push("");
+        }
+        $scope.addRes = function() {
+                $scope.formdata.ad_responsibilities.push("");
+        }
+        $scope.addCon = function() {
+                $scope.formdata.ad_contacts.push("");
+        }
+
         $scope.save = function () {
              Ads.save($scope.formdata).$promise.then(function (response){
-            //  console.log(response);
 			});
             $state.go('user_company.company_ads');
         };
@@ -124,6 +140,25 @@
             }).catch(function(e){
                 console.log(e)
             });
+        };
+
+
+        $scope.openAdModal = function(id){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'company_ad.html',
+                controller: 'ad_controller',
+                size: 'lg',
+                resolve: {
+                        id: function () {
+                            return id;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (id) {
+					return 1;
+				});
         };
 
     });

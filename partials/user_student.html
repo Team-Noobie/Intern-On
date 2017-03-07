@@ -159,8 +159,8 @@
         <div ng-repeat="ad in aAds | filter:search" class="panel search-ads">
              <div style="border-style:solid;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
                 <a ng-click= "openAdModal(ad.ads_id)">
-                    <h3 style="text-transform: capitalize;">{{ad.ads_title}}</h3>
-                    <h4>{{ad.ads_description}}</h4>
+                    <h3 style="text-transform: capitalize;cursor:pointer">{{ad.ads_title}}</h3>
+                    <h4>{{ad.ads_requirement}}</h4>
                     <h5>{{ad.company_name}}</h5>
                 </a>
              </div>
@@ -184,7 +184,22 @@
 
     </script>
     <script type="text/ng-template" id="studentapplication.html">
-        <div class="partials"> Application</div>
+        <div class="partials"> 
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Advertisement Title</th>
+                    <th>Application Date</th>
+                    <th>Company Name</th>
+                </tr>
+                <tr ng-repeat="ap in applications">
+                    <td><a ng-click="">{{ap.ads_title}}</a></td>
+                    <!--<td><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button></td>
+                    <td></td>-->
+                    <td>{{ap.created_at}}</td>
+                    <td>{{ap.company_name}}</td>
+                </tr>
+            </table>
+        </div>
     </script>
     <script type="text/ng-template" id="studentschedule.html">
         <div class="partials"> Schedules</div>
@@ -207,7 +222,7 @@
                 <div class="col-md-6">
                       
                       <p>Description: {{ad.ads_description}}</p>
-                      <p>Requirements: {{ad.ads_requirement}}</p>
+                      <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
                       <p>Company Overview: company overview1</p>
                       <p>Skills: skills </p>
                       <p>minimum required hours: 200hrs</p>

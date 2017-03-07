@@ -53,7 +53,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'applicants_modal.html',
-                controller: 'application_controller',
+                controller: 'ads_application_controller',
                 size: 'lg',
                 resolve: {
                         id: function () {
@@ -69,6 +69,24 @@
 
 
         }
-    });    
 
+        if($state.current.name == 'user_student.student_application'){
+            $scope.formdata ={
+                user:'student',
+                type: 'show_applications',
+                id:$localStorage.id
+            };
+
+            Application.save($scope.formdata).$promise.then(function (response){
+                $scope.applications = response;
+            });
+        };
+    });    
+     internon.controller('ads_application_controller',function(id,Ads,Application,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+         
+        Application.get({id:id}).$promise.then(function (response) {
+           $scope.application = response;
+        });
+
+    });
 })();

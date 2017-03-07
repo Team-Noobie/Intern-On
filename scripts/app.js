@@ -98,7 +98,7 @@
             name: 'user_student.student_application',
             url: '',
             templateUrl:  'studentapplication.html',
-            controller:'user_students_controller'
+            controller:'application_controller'
             },
             {
             name: 'user_student.student_schedule',
