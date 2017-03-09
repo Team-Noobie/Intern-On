@@ -126,10 +126,17 @@
         };
 
         if($state.current.name == 'user_company.company_ads'){
-            $scope.items = [
-                'Date',
-                'Title',
+            $scope.choice = {
+                'option': {'name': '','value':''},
+            };
+            
+                
+            $scope.choices = [
+                {'name': 'Date','value':'created_at'},
+                {'name': 'Title','value':'ads_title'},
             ];
+
+
             $scope.data={
                 id:$localStorage.id,
                 type:'show'
