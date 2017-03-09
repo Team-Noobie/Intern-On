@@ -6,6 +6,7 @@
         'ui.bootstrap',
         'ngStorage',
         'satellizer',
+        'angular-toArrayFilter',
         ]);
 
     internon.constant('urls', (function () {
@@ -73,7 +74,12 @@
             templateUrl:  'company_application.html',
             controller:'application_controller'
             },
-
+            {
+            name: 'user_company.company_interns',
+            url: '',
+            templateUrl:  'company_interns.html',
+            controller:'application_controller'
+            },
             
             // Student routes
             {

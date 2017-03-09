@@ -121,13 +121,16 @@
                     </li>
                     <li>
                         <a ui-sref="user_company.company_application"><i class="fa fa-fw fa-table"></i> Applications</a>
+                    </li>
+                    <li>
+                        <a ui-sref="user_company.company_interns"><i class="fa fa-users"></i>Interns</a>
                     </li>   
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="width: 1012px;">
             <ui-view>
             </ui-view>
         </div>
@@ -137,55 +140,55 @@
 
     <script type="text/ng-template" id="company_ads.html">
         <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                           Advertisement
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-bar-chart-o"></i> Ads
-                            </li>
-                        </ol>
-                    </div>
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Advertisement
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-bar-chart-o"></i> Ads
+                        </li>
+                    </ol>
                 </div>
-                <!-- /.row -->
-                    <div class="row">
-                        <div class = "col-md-6">
-                            <a ui-sref="user_company.company_create_ads" class="" id="add-ad"><i class="fa fa-plus-circle" aria-hidden="true"border-radius:25px;></i> Create New Ad</a> 
-                        </div>
-                        <div class = "col-md-6">
-                            <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
-                                <a href id="simple-dropdown" uib-dropdown-toggle>Filter By <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-                                    <li ng-repeat="choice in items">
-                                        <a href>{{choice}}</a>
-                                    </li>
-                                </ul>
-                            </span>
-                        </div>      
-                    </div>
-                    <!--<div ng-repeat="ad in ads" style="border-style:solid;border-radius:25px;padding:3em;margin-top:1em;margin-bottom:1em">
-                        <p> <a>Title: {{ad.ads_title}}</a></p><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button>
-                    </div>-->
-                    
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th>Advertisement Title</th>
-                            <th>Actions</th>
-                            <th>Date Publish</th>
-                        </tr>
-                        <tr ng-repeat="ad in ads">
-                            <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ads_id)">{{ad.ads_title}}</a></td>
-                            <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                            <td>{{ad.created_at}}</td>
-                        </tr>
-                    </table>
-                <div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class = "col-md-6">
+                    <a ui-sref="user_company.company_create_ads" class="" id="add-ad"><i class="fa fa-plus-circle" aria-hidden="true"border-radius:25px;></i> Create New Ad</a> 
+                </div>
+                <div class = "col-md-6">
+                    <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
+                        <a href id="simple-dropdown" uib-dropdown-toggle>Filter By <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                            <li ng-repeat="choice in items">
+                                <a href>{{choice}}</a>
+                            </li>
+                        </ul>
+                    </span>
+                </div>      
+            </div>
+            <!--<div ng-repeat="ad in ads" style="border-style:solid;border-radius:25px;padding:3em;margin-top:1em;margin-bottom:1em">
+                <p> <a>Title: {{ad.ads_title}}</a></p><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button>
+            </div>-->
+            
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Advertisement Title</th>
+                    <th>Actions</th>
+                    <th>Date Publish</th>
+                </tr>
+                <tr ng-repeat="ad in ads  | toArray:false | orderBy: 'ads_title': false ">
+                    <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ads_id)">{{ad.ads_title}}</a></td>
+                    <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
+                    <td>{{ad.created_at}}</td>
+                </tr>
+            </table>
+        <div>
     </script>   
 
     <script type="text/ng-template" id="company_create_ads.html">
@@ -302,7 +305,7 @@
                         <tr ng-repeat="ad in ads">
                             <td><a style="text-transform:uppercase">{{ad.ads_title}}</a></td>
                             <td><button ng-click="openApModal(ad.ads_id)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
-                            <td></td>
+                            <td>{{ad.application_count}}</td>
                         </tr>
                     </table>
             </div>
@@ -338,3 +341,48 @@
            <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
         </div>
     </script>
+
+    <script type="text/ng-template" id="company_interns.html">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Interns
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-bar-chart-o"></i> Interns
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    </a>
+                </div>
+            </div>  
+        <div>
+    </script>
+
