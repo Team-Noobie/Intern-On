@@ -81,6 +81,7 @@
             controller:'application_controller'
             },
             
+            
             // Student routes
             {
             name: 'user_student',
@@ -148,7 +149,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: template,
-                controller: 'index_modal_controller',
+                controller: 'login_modal_controller',
                 size: 'sm',
                 resolve: {
                         type: function () {
@@ -165,7 +166,7 @@
 
 	});
 
-    internon.controller('index_modal_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+    internon.controller('login_modal_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
 
         $scope.close = function () {
             $uibModalInstance.close();
@@ -181,7 +182,6 @@
             $auth.login(credentials).then(function(data) {
                 $state.go('getUser')
                 $uibModalInstance.close();
-                
             }).catch(function(error){
 
             });
@@ -191,7 +191,7 @@
 
 
     internon.factory('Account', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/register/:id', {
+        return $resource(urls.API_HOST + '/user/:id', {
             id: '@id'
         },{
             update:{
@@ -211,8 +211,7 @@
             },
             save:{
                 method:'POST',
-                isArray: true,
-            }
+            },
         });
     }
     ]);

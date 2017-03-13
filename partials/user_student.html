@@ -140,7 +140,7 @@
         </nav>
 
         <div id="page-wrapper">
-            <ui-view>
+            <ui-view style="width: inherit;">
             </ui-view>
         </div>
         <!-- /#page-wrapper -->
@@ -149,89 +149,84 @@
     <!-- /#wrapper -->
 
 
-    <script type="text/ng-template" id="searchinternship.html">
-      <!--<div style="border-style:solid;border-radius:25px;padding:3em;margin-top:1em;margin-bottom:1em">  
-           <p><a href="#modalssss">Title: Ads Title</a></p>
-           <p>Description: Ads Description</p>
-      </div>-->
-       
-        <input type="text" ng-model="search" class="form-control" placeholder="Search for Internship" autofocus/>
-        <div ng-repeat="ad in aAds | filter:search" class="panel search-ads">
-             <div style="border-style:solid;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
-                <a ng-click= "openAdModal(ad.ads_id)">
-                    <h3 style="text-transform: capitalize;cursor:pointer">{{ad.ads_title}}</h3>
-                    <h4>{{ad.ads_requirement}}</h4>
-                    <h5>{{ad.company_name}}</h5>
-                </a>
-             </div>
-        </div>
-        
-        <ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
-    </script>
-    <script type="text/ng-template" id="studentprofile.html">
-        <div class="partials"> Student Profile</div>
-        <div style="border:solid; height: 300px ; width: 1100px ;border-radius:25px">
-
-            <div style="margin-left:20px;margin-top:1em;border:solid 1px; height: 200px ; width: 200px;border-radius:25px">
-                <p>IMAGE</p>
-                <a href="" style="padding-top:20px;">upload image</a>
-            </div>    
-            <div> 
-                Name: {{name}}
+<script type="text/ng-template" id="searchinternship.html">
+    <input type="text" ng-model="search" class="form-control" placeholder="Search for Internship" autofocus/>
+    <div ng-repeat="ad in aAds" class="panel search-ads">
+            <div style="border-style:solid;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
+            <a ng-click= "openAdModal(ad.ID)">
+                <h3 style="text-transform: capitalize;cursor:pointer">{{ad.ads_title}}</h3>
+                <h4>{{ad.ads_requirement}}</h4>
+                <h5>{{ad.company.company_name}}</h5>
+            </a>
             </div>
-        
-        </div>
+    </div>
+    <ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
+</script>
+<script type="text/ng-template" id="studentprofile.html">
+    <div class="partials"> Student Profile</div>
+    <div style="border:solid; height: 300px ; width: 1100px ;border-radius:25px">
 
-    </script>
-    <script type="text/ng-template" id="studentapplication.html">
-        <div class="partials"> 
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <th>Advertisement Title</th>
-                    <th>Application Date</th>
-                    <th>Company Name</th>
-                </tr>
-                <tr ng-repeat="ap in applications">
-                    <td><a ng-click="">{{ap.ads_title}}</a></td>
-                    <!--<td><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button></td>
-                    <td></td>-->
-                    <td>{{ap.created_at}}</td>
-                    <td>{{ap.company_name}}</td>
-                </tr>
-            </table>
+        <div style="margin-left:20px;margin-top:1em;border:solid 1px; height: 200px ; width: 200px;border-radius:25px">
+            <p>IMAGE</p>
+            <a href="" style="padding-top:20px;">upload image</a>
+        </div>    
+        <div> 
+            Name: {{name}}
         </div>
-    </script>
-    <script type="text/ng-template" id="studentschedule.html">
-        <div class="partials"> Schedules</div>
-    </script>
-    <script type="text/ng-template" id="studentsetting.html">
-        <div class="partials"> Settings</div>
-    </script>
-    <script type="text/ng-template" id="studentmessage.html">
-        <div class="partials"> Message</div>
-    </script>
     
-    <script type="text/ng-template" id="ad.html">       
- 
-        <div class="modal-header">
-            <h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.ads_title}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="modal-body">
-            <div class="main-center">
-                <div class="row">
-                <div class="col-md-6">
-                      
-                      <p>Description: {{ad.ads_description}}</p>
-                      <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
-                      <p>Company Overview: company overview1</p>
-                      <p>Skills: skills </p>
-                      <p>minimum required hours: 200hrs</p>
-                      
-                </div>  
-                </div>
-                      <button type="submit" ng-click="apply()" class="btn btn-xl btn-success">Apply</button>
+    </div>
+
+</script>
+<script type="text/ng-template" id="studentapplication.html">
+    <div class="partials"> 
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Advertisement Title</th>
+                <th>Application Date</th>
+                <th>Company Name</th>
+                <th>Remarks</th>
+            </tr>
+            <tr ng-repeat="ap in applications">
+                <td><a ng-click="">{{ap.advertisement.ads_title}}</a></td>
+                <!--<td><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button></td>
+                <td></td>-->
+                <td>{{ap.created_at}}</td>
+                <td>{{ap.company.company_name}}</td>
+                <td>Pending...</td>
+            </tr>
+        </table>
+    </div>
+</script>
+<script type="text/ng-template" id="studentschedule.html">
+    <div class="partials"> Schedules</div>
+</script>
+<script type="text/ng-template" id="studentsetting.html">
+    <div class="partials"> Settings</div>
+</script>
+<script type="text/ng-template" id="studentmessage.html">
+    <div class="partials"> Message</div>
+</script>
+<script type="text/ng-template" id="ad.html">       
+
+    <div class="modal-header">
+        <h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.ads_title}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+            <div class="row">
+            <div class="col-md-6">
+                    
+                    <p>Description: {{ad.ads_description}}</p>
+                    <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
+                    <p>Company Overview: company overview1</p>
+                    <p>Skills: skills </p>
+                    <p>minimum required hours: 200hrs</p>
+                    
+            </div>  
             </div>
+                    <button type="submit" ng-click="apply()" class="btn btn-xl btn-success">Apply</button>
         </div>
-        <div class="modal-footer">
-        </div>
-    </script>
+    </div>
+    <div class="modal-footer">
+    </div>
+</script>

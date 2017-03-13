@@ -130,8 +130,8 @@
         <!-- /.navbar-collapse -->
     </nav>
 
-    <div id="page-wrapper" style="width: 1012px;">
-        <ui-view>
+    <div id="page-wrapper" >
+        <ui-view style="width: inherit;">
         </ui-view>
     </div>
     <!-- /#page-wrapper -->
@@ -179,7 +179,7 @@
                 <th>Actions</th>
                 <th>Date Publish</th>
             </tr>
-            <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value : false ">
+            <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value ">
                 <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ads_id)">{{ad.ads_title}}</a></td>
                 <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
                 <td>{{ad.created_at}}</td>
@@ -265,7 +265,18 @@
             </div>
         </div>
 </script>
-
+<script type="text/ng-template" id="company_ad_modal.html">
+    <div class="modal-header">
+        <h1 style="text-transform:capitalize;">{{ad.ads_title}}</h1>
+    </div>
+    <div class="modal-body">
+        <input type="text" class="form-control" name="" value="{{ad.ads_requirement}}"> 
+        <input type="text" class="form-control" name="" value="{{ad.ads_responsibility}}"> 
+    </div>
+    <div class="modal-footer">
+        <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
+    </div>
+</script>
 <script type="text/ng-template" id="company_application.html">
     <div class="container-fluid">
 
@@ -285,14 +296,6 @@
                     </ol>
                 </div>
             </div>
-            <!-- /.row -->
-            <!--<div ng-repeat="application in applications" style="border-style:solid;padding:2em;margin-bottom:1em;border-radius:25px;">
-                <p>Student ID: {{application.student_id}}</p>
-                <p>Ads ID: {{application.ads_id}}</p> 
-                <p>Course: Course1</p> 
-                <p>School: School1</p>
-                <button style="position:inherit;margin-left:25em;margin-top:1em;" class="btn btn-success btn-sm" >View Full Details</a> 
-            </div>-->
             <table class="table table-bordered table-hover">
                     <tr>
                         <th>Advertisement Title</th>
@@ -301,8 +304,8 @@
                     </tr>
                     <tr ng-repeat="ad in ads">
                         <td><a style="text-transform:uppercase">{{ad.ads_title}}</a></td>
-                        <td><button ng-click="openApModal(ad.ads_id)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
-                        <td>{{ad.application_count}}</td>
+                        <td><button ng-click="openApModal(ad.ID)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
+                        <td>{{ad.count}}</td>
                     </tr>
                 </table>
         </div>
@@ -316,8 +319,8 @@
             <tr>
                 <th>Student Name</th>
             </tr>
-            <tr ng-repeat="ap in application">
-                <td><a>{{ap.student_name}}</a></td>
+            <tr ng-repeat="ap in applications">
+                <td><a>{{ap.student.student_name}}</a></td>
             </tr>
         </table>
     </div>
@@ -325,20 +328,6 @@
         <h1>FOOTER</h1>
     </div>
 </script>
-
-<script type="text/ng-template" id="company_ad.html">
-    <div class="modal-header">
-        <h1 style="text-transform:capitalize;">{{ad.ads_title}}</h1>
-    </div>
-    <div class="modal-body">
-        <input type="text" class="form-control" name="" value="{{ad.ads_requirement}}"> 
-        <input type="text" class="form-control" name="" value="{{ad.ads_responsibility}}"> 
-    </div>
-    <div class="modal-footer">
-        <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
-    </div>
-</script>
-
 <script type="text/ng-template" id="company_interns.html">
     <div class="container-fluid">
         <!-- Page Heading -->
