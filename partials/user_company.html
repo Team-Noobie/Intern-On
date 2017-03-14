@@ -147,9 +147,6 @@
                     Advertisement
                 </h1>
                 <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                    </li>
                     <li class="active">
                         <i class="fa fa-bar-chart-o"></i> Ads
                     </li>
@@ -158,38 +155,38 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class = "col-md-6">
-                <a ui-sref="user_company.company_create_ads" class="" id="add-ad"><i class="fa fa-plus-circle" aria-hidden="true"border-radius:25px;></i> Create New Ad</a> 
+            <div class = "col-md-4">
+                <a ui-sref="user_company.company_create_ads"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Ad</a> 
             </div>
-            <div class = "col-md-6">
+            <div class = "col-md-4">
                 <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
-                    <!--<a href id="simple-dropdown" uib-dropdown-toggle>Filter By <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-                        <li ng-repeat="choice in items">
-                            <a href>{{choice}}</a>
-                        </li>
-                    </ul>-->
                     <select class="form-control" ng-model="choice.option" ng-init="choice.option = choices[0]" ng-options="state as state.name for state in choices"></select>
                 </span>
-            </div>      
-        </div>        
-        <table class="table table-bordered table-hover">
-            <tr>
-                <th>Advertisement Title</th>
-                <th>Actions</th>
-                <th>Date Publish</th>
-            </tr>
-            <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value ">
-                <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ads_id)">{{ad.ads_title}}</a></td>
-                <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                <td>{{ad.created_at}}</td>
-            </tr>
-        </table>
+            </div>     
+            <div class="col-md-4">
+                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
+            </div> 
+        </div>      
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Advertisement Title</th>
+                        <th>Actions</th>
+                        <th>Date Publish</th>
+                    </tr>
+                    <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ID)">{{ad.ads_title}}</a></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
+                        <td>{{ad.created_at}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>   
     <div>
 </script>   
-
 <script type="text/ng-template" id="company_create_ads.html">
-    
         <div class="container-fluid">
             <div>
                 <h4>Create Advertisement</h4>
@@ -267,11 +264,79 @@
 </script>
 <script type="text/ng-template" id="company_ad_modal.html">
     <div class="modal-header">
-        <h1 style="text-transform:capitalize;">{{ad.ads_title}}</h1>
+        <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
     </div>
     <div class="modal-body">
-        <input type="text" class="form-control" name="" value="{{ad.ads_requirement}}"> 
-        <input type="text" class="form-control" name="" value="{{ad.ads_responsibility}}"> 
+        <div>
+            <h4></h4>
+            <form class="form-horizontal post-ads" method="post"> 
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Ad Title</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-title" ng-model="formdata.ads_title"  placeholder="Ad Title" required/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Requirement</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" ng-repeat="req in formdata.ads_requirement track by $index">
+                            <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="formdata.ads_requirement[$index]"  value="req" placeholder="Requirement" required/>
+                        </div>
+                        <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Responsibilities</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" ng-repeat="res in formdata.ads_responsibility track by $index">
+                            <span class="input-group-addon"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-responsibility" 
+                            ng-model="formdata.ads_responsibility[$index]"  value="res" placeholder="Responsibility" required/>
+                        </div>
+
+                        <button class="btn btn-info btn-md" id="add" ng-click="addRes()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Contacts</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" ng-repeat="cont in formdata.ads_contact track by $index">
+                            <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ads_contact[$index]" placeholder="Contact" required/>
+                        </div>
+                            <button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Tags</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="formdata.ads_tags"  placeholder="Tags" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
+                </div>
+
+            </form>
+            <form>
+                <div class="form-group">
+                    <button ng-click="cancel()" class="btn btn-danger btn-md" id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                </div>  
+            </form>
+        </div>
     </div>
     <div class="modal-footer">
         <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
@@ -279,24 +344,22 @@
 </script>
 <script type="text/ng-template" id="company_application.html">
     <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Applications
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-table"></i> Applications
-                        </li>
-                    </ol>
-                </div>
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Applications
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-table"></i> Applications
+                    </li>
+                </ol>
             </div>
-            <table class="table table-bordered table-hover">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
                     <tr>
                         <th>Advertisement Title</th>
                         <th>Actions</th>
@@ -304,15 +367,17 @@
                     </tr>
                     <tr ng-repeat="ad in ads">
                         <td><a style="text-transform:uppercase">{{ad.ads_title}}</a></td>
-                        <td><button ng-click="openApModal(ad.ID)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
+                        <td><button ng-click="openApModal(ad.ID,ad.ads_title)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
                         <td>{{ad.count}}</td>
                     </tr>
                 </table>
+            </div>
         </div>
+    </div>
 </script>  
 <script type="text/ng-template" id="applicants_modal.html">
     <div class="modal-header">
-        <h1>HEADER</h1>
+        <h1>{{title}}</h1>
     </div>
     <div class="modal-body">
         <table class="table table-bordered table-hover">
@@ -337,9 +402,7 @@
                     Interns
                 </h1>
                 <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                    </li>
+                    
                     <li class="active">
                         <i class="fa fa-bar-chart-o"></i> Interns
                     </li>

@@ -8,6 +8,8 @@
                 $state.go('user_student');
             if(response.data.user.type == "company")
                 $state.go('user_company');
+            if(response.data.user.type == "coordinator")
+                $state.go('user_coordinator');
         });
     });
 
@@ -158,4 +160,43 @@
         };
 
     });
+
+    internon.controller('user_coordinator_controller',function(Ads,Account,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        console.log("coordinator");
+        // $scope.init = function () {
+        //     Account.get({id:$localStorage.id}).$promise.then(function (response) {
+        //            $scope.name = response.coordinator_email;
+        //         //    console.log(response);
+        //            $state.go('user_coordinator');
+        //            console.log(response);
+        //         });
+        // };
+
+         $scope.logout = function(){
+            $auth.logout();
+            $localStorage.$reset();
+            $state.go('index');
+        };
+
+
+        $scope.openAdModal = function(id){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'coordinator_create_sec_modal.html',
+                controller: 'ad_controller',
+                size: 'sm',
+                resolve: {
+                        id: function () {
+                            return id;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (id) {
+                    return 1;
+                });
+        };
+
+    });    
+
 })();

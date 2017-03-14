@@ -52,7 +52,7 @@
             // Company routes
             {
             name: 'user_company',
-            url: '/user-company',
+            url: '/company',
             templateUrl:  'partials/user_company.html',
             controller:'user_company_controller'
             },
@@ -85,7 +85,7 @@
             // Student routes
             {
             name: 'user_student',
-            url: '/user',
+            url: '/student',
             templateUrl:  'partials/user_student.html',
             controller:'user_students_controller'
             },
@@ -124,7 +124,29 @@
             url: '',
             templateUrl:  'studentmessage.html',
             controller:'user_students_controller'
-            }
+            },
+
+            //Coordinator routes
+            {
+            name: 'user_coordinator',
+            url: '/coordinator',
+            templateUrl:  'partials/user_coordinator.html',
+            controller:'user_coordinator_controller'
+            },
+
+            {
+            name: 'user_coordinator.coordinator_profile',
+            url: '',
+            templateUrl:  'coordinator_profile.html',
+            controller:'user_coordinator_controller'
+            },
+            {
+            name: 'user_coordinator.coordinator_section',
+            url: '',
+            templateUrl:  'coordinator_section.html',
+            controller:'user_coordinator_controller'
+            },
+
             
         ]
 
