@@ -162,15 +162,15 @@
     });
 
     internon.controller('user_coordinator_controller',function(Ads,Account,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-        console.log("coordinator");
-        // $scope.init = function () {
-        //     Account.get({id:$localStorage.id}).$promise.then(function (response) {
-        //            $scope.name = response.coordinator_email;
-        //         //    console.log(response);
-        //            $state.go('user_coordinator');
-        //            console.log(response);
-        //         });
-        // };
+        
+        $scope.init = function () {
+            Account.get({id:$localStorage.id}).$promise.then(function (response) {
+                   $scope.name = response.coordinator_name;
+                //    console.log(response);
+                   $state.go('user_coordinator.coordinator_profile');
+                   console.log(response);
+                });
+        };
 
          $scope.logout = function(){
             $auth.logout();

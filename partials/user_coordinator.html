@@ -95,7 +95,7 @@
                 </ul>
             </li>
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user-md"></i> {{name}} <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -117,13 +117,13 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a ui-sref="user_coordinator.coordinator_profile"><i class="fa fa-fw fa-newspaper-o"></i> Profile</a>
+                    <a ui-sref="user_coordinator.coordinator_profile"><i class="fa fa-fw fa-user-md"></i> Profile</a>
                 </li>
                 <li>
-                    <a ui-sref="user_coordinator.coordinator_section"><i class="fa fa-fw fa-table"></i> Sections</a>
+                    <a ui-sref="user_coordinator.coordinator_section"><i class="fa fa-fw fa-users"></i> Sections</a>
                 </li>
                 <li>
-                    <a ui-sref="user_coordinator.coordinator_files"><i class="fa fa-users"></i> Files</a>
+                    <a ui-sref="user_coordinator.coordinator_files"><i class="fa fa-files-o"></i> Files</a>
                 </li>   
             </ul>
         </div>
@@ -181,11 +181,13 @@
                         <th>Actions</th>
                         <th>Date Publish</th>
                     </tr>
-                    <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.ID)">{{ad.ads_title}}</a></td>
+                    <!-- <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search "> -->
+                    <tr>
+                    <td><a style="cursor:pointer;text-transform:uppercase;" ui-sref="section_students">IT301</a></td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
                         <td>{{ad.created_at}}</td>
                     </tr>
+                    <!-- </tr> -->
                 </table>
             </div>
         </div>   
@@ -193,15 +195,18 @@
         </script>   
 
         <script type="text/ng-template" id="coordinator_create_sec_modal.html">
-         <div class="modal-body">
+           <div class="modal-body">
             <label for="name" class="cols-sm-2 control-label">Section Code</label>
             <div class="cols-sm-6">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" ng-model="formdata.ads_tags"  placeholder="Section Code" required/>
                 </div>
-                <button class="btn btn-info btn-md" id="add" ng-click=""><i class="fa fa-plus-circle" aria-hidden="true"></i>Create Section</button> 
+                <button class="btn btn-info btn-md" id="add" ng-click=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
             </div>
         </div>        
 
+    </script>
+    <script type="text/ng-template" id="section_students">
+        student
     </script>

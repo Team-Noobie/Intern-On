@@ -13,7 +13,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -162,8 +162,6 @@
             templateUrl:  'coordinator_section.html',
             controller:'user_coordinator_controller'
             },
-
-            
         ]
 
         states.forEach(function(state) {
@@ -212,7 +210,7 @@
 
         $scope.login = function() {
             var credentials = {
-                email: $scope.email,
+                username: $scope.username,
                 password: $scope.password
             }
 

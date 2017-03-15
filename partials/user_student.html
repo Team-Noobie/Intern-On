@@ -150,13 +150,38 @@
 
 
     <script type="text/ng-template" id="searchinternship.html">
-        <input type="text" ng-model="search" class="form-control" placeholder="Search for Internship" autofocus/>
+          <div class="search-box">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="input-group">
+                                        <div class="input-group-btn search-panel">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_concept">Filter by</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#course">All</a></li>
+                                                <li><a href="#company">Company</a></li>
+                                                <li><a href="#location">Location</a></li>
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" name="search_param" value="all" id="search_param">
+                                        <input type="text" class="form-control" placeholder="Search for Internship" autofocus/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        </div>
         <div ng-repeat="ad in aAds" class="panel search-ads">
-            <div style="border-style:solid;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
+            <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
                 <a ng-click= "openAdModal(ad.ID)">
-                    <h3 style="text-transform: capitalize;cursor:pointer">{{ad.ads_title}}</h3>
-                    <h4>{{ad.ads_requirement}}</h4>
-                    <h5>{{ad.company.company_name}}</h5>
+
+                        <h3 style="text-transform: capitalize; cursor:pointer;">{{ad.ads_title}}</h3>
+                        <h4>{{ad.ads_requirement}}</h4>
+                        <h5>{{ad.company.company_name}}</h5>
+                   
                 </a>
             </div>
         </div>
@@ -240,9 +265,9 @@
             <div class="row">
                 <div class="col-md-6">
 
-                    <p>Description: {{ad.ads_description}}</p>
+                    <p>Company Overview: Company Overview</p>
                     <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
-                    <p>Company Overview: company overview1</p>
+                    <p>Responsiblities: {{ads.ads_responsibility}} </p>
                     <p>Skills: skills </p>
                     <p>minimum required hours: 200hrs</p>
                     
