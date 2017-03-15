@@ -367,10 +367,68 @@
                     </tr>
                     <tr ng-repeat="ad in ads">
                         <td><a style="text-transform:uppercase">{{ad.ads_title}}</a></td>
-                        <td><button ng-click="openApModal(ad.ID,ad.ads_title)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
+                        <td><button ng-click="changeState(ad.ID)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
                         <td>{{ad.count}}</td>
                     </tr>
                 </table>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="company_list_application.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    List Applications
+                </h1>
+                
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-table"></i> List Applications
+                    </li>
+                    <div style="display:inline; margin-left:200px">
+                        <a ui-sref="user_company.company_application">Back</a>
+                    </div>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Student Name</th>
+                    </tr>
+                    <tr ng-repeat="ap in applications">
+                        <td><a ng-click="changeState(ap.ID)">{{ap.student.student_name}}</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>  
+<script type="text/ng-template" id="company_student_application.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Student Name
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-table"></i> Student Name
+                    </li>
+                    <div style="display:inline; margin-left:200px">
+                        <a ng-click="backState(application.ads_id)">Back</a>
+                    </div>
+                </ol>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                
             </div>
         </div>
     </div>

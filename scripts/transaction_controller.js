@@ -4,25 +4,29 @@
         // console.log(id);
 
         $scope.ad;
-        $scope.formdata ={
+        $scope.formdata1 ={
             ad_id:id,
             student_id: $localStorage.id,
+
+        };
+        $scope.formdata ={
+
         };
 
-
         Ads.get({id:id}).$promise.then(function (response) {
-            $scope.formdata.company_id = response.company_id;
+            $scope.formdata1.company_id = response.company_id;
             $scope.ad = response;
+            $scope.formdata = response;
         });
         
         $scope.init = function(){
-            $http.post(urls.API_HOST + '/checkApplication', $scope.formdata).then(function (response){
+            $http.post(urls.API_HOST + '/checkApplication', $scope.formdata1).then(function (response){
                 $scope.hasApplied = response.data;
             });
         }
 
         $scope.apply = function () {
-            Application.save($scope.formdata).$promise.then(function (response){
+            Application.save($scope.formdata1).$promise.then(function (response){
                 $uibModalInstance.close();
             });
         };
@@ -38,26 +42,9 @@
                     // console.log(response.data);
             });
 
-            $scope.openApModal = function(id,title){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'applicants_modal.html',
-                    controller: 'ads_application_controller',
-                    size: 'lg',
-                    resolve: {
-                            id: function () {
-                                return id;
-                            },
-                            title: function () {
-                                return title;
-                            },
-                        }
-                    });
-
-                    modalInstance.result.then(function (id) {
-                        return 1;
-                    });
-            };
+            $scope.changeState = function($id){
+                $state.go('user_company.company_list_application', {ads_id: $id} );
+            }
         }
 
         if($state.current.name == 'user_student.student_application'){
@@ -67,10 +54,25 @@
             });
         };
     });    
-     internon.controller('ads_application_controller',function(id,title,Ads,Application,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
-        $http({method: 'GET', url: urls.API_HOST + '/company_show_applicants/'+id}).then(function(response){
+     internon.controller('ads_application_controller',function(Ads,Application,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+        $http({method: 'GET', url: urls.API_HOST + '/company_show_applicants/'+$stateParams.ads_id}).then(function(response){
                     $scope.applications = response.data;
         });
-        $scope.title = title;
+
+        $scope.changeState = function($id){
+            $state.go('user_company.company_student_application', {application_id: $id} );            
+        };
+        
     });
+
+    internon.controller('student_application_controller',function(Ads,Application,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){      
+            Application.get({id:$stateParams.application_id}).$promise.then(function (response){    
+                $scope.application  = response;          
+            });
+
+            $scope.backState = function($id){
+                $state.go('user_company.company_list_application', {ads_id: $id} );                
+            }
+    });
+
 })();

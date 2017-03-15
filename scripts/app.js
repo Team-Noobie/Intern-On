@@ -74,6 +74,22 @@
             templateUrl:  'company_application.html',
             controller:'application_controller'
             },
+            // for application
+            {
+            name: 'user_company.company_list_application',
+            url: '',
+            templateUrl:  'company_list_application.html',
+            controller:'ads_application_controller',
+            params : { ads_id: null, },
+            },
+            {
+            name: 'user_company.company_student_application',
+            url: '',
+            templateUrl:  'company_student_application.html',
+            controller:'student_application_controller',
+            params : { application_id: null, },            
+            },
+            // 
             {
             name: 'user_company.company_interns',
             url: '',
