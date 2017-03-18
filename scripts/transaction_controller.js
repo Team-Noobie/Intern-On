@@ -66,8 +66,8 @@
     });
 
     internon.controller('student_application_controller',function(Ads,Application,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){      
-            Application.get({id:$stateParams.application_id}).$promise.then(function (response){    
-                $scope.application  = response;          
+            $http({method: 'GET', url: urls.API_HOST + '/view_application/'+$stateParams.application_id}).then(function(response){
+                    $scope.applications = response;
             });
 
             $scope.backState = function($id){
