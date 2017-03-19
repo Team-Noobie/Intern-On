@@ -203,28 +203,12 @@
                     
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">Requirement</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group" ng-repeat="req in formdata.ad_requirements track by $index">
-                                <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                                <input type=text class="form-control" id="ad-requirement" 
-                                ng-model="formdata.ad_requirements[$index]"  placeholder="Requirement" required/>
-                            </div>
-                            <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
-                        </div>
+                                 <textarea id="req"></textarea>      
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="cols-sm-2 control-label">Responsibilities</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group" ng-repeat="res in formdata.ad_responsibilities track by $index">
-                                <span class="input-group-addon"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" id="ad-responsibility" 
-                                ng-model="formdata.ad_responsibilities[$index]"  placeholder="Responsibility" required/>
-                            </div>
-
-
-                            <button class="btn btn-info btn-md" id="add" ng-click="addRes()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
-                        </div>
+                        <label for="name" class="cols-sm-2 control-label">Responsibilities</label>                               
+                                 <textarea id="res"></textarea>      
                     </div>
 
                     <div class="form-group">
@@ -234,31 +218,31 @@
                                 <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ad_contacts[$index]"  placeholder="Contact" required/>
                             </div>
-                                <button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                <!--<button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>-->
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="cols-sm-2 control-label">Tags</label>
+                        <label for="name" class="cols-sm-2 control-label">Location</label>
                         <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" ng-model="formdata.ad_tags"  placeholder="Tags" required/>
+                            <div class="input-group" ng-repeat="cont in formdata.ad_contacts track by $index">
+                                <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ad_contacts[$index]"  placeholder="Location" required/>
                             </div>
+                                <!--<button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>-->
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
                     </div>
-
-                </form>
-                <form action="charts.html">
-                    <div class="form-group">
-                        <button ng-click="cancel()" class="btn btn-danger btn-md" id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                   <div class="form-group">
+                        <button class="btn btn-danger btn-md" ng-click="cancel()"  id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
                     </div>  
+               
                 </form>
+               
+                  
             </div>
         </div>
 </script>
@@ -401,14 +385,15 @@
                         <th>Student Name</th>
                     </tr>
                     <tr ng-repeat="ap in applications">
-                        <td><a ng-click="changeState(ap.ID)">{{ap.student.student_name}}</a></td>
+                        <td><a ng-click="openStudentAppModal(ap.ID)">{{ap.student.student_lastname}}, {{ap.student.student_firstname}}</a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </script>  
-<script type="text/ng-template" id="company_student_application.html">
+<script type="text/ng-template" id="company_student_application_modal.html">
+
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -416,14 +401,10 @@
                 <h1 class="page-header">
                     Student Name
                 </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-table"></i> Student Name
-                    </li>
-                    <div style="display:inline; margin-left:200px">
-                        <a ng-click="backState(application.ads_id)">Back</a>
-                    </div>
-                </ol>
+                <div style="border-style: solid; padding: 5em;margin-bottom:20px;"> Student Overview</div>
+                <div style="margin-bottom:20px;"><a href=""><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
+                <div class="col-md-4"><button class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule for Interview</button></div>
+                <div class="col-md-4"><button class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button></div>
             </div>  
         </div>
         <div class="row">
