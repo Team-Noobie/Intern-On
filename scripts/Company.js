@@ -80,8 +80,14 @@
             ad_responsibilities:["",],
             ad_contacts:["",],
         };
-
-
+      
+        CKEDITOR.replace( 'editor1', {
+            height: 150
+        } );
+        CKEDITOR.replace( 'editor2', {
+            height: 150
+        } );
+                            
         $scope.addReq = function() {
                 $scope.formdata.ad_requirements.push("");
         }
@@ -128,6 +134,26 @@
         $scope.backState = function($id){
             $state.go('user_company.company_list_application', {ads_id: $id,type: $stateParams.type} );                
         }
+
+        $scope.openAdModal = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'company_sched_student_modal.html',
+                    controller: 'company_view_advertisement_controller',
+                    size: 'md',
+                    resolve: {
+                            id: function () {
+                                return id;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (id) {
+                        return 1;
+                    });
+            };
+
+
     });
 
 })();

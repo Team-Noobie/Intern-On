@@ -11,10 +11,16 @@
 
 		$scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
-				$scope.name = response.data.student_name;
-				$state.go('user_student.student_profile');
+				$scope.student = response.data;
+				$state.go('user_student.student_profile',{student:response.data});
 			});
 		};
+	});
+	internon.controller('student_profile_controller',function(urls,$http,$stateParams,$state,$scope,$localStorage,$uibModal){
+		$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
+				$scope.student = response.data;
+				$state.go('user_student.student_profile',{student:response.data});
+			});
 	});
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
 		$scope.ads;

@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_student.student_profile">{{name}}</a>
+            <a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_lastname}},{{student.student_firstname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -149,129 +149,129 @@
     <!-- /#wrapper -->
 
 
-    <script type="text/ng-template" id="searchinternship.html">
-          <div class="search-box">
-                            <div class="row">
-                                <div class="col-xs-8 col-xs-offset-2">
-                                    <div class="input-group">
-                                        <div class="input-group-btn search-panel">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                <span id="search_concept">Filter by</span> <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#course">All</a></li>
-                                                <li><a href="#company">Company</a></li>
-                                                <li><a href="#location">Location</a></li>
-                                            </ul>
-                                        </div>
-                                        <input type="hidden" name="search_param" value="all" id="search_param">
-                                        <input type="text" class="form-control" placeholder="Search for Internship" autofocus/>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                        </span>
+<script type="text/ng-template" id="searchinternship.html">
+        <div class="search-box">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn search-panel">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span id="search_concept">Filter by</span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#course">All</a></li>
+                                            <li><a href="#company">Company</a></li>
+                                            <li><a href="#location">Location</a></li>
+                                        </ul>
                                     </div>
+                                    <input type="hidden" name="search_param" value="all" id="search_param">
+                                    <input type="text" class="form-control" placeholder="Search for Internship" autofocus/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-        </div>
-        <div ng-repeat="ad in aAds" class="panel search-ads">
-            <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
-                <a ng-click= "openAdModal(ad.ID)">
+                    </div>
+    </div>
+    <div ng-repeat="ad in aAds" class="panel search-ads">
+        <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
+            <a ng-click= "openAdModal(ad.ID)">
 
-                        <h3 style="text-transform: capitalize; cursor:pointer;">{{ad.ads_title}}</h3>
-                        <h4>{{ad.ads_requirement}}</h4>
-                        <h5>{{ad.company.company_name}}</h5>
-                   
-                </a>
-            </div>
+                    <h3 style="text-transform: capitalize; cursor:pointer;">{{ad.ads_title}}</h3>
+                    <h4>{{ad.ads_requirement}}</h4>
+                    <h5>{{ad.company.company_name}}</h5>
+                
+            </a>
         </div>
-        <ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
-    </script>
-    <script type="text/ng-template" id="studentprofile.html">
-        <div class="container-fluid">
-            <div class="row" >
-                <div class="col-lg-12">
-                    <h1 class="page-header">
+    </div>
+    <ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
+</script>
+<script type="text/ng-template" id="studentprofile.html">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-lg-12">
+                <h1 class="page-header">
                         My Profile
                     </h1>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div style="border:solid; height: auto ; width: inherit;">
-                        <div class="jumbotron text-center">
-                             <div class="row">
-                                 <div class="col-md-8">
-                            <h1>{{name}}</h1>
-                            <p>E-mail Address: <a href="">{{email}}</a></p> 
-                            <p>Contact Number: {{contact_no}}</p>
-                            <p>Address: {{address}} </p>
-                            </div>
-                           
-                                <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                    <p>IMAGE</p>
-                                    <a href="" style="padding-top:20px;">upload image</a>
-                                </div>
-                            </div> 
-                        </div>
-
-
-                        <div class="container">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
                             <div class="row">
                                 <div class="col-md-8">
-                                    
-                                <h3>Personal Background</h3>
-                                <p>Birthday: {{birthday}}</p>
-                                <p>Gender: {{gender}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-8">
-                                <h3>Educational Background</h3>
-                                <p>Course: {{course}}</p>
-                                <p>Department: {{department}}</p>
-                                <p>Intitute: {{institute}}</p>
-                                <p>School: {{school}}</p>
-                                </div>
-                            </div>
+                        <h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+                        <p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
+                        <p>Contact Number: {{student.student_contact_no}}</p>
+                        <p>Address: {{student.student_address}} </p>
                         </div>
                         
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                                <a href="" style="padding-top:20px;">upload image</a>
+                            </div>
+                        </div> 
                     </div>
-                </div>
-            </div>    
-        </div>
-    </script>
-    <script type="text/ng-template" id="studentapplication.html">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        My Applications
-                    </h1>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                            <h3>Personal Background</h3>
+                            <p>Birthday: {{student.student_birthday}}</p>
+                            <p>Gender: {{student.student_gender}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                            <h3>Educational Background</h3>
+                            <p>Course: {{student.student_course}}</p>
+                            <p>Department: {{student.student_department}}</p>
+                            <p>Intitute: {{student.student_institute}}</p>
+                            <p>School: {{student.student_school}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th>Advertisement Title</th>
-                            <th>Application Date</th>
-                            <th>Company Name</th>
-                            <th>Remarks</th>
-                        </tr>
-                        <tr ng-repeat="ap in applications">
-                            <td><a ng-click="">{{ap.advertisement.ads_title}}</a></td>
-                        <!--<td><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button></td>
-                        <td></td>-->
-                        <td>{{ap.created_at}}</td>
-                        <td>{{ap.company.company_name}}</td>
-                        <td>{{ap.status}}</td>
+        </div>    
+    </div>
+</script>
+<script type="text/ng-template" id="studentapplication.html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    My Applications
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Advertisement Title</th>
+                        <th>Application Date</th>
+                        <th>Company Name</th>
+                        <th>Remarks</th>
                     </tr>
-                </table>
-            </div>
+                    <tr ng-repeat="ap in applications">
+                        <td><a ng-click="">{{ap.advertisement.ads_title}}</a></td>
+                    <!--<td><button style="margin-right:5px;" class="btn btn-info btn-sm">Edit</button><button class="btn btn-danger btn-sm">Delete</button></td>
+                    <td></td>-->
+                    <td>{{ap.created_at}}</td>
+                    <td>{{ap.company.company_name}}</td>
+                    <td>{{ap.status}}</td>
+                </tr>
+            </table>
         </div>
+    </div>
     </div>
 </script>
 <script type="text/ng-template" id="studentschedule.html">
