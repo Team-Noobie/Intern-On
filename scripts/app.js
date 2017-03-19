@@ -79,15 +79,15 @@
             name: 'user_company.company_list_application',
             url: '',
             templateUrl:  'company_list_application.html',
-            controller:'ads_application_controller',
-            params : { ads_id: null, },
+            controller:'list_applicants_controller',
+            params : { ads_id: null, type: null },
             },
             {
             name: 'user_company.company_student_application',
             url: '',
             templateUrl:  'company_student_application.html',
-            controller:'student_application_controller',
-            params : { application_id: null, },            
+            controller:'View_Application_Controller',
+            params : { application_id: null, type: null},            
             },
             // 
             {

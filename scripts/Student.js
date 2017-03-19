@@ -16,7 +16,6 @@
 			});
 		};
 	});
-
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
 		$scope.ads;
 		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement'}).then(function(response){
@@ -83,7 +82,6 @@
 		};
 
 	});
-
 	internon.controller('student_view_application_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
 		$http({method: 'GET', url: urls.API_HOST + '/application_list/'+$localStorage.id}).then(function(response){
 				$scope.applications = response.data;
