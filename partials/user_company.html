@@ -391,15 +391,14 @@
                         <th>Student Name</th>
                     </tr>
                     <tr ng-repeat="ap in applications">
-                        <td><a ng-click="openStudentAppModal(ap.ID)">{{ap.student.student_lastname}}, {{ap.student.student_firstname}}</a></td>
+                        <td><a ng-click="changeState(ap.ID)">{{ap.student.student_name}}</a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </script>  
-<script type="text/ng-template" id="company_student_application_modal.html">
-
+<script type="text/ng-template" id="company_student_application.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -409,20 +408,16 @@
                 </h1>
                 <ol class="breadcrumb">
                     <div style="display:inline; margin-left:200px">
-                        <a ng-click="backState(applications.ads_id)">Back</a>
+                        <a ng-click="backState(application.ads_id)">Back</a>
                     </div>
                 </ol>
-                <div style="border-style: solid; padding: 5em;margin-bottom:20px;"> Student Overview</div>
-                <div style="margin-bottom:20px;"><a href=""><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
+                <div style="border-style: solid; padding: 5em;margin-bottom:20px;">
+                    {{application.student.student_name}}
+                </div>
+                <div style="margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
                 <div class="col-md-4"><button class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule for Interview</button></div>
                 <div class="col-md-4"><button class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button></div>
             </div>  
-        </div>
-        <div class="row">
-            {{application.student.student_name}}
-            <div class="col-lg-12">
-                <a ng-href="{{file}}" download>Download</a>
-            </div>
         </div>
     </div>
 </script>  
