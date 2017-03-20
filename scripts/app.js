@@ -13,7 +13,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -54,40 +54,40 @@
             name: 'user_company',
             url: '/company',
             templateUrl:  'partials/user_company.html',
-            controller:'user_company_controller'
+            controller:'company_controller'
             },
             {
             name: 'user_company.company_ads',
             url: '',
             templateUrl:  'company_ads.html',
-            controller:'user_company_controller'
+            controller:'advertisement_list_controller'
             },
             {
             name: 'user_company.company_create_ads',
             url: '',
             templateUrl:  'company_create_ads.html',
-            controller:'user_company_controller'
+            controller:'create_advertisement_controller'
             },
             {
             name: 'user_company.company_application',
             url: '',
             templateUrl:  'company_application.html',
-            controller:'application_controller'
+            controller:'advertisement_list_controller'
             },
             // for application
             {
             name: 'user_company.company_list_application',
             url: '',
             templateUrl:  'company_list_application.html',
-            controller:'ads_application_controller',
-            params : { ads_id: null, },
+            controller:'list_applicants_controller',
+            params : { ads_id: null, type: null },
             },
             {
             name: 'user_company.company_student_application',
             url: '',
             templateUrl:  'company_student_application.html',
-            controller:'student_application_controller',
-            params : { application_id: null, },            
+            controller:'View_Application_Controller',
+            params : { application_id: null, type: null},            
             },
             // 
             {
@@ -103,43 +103,25 @@
             name: 'user_student',
             url: '/student',
             templateUrl:  'partials/user_student.html',
-            controller:'user_students_controller'
-            },
-            {
-            name: 'user_student.student_search',
-            url: '',
-            templateUrl:  'searchinternship.html',
-            controller:'user_students_controller'
+            controller:'students_controller'
             },
             {
             name: 'user_student.student_profile',
             url: '',
             templateUrl:  'studentprofile.html',
-            controller:'user_students_controller'
+            controller:'students_controller'
+            },
+            {
+            name: 'user_student.student_search',
+            url: '',
+            templateUrl:  'searchinternship.html',
+            controller:'search_advertisement_controller'
             },
             {
             name: 'user_student.student_application',
             url: '',
             templateUrl:  'studentapplication.html',
-            controller:'application_controller'
-            },
-            {
-            name: 'user_student.student_schedule',
-            url: '',
-            templateUrl:  'studentschedule.html',
-            controller:'user_students_controller'
-            },
-            {
-            name: 'user_student.student_setting',
-            url: '',
-            templateUrl:  'studentsetting.html',
-            controller:'user_students_controller'
-            },
-            {
-            name: 'user_student.student_message',
-            url: '',
-            templateUrl:  'studentmessage.html',
-            controller:'user_students_controller'
+            controller:'student_view_application_controller'
             },
 
             //Coordinator routes
@@ -223,6 +205,19 @@
             });
         }
 
+    });
+
+    internon.controller('user_controller',function(Ads,Account,urls,$http,$auth,$state,$rootScope,$scope,$localStorage){
+            
+        $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
+          $localStorage.id = response.data.user.id;
+            if(response.data.user.type == "student")
+                $state.go('user_student');
+            if(response.data.user.type == "company")
+                $state.go('user_company');
+            if(response.data.user.type == "coordinator")
+                $state.go('user_coordinator');
+        });
     });
 
 
