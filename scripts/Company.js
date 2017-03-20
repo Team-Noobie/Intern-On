@@ -76,28 +76,13 @@
     internon.controller('create_advertisement_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.formdata={ 
             id:$localStorage.id,
-            ad_requirements:["",],
-            ad_responsibilities:["",],
-            ad_contacts:["",],
         };
-
-
-        $scope.addReq = function() {
-                $scope.formdata.ad_requirements.push("");
-        }
-        $scope.addRes = function() {
-                $scope.formdata.ad_responsibilities.push("");
-        }
-        $scope.addCon = function() {
-                $scope.formdata.ad_contacts.push("");
-        }
-
+        
         $scope.save = function () {
             $http.post(urls.API_HOST + '/create_advertisement', $scope.formdata).then(function (response){
                 $state.go('user_company.company_ads');   
 			});
         };
-
         $scope.cancel = function () {
             $state.go('user_company.company_ads');  
         };

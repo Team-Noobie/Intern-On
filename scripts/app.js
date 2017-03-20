@@ -7,6 +7,7 @@
         'ngStorage',
         'satellizer',
         'angular-toArrayFilter',
+        'ckeditor',
         ]);
 
     internon.constant('urls', (function () {
@@ -94,7 +95,7 @@
             name: 'user_company.company_interns',
             url: '',
             templateUrl:  'company_interns.html',
-            controller:'application_controller'
+            controller:''
             },
             
             
