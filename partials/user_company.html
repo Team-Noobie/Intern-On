@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company">{{name}}</a>
+            <a class="navbar-brand" ui-sref="user_company">{{company.company_name}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{name}}</strong>
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -39,7 +39,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{name}}</strong>
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -98,7 +98,7 @@
                 <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
-                        <a><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a><i class="fa fa-fw fa-envelope"></i> Inbox</a>
@@ -198,21 +198,32 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="adTitle" class="cols-sm-2 control-label">Requirements</label>
+                <label for="adTitle" class="cols-sm-2 control-label">Job Description</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <textarea name="editor1" id="editor1" rows="10" cols="80" ng-model="formdata.ad_requirements">
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                            <p>
+                                <b>Requirements</b>
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                            </p>
+                            <br>
+                            <p>
+                                <b>Responsibilities</b>
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    </p>
                         </textarea>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="adTitle" class="cols-sm-2 control-label">Responsibilities</label>
-                <div class="input-group">
-                    <textarea name="editor2" id="editor2" rows="10" cols="80" ng-model="formdata.ad_responsibilities">
-                    </textarea>                                
-                </div>
-            </div>                               
+                                   
             <div class="form-group">
                 <label for="adTitle" class="cols-sm-2 control-label">Contacts</label>
                     <div class="input-group">
@@ -230,7 +241,7 @@
         </form>
     </div>
 </script>
-<script type="text/ng-template" id="company_ad_modal.html">
+<!--<script type="text/ng-template" id="company_ad_modal.html">
     <div class="modal-header">
         <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
     </div>
@@ -249,26 +260,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Requirement</label>
+                    <label for="name" class="cols-sm-2 control-label">Job Description</label>
                     <div class="cols-sm-10">
                         <div class="input-group" ng-repeat="req in formdata.ads_requirement track by $index">
                             <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
                             <input type="text" class="form-control" ng-model="formdata.ads_requirement[$index]"  value="req" placeholder="Requirement" required/>
                         </div>
                         <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Responsibilities</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group" ng-repeat="res in formdata.ads_responsibility track by $index">
-                            <span class="input-group-addon"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-responsibility" 
-                            ng-model="formdata.ads_responsibility[$index]"  value="res" placeholder="Responsibility" required/>
-                        </div>
-
-                        <button class="btn btn-info btn-md" id="add" ng-click="addRes()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
                     </div>
                 </div>
 
@@ -284,17 +282,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Tags</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" ng-model="formdata.ads_tags"  placeholder="Tags" required/>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
                     <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
                 </div>
 
@@ -308,6 +295,73 @@
     </div>
     <div class="modal-footer">
         <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
+    </div>
+</script>-->
+
+<script type="text/ng-template" id="company_profile.html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    My Profile
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                    <p>IMAGE</p>
+                                    <a href="" style="padding-top:20px;">upload image</a>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h1>{{company.company_name}}</h1>
+                                    <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
+                                    <p>Contact Number: {{company.company_contact_no}}</p>
+                                    <p>Address: {{company.company_address}} </p>
+                                </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                            <h3>Company Overview</h3>
+                            <p>{{company.company_overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Company Snapshot</h3>
+                                <p>Industry: {{company.company_industry}}</p>
+                                <p>Website: {{company.company_website}}</p>
+                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
+                                <p>Benefits: {{company.company_benefits}}</p>
+                            </div>
+                        </div>
+                    </div>       
+
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Why Join Us?</h3>
+                                <p>Industry: {{company.company_why_join_us}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        </div>    
     </div>
 </script>
 <script type="text/ng-template" id="company_application.html">
