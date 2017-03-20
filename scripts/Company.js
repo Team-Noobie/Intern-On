@@ -78,7 +78,10 @@
             id:$localStorage.id,
         };
       
-        CKEDITOR.replace( ['editor1','editor2'], {
+        CKEDITOR.replace( 'editor1', {
+            height: 150
+        } );
+        CKEDITOR.replace( 'editor2', {
             height: 150
         } );
                             
