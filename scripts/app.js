@@ -7,6 +7,7 @@
         'ngStorage',
         'satellizer',
         'angular-toArrayFilter',
+        'ckeditor',
         ]);
 
     internon.constant('urls', (function () {
