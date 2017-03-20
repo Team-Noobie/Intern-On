@@ -198,18 +198,46 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div style="border:solid; height: 300px ; width: inherit;">
-                        <div class="row">   
-                            <div class="col-md-4" style="margin-left:20px; margin-top:1em; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
+                    <div style="border:solid; height: auto ; width: inherit;">
+                        <div class="jumbotron text-center">
+                             <div class="row">
+                                 <div class="col-md-8">
+                            <h1>{{name}}</h1>
+                            <p>E-mail Address: <a href="">{{email}}</a></p> 
+                            <p>Contact Number: {{contact_no}}</p>
+                            <p>Address: {{address}} </p>
+                            </div>
+                           
+                                <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                    <p>IMAGE</p>
+                                    <a href="" style="padding-top:20px;">upload image</a>
+                                </div>
                             </div> 
                         </div>
-                        <div class="row"> 
-                            <div class="col-md-4" style="margin-left:20px;">
-                                Name: {{name}}
-                            </div>                        
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    
+                                <h3>Personal Background</h3>
+                                <p>Birthday: {{birthday}}</p>
+                                <p>Gender: {{gender}}</p>
+                                </div>
+                            </div>
                         </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                <h3>Educational Background</h3>
+                                <p>Course: {{course}}</p>
+                                <p>Department: {{department}}</p>
+                                <p>Intitute: {{institute}}</p>
+                                <p>School: {{school}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>    
@@ -268,8 +296,8 @@
                     <p>Company Overview: Company Overview</p>
                     <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
                     <p>Responsiblities: {{ads.ads_responsibility}} </p>
-                    <p>Skills: skills </p>
-                    <p>minimum required hours: 200hrs</p>
+                    <p>Contacts : {{ads.ads_}}</p>
+                  
                     
                 </div>  
             </div>
