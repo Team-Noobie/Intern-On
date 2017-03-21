@@ -38,7 +38,7 @@
         	};
 
 	});
-
+	
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
 		$scope.ads;
 		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement'}).then(function(response){
