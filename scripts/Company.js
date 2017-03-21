@@ -171,6 +171,27 @@
     internon.controller('company_schedule_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
         $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.id}).then(function(response){
 			$scope.schedules = response.data;
+            
+
 		});
+
+          $scope.remarksModal = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'company_sched_remarks_modal.html',
+                    controller: 'company_schedule_controller',
+                    size: 'sm',
+                    resolve: {
+                            id: function () {
+                                return id;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (id) {
+                        return 1;
+                    });
+            };
+
     });
 })();

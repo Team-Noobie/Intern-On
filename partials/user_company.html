@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company">{{company.company_name}}</a>
+            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -123,7 +123,7 @@
                     <a ui-sref="user_company.company_application"><i class="fa fa-fw fa-table"></i>Applications</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_schedule"><i class="fa fa-users"></i> Schedules</a>
+                    <a ui-sref="user_company.company_schedule"><i class="fa fa-calendar"></i> Schedules</a>
                 </li>
                 <li>
                     <a ui-sref="user_company.company_interns"><i class="fa fa-users"></i> Interns</a>
@@ -228,13 +228,23 @@
             </div>
                                    
             <div class="form-group">
-                <label for="adTitle" class="cols-sm-2 control-label">Contacts</label>
+                <label for="adContacts" class="cols-sm-2 control-label">Contacts</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" id="ad-title" ng-model="formdata.ad_contacts"  placeholder="Contacts" required/>
+                        <input type="text" class="form-control" id="ad-contacts" ng-model="formdata.ad_contacts"  placeholder="Contacts" required/>
                     </div>
                 </div>
             </div> 
+
+             <div class="form-group">
+                <label for="workLocation" class="cols-sm-2 control-label">Work Location</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="ad-location" ng-model="formdata.ad_location"  placeholder="Work Location" required/>
+                    </div>
+                </div>
+            </div> 
+
             <div class="form-group">
                 <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
             </div>
@@ -391,7 +401,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" style="margin-top:1em;">
                     <tr>
                         <th>Advertisement Title</th>
                         <th>Actions</th>
@@ -516,7 +526,7 @@
                                 <td>{{ap_log.reason}}</td>
                                 <td>{{ap_log.interview_date}} {{ap_log.interview_time}}</td>
                                 <td>{{ap_log.status}}</td>
-                                <td><button class="btn btn-info"><i class="fa fa-ban" aria-hidden="true"></i> View</button></td>
+                                <td><button class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
                             </tr>                          
                         </table>
                     </div>
@@ -532,16 +542,18 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="reason" class="cols-sm-2 control-label">Reason</label>
-                        <input type="text" class="form-control" placeholder="Reason Of Interview" ng-model="reason">
+                        <input type="text" class="form-control" placeholder="Reason Of Interview" ng-model="reason" required>
                     </div>
                     <!--<div class="col-md-6"> <label for="name" class="cols-sm-2 control-label">Date and Time</label> <input type="date" class="form-control"></div>-->
                     <div class="col-md-12">
-                        <div style="display:inline-block; min-height:290px;">
-                            <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
-                        </div>
+                        <label for="reason" class="cols-sm-2 control-label">Date of Interview</label>
+                        <!--<div style="display:inline-block; min-height:290px;">-->
+                            <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" required></div>
+                        <!--</div>-->
                     </div>
                     <div class="col-md-12">
-                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                        <label for="reason" class="cols-sm-2 control-label">Time of Interview (24-hour Format)</label>
+                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
 
                     </div>
 
@@ -552,6 +564,23 @@
     </div>     
 
 </script>
+
+<script type="text/ng-template" id="company_sched_remarks_modal.html">
+    <div class="modal-body">
+        <div class="row">
+            <form action="">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
+                        <textarea name="remarks" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="col-md-12"> <button class="btn btn-success" ng-click="">Save</button> </div>
+                </div>
+            </form>
+        </div>
+    </div>     
+</script>
+
 <script type="text/ng-template" id="applicants_modal.html">
     <div class="modal-header">
         <h1>{{title}}</h1>
@@ -580,7 +609,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-bar-chart-o"></i> Schedules
+                        <i class="fa fa-calendar"></i> Schedules
                     </li>
                 </ol>
             </div>
@@ -614,7 +643,8 @@
                         <td>{{sched.interview_date}}</td>
                         <td>{{sched.interview_time}}</td>
                         <td>{{sched.ads_title}}</td>
-                        <td><button class="btn btn-info btn-sm">Remarks</button></td>
+                        
+                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(application.id)">  Remarks</button></td>
                     </tr>
 
                 </table>

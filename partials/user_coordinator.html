@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company">{{name}}</a>
+            <a class="navbar-brand" ui-sref="user_company">{{coordinator.coordinator_firstname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{name}}</strong>
+                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -39,7 +39,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{name}}</strong>
+                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -95,7 +95,7 @@
                 </ul>
             </li>
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user-md"></i> {{name}} <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user-md"></i> {{coordinator.coordinator_firstname}} <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a><i class="fa fa-fw fa-user"></i> Profile</a>
