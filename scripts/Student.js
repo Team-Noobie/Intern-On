@@ -11,11 +11,34 @@
 
 		$scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
-				$scope.name = response.data.student_name;
+				$scope.student = response.data;
 				$state.go('user_student.student_profile');
 			});
 		};
 	});
+	internon.controller('student_profile_controller',function(urls,$auth,FileUploader,$http,$state,$scope,$localStorage,$uibModal){
+			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
+				$scope.student = response.data;
+                $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
+			});
+
+
+			var uploader = $scope.uploader = new FileUploader({
+				url: urls.API_HOST + '/upload_resume',
+				formData:[{
+					id:$localStorage.id,
+				}],
+				headers: {
+					'Authorization': 'Bearer: ' + $auth.getToken()
+				}
+			});
+
+			uploader.onAfterAddingFile = function(fileItem) {
+            	console.info('onAfterAddingFile', fileItem);
+        	};
+
+	});
+
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
 		$scope.ads;
 		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement'}).then(function(response){
@@ -55,7 +78,6 @@
 				});
 		};
 	});
-
 	internon.controller('student_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
 		$scope.ids ={
 			ad_id:id,

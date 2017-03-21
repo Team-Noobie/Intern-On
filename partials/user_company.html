@@ -136,7 +136,6 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
-
 <script type="text/ng-template" id="company_ads.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -424,10 +423,15 @@
                 <div style="border-style: solid; padding: 5em;margin-bottom:20px;">
                     {{application.student.student_name}}
                 </div>
-                <div style="margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
-                <div class="col-md-4"><button class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule for Interview</button></div>
-                <div class="col-md-4"><button class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button></div>
-            </div>  
+                <div style="margin-bottom:20px;"><a ng-href="{{file}}" download>
+                    <i class="fa fa-download" aria-hidden="true"></i> Download Resume</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><button class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i>Schedule for Interview</button></div>
+                    <div class="col-md-4"><button class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i>Accept</button></div>                
+                    <div class="col-md-4"><button class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>Reject</button></div>
+                </div>
+                </div>  
         </div>
     </div>
 </script>  

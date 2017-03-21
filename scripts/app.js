@@ -8,6 +8,7 @@
         'satellizer',
         'angular-toArrayFilter',
         'ckeditor',
+        'angularFileUpload',
         ]);
 
     internon.constant('urls', (function () {
@@ -110,7 +111,7 @@
             name: 'user_student.student_profile',
             url: '',
             templateUrl:  'studentprofile.html',
-            controller:'students_controller'
+            controller:'student_profile_controller'
             },
             {
             name: 'user_student.student_search',
