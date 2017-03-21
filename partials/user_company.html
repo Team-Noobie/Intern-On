@@ -136,7 +136,6 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
-
 <script type="text/ng-template" id="company_ads.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -533,30 +532,79 @@
                             </ol>
                         </div>
                     </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-md-3 portfolio-item">
-                            <a  ui-sref="user_company">
-                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                            <a  ui-sref="user_company">
-                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                            <a  ui-sref="user_company">
-                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                            </a>
-                        </div>
-                        <div class="col-md-3 portfolio-item">
-                            <a  ui-sref="user_company">
-                                <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-                            </a>
-                        </div>
-                    </div>  
-                    <div>
-                    </script>
-
+                </ol>
+                <div style="border-style: solid; padding: 5em;margin-bottom:20px;">
+                    {{application.student.student_name}}
+                </div>
+                <div style="margin-bottom:20px;"><a ng-href="{{file}}" download>
+                    <i class="fa fa-download" aria-hidden="true"></i> Download Resume</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><button class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i>Schedule for Interview</button></div>
+                    <div class="col-md-4"><button class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i>Accept</button></div>                
+                    <div class="col-md-4"><button class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>Reject</button></div>
+                </div>
+                </div>  
+        </div>
+    </div>
+</script>  
+<script type="text/ng-template" id="applicants_modal.html">
+    <div class="modal-header">
+        <h1>{{title}}</h1>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Student Name</th>
+            </tr>
+            <tr ng-repeat="ap in applications">
+                <td><a>{{ap.student.student_name}}</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <h1>FOOTER</h1>
+    </div>
+</script>
+<script type="text/ng-template" id="company_interns.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Interns
+                </h1>
+                <ol class="breadcrumb">
+                    
+                    <li class="active">
+                        <i class="fa fa-bar-chart-o"></i> Interns
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-3 portfolio-item">
+                <a  ui-sref="user_company">
+                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a  ui-sref="user_company">
+                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a  ui-sref="user_company">
+                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 portfolio-item">
+                <a  ui-sref="user_company">
+                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                </a>
+            </div>
+        </div>  
+    <div>
+</script>
 
