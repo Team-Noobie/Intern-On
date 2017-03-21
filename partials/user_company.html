@@ -204,7 +204,7 @@
                 <label for="adTitle" class="cols-sm-2 control-label">Job Description</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                        <!--<textarea name="editor1" id="editor1" rows="10" cols="80">
                             <p>
                                 <b>Requirements</b>
                                     <ul>
@@ -222,8 +222,13 @@
                                         <li></li>
                                     </ul>
                                     </p>
+                        </textarea>-->
+                    </div>
+                    <div ckeditor="options" ng-model="formdata.ad_description" ready="onReady()">
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
                         </textarea>
                     </div>
+
                 </div>
             </div>
                                    

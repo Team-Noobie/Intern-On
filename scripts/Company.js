@@ -83,6 +83,17 @@
             height:300,
             width:800,
 		} );
+
+        $scope.options = {
+            language: 'en',
+            allowedContent: true,
+            entities: false
+        };
+
+        // Called when the editor is completely ready.
+        $scope.onReady = function () {
+            // ...
+        };
       
                             
         $scope.save = function () {
