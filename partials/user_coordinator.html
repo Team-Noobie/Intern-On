@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}}</strong>
+                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -139,7 +139,51 @@
 </div>
 
 <script type="text/ng-template" id="coordinator_profile.html">
-    profile
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    My Profile
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                    <p>IMAGE</p>
+                                    <a href="" style="padding-top:20px;">upload image</a>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <h1>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
+                                    <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
+                                    <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
+                                    <p>Address: {{coordinator.coordinator_address}} </p>
+                                </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                                <h3>School Background</h3>
+                                <p>Department: {{coordinator.coordinator_department}}</p>
+                                <p>Institute: {{coordinator.coordinator_institute}}</p>
+                                <p>School: {{coordinator.coordinator_school}}</p>    
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+    </div>
 </script>
 
 
