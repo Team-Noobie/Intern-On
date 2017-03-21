@@ -126,7 +126,10 @@
         });
         
         $scope.accept = function (){
-            console.log("accept");
+            $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$stateParams.application_id}).then(function(response){
+                // $scope.application = response.data;
+                // $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.student_id+'/'+response.data.student.resume;
+            });
         }
 
         $scope.reject = function (){
@@ -182,6 +185,11 @@
     internon.controller('company_schedule_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
         $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.id}).then(function(response){
 			$scope.schedules = response.data;
+		});
+    });
+    internon.controller('company_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
+        $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.id}).then(function(response){
+			$scope.interns = response.data;
 		});
     });
 })();

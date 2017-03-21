@@ -109,7 +109,7 @@
             name: 'user_company.company_interns',
             url: '',
             templateUrl:  'company_interns.html',
-            controller:''
+            controller:'company_interns_controller'
             },
             
             

@@ -305,7 +305,6 @@
         <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
     </div>
 </script>
-
 <script type="text/ng-template" id="company_profile.html">
     <div class="container-fluid">
         <div class="row">
@@ -620,6 +619,49 @@
                         <td>{{sched.interview_time}}</td>
                         <td>{{sched.ads_title}}</td>
                         <td><button class="btn btn-info btn-sm">Remarks</button></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>   
+    </div>
+</script>
+
+<script type="text/ng-template" id="company_interns.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Interns
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-bar-chart-o"></i> Interns
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
+            </div> 
+        </div>      
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Student Name</th>
+                    </tr>
+                    <!--<tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
+                        <td>{{ad.created_at}}</td>
+                    </tr>-->
+                    <tr ng-repeat="intern in interns">
+                        <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                     </tr>
 
                 </table>
