@@ -145,14 +145,14 @@
             name: 'user_coordinator',
             url: '/coordinator',
             templateUrl:  'partials/user_coordinator.html',
-            controller:'user_coordinator_controller'
+            controller:'coordinator_controller'
             },
 
             {
             name: 'user_coordinator.coordinator_profile',
             url: '',
             templateUrl:  'coordinator_profile.html',
-            controller:'user_coordinator_controller'
+            controller:'coordinator_controller'
             },
             {
             name: 'user_coordinator.coordinator_section',
