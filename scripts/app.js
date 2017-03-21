@@ -9,6 +9,7 @@
         'angular-toArrayFilter',
         'ckeditor',
         'angularFileUpload',
+        'ngSanitize'
         ]);
 
     internon.constant('urls', (function () {
