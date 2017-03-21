@@ -177,8 +177,7 @@
     </div>
     <div ng-repeat="ad in aAds" class="panel search-ads">
         <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
-            <a ng-click= "openAdModal(ad.ID)" style="cursor:pointer">
-
+            <a ng-click= "openAdModal(ad.id)">
                     <h3 style="text-transform:capitalize;">{{ad.ads_title}}</h3>
                     <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
                     <h5 style="text-transform:capitalize;">Work Location:{{ad.ads_work_location}}</h4>
