@@ -60,7 +60,7 @@
             $scope.choices = [
                 {'name': 'New Applicants','value':'New'},
                 {'name': 'Pending Applicants','value':'Pending'},
-                {'name': 'On-Process Applicants','value':'Process'},
+                {'name': 'On-Process Applicants','value':'On-Process'},
             ];
 
 
@@ -113,19 +113,27 @@
                 $scope.application = response.data;
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.student_id+'/'+response.data.student.resume;
         });
-        // $scope.file = urls.API_HOST;
-        // console.log('localhost/Intern-On-DB/storage/resume/'+$scope.application);
+        
+        $scope.accept = function (){
+            console.log("accept");
+        }
+
+        $scope.reject = function (){
+            console.log("reject");
+        }
         
         
         $scope.backState = function($id){
             $state.go('user_company.company_list_application', {ads_id: $id,type: $stateParams.type} );                
         }
 
-        $scope.openAdModal = function(id){
+        
+
+        $scope.schedModal = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'company_sched_student_modal.html',
-                    controller: 'company_view_advertisement_controller',
+                    controller: 'sched_modal_Controller',
                     size: 'md',
                     resolve: {
                             id: function () {
@@ -141,5 +149,23 @@
 
 
     });
-
+    internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
+        $scope.today = function() {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+        $scope.mytime = new Date();
+        $scope.hstep = 1;
+        $scope.mstep = 1;
+        
+        $scope.set = function(){
+            $scope.date = ($scope.dt.getYear()+1900)+"-"+($scope.dt.getMonth()+1)+"-"+$scope.dt.getDate();
+            $scope.time = $scope.mytime.getHours()+":"+$scope.mytime.getMinutes();            
+            console.log($scope.date + " "+$scope.time);
+            $http.post(urls.API_HOST + '/set_interview/'+id,{reason:$scope.reason,interview_date:$scope.date,interview_time:$scope.time}).then(function (response){
+                $uibModalInstance.close();
+                $state.go('user_company.company_student_application', {application_id: id,type: $stateParams.type} );            
+            });
+        };
+    });
 })();
