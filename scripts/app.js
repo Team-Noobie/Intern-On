@@ -15,7 +15,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -56,6 +56,12 @@
             name: 'user_company',
             url: '/company',
             templateUrl:  'partials/user_company.html',
+            controller:'company_controller'
+            },
+            {
+            name: 'user_company.company_profile',
+            url: '',
+            templateUrl:  'company_profile.html',
             controller:'company_controller'
             },
             {

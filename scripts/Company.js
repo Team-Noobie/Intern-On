@@ -9,11 +9,12 @@
 
         $scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
-				$scope.name = response.data.company_name;
-				$state.go('user_company.company_ads');
+				$scope.company = response.data;
+				$state.go('user_company.company_profile');
 			});
 		};
     });
+    
     internon.controller('advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
 
         if($state.current.name == 'user_company.company_ads'){
@@ -79,11 +80,10 @@
         };
       
         CKEDITOR.replace( 'editor1', {
-            height: 150
-        } );
-        CKEDITOR.replace( 'editor2', {
-            height: 150
-        } );
+            height:300,
+            width:800,
+		} );
+      
                             
         $scope.save = function () {
             $http.post(urls.API_HOST + '/create_advertisement', $scope.formdata).then(function (response){

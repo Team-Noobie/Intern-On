@@ -178,10 +178,9 @@
     <div ng-repeat="ad in aAds" class="panel search-ads">
         <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
             <a ng-click= "openAdModal(ad.id)">
-
-                    <h3 style="text-transform: capitalize; cursor:pointer;">{{ad.ads_title}}</h3>
-                    <h4>{{ad.ads_requirement}}</h4>
-                    <h5>{{ad.company.company_name}}</h5>
+                    <h3 style="text-transform:capitalize;">{{ad.ads_title}}</h3>
+                    <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
+                    <h5 style="text-transform:capitalize;">Work Location:{{ad.ads_work_location}}</h4>
                 
             </a>
         </div>
@@ -210,7 +209,6 @@
                                 </div>
                             <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
                                 <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
                             </div>
                         </div> 
                     </div>
@@ -226,6 +224,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8">
@@ -235,8 +234,12 @@
                                 <p>Intitute: {{student.student_institute}}</p>
                                 <p>School: {{student.student_school}}</p>
                             </div>
+
+                            <div class="col-md-2">
+                                 <div style="margin-top:20px;margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-upload" aria-hidden="true"></i> Upload Resume</a></div>
+                            </div>
                         </div>
-                    </div>                   
+                    </div>       
                 </div>
             </div>
         </div>    
@@ -285,22 +288,79 @@
 <script type="text/ng-template" id="ad.html" >
 
     <div class="modal-header">
-        <h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.ads_title}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+        <h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
     </div>
     <div class="modal-body">
         <div class="main-center">
-            <div class="row">
-                <div class="col-md-6">
+           <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                    <p>IMAGE</p>
+                                    <a href="" style="padding-top:20px;">upload image</a>
+                                </div>
 
-                    <p>Company Overview: Company Overview</p>
-                    <p>Requirements: <ul ><li ng-repeat="req in ad.ads_requirement track by $index">{{req}}</li></ul></p>
-                    <p>Responsiblities: {{ads.ads_responsibility}} </p>
-                    <p>Contacts : {{ads.ads_}}</p>
-                  
+                                <div class="col-md-8">
+                                    <h1>{{ad.ads_title}}</h1>
+                                    <h2>Job Description</h2>
+                                    <h3>Requirements</h3>
+                                    <h3>Responsibilities</h3>
+                                </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                            <h3>Company Overview</h3>
+                            <p>{{ad.company.company_overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Company Snapshot</h3>
+                                <p>Industry: {{ad.company.company_industry}}</p>
+                                <p>Website: {{ad.company.company_website}}</p>
+                                <p>Spoken Language: {{ad.company.company_spoken_lang}}</p>
+                                <p>Benefits: {{ad.company.company_benefits}}</p>
+                            </div>
+                        </div>
+                    </div>       
                     
-                </div>  
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Company Contacts</h3>
+                                    <p>E-mail Address: <a href="">{{ad.company.company_email}}</a></p> 
+                                    <p>Contact Number: {{ad.company.company_contact_no}}</p>
+                                    <p>Address: {{ad.company.company_address}} </p>
+                            </div>
+                        </div>
+                    </div>       
+                    
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Why Join Us?</h3>
+                                <p>Industry: {{ad.company.company_why_join_us}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>       
+                </div>
             </div>
-            <button ng-init="init()" ng-disabled="hasApplied" ng-model="hasApplied" ng-click="apply()" class="btn btn-xl btn-success">Apply</button>
+        </div>    
+    </div>
+            <button ng-init="init()" style="margin-top:1em;position:relative;left:50%;" ng-disabled="hasApplied" ng-model="hasApplied" ng-click="apply()" class="btn btn-xl btn-success">Apply</button>
         </div>
     </div>
     <div class="modal-footer">
