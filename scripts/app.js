@@ -97,6 +97,12 @@
             controller:'View_Application_Controller',
             params : { application_id: null, type: null},            
             },
+            {
+            name: 'user_company.company_schedule',
+            url: '',
+            templateUrl:  'company_schedules.html',
+            controller:'company_schedule_controller'
+            },
             // 
             {
             name: 'user_company.company_interns',
