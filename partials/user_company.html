@@ -530,7 +530,7 @@
                                 <td>{{ap_log.reason}}</td>
                                 <td>{{ap_log.interview_date}} {{ap_log.interview_time}}</td>
                                 <td>{{ap_log.status}}</td>
-                                <td><button class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
+                                <td>{{ap_log.remarks}}</td>
                             </tr>                          
                         </table>
                     </div>
@@ -572,13 +572,13 @@
 <script type="text/ng-template" id="company_sched_remarks_modal.html">
     <div class="modal-body">
         <div class="row">
-            <form action="">
+            <form>
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
-                        <textarea name="remarks" id="" cols="30" rows="10"></textarea>
+                        <textarea name="remarks" id="" cols="30" rows="10" ng-model="remarks"></textarea>
                     </div>
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="">Save</button> </div>
+                    <div class="col-md-12"> <button class="btn btn-success" ng-click="save()">Save</button> </div>
                 </div>
             </form>
         </div>
@@ -648,7 +648,7 @@
                         <td>{{sched.interview_time}}</td>
                         <td>{{sched.ads_title}}</td>
                         
-                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(application.id)">  Remarks</button></td>
+                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(sched.id)">  Remarks</button></td>
                     </tr>
 
                 </table>
