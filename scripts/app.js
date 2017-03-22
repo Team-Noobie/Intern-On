@@ -9,13 +9,14 @@
         'angular-toArrayFilter',
         'ckeditor',
         'angularFileUpload',
+        'ngSanitize'
         ]);
 
     internon.constant('urls', (function () {
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -108,7 +109,7 @@
             name: 'user_company.company_interns',
             url: '',
             templateUrl:  'company_interns.html',
-            controller:''
+            controller:'company_interns_controller'
             },
             
             

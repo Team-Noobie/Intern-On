@@ -204,7 +204,7 @@
                 <label for="adTitle" class="cols-sm-2 control-label">Job Description</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <textarea name="editor1" id="editor1" rows="10" cols="80">
+                        <!--<textarea name="editor1" id="editor1" rows="10" cols="80">
                             <p>
                                 <b>Requirements</b>
                                     <ul>
@@ -222,8 +222,13 @@
                                         <li></li>
                                     </ul>
                                     </p>
+                        </textarea>-->
+                    </div>
+                    <div ckeditor="options" ng-model="formdata.ad_description" ready="onReady()">
+                        <textarea name="editor1" id="editor1" rows="10" cols="80">
                         </textarea>
                     </div>
+
                 </div>
             </div>
                                    
@@ -254,7 +259,7 @@
         </form>
     </div>
 </script>
-<!--<script type="text/ng-template" id="company_ad_modal.html">
+<script type="text/ng-template" id="company_ad_modal.html">
     <div class="modal-header">
         <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
     </div>
@@ -309,8 +314,7 @@
     <div class="modal-footer">
         <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
     </div>
-</script>-->
-
+</script>
 <script type="text/ng-template" id="company_profile.html">
     <div class="container-fluid">
         <div class="row">
@@ -526,7 +530,7 @@
                                 <td>{{ap_log.reason}}</td>
                                 <td>{{ap_log.interview_date}} {{ap_log.interview_time}}</td>
                                 <td>{{ap_log.status}}</td>
-                                <td><button class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
+                                <td>{{ap_log.remarks}}</td>
                             </tr>                          
                         </table>
                     </div>
@@ -568,13 +572,13 @@
 <script type="text/ng-template" id="company_sched_remarks_modal.html">
     <div class="modal-body">
         <div class="row">
-            <form action="">
+            <form>
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
-                        <textarea name="remarks" id="" cols="30" rows="10"></textarea>
+                        <textarea name="remarks" id="" cols="30" rows="10" ng-model="remarks"></textarea>
                     </div>
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="">Save</button> </div>
+                    <div class="col-md-12"> <button class="btn btn-success" ng-click="save()">Save</button> </div>
                 </div>
             </form>
         </div>
@@ -644,7 +648,50 @@
                         <td>{{sched.interview_time}}</td>
                         <td>{{sched.ads_title}}</td>
                         
-                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(application.id)">  Remarks</button></td>
+                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(sched.id)">  Remarks</button></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>   
+    </div>
+</script>
+
+<script type="text/ng-template" id="company_interns.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Interns
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-bar-chart-o"></i> Interns
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
+            </div> 
+        </div>      
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Student Name</th>
+                    </tr>
+                    <!--<tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
+                        <td>{{ad.created_at}}</td>
+                    </tr>-->
+                    <tr ng-repeat="intern in interns">
+                        <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                     </tr>
 
                 </table>
