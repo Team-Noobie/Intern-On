@@ -13,7 +13,41 @@
 				$state.go('user_coordinator.coordinator_profile');
 			});
 		};
+
+
+
+
     });
- 
+
+     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $scope.newSection = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'create_student_section.html',
+                    controller: 'create_student_section_controller',
+                    size: 'md',
+                    resolve: {
+                            id: function () {
+                                return id;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (id) {
+                        return 1;
+                    });
+            };
+    });
+
+    internon.controller('create_student_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+       
+        $scope.create_section = function () {
+            $http.post(urls.API_HOST + '/create_student_section', $scope.formdata).then(function (response){
+                $state.go('user_coordinator.coordinator_section');   
+            });
+
+        };
+
+    });
    
 })();

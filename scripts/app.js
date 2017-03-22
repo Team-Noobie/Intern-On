@@ -16,7 +16,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -51,7 +51,19 @@
             templateUrl:  '',
             controller:'user_controller'
             },
-
+            // Administrator routes
+            {
+            name: 'user_administrator',
+            url: '/administrator',
+            templateUrl:  'partials/user_administrator.html',
+            controller:'administrator_controller'
+            },
+            {
+            name: 'user_administrator.administrator_module',
+            url: '',
+            templateUrl:  'administrator_module.html',
+            controller:'administrator_controller'
+            },
             // Company routes
             {
             name: 'user_company',
@@ -158,7 +170,7 @@
             name: 'user_coordinator.coordinator_section',
             url: '',
             templateUrl:  'coordinator_section.html',
-            controller:'user_coordinator_controller'
+            controller:'coordinator_section_controller'
             },
         ]
 
@@ -179,6 +191,7 @@
                 template="Register.html";
              else if(type==3)
                 template="CompanyLogin.html";
+                
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -233,7 +246,9 @@
                 $state.go('user_company');
             if(response.data.user.type == "coordinator")
                 $state.go('user_coordinator');
-        });
+            if(response.data.user.type == "administrator")
+                $state.go('user_administrator');    
+     });
     });
 
 
