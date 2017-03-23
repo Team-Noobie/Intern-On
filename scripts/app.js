@@ -16,7 +16,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -123,8 +123,6 @@
             templateUrl:  'company_interns.html',
             controller:'company_interns_controller'
             },
-            
-            
             // Student routes
             {
             name: 'user_student',
@@ -159,7 +157,6 @@
             templateUrl:  'partials/user_coordinator.html',
             controller:'coordinator_controller'
             },
-
             {
             name: 'user_coordinator.coordinator_profile',
             url: '',
@@ -172,6 +169,17 @@
             templateUrl:  'coordinator_section.html',
             controller:'coordinator_section_controller'
             },
+            //HR
+            {
+            name: 'user_hr',
+            url: '/hr',
+            templateUrl:  'partials/user_HR.html',
+            controller:'coordinator_controller'
+            },
+
+
+
+            //SV
         ]
 
         states.forEach(function(state) {
