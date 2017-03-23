@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}</a>
+            <a class="navbar-brand" ui-sref="user_company.company_profile">{{hr.hr_firstname}} {{hr.hr_lastname}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    <h5 class="media-heading"><strong></strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -39,7 +39,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    <h5 class="media-heading"><strong></strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -95,7 +95,7 @@
                 </ul>
             </li>
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i>  <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -116,9 +116,6 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
-                </li>
                 <li>
                     <a ui-sref="user_company.company_application"><i class="fa fa-fw fa-table"></i>Applications</a>
                 </li>
