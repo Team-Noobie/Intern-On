@@ -9,16 +9,16 @@
         };
 
         $scope.init = function () {
-			$http({method: 'GET', url: urls.API_HOST + '/hr_profile/'+$localStorage.id}).then(function(response){
+			$http({method: 'GET', url: urls.API_HOST + '/hr_application/'+$localStorage.id}).then(function(response){
 				$scope.hr = response.data;
-				$state.go('user_company_HR.hr_profile');
+				$state.go('user_company_HR.hr_application');
 			});
 		};
     });
 
-       internon.controller('advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+       internon.controller('hr_advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
 
-        if($state.current.name == 'user_company.company_ads'){
+        if($state.current.name == 'user_company_HR.company_ads'){
             $scope.choice = {
                 'option': {'name': '','value':''},
             };
@@ -53,7 +53,7 @@
             };
         }
 
-        if($state.current.name == 'user_company.company_application'){
+        if($state.current.name == 'user_company_HR.hr_application'){
 
             $scope.choice = {
                 'option': {'name': '','value':''},
@@ -66,39 +66,39 @@
             ];
 
 
-            $http({method: 'GET', url: urls.API_HOST + '/advertisement_application_list/'+$localStorage.id}).then(function(response){
+            $http({method: 'GET', url: urls.API_HOST + '/hr_advertisement_application_list/'+$localStorage.id}).then(function(response){
                     $scope.ads = response.data;
             });
 
             $scope.changeState = function($id){
-                $state.go('user_company.company_list_application', {ads_id: $id,type:$scope.choice.option.value} );
+                $state.go('user_company_HR.hr_list_application', {ads_id: $id,type:$scope.choice.option.value} );
             }
         };
     });
-  internon.controller('list_applicants_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+  internon.controller('hr_list_applicants_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
         $http.post(urls.API_HOST + '/advertisement_applicant_list/'+$stateParams.ads_id , {type: $stateParams.type}).then(function (response){
             $scope.applications = response.data;
         });
     
         $scope.changeState = function($id){
-            $state.go('user_company.company_student_application', {application_id: $id,type: $stateParams.type} );            
+            $state.go('user_company_HR.hr_student_application', {application_id: $id,type: $stateParams.type} );            
         };
     });
     internon.controller('View_Application_Controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
-        $http({method: 'GET', url: urls.API_HOST + '/view_application/'+$stateParams.application_id}).then(function(response){
+        $http({method: 'GET', url: urls.API_HOST + '/hr_view_application/'+$stateParams.application_id}).then(function(response){
                 $scope.application = response.data;
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.student_id+'/'+response.data.student.resume;
         });
         
         $scope.accept = function (){
-            $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$stateParams.application_id}).then(function(response){
+            $http({method: 'GET', url: urls.API_HOST + '/hr_hire_applicant/'+$stateParams.application_id}).then(function(response){
                 // $scope.application = response.data;
                 // $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.student_id+'/'+response.data.student.resume;
             });
         }
 
         $scope.reject = function (){
-            $http({method: 'GET', url: urls.API_HOST + '/reject_application/'+$stateParams.application_id}).then(function(response){
+            $http({method: 'GET', url: urls.API_HOST + '/hr_reject_application/'+$stateParams.application_id}).then(function(response){
                 // $scope.application = response.data;
                 // $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.student_id+'/'+response.data.student.resume;
             });
@@ -106,7 +106,7 @@
         
         
         $scope.backState = function($id){
-            $state.go('user_company.company_list_application', {ads_id: $id,type: $stateParams.type} );                
+            $state.go('user_company_HR.hr_list_application', {ads_id: $id,type: $stateParams.type} );                
         }
 
         
@@ -114,7 +114,7 @@
         $scope.schedModal = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
-                    templateUrl: 'company_sched_student_modal.html',
+                    templateUrl: 'hr_sched_student_modal.html',
                     controller: 'sched_modal_Controller',
                     size: 'md',
                     resolve: {
@@ -131,7 +131,7 @@
 
 
     });
-    internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
+    internon.controller('hr_sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.today = function() {
             $scope.dt = new Date();
         };
@@ -146,11 +146,11 @@
             console.log($scope.date + " "+$scope.time);
             $http.post(urls.API_HOST + '/set_interview/'+id,{reason:$scope.reason,interview_date:$scope.date,interview_time:$scope.time}).then(function (response){
                 $uibModalInstance.close();
-                $state.go('user_company.company_student_application', {application_id: id,type: $stateParams.type} );            
+                $state.go('user_company_HR.hr_student_application', {application_id: id,type: $stateParams.type} );            
             });
         };
     });
-    internon.controller('company_schedule_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
+    internon.controller('hr_schedule_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
         $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.id}).then(function(response){
 			$scope.schedules = response.data;
 		});
@@ -161,7 +161,7 @@
         $scope.remarksModal = function(id){
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'company_sched_remarks_modal.html',
+                templateUrl: 'hr_sched_remarks_modal.html',
                 controller: 'remarks_modal_Controller',
                 size: 'sm',
                 resolve: {
@@ -185,7 +185,7 @@
             });
         }
     });
-    internon.controller('company_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
+    internon.controller('hr_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
         // $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.id}).then(function(response){
 		// 	$scope.interns = response.data;
 		// });

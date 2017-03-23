@@ -103,10 +103,35 @@
             controller:'hr_controller'
             },
             {
-            name: 'user_company_hr.hr_profile',
+            name: 'user_company_HR.hr_application',
             url: '',
-            templateUrl:  'hr_profile.html',
+            templateUrl:  'hr_application.html',
             controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_schedules',
+            url: '',
+            templateUrl:  'hr_schedules.html',
+            controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_interns',
+            url: '',
+            templateUrl:  'hr_interns.html',
+            controller:'hr_controller'
+            },
+             // HR 
+            { 
+            name: 'user_company_SV',
+            url: '/sv',
+            templateUrl:  'partials/user_company_SV.html',
+            controller:'sv_controller'
+            },
+            {
+            name: 'user_company_SV.sv_interns',
+            url: '',
+            templateUrl:  'sv_interns.html',
+            controller:'sv_controller'
             },
 
             // for application
