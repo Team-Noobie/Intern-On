@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}}</strong>
+                                    <h5 class="media-heading"><strong>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -139,7 +139,51 @@
 </div>
 
 <script type="text/ng-template" id="coordinator_profile.html">
-    profile
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    My Profile
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                                <a href="" style="padding-top:20px;">upload image</a>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h1>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
+                                <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
+                                <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
+                                <p>Address: {{coordinator.coordinator_address}} </p>
+                            </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                                <h3>School Background</h3>
+                                <p>Department: {{coordinator.coordinator_department}}</p>
+                                <p>Institute: {{coordinator.coordinator_institute}}</p>
+                                <p>School: {{coordinator.coordinator_school}}</p>    
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+    </div>
 </script>
 
 
@@ -161,7 +205,7 @@
         <!-- /.row -->
         <div class="row">
             <div class = "col-md-4">
-                <a style="cursor:pointer;" ng-click="openAdModal(ad.ID)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create A Section</a> 
+                <a style="cursor:pointer;" ng-click="newSection(ad.ID)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create A Section</a> 
             </div>
             <div class = "col-md-4">
                 <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
@@ -173,36 +217,59 @@
             </div> 
         </div>      
 
-        <div class="row" style="margin-top:10px">
+      <div class="row" style="margin-top:10px">
             <div class="col-lg-12">
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <th>Sections</th>
+                        <th>Section</th>
+                        <th>Date Created</th>
                         <th>Actions</th>
-                        <th>Date Publish</th>
                     </tr>
-                    <!-- <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search "> -->
-                    <tr>
-                    <td><a style="cursor:pointer;text-transform:uppercase;" ui-sref="section_students">IT301</a></td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                        <td>{{ad.created_at}}</td>
+                    <tr ng-repeat="sec in section">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{sec.section_code}}</a></td>
+                        
+                        <td>{{sec.created_at}}</td>
+                        <td><button style="margin-right:5px;" ng-click="enrollStudent(sec.id)" class="btn btn-info btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> Enroll Student</button><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
-                    <!-- </tr> -->
                 </table>
             </div>
         </div>   
-        <div>
+       
         </script>   
 
-        <script type="text/ng-template" id="coordinator_create_sec_modal.html">
-           <div class="modal-body">
+    <script type="text/ng-template" id="create_student_section.html">
+         <div class="modal-body">
             <label for="name" class="cols-sm-2 control-label">Section Code</label>
             <div class="cols-sm-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" ng-model="formdata.ads_tags"  placeholder="Section Code" required/>
+                    <input type="text" class="form-control" ng-model="formdata.section_code"  placeholder="Section Code" required/>
                 </div>
-                <button class="btn btn-info btn-md" id="add" ng-click=""><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
+                <button class="btn btn-info btn-md" id="add" ng-click="create_section()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
+            </div>
+        </div>        
+
+    </script>
+
+    <script type="text/ng-template" id="enroll_student.html">
+         <div class="modal-body">
+            <label for="name" class="cols-sm-2 control-label">Student Username</label>
+            <div class="cols-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="formdata.student_firstname"  placeholder="Firstname" required/>
+                </div>
+
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="formdata.student_lastname"  placeholder="Lastname" required/>
+                </div>
+                <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
             </div>
         </div>        
 
