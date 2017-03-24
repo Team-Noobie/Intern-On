@@ -8,9 +8,7 @@
         };
 
         $scope.init = function () {
-			
 				$state.go('user_administrator.administrator_module');
-			
 		};
 
           $scope.newCompanyAccount = function(id){
@@ -30,8 +28,6 @@
                         return 1;
                     });
             };
-
-
                 $http({method: 'GET', url: urls.API_HOST + '/company_accounts_list'}).then(function(response){
                     $scope.company = response.data;
                 });
@@ -39,16 +35,12 @@
     });
 
      internon.controller('create_company_account_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-       
         $scope.create_account = function () {
             $http.post(urls.API_HOST + '/create_company_account', $scope.formdata).then(function (response){
                 $state.go('user_administrator.administrator_module');   
             });
 
         };
-
-
-
     });
 
         
