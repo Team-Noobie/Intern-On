@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}</a>
+            <a class="navbar-brand" ui-sref="user_company_HR.hr_profile">{{sv.sv_firstname}} {{sv.sv_lastname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    <h5 class="media-heading"><strong></strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -39,7 +39,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    <h5 class="media-heading"><strong></strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -95,10 +95,10 @@
                 </ul>
             </li>
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i>  <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
-                        <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a ui-sref="user_company_HR.hr_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a><i class="fa fa-fw fa-envelope"></i> Inbox</a>
@@ -117,16 +117,13 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
+                    <a ui-sref="user_company_HR.hr_application"><i class="fa fa-fw fa-table"></i>Applications</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_application"><i class="fa fa-fw fa-table"></i>Applications</a>
+                    <a ui-sref="user_company_HR.hr_schedules"><i class="fa fa-calendar"></i> Schedules</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_schedule"><i class="fa fa-calendar"></i> Schedules</a>
-                </li>
-                <li>
-                    <a ui-sref="user_company.company_interns"><i class="fa fa-users"></i> Interns</a>
+                    <a ui-sref="user_company_HR.hr_interns"><i class="fa fa-users"></i> Interns</a>
                 </li>      
             </ul>
         </div>
@@ -315,73 +312,7 @@
         <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
     </div>
 </script>
-<script type="text/ng-template" id="company_profile.html">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    My Profile
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div style="border:solid; height: auto ; width: inherit;">
-                    <div class="jumbotron text-center">
-                        <div class="row">
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
-                            </div>
-
-                            <div class="col-md-8">
-                                <h1>{{company.company_name}}</h1>
-                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
-                                <p>Contact Number: {{company.company_contact_no}}</p>
-                                <p>Address: {{company.company_address}} </p>
-                            </div>
-                            
-                        </div> 
-                    </div>
-
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                
-                                <h3>Company Overview</h3>
-                                <p>{{company.company_overview}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Company Snapshot</h3>
-                                <p>Industry: {{company.company_industry}}</p>
-                                <p>Website: {{company.company_website}}</p>
-                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
-                                <p>Benefits: {{company.company_benefits}}</p>
-                            </div>
-                        </div>
-                    </div>       
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Why Join Us?</h3>
-                                <p>Industry: {{company.company_why_join_us}}</p>
-                                
-                            </div>
-                        </div>
-                    </div>       
-                </div>
-            </div>
-        </div>    
-    </div>
-</script>
-<script type="text/ng-template" id="company_application.html">
+<script type="text/ng-template" id="hr_application.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -421,7 +352,7 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="company_list_application.html">
+<script type="text/ng-template" id="hr_list_application.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -435,7 +366,7 @@
                         <i class="fa fa-table"></i> List Applications
                     </li>
                     <div style="display:inline; margin-left:200px">
-                        <a ui-sref="user_company.company_application">Back</a>
+                        <a ui-sref="user_company_HR.hr_application">Back</a>
                     </div>
                 </ol>
             </div>
@@ -454,7 +385,7 @@
         </div>
     </div>
 </script>  
-<script type="text/ng-template" id="company_student_application.html">
+<script type="text/ng-template" id="hr_student_application.html">
     <div class="container-fluid" >
         <!-- Page Heading -->
         <div class="row">
@@ -539,7 +470,7 @@
         </div>
     </div>
 </script>  
-<script type="text/ng-template" id="company_sched_student_modal.html">
+<script type="text/ng-template" id="hr_sched_student_modal.html">
     <div class="modal-body">
         <div class="row">
             <form action="">
@@ -569,7 +500,7 @@
 
 </script>
 
-<script type="text/ng-template" id="company_sched_remarks_modal.html">
+<script type="text/ng-template" id="hr_sched_remarks_modal.html">
     <div class="modal-body">
         <div class="row">
             <form>
@@ -603,7 +534,7 @@
         <h1>FOOTER</h1>
     </div>
 </script>
-<script type="text/ng-template" id="company_schedules.html">
+<script type="text/ng-template" id="hr_schedules.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -657,7 +588,7 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="company_interns.html">
+<script type="text/ng-template" id="hr_interns.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">

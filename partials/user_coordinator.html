@@ -253,20 +253,19 @@
 
     <script type="text/ng-template" id="enroll_student.html">
          <div class="modal-body">
-            <label for="name" class="cols-sm-2 control-label">Student Username</label>
-            <div class="cols-sm-6">
+            <div class="cols-md-8">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <label for="name" class="cols-sm-2 control-label">Student Username</label>
                     <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
                 </div>
 
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <label for="name" class="cols-sm-2 control-label">Student Firstname</label>                     
                     <input type="text" class="form-control" ng-model="formdata.student_firstname"  placeholder="Firstname" required/>
                 </div>
 
                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <label for="name" class="cols-sm-2 control-label">Student Lastname</label>                                         
                     <input type="text" class="form-control" ng-model="formdata.student_lastname"  placeholder="Lastname" required/>
                 </div>
                 <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 

@@ -92,6 +92,52 @@
             {
             name: 'user_company.company_application',
             url: '',
+            templateUrl:  'company_application.html',
+            controller:'advertisement_list_controller'
+            },
+            // HR 
+            { 
+            name: 'user_company_HR',
+            url: '/hr',
+            templateUrl:  'partials/user_company_HR.html',
+            controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_application',
+            url: '',
+            templateUrl:  'hr_application.html',
+            controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_schedules',
+            url: '',
+            templateUrl:  'hr_schedules.html',
+            controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_interns',
+            url: '',
+            templateUrl:  'hr_interns.html',
+            controller:'hr_controller'
+            },
+             // HR 
+            { 
+            name: 'user_company_SV',
+            url: '/sv',
+            templateUrl:  'partials/user_company_SV.html',
+            controller:'sv_controller'
+            },
+            {
+            name: 'user_company_SV.sv_interns',
+            url: '',
+            templateUrl:  'sv_interns.html',
+            controller:'sv_controller'
+            },
+
+            // for application
+            {
+            name: 'user_company.company_list_application',
+            url: '',
             templateUrl:  'company_list_application.html',
             controller:'application_controller'
             },
@@ -153,18 +199,7 @@
             url: '',
             templateUrl:  'coordinator_section.html',
             controller:'coordinator_section_controller'
-            },
-            //HR
-            {
-            name: 'user_hr',
-            url: '/hr',
-            templateUrl:  'partials/user_HR.html',
-            controller:'coordinator_controller'
-            },
-
-
-
-            //SV
+            },        
         ]
 
         states.forEach(function(state) {
@@ -240,7 +275,11 @@
             if(response.data.user.type == "coordinator")
                 $state.go('user_coordinator');
             if(response.data.user.type == "administrator")
-                $state.go('user_administrator');    
+                $state.go('user_administrator'); 
+            if(response.data.user.type == "hr")
+                $state.go('user_company_HR'); 
+            if(response.data.user.type == "sv")
+                $state.go('user_company_SV');            
      });
     });
 
