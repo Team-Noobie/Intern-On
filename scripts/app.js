@@ -92,23 +92,8 @@
             {
             name: 'user_company.company_application',
             url: '',
-            templateUrl:  'company_application.html',
-            controller:'advertisement_list_controller'
-            },
-            // for application
-            {
-            name: 'user_company.company_list_application',
-            url: '',
             templateUrl:  'company_list_application.html',
-            controller:'list_applicants_controller',
-            params : { ads_id: null, type: null },
-            },
-            {
-            name: 'user_company.company_student_application',
-            url: '',
-            templateUrl:  'company_student_application.html',
-            controller:'View_Application_Controller',
-            params : { application_id: null, type: null},            
+            controller:'application_controller'
             },
             {
             name: 'user_company.company_schedule',
@@ -188,7 +173,7 @@
     });
 
 
-    internon.controller('index_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal){
+    internon.controller('index_controller',function($http,$state,$scope,$localStorage,$auth,$uibModal){
         $scope.openModal = function(type){
             var type;
             var template="";
@@ -221,7 +206,7 @@
 
 	});
 
-    internon.controller('login_modal_controller',function(Account,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+    internon.controller('login_modal_controller',function($http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
 
         $scope.close = function () {
             $uibModalInstance.close();
@@ -244,7 +229,7 @@
 
     });
 
-    internon.controller('user_controller',function(Ads,Account,urls,$http,$auth,$state,$rootScope,$scope,$localStorage){
+    internon.controller('user_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage){
             
         $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
           $localStorage.id = response.data.user.id;
@@ -258,44 +243,5 @@
                 $state.go('user_administrator');    
      });
     });
-
-
-    internon.factory('Account', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/user/:id', {
-            id: '@id'
-        },{
-            update:{
-                method:'PUT',
-            },
-            save:{
-                method:'POST'
-            }
-        });
-    }
-    ]);
-
-    internon.factory('Ads', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/ads/:id',{
-            update:{
-                method:'PUT',
-            },
-            save:{
-                method:'POST',
-            },
-        });
-    }
-    ]);
-
-    internon.factory('Application', ['urls', '$resource', function (urls, $resource) {
-        return $resource(urls.API_HOST + '/application/:id',{
-            update:{
-                method:'PUT',
-            },
-            save:{
-                method:'POST',               
-            }
-        });
-    }
-    ]);
 
 })();
