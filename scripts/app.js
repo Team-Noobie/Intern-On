@@ -9,7 +9,8 @@
         'angular-toArrayFilter',
         'ckeditor',
         'angularFileUpload',
-        'ngSanitize'
+        'ngSanitize',
+        'ngToast'
         ]);
 
     internon.constant('urls', (function () {
@@ -110,10 +111,16 @@
             controller:'hr_controller'
             },
             {
-            name: 'user_company_HR.hr_application',
+            name: 'user_company_HR.hr_profile',
             url: '',
-            templateUrl:  'hr_application.html',
+            templateUrl:  'hr_profile.html',
             controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_list_application',
+            url: '',
+            templateUrl:  'hr_list_application.html',
+            controller:'application_controller'
             },
             {
             name: 'user_company_HR.hr_schedules',
@@ -127,7 +134,7 @@
             templateUrl:  'hr_interns.html',
             controller:'hr_controller'
             },
-             // HR 
+             // SV
             { 
             name: 'user_company_SV',
             url: '/sv',
