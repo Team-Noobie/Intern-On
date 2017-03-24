@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_administrator">Hello Admin!</a>
+            <a class="navbar-brand">Hello Admin!</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -66,6 +66,9 @@
     <div class="row">
         <div class = "col-md-4">
             <a ng-click="newCompanyAccount(4)" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Company Account</a> 
+        </div>
+        <div class = "col-md-4">
+            <a ng-click="newCoordinatorAccount(4)" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Coordinator Account</a> 
         </div>
         <div class = "col-md-4">
             <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
@@ -125,7 +128,54 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-info btn-md" id="addCompanyAccount" ng-click="create_account()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Account</button>
+                                <button class="btn btn-info btn-md" id="addCompanyAccount" ng-click="create_company_account()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</script>
+ <script type="text/ng-template" id="create_coordinator_accounts.html">
+        <div class="modal-body">
+            <div class="main-center">
+             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form class="form-horizontal post-ads" method="post"> 
+                            <div class="form-group">
+                                <label for="Username" class="cols-sm-2 control-label">Username</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="company-username" ng-model="formdata.coordinator_username"  placeholder="Username" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="firstname" class="cols-sm-2 control-label">First Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="coordinator-user" ng-model="formdata.coordinator_firstname"  placeholder="First Name" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="companyName" class="cols-sm-2 control-label">Last Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" id="coordinator-lastname" ng-model="formdata.coordinator_lastname"  placeholder="Last Name" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-info btn-md" id="addCoordinatorAccount" ng-click="create_coordinator_account()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Account</button>
                             </div>
                         </form>
                     </div>

@@ -134,7 +134,6 @@
             templateUrl:  'hr_interns.html',
             controller:'hr_controller'
             },
-             // SV
             { 
             name: 'user_company_SV',
             url: '/sv',
