@@ -14,8 +14,7 @@
 			});
 		};
     });
-
-       internon.controller('hr_advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('hr_advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
 
         if($state.current.name == 'user_company_HR.company_ads'){
             $scope.choice = {
@@ -74,7 +73,7 @@
             }
         };
     });
-  internon.controller('hr_list_applicants_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+    internon.controller('hr_list_applicants_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
         $http.post(urls.API_HOST + '/advertisement_applicant_list/'+$stateParams.ads_id , {type: $stateParams.type}).then(function (response){
             $scope.applications = response.data;
         });
@@ -176,7 +175,6 @@
         };
 
     });
-
     internon.controller('remarks_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
        $scope.save = function(){
             $http.post(urls.API_HOST + '/interview_result/'+id , {remarks: $scope.remarks}).then(function (response){
