@@ -10,7 +10,7 @@
         'ckeditor',
         'angularFileUpload',
         'ngSanitize',
-        'ngToast'
+        // 'ngToast'
         ]);
 
     internon.constant('urls', (function () {
@@ -234,8 +234,6 @@
 					return 1;
 				});
         };
-
-
 	});
 
     internon.controller('login_modal_controller',function(urls,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
