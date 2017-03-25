@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_lastname}},{{student.student_firstname}}</a>
+            <a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_firstname}} {{student.student_lastname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -174,16 +174,21 @@
             </div>
         </div>
     </div>
-    <div ng-repeat="ad in aAds" class="panel search-ads">
-        <div style="border-style:groove;border-radius:25px;padding:10px;margin-top:5px;margin-bottom:5px;"> 
-            <a ng-click= "openAdModal(ad.id)">
-                <h3 style="text-transform:capitalize;">{{ad.ads_title}}</h3>
-                <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
-                <h5 style="text-transform:capitalize;">Work Location:{{ad.ads_work_location}}</h4>         
-            </a>
+ <div style="margin-top:2em;" ng-repeat="ad in aAds">    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+        <h3 class="panel-title" style="text-transform:capitalize;"><a ng-click= "openAdModal(ad.id)">{{ad.ads_title}}</a></h3>
         </div>
-    </div>
-    <ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
+        <div class="panel-body">
+            <a ng-click= "openAdModal(ad.id)">
+               <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
+               <h5 style="text-transform:capitalize;">Work Location:{{ad.ads_work_location}}</h4> 
+            </a>      
+        </div>
+   </div>
+ </div>
+   
+<ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
 </script>
 <script type="text/ng-template" id="studentprofile.html">
     <div class="container-fluid">

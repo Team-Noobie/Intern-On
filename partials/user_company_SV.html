@@ -10,92 +10,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company.company_profile">{{sv.sv_firstname}} {{sv.sv_lastname}}</a>
+            <a class="navbar-brand" ui-sref="user_company_SV.sv_profile">{{sv.sv_firstname}} {{sv.sv_lastname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu message-dropdown" uib-dropdown-menu>
-                    <li class="message-preview">
-                        <a>
-                            <div class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="img/text.png" alt="">
-                                </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><stron</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="message-preview">
-                        <a>
-                            <div class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="img/text.png" alt="">
-                                </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><strong>{{sv.sv_fisrtname}}</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>har
-                            </div>
-                        </a>
-                    </li>
-                    <li class="message-preview">
-                        <a>
-                            <div class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="img/text.png" alt="">
-                                </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="message-footer">
-                        <a ui-sref="user_student.student_message">Read All New Messages</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown" uib-dropdown-menu>
-                    <li>
-                        <a>Alert Name <span class="label label-default">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-primary">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-success">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-info">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-warning">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a>Alert Name <span class="label label-danger">Alert Badge</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a>View All</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i>  <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user"></i>  <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -120,7 +40,7 @@
                     <a ui-sref="user_company_SV.sv_interns"><i class="fa fa-users"></i> Interns</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company_SV.interns_grades"><i class="fa fa-pencil-square-o"></i> Grades</a>
+                    <a ui-sref="user_company_SV.interns_grade"><i class="fa fa-pencil-square-o"></i> Grades</a>
                 </li>            
             </ul>
         </div>

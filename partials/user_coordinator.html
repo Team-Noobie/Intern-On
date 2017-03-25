@@ -186,7 +186,6 @@
     </div>
 </script>
 
-
 <script type="text/ng-template" id="coordinator_section.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -234,7 +233,13 @@
                 </table>
             </div>
         </div>   
-       
+            <input type="file" id="fileUpload" />
+            <input type="button" ng-click="uploadCSV()" value="Upload" />
+            <hr />
+            <div id="dvCSV">
+
+            </div>
+
         </script>   
 
     <script type="text/ng-template" id="create_student_section.html">
@@ -245,7 +250,7 @@
                     <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" ng-model="formdata.section_code"  placeholder="Section Code" required/>
                 </div>
-                <button class="btn btn-info btn-md" id="add" ng-click="create_section()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
+                <button class="btn btn-info btn-md" id="add" ng-click="create_section()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
             </div>
         </div>        
 

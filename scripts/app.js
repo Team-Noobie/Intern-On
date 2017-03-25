@@ -10,6 +10,7 @@
         'ckeditor',
         'angularFileUpload',
         'ngSanitize',
+        'ngCsvImport',
         // 'ngToast'
         ]);
 
@@ -17,7 +18,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -60,9 +61,15 @@
             controller:'administrator_controller'
             },
             {
-            name: 'user_administrator.administrator_module',
+            name: 'user_administrator.administrator_company',
             url: '',
-            templateUrl:  'administrator_module.html',
+            templateUrl:  'administrator_company.html',
+            controller:'administrator_controller'
+            },
+            {
+            name: 'user_administrator.administrator_coordinator',
+            url: '',
+            templateUrl:  'administrator_coordinator.html',
             controller:'administrator_controller'
             },
             // Company routes
@@ -145,8 +152,14 @@
             url: '',
             templateUrl:  'sv_interns.html',
             controller:'sv_controller'
+        },
+        
+            {
+            name: 'user_company_SV.interns_grade',
+            url: '',
+            templateUrl:  'interns_grade.html',
+            controller:'sv_controller'
             },
-
             // 
             {
             name: 'user_company.company_interns',
