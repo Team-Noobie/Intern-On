@@ -8,7 +8,7 @@
         };
 
         $scope.init = function () {
-			$http({method: 'GET', url: urls.API_HOST + '/sv_interns/'+$localStorage.id}).then(function(response){
+			$http({method: 'GET', url: urls.API_HOST + '/sv_profile/'+$localStorage.id}).then(function(response){
 				$scope.sv = response.data;
 				$state.go('user_company_SV.sv_interns');
 			});

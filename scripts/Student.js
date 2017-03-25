@@ -41,7 +41,7 @@
 	
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
 		$scope.ads;
-		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement'}).then(function(response){
+		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
 			$scope.ads = response.data;
 			$scope.totalItems = $scope.ads.length;
 			$scope.currentPage = 1;
@@ -78,7 +78,7 @@
 				});
 		};
 	});
-	internon.controller('student_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+	internon.controller('student_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
 		$scope.ids ={
 			ad_id:id,
 			student_id: $localStorage.id,
@@ -89,17 +89,9 @@
 			$scope.ids.company_id = response.data.company_id;
 		});
 
-		
-		
-		$scope.init = function(){
-			$http.post(urls.API_HOST + '/application_check', $scope.ids).then(function (response){
-				$scope.hasApplied = response.data;
-			});
-		};
-
 		$scope.apply = function () {
 			$http.post(urls.API_HOST + '/apply', $scope.ids).then(function (response){
-				console.log('Application Sent!');
+				$uibModalInstance.close();
 			});
 		};
 
@@ -107,6 +99,11 @@
 	internon.controller('student_view_application_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
 		$http({method: 'GET', url: urls.API_HOST + '/application_list/'+$localStorage.id}).then(function(response){
 				$scope.applications = response.data;
+		});
+	});
+	internon.controller('student_sched_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+		$http({method: 'GET', url: urls.API_HOST + '/student_schedule/'+$localStorage.id}).then(function(response){
+			$scope.schedules = response.data;
 		});
 	});
 })();

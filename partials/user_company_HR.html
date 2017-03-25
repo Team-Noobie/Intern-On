@@ -24,7 +24,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong></strong>
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -39,7 +39,7 @@
                                     <img class="media-object" src="img/text.png" alt="">
                                 </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong></strong>
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
                                     </h5>
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                     <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -95,7 +95,7 @@
                 </ul>
             </li>
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i>  <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a ui-sref="user_company_HR.hr_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -117,13 +117,16 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a ui-sref="user_company_HR.hr_application"><i class="fa fa-fw fa-table"></i>Applications</a>
+                    <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company_HR.hr_schedules"><i class="fa fa-calendar"></i> Schedules</a>
+                    <a ui-sref="user_company_HR.hr_list_application"><i class="fa fa-fw fa-table"></i>Applications</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company_HR.hr_interns"><i class="fa fa-users"></i> Interns</a>
+                    <a ui-sref="user_company.company_schedule"><i class="fa fa-calendar"></i> Schedules</a>
+                </li>
+                <li>
+                    <a ui-sref="user_company.company_interns"><i class="fa fa-users"></i> Interns</a>
                 </li>      
             </ul>
         </div>
@@ -139,163 +142,71 @@
 
 <script type="text/ng-template" id="hr_application.html">
     <div class="container-fluid">
-        <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Applications
+                    My Profile
                 </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-table"></i> Applications
-                    </li>
-                </ol>
             </div>
         </div>
         <div class="row">
-            <div class = "col-md-4">
-                <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
-                    <select class="form-control" ng-model="choice.option" ng-init="choice.option = choices[0]" ng-options="state as state.name for state in choices"></select>
-                </span>
-            </div>   
-        </div>
-        <div class="row">
             <div class="col-lg-12">
-                <table class="table table-bordered table-hover" style="margin-top:1em;">
-                    <tr>
-                        <th>Advertisement Title</th>
-                        <th>Actions</th>
-                    </tr>
-                    <tr ng-repeat="ad in ads">
-                        <td><a style="text-transform:uppercase">{{ad.ads_title}}</a></td>
-                        <td>
-                            <button ng-click="changeState(ad.id)" style="margin-right:5px;" class="btn btn-info btn-sm">View Applicants</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</script>
-<script type="text/ng-template" id="hr_list_application.html">
-    <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    List Applications
-                </h1>
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                                <a href="" style="padding-top:20px;">upload image</a>
+                            </div>
 
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-table"></i> List Applications
-                    </li>
-                    <div style="display:inline; margin-left:200px">
-                        <a ui-sref="user_company_HR.hr_application">Back</a>
+                            <div class="col-md-8">
+                                <h1>{{company.company_name}}</h1>
+                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
+                                <p>Contact Number: {{company.company_contact_no}}</p>
+                                <p>Address: {{company.company_address}} </p>
+                            </div>
+                            
+                        </div> 
                     </div>
-                </ol>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>Student Name</th>
-                    </tr>
-                    <tr ng-repeat="ap in applications">
-                        <td><a ng-click="changeState(ap.id)">{{ap.student.student_lastname}}, {{ap.student.student_firstname}}</a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</script>  
-<script type="text/ng-template" id="hr_student_application.html">
-    <div class="container-fluid" >
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    Application
-                </h1>
-                <ol class="breadcrumb">
-                    <div style="display:inline; margin-left:200px">
-                        <a ng-click="backState(application.ads_id)">Back</a>
-                    </div>
-                </ol>
-                <!--<div style="border-style: solid; padding: 5em;margin-bottom:20px;">-->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="border:solid; height: auto ; width: inherit;">
-                            <div class="jumbotron text-center">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <h1>{{application.student.student_firstname}} {{application.student.student_lastname}}</h1>
-                                        <p>E-mail Address: <a href="">{{application.student.student_email}}</a></p> 
-                                        <p>Contact Number: {{application.student.student_contact_no}}</p>
-                                        <p>Address: {{application.student.student_address}} </p>
-                                    </div>
 
-                                    <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                        <p>IMAGE</p>
-                                    </div>
-                                </div> 
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                                <h3>Company Overview</h3>
+                                <p>{{company.company_overview}}</p>
                             </div>
-
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-
-                                        <h3>Personal Background</h3>
-                                        <p>Birthday: {{application.student.student_birthday}}</p>
-                                        <p>Gender: {{application.student.student_gender}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <h3>Educational Background</h3>
-                                        <p>Course: {{application.student.student_course}}</p>
-                                        <p>Department: {{application.student.student_department}}</p>
-                                        <p>Intitute: {{application.student.student_institute}}</p>
-                                        <p>School: {{application.student.student_school}}</p>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                    <!--</div>-->
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Company Snapshot</h3>
+                                <p>Industry: {{company.company_industry}}</p>
+                                <p>Website: {{company.company_website}}</p>
+                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
+                                <p>Benefits: {{company.company_benefits}}</p>
+                            </div>
+                        </div>
+                    </div>       
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Why Join Us?</h3>
+                                <p>Industry: {{company.company_why_join_us}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>       
                 </div>
-                <div style="margin-top:20px;margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
-                <div class="col-md-4"><button ng-click="schedModal(application.id)" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule for Interview</button></div>
-                <div style="margin-bottom:20px;" class="col-md-4"><button class="btn btn-success" ng-click="accept()"><i class="fa fa-ban" aria-hidden="true"></i> Accept</button></div>                
-                <div style="margin-bottom:20px;" class="col-md-4"><button class="btn btn-danger" ng-click="reject()"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button></div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <table class="table table-bordered table-hover">
-                            <tr>
-                                <th>Reason</th>
-                                <th>Date and Time</th>
-                                <th>Status</th>
-                                <th>Remarks</th>
-                            </tr>
-                            <tr ng-repeat="ap_log in application.logs">
-                                <td>{{ap_log.reason}}</td>
-                                <td>{{ap_log.interview_date}} {{ap_log.interview_time}}</td>
-                                <td>{{ap_log.status}}</td>
-                                <td>{{ap_log.remarks}}</td>
-                            </tr>                          
-                        </table>
-                    </div>
-                </div>
-            </div>  
-        </div>
+            </div>
+        </div>    
     </div>
-</script>  
-<script type="text/ng-template" id="hr_sched_student_modal.html">
+</script>
+<script type="text/ng-template" id="company_sched_student_modal.html">
     <div class="modal-body">
         <div class="row">
             <form action="">
@@ -324,8 +235,7 @@
     </div>     
 
 </script>
-
-<script type="text/ng-template" id="hr_sched_remarks_modal.html">
+<script type="text/ng-template" id="company_sched_remarks_modal.html">
     <div class="modal-body">
         <div class="row">
             <form>
@@ -340,26 +250,7 @@
         </div>
     </div>     
 </script>
-
-<script type="text/ng-template" id="applicants_modal.html">
-    <div class="modal-header">
-        <h1>{{title}}</h1>
-    </div>
-    <div class="modal-body">
-        <table class="table table-bordered table-hover">
-            <tr>
-                <th>Student Name</th>
-            </tr>
-            <tr ng-repeat="ap in applications">
-                <td><a>{{ap.student.student_name}}</a></td>
-            </tr>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <h1>FOOTER</h1>
-    </div>
-</script>
-<script type="text/ng-template" id="hr_schedules.html">
+<script type="text/ng-template" id="company_schedules.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -389,22 +280,15 @@
                         <th>Reason</th>
                         <th>Date</th>
                         <th>Time</th>                        
-                        <th>Advertisement Title</th>
                         <th>Remarks</th>
                     </tr>
-                    <!--<tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                        <td>{{ad.created_at}}</td>
-                    </tr>-->
                     <tr ng-repeat="sched in schedules">
-                        <td>{{sched.student_firstname}} {{sched.student_lastname}}</td>
+                        <td>{{sched.application.student.student_firstname}} {{sched.application.student.student_lastname}}</td>
                         <td>{{sched.reason}}</td>
                         <td>{{sched.interview_date}}</td>
                         <td>{{sched.interview_time}}</td>
-                        <td>{{sched.ads_title}}</td>
                         
-                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(sched.id)">  Remarks</button></td>
+                        <td><button class="btn btn-info btn-sm" ng-click="remarksModal(sched.id)">Remarks</button></td>
                     </tr>
 
                 </table>
@@ -412,8 +296,7 @@
         </div>   
     </div>
 </script>
-
-<script type="text/ng-template" id="hr_interns.html">
+<script type="text/ng-template" id="company_interns.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -441,11 +324,6 @@
                     <tr>
                         <th>Student Name</th>
                     </tr>
-                    <!--<tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                        <td>{{ad.created_at}}</td>
-                    </tr>-->
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                     </tr>
@@ -455,3 +333,142 @@
         </div>   
     </div>
 </script>
+<script type="text/ng-template" id="company_list_application.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Applications
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-table"></i> Applications
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class = "col-md-4">
+                <div class="btn-group" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]" ng-options="status as status.name for status in choices_status"></select>                    
+                </div>
+            </div> 
+            <div class = "col-md-4">
+                <div class="btn-group" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]" ng-options="ads as ads.name for ads in choices_advertisement"></select>
+                </div>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover" style="margin-top:1em;">
+                    <tr>
+                        <th>Student</th>
+                        <th>Logs</th>
+                        <th>Advertisement Title</th>                        
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr ng-repeat="application in applications| filter : choice_status.option.value | filter: {advertisement: {ads_title: choice_advertisement.option.value}}:choice_advertisement.option.strict">
+                        <td><a ng-click="profileModal(application.student)">{{application.student.student_firstname}} {{application.student.student_lastname}}</a></td>
+                        <td>
+                            <div class="btn-group" uib-dropdown>
+                                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                                    Logs <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" uib-dropdown-menu aria-labelledby="btn-append-to-body" style="width:500px; padding:5px;">
+                                    <table class="table table-bordered table-hover" style="margin-top:1em;">
+                                        <!--<li ng-repeat="logs in application.logs"></li>-->
+                                        <tr>
+                                            <th>Reason</th>
+                                            <th>Status</th>
+                                            <th>Date and Time</th>
+                                            <th>Interviewer</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                        <tr ng-repeat = "log in application.logs">
+                                            <td>{{log.reason}}</td>
+                                            <td>{{log.status}}</td>
+                                            <td>{{log.interview_date}} {{log.interview_time}}</td>
+                                            <td>Sharina Cruz</td>
+                                            <td><button class="btn btn-primary">View</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                        <td><a ng-click="advertisementModal(application.advertisement)">{{application.advertisement.ads_title}}</a></td>
+                        <td>
+                            <button ng-click="schedModal(application.id)" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i>Schedule</button>
+                            <button class="btn btn-success" ng-click="accept(application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                            <button class="btn btn-danger" ng-click="reject(application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
+                        </td>
+                        <td>
+                            {{application.status}}                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="student_profile_modal.html"> 
+    <div class="modal-body">    
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+                                <p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
+                                <p>Contact Number: {{student.student_contact_no}}</p>
+                                <p>Address: {{student.student_address}} </p>
+                            </div>
+
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                            </div>
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <h3>Personal Background</h3>
+                                <p>Birthday: {{student.student_birthday}}</p>
+                                <p>Gender: {{student.student_gender}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Educational Background</h3>
+                                <p>Course: {{student.student_course}}</p>
+                                <p>Department: {{student.student_department}}</p>
+                                <p>Intitute: {{student.student_institute}}</p>
+                                <p>School: {{student.student_school}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+        <div style="margin-top:20px;margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
+    </div>
+</script>
+<script type="text/ng-template" id="advertisement_modal.html"> 
+    <h1>Advertisement</h1>
+</script>
+<script type="text/ng-template" id="remarks.html"> 
+    <h1>remarks</h1>
+</script>
+
+
+

@@ -9,14 +9,15 @@
         'angular-toArrayFilter',
         'ckeditor',
         'angularFileUpload',
-        'ngSanitize'
+        'ngSanitize',
+        // 'ngToast'
         ]);
 
     internon.constant('urls', (function () {
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -90,11 +91,18 @@
             controller:'create_advertisement_controller'
             },
             {
-            name: 'user_company.company_application',
+            name: 'user_company.company_list_application',
             url: '',
-            templateUrl:  'company_application.html',
-            controller:'advertisement_list_controller'
+            templateUrl:  'company_list_application.html',
+            controller:'application_controller'
             },
+            {
+            name: 'user_company.company_schedule',
+            url: '',
+            templateUrl:  'company_schedules.html',
+            controller:'company_schedule_controller'
+            },
+
             // HR 
             { 
             name: 'user_company_HR',
@@ -103,10 +111,16 @@
             controller:'hr_controller'
             },
             {
-            name: 'user_company_HR.hr_application',
+            name: 'user_company_HR.hr_profile',
             url: '',
-            templateUrl:  'hr_application.html',
+            templateUrl:  'hr_profile.html',
             controller:'hr_controller'
+            },
+            {
+            name: 'user_company_HR.hr_list_application',
+            url: '',
+            templateUrl:  'hr_list_application.html',
+            controller:'application_controller'
             },
             {
             name: 'user_company_HR.hr_schedules',
@@ -120,7 +134,6 @@
             templateUrl:  'hr_interns.html',
             controller:'hr_controller'
             },
-             // SV 
             { 
             name: 'user_company_SV',
             url: '/sv',
@@ -134,19 +147,6 @@
             controller:'sv_controller'
             },
 
-            // for application
-            {
-            name: 'user_company.company_list_application',
-            url: '',
-            templateUrl:  'company_list_application.html',
-            controller:'application_controller'
-            },
-            {
-            name: 'user_company.company_schedule',
-            url: '',
-            templateUrl:  'company_schedules.html',
-            controller:'company_schedule_controller'
-            },
             // 
             {
             name: 'user_company.company_interns',
@@ -180,6 +180,12 @@
             templateUrl:  'studentapplication.html',
             controller:'student_view_application_controller'
             },
+            {
+            name: 'user_student.student_schedule',
+            url: '',
+            templateUrl:  'studentschedule.html',
+            controller:'student_sched_controller'
+            },
 
             //Coordinator routes
             {
@@ -199,6 +205,12 @@
             url: '',
             templateUrl:  'coordinator_section.html',
             controller:'coordinator_section_controller'
+            },
+            {
+            name: 'user_coordinator.coordinator_files',
+            url: '',
+            templateUrl:  'coordinator_section.html',
+            controller:'coordinator_section_controller'
             },        
         ]
 
@@ -209,40 +221,21 @@
 
 
     internon.controller('index_controller',function($http,$state,$scope,$localStorage,$auth,$uibModal){
-        $scope.openModal = function(type){
-            var type;
-            var template="";
-
-            if(type==1)
-                template="Login.html";
-            else if(type==2)
-                template="Register.html";
-             else if(type==3)
-                template="CompanyLogin.html";
-                
-
+        $scope.openModal = function(){
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: template,
+                templateUrl: 'Login.html',
                 controller: 'login_modal_controller',
                 size: 'sm',
-                resolve: {
-                        type: function () {
-                            return type;
-                        }
-                    }
-                });
+                resolve: {}});
 
-                modalInstance.result.then(function (type) {
+                modalInstance.result.then(function () {
 					return 1;
 				});
         };
-
-
 	});
 
-    internon.controller('login_modal_controller',function($http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
-
+    internon.controller('login_modal_controller',function(urls,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
         $scope.close = function () {
             $uibModalInstance.close();
         };
@@ -252,35 +245,27 @@
                 username: $scope.username,
                 password: $scope.password
             }
-
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
-                $state.go('getUser')
+                $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
+                    $localStorage.id = response.data.user.id;
+                        if(response.data.user.type == "student")
+                            $state.go('user_student');
+                        if(response.data.user.type == "company")
+                            $state.go('user_company');
+                        if(response.data.user.type == "coordinator")
+                            $state.go('user_coordinator');
+                        if(response.data.user.type == "administrator")
+                            $state.go('user_administrator'); 
+                        if(response.data.user.type == "hr")
+                            $state.go('user_company_HR'); 
+                        if(response.data.user.type == "sv")
+                            $state.go('user_company_SV');            
+                });
                 $uibModalInstance.close();
             }).catch(function(error){
 
             });
         }
-
     });
-
-    internon.controller('user_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage){
-            
-        $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
-          $localStorage.id = response.data.user.id;
-            if(response.data.user.type == "student")
-                $state.go('user_student');
-            if(response.data.user.type == "company")
-                $state.go('user_company');
-            if(response.data.user.type == "coordinator")
-                $state.go('user_coordinator');
-            if(response.data.user.type == "administrator")
-                $state.go('user_administrator'); 
-            if(response.data.user.type == "hr")
-                $state.go('user_company_HR'); 
-            if(response.data.user.type == "sv")
-                $state.go('user_company_SV');            
-     });
-    });
-
 })();
