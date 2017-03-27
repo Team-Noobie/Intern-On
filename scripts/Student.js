@@ -122,6 +122,7 @@
 					return 1;
 				});
 			};
+			
 			var uploader = $scope.uploader = new FileUploader({
 				url: urls.API_HOST + '/upload_resume',
 				formData:[{
