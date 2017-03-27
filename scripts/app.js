@@ -196,17 +196,9 @@
             {
             name: 'user_student.student_schedule',
             url: '',
-            templateUrl:  'student_schedule.html',
+            templateUrl:  'studentschedule.html',
             controller:'student_sched_controller'
             },
-            {
-            name: 'user_student.student_grades',
-            url: '',
-            templateUrl:  'student_grades.html',
-            controller:''
-            },
-
-        
 
             //Coordinator routes
             {
@@ -227,23 +219,11 @@
             templateUrl:  'coordinator_section.html',
             controller:'coordinator_section_controller'
             },
-           {
-            name: 'user_coordinator.coordinator_enroll_students',
-            url: '',
-            templateUrl:  'coordinator_enroll_students.html',
-            controller:''
-            },
-            {
-            name: 'user_coordinator.coordinator_grades',
-            url: '',
-            templateUrl:  'coordinator_grades.html',
-            controller:''
-            },        
             {
             name: 'user_coordinator.coordinator_files',
             url: '',
             templateUrl:  'coordinator_section.html',
-            controller:''
+            controller:'coordinator_section_controller'
             },        
         ]
 

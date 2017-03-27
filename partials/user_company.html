@@ -15,10 +15,93 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i><b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu message-dropdown" uib-dropdown-menu>
+                    <li class="message-preview">
+                        <a>
+                            <div class="media">
+                                <span class="pull-left">
+                                    <img class="media-object" src="img/text.png" alt="">
+                                </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-preview">
+                        <a>
+                            <div class="media">
+                                <span class="pull-left">
+                                    <img class="media-object" src="img/text.png" alt="">
+                                </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>{{company.company_name}}</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>har
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-preview">
+                        <a>
+                            <div class="media">
+                                <span class="pull-left">
+                                    <img class="media-object" src="img/text.png" alt="">
+                                </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>John Smith</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="message-footer">
+                        <a ui-sref="user_student.student_message">Read All New Messages</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown" uib-dropdown>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu alert-dropdown" uib-dropdown-menu>
+                    <li>
+                        <a>Alert Name <span class="label label-default">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a>Alert Name <span class="label label-primary">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a>Alert Name <span class="label label-success">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a>Alert Name <span class="label label-info">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a>Alert Name <span class="label label-warning">Alert Badge</span></a>
+                    </li>
+                    <li>
+                        <a>Alert Name <span class="label label-danger">Alert Badge</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a>View All</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown" uib-dropdown>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
                         <a><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -37,7 +120,7 @@
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-th-large"></i>Applications</a>
+                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-table"></i>Applications</a>
                 </li>
                 <li>
                     <a ui-sref="user_company.company_schedule"><i class="fa fa-calendar"></i> Schedules</a>
@@ -96,7 +179,7 @@
                     </tr>
                     <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-warning btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
                         <td>{{ad.created_at}}</td>
                     </tr>
                 </table>
@@ -224,7 +307,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="jumbotron text-center">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
                         <div class="row">
                             <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
                                 <p>IMAGE</p>
@@ -242,7 +326,7 @@
                     </div>
 
 
-                    <div class="well">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-8">
                                 
@@ -252,7 +336,7 @@
                         </div>
                     </div>
 
-                    <div class="well">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-8">
                                 <h3>Company Snapshot</h3>
@@ -264,7 +348,7 @@
                         </div>
                     </div>       
 
-                    <div class="well">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-8">
                                 <h3>Why Join Us?</h3>
@@ -273,6 +357,7 @@
                             </div>
                         </div>
                     </div>       
+                </div>
             </div>
         </div>    
     </div>
