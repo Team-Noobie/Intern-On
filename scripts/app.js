@@ -11,7 +11,7 @@
         'angularFileUpload',
         'ngSanitize',
         'ngCsvImport',
-        // 'ngToast'
+        'ngToast'
         ]);
 
     internon.constant('urls', (function () {
@@ -27,6 +27,12 @@
         };
     })());
 
+    internon.factory('var', function ($q, $injector) {
+           return{
+               ngToast : $injector.get('ngToast'),
+           }
+    });
+
 
     internon.run(function($auth,$http,$rootScope,$state, $stateParams,$localStorage) {
         $http.defaults.headers.common.Authorization = 'Bearer: ' + $auth.getToken();
@@ -36,9 +42,14 @@
         });
     });
 
-    internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
+    internon.config(function(urls,ngToastProvider,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
         $authProvider.loginUrl = urls.API_HOST + '/auth';
         $urlRouterProvider.otherwise('index');
+        ngToastProvider.configure({
+            animation: 'slide', // or 'fade',
+            compileContent: true,
+            combineDuplications: true,
+        });
         // $qProvider.errorOnUnhandledRejections(false);
         var states = [
             {
@@ -199,6 +210,12 @@
             templateUrl:  'studentschedule.html',
             controller:'student_sched_controller'
             },
+            {
+            name: 'user_student.student_grades',
+            url: '',
+            templateUrl:  'student_grades.html',
+            controller:''
+            },
 
             //Coordinator routes
             {
@@ -248,7 +265,7 @@
         };
 	});
 
-    internon.controller('login_modal_controller',function(urls,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+    internon.controller('login_modal_controller',function(urls,ngToast,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
         $scope.close = function () {
             $uibModalInstance.close();
         };
@@ -260,6 +277,7 @@
             }
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
+                
                 $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
                     $localStorage.id = response.data.user.id;
                         if(response.data.user.type == "student")
@@ -277,7 +295,9 @@
                 });
                 $uibModalInstance.close();
             }).catch(function(error){
-
+                ngToast.warning({
+                  content: "Invalid Username or Password"
+				}); 
             });
         }
     });

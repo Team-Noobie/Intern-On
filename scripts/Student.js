@@ -15,6 +15,27 @@
 				$state.go('user_student.student_profile');
 			});
 		};
+
+		$scope.studentSetting = function(data){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'student_setting.html',
+				controller: function(){
+
+
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					return 1;
+				});
+		};
 	});
 	internon.controller('student_profile_controller',function(urls,$auth,FileUploader,$http,$state,$scope,$localStorage,$uibModal){
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
@@ -22,6 +43,85 @@
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
 			});
 
+			$scope.editProfile = function(data){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_profile.html',
+				controller: function(data,$scope){
+					$scope.student = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+
+			$scope.editPersonal = function(data){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_personal.html',
+				controller: function(data,$scope){
+					$scope.student = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+
+			$scope.editEducational = function(data){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_educational.html',
+				controller: function(data,$scope){
+					$scope.student = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					return 1;
+				});
+			};
+			
+			
+
+			$scope.editPassword = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_password.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
 
 			var uploader = $scope.uploader = new FileUploader({
 				url: urls.API_HOST + '/upload_resume',
