@@ -7,7 +7,7 @@
 		$localStorage.$reset();
 		$state.go('index');
 		};
-
+		
 
 		$scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
@@ -22,7 +22,95 @@
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
 			});
 
+			$scope.editProfile = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_profile.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
 
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+
+			$scope.editPersonal = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_personal.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+
+			$scope.editEducational = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_educational.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+			
+			$scope.studentSetting = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'student_setting.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
+
+			$scope.editPassword = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'edit_password.html',
+				controller: '',
+				size: 'md',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			};
 			var uploader = $scope.uploader = new FileUploader({
 				url: urls.API_HOST + '/upload_resume',
 				formData:[{
