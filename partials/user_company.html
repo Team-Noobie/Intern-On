@@ -117,6 +117,12 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
+                    <a ui-sref="user_company.company_accounts"><i class="fa fa-fw fa-user"></i> Accounts</a>
+                </li>
+                <li>
+                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-user"></i> Departments</a>
+                </li>
+                <li>
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
@@ -139,6 +145,220 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
+<!--UI VIEW-->
+<script type="text/ng-template" id="company_profile.html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    My Profile
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="border:solid; height: auto ; width: inherit;">
+                    <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                                <a href="" style="padding-top:20px;">upload image</a>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h1>{{company.company_name}}</h1>
+                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
+                                <p>Contact Number: {{company.company_contact_no}}</p>
+                                <p>Address: {{company.company_address}} </p>
+                            </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                                <h3>Company Overview</h3>
+                                <p>{{company.company_overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Company Snapshot</h3>
+                                <p>Industry: {{company.company_industry}}</p>
+                                <p>Website: {{company.company_website}}</p>
+                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
+                                <p>Benefits: {{company.company_benefits}}</p>
+                            </div>
+                        </div>
+                    </div>       
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Why Join Us?</h3>
+                                <p>Industry: {{company.company_why_join_us}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        </div>    
+    </div>
+</script>
+<script type="text/ng-template" id="company_accounts.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Company Accounts
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-building"></i> Company Accounts
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-4">
+                <a ng-click="openAddEmployeeModal('hr')" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Human Resource Account</a>                 
+                <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Human Resource Name">                        
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>HR Name</th>
+                        <th>Date Created</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr ng-repeat="account in hr">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.hr_firstname}} {{account.hr_lastname}}</a></td>
+                        <td>{{account.created_at}}</td>
+                        <td><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Reset Password</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-8">
+                <a ng-click="openAddEmployeeModal('sv')" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Supervisor Account</a>                 
+                <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Supervisor Name">              
+                <table class="table table-bordered table-hover"> 
+                    <tr>
+                        <th>Supervisor</th>
+                        <th>Department</th>
+                        <th>Date Created</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr ng-repeat="account in sv">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.sv_firstname}} {{account.sv_lastname}}</a></td>
+                        <td>{{account.department.department_name}}</td>
+                        <td>{{account.created_at}}</td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>  
+    </div>
+</script>
+<script type="text/ng-template" id="company_department.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Departments
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-bar-chart-o"></i> Departments
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class = "col-md-4">
+                <a ng-click="openAddDeptModal()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Department</a> 
+            </div>
+        </div>      
+
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Department</th>
+                        <th>Employees</th>
+                        <th>Date Publish</th>
+                    </tr>
+                    <tr ng-repeat="dept in departments">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</a></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
+                        <td>{{dept.created_at}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>   
+        <div>
+        </script>   
+        <script type="text/ng-template" id="company_create_ads.html">
+            <div class="container-fluid">
+                <h4>Create Advertisement</h4>
+                <form class="form-horizontal post-ads" method="post"> 
+                    <div class="form-group">
+                        <label for="adTitle" class="cols-sm-2 control-label">Title</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="ad-title" ng-model="formdata.ad_title"  placeholder="Title" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adTitle" class="cols-sm-2 control-label">Job Description</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                            </div>
+                            <div ckeditor="options" ng-model="formdata.ad_description" ready="onReady()">
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                </textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adContacts" class="cols-sm-2 control-label">Contacts</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-contacts" ng-model="formdata.ad_contacts"  placeholder="Contacts" required/>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label for="workLocation" class="cols-sm-2 control-label">Work Location</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="ad-location" ng-model="formdata.ad_location"  placeholder="Work Location" required/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-md" ng-click="cancel()"  id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            </div> 
+        </form>
+    </div>
+</script>
 <script type="text/ng-template" id="company_ads.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -240,172 +460,6 @@
         </form>
     </div>
 </script>
-<script type="text/ng-template" id="company_ad_modal.html">
-    <div class="modal-header">
-        <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
-    </div>
-    <div class="modal-body">
-        <div>
-            <h4></h4>
-            <form class="form-horizontal post-ads" method="post"> 
-                <div class="form-group">
-                    <label for="adTitle" class="cols-sm-2 control-label">Ad Title</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-title" ng-model="formdata.ads_title"  placeholder="Ad Title" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Job Description</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group" ng-repeat="req in formdata.ads_requirement track by $index">
-                            <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" ng-model="formdata.ads_requirement[$index]"  value="req" placeholder="Requirement" required/>
-                        </div>
-                        <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Contacts</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group" ng-repeat="cont in formdata.ads_contact track by $index">
-                            <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ads_contact[$index]" placeholder="Contact" required/>
-                        </div>
-                        <button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
-                </div>
-
-            </form>
-            <form>
-                <div class="form-group">
-                    <button ng-click="cancel()" class="btn btn-danger btn-md" id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-                </div>  
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
-    </div>
-</script>
-<script type="text/ng-template" id="company_profile.html">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    My Profile
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div style="border:solid; height: auto ; width: inherit;">
-                    <div class="jumbotron text-center">
-                        <div class="row">
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
-                            </div>
-
-                            <div class="col-md-8">
-                                <h1>{{company.company_name}}</h1>
-                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
-                                <p>Contact Number: {{company.company_contact_no}}</p>
-                                <p>Address: {{company.company_address}} </p>
-                            </div>
-                            
-                        </div> 
-                    </div>
-
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                
-                                <h3>Company Overview</h3>
-                                <p>{{company.company_overview}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Company Snapshot</h3>
-                                <p>Industry: {{company.company_industry}}</p>
-                                <p>Website: {{company.company_website}}</p>
-                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
-                                <p>Benefits: {{company.company_benefits}}</p>
-                            </div>
-                        </div>
-                    </div>       
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Why Join Us?</h3>
-                                <p>Industry: {{company.company_why_join_us}}</p>
-                                
-                            </div>
-                        </div>
-                    </div>       
-                </div>
-            </div>
-        </div>    
-    </div>
-</script>
-<script type="text/ng-template" id="company_sched_student_modal.html">
-    <div class="modal-body">
-        <div class="row">
-            <form action="">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label for="reason" class="cols-sm-2 control-label">Reason</label>
-                        <input type="text" class="form-control" placeholder="Reason Of Interview" ng-model="reason" required>
-                    </div>
-                    <!--<div class="col-md-6"> <label for="name" class="cols-sm-2 control-label">Date and Time</label> <input type="date" class="form-control"></div>-->
-                    <div class="col-md-12">
-                        <label for="reason" class="cols-sm-2 control-label">Date of Interview</label>
-                        <!--<div style="display:inline-block; min-height:290px;">-->
-                        <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" required></div>
-                        <!--</div>-->
-                    </div>
-                    <div class="col-md-12">
-                        <label for="reason" class="cols-sm-2 control-label">Time of Interview (24-hour Format)</label>
-                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
-
-                    </div>
-
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="set()">Save</button> </div>
-                </div>
-            </form>
-        </div>
-    </div>     
-
-</script>
-<script type="text/ng-template" id="company_sched_remarks_modal.html">
-    <div class="modal-body">
-        <div class="row">
-            <form>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
-                        <textarea name="remarks" id="" cols="30" rows="10" ng-model="remarks"></textarea>
-                    </div>
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="save()">Save</button> </div>
-                </div>
-            </form>
-        </div>
-    </div>     
-</script>
 <script type="text/ng-template" id="company_schedules.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -469,10 +523,19 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-md-4">
-                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
+            <div class = "col-md-4"> <!-- for active/graduate-->
+                <div class="btn-group" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]" ng-options="status as status.name for status in choices_status"></select>                    
+                </div>
+                Status
             </div> 
-        </div>      
+            <div class = "col-md-4"> <!-- for department-->
+                <div class="btn-group" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+                </div>
+                Department
+            </div>  
+        </div>   
 
         <div class="row" style="margin-top:10px">
             <div class="col-lg-12">
@@ -483,7 +546,6 @@
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                     </tr>
-
                 </table>
             </div>
         </div>   
@@ -548,7 +610,7 @@
                                             <td>{{log.status}}</td>
                                             <td>{{log.interview_date}} {{log.interview_time}}</td>
                                             <td>Sharina Cruz</td>
-                                            <td><button class="btn btn-primary">View</button></td>
+                                            <td><button class="btn btn-primary" ng-click="remarksModal(log.remarks)">View</button></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -557,8 +619,8 @@
                         <td><a ng-click="advertisementModal(application.advertisement)">{{application.advertisement.ads_title}}</a></td>
                         <td>
                             <button ng-click="schedModal(application.id)" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i>Schedule</button>
-                            <button class="btn btn-success" ng-click="accept(application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                            <button class="btn btn-danger" ng-click="reject(application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
+                            <button class="btn btn-success" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                            <button class="btn btn-danger" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
                         </td>
                         <td>
                             {{application.status}}                            
@@ -569,6 +631,8 @@
         </div>
     </div>
 </script>
+
+<!--MODALS-->
 <script type="text/ng-template" id="student_profile_modal.html"> 
     <div class="modal-body">    
         <div class="row">
@@ -622,7 +686,191 @@
 <script type="text/ng-template" id="advertisement_modal.html"> 
     <h1>Advertisement</h1>
 </script>
-<script type="text/ng-template" id="remarks.html"> 
-    <h1>remarks</h1>
+<script type="text/ng-template" id="company_sched_student_modal.html">
+    <div class="modal-body">
+        <div class="row">
+            <form name="sched">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="reason" class="cols-sm-2 control-label">Reason</label>
+                        <input type="text" class="form-control" placeholder="Reason Of Schedule e.g. Interview, Briefing ..." ng-model="reason" ng-required="true" required>
+                    </div>
+                    <!--<div class="col-md-6"> <label for="name" class="cols-sm-2 control-label">Date and Time</label> <input type="date" class="form-control"></div>-->
+                    <div class="col-md-12">
+                        <label for="reason" class="cols-sm-2 control-label">Date of Interview</label>
+                        <!--<div style="display:inline-block; min-height:290px;">-->
+                        <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" required></div>
+                        <!--</div>-->
+                    </div>
+                    <div class="col-md-12">
+                        <label for="reason" class="cols-sm-2 control-label">Time of Interview (24-hour Format)</label>
+                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
+
+                    </div>
+
+                    <div class="col-md-12"> <button class="btn btn-success" ng-click="sched.$valid && set()">Save</button> </div>
+                </div>
+            </form>
+        </div>
+    </div>     
+
 </script>
+<script type="text/ng-template" id="company_sched_remarks_modal.html">
+    <div class="modal-body">
+        <div class="row">
+            <form name="remarks_form">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
+                        <textarea name="remarks" cols="30" rows="10" ng-model="remarks" ng-required="true" required></textarea>
+                    </div>
+                    <div class="col-md-12"> <button class="btn btn-success" ng-click="remarks_form.$valid && save()">Save</button> </div>
+                </div>
+            </form>
+        </div>
+    </div>     
+</script>
+<script type="text/ng-template" id="remarks_modal.html"> 
+    <div class="modal-body">
+        {{remarks}}
+    </div>
+</script>
+<script type="text/ng-template" id="result_modal.html"> 
+    <div class="modal-body">
+        <div class="row" ng-if="type == 'accept'">
+            <div class="col-md-12">
+                Select Department to Appoint: 
+            </div>
+            <div class="btn-group col-lg-12" uib-dropdown>
+                <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+            </div>
+            <div class="col-md-12"> 
+                <button class="btn btn-success" ng-click="hire()"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>                
+            </div>
+        </div> 
+        <div class="row" ng-if="type == 'reject'">
+            <form name="reject">
+                <div class="col-md-6">
+                    Comment:
+                    <textarea name="comment" cols="30" rows="10" ng-model="comment" ng-required="true" required></textarea>                
+                    <div class="row"  style="margin: 0 0 0 0;">
+                        <button class="btn btn-danger" ng-click="reject.$valid && reject()"><i class="fa fa-check" aria-hidden="true"></i> Reject</button>                                    
+                    </div>
+                </div>                
+            </form>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="company_ad_modal.html">
+    <div class="modal-header">
+        <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
+    </div>
+    <div class="modal-body">
+        <div>
+            <h4></h4>
+            <form class="form-horizontal post-ads" method="post"> 
+                <div class="form-group">
+                    <label for="adTitle" class="cols-sm-2 control-label">Ad Title</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-title" ng-model="formdata.ads_title"  placeholder="Ad Title" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Job Description</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" ng-repeat="req in formdata.ads_requirement track by $index">
+                            <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="formdata.ads_requirement[$index]"  value="req" placeholder="Requirement" required/>
+                        </div>
+                        <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Contacts</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" ng-repeat="cont in formdata.ads_contact track by $index">
+                            <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ads_contact[$index]" placeholder="Contact" required/>
+                        </div>
+                        <button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
+                </div>
+
+            </form>
+            <form>
+                <div class="form-group">
+                    <button ng-click="cancel()" class="btn btn-danger btn-md" id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                </div>  
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
+    </div>
+</script>
+<script type="text/ng-template" id="company_add_department_modal.html">
+    <div class="modal-body">
+        <form name="addDept">
+            <input type="text" class="form-control" ng-required="true" required ng-model="formdata.department_name" placeholder="I.T. Department">
+            <button class="btn btn-success" ng-click="addDept.$valid && add()">Add Department</button>
+        </form>
+    </div>
+</script>
+<script type="text/ng-template" id="company_add_employee_modal.html">
+    <div class="modal-body">
+        <div class="row" ng-if="type == 'hr'">
+            <form name="add_HR">
+                <div class="col-lg-12" style="margin-bottom:5px;">
+                    <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Enter HR Firstname">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                
+                    <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Enter HR Lastname">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.hr_username" required ng-required="true" placeholder="Enter username">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.hr_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                                        
+                    <button class="btn btn-success" ng-click="add_HR.$valid && add()">Add</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row" ng-if="type == 'sv'">
+            <form name="add_SV">
+                <div class="col-lg-12" style="margin-bottom:5px;">
+                    <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Enter SV Firstname">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                
+                    <input class="form-control" type="text" ng-model="formdata.sv_lastname" required ng-required="true" placeholder="Enter SV Lastname">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Enter username">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
+                </div>
+                <div class="btn-group col-lg-12" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                                        
+                    <button class="btn btn-success" ng-click="add_SV.$valid && add()">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+
 

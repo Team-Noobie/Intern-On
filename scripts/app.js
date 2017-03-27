@@ -39,6 +39,31 @@
         $authProvider.loginUrl = urls.API_HOST + '/auth';
         $urlRouterProvider.otherwise('index');
         // $qProvider.errorOnUnhandledRejections(false);
+        $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
+            return {
+                'request': function (config) {
+                    config.headers = config.headers || {};
+                    if ($localStorage.token) {
+                        config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                    }
+                    return config;
+                },
+                'responseError': function(response) {
+                    /* 401, unauthorised:
+                        - bad username / password
+                        - token expired
+                    403, forbidden - notAdmin
+                    */ 
+                    // if(response.status === 401 || response.status === 403) {
+                    if(response.status === 401 || response.status === 400) {
+                        console.log("app.js: httpInterceptor caught 40x:", response);
+                        $injector.get('$state').go('index');
+                    }
+                    // Replace reponse with rejected promise to prevent rest of execution
+                    return $q.reject(response);
+                }
+            };
+        });
         var states = [
             {
             name: 'index',
@@ -79,6 +104,18 @@
             controller:'company_controller'
             },
             {
+            name: 'user_company.company_accounts',
+            url: '',
+            templateUrl:  'company_accounts.html',
+            controller:'company_accounts_controller'
+            },
+            {
+            name: 'user_company.company_departments',
+            url: '',
+            templateUrl:  'company_department.html',
+            controller:'company_departments_controller'
+            },
+            {
             name: 'user_company.company_ads',
             url: '',
             templateUrl:  'company_ads.html',
@@ -102,6 +139,12 @@
             templateUrl:  'company_schedules.html',
             controller:'company_schedule_controller'
             },
+            {
+            name: 'user_company.company_interns',
+            url: '',
+            templateUrl:  'company_interns.html',
+            controller:'company_interns_controller'
+            },
 
             // HR 
             { 
@@ -120,7 +163,7 @@
             name: 'user_company_HR.hr_list_application',
             url: '',
             templateUrl:  'hr_list_application.html',
-            controller:'application_controller'
+            controller:'hr_application_controller'
             },
             {
             name: 'user_company_HR.hr_schedules',
@@ -145,15 +188,7 @@
             url: '',
             templateUrl:  'sv_interns.html',
             controller:'sv_controller'
-            },
-
-            // 
-            {
-            name: 'user_company.company_interns',
-            url: '',
-            templateUrl:  'company_interns.html',
-            controller:'company_interns_controller'
-            },
+            },            
             // Student routes
             {
             name: 'user_student',
@@ -217,6 +252,7 @@
         states.forEach(function(state) {
             $stateProvider.state(state);
         });
+
     });
 
 
