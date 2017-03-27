@@ -207,13 +207,6 @@
             templateUrl:  'interns_grade.html',
             controller:'sv_controller'
             },
-            // 
-            {
-            name: 'user_company.company_interns',
-            url: '',
-            templateUrl:  'company_interns.html',
-            controller:'company_interns_controller'
-            },
             // Student routes
             {
             name: 'user_student',
@@ -224,7 +217,7 @@
             {
             name: 'user_student.student_profile',
             url: '',
-            templateUrl:  'studentprofile.html',
+            templateUrl:  'student_profile.html',
             controller:'student_profile_controller',
             params : { student: null},                        
             },

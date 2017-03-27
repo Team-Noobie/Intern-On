@@ -142,6 +142,7 @@
             height:300,
             width:800,
 		} );
+        
 
         $scope.options = {
             language: 'en',
