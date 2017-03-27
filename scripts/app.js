@@ -10,14 +10,15 @@
         'ckeditor',
         'angularFileUpload',
         'ngSanitize',
-        // 'ngToast'
+        'ngCsvImport',
+        'ngToast'
         ]);
 
     internon.constant('urls', (function () {
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -25,6 +26,12 @@
             //, UTIL_HOST: 'http://'+window.location.host+'/us'  //Utility server
         };
     })());
+
+    internon.factory('var', function ($q, $injector) {
+           return{
+               ngToast : $injector.get('ngToast'),
+           }
+    });
 
 
     internon.run(function($auth,$http,$rootScope,$state, $stateParams,$localStorage) {
@@ -35,9 +42,14 @@
         });
     });
 
-    internon.config(function(urls,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
+    internon.config(function(urls,ngToastProvider,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
         $authProvider.loginUrl = urls.API_HOST + '/auth';
         $urlRouterProvider.otherwise('index');
+        ngToastProvider.configure({
+            animation: 'slide', // or 'fade',
+            compileContent: true,
+            combineDuplications: true,
+        });
         // $qProvider.errorOnUnhandledRejections(false);
         $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
             return {
@@ -85,9 +97,15 @@
             controller:'administrator_controller'
             },
             {
-            name: 'user_administrator.administrator_module',
+            name: 'user_administrator.administrator_company',
             url: '',
-            templateUrl:  'administrator_module.html',
+            templateUrl:  'administrator_company.html',
+            controller:'administrator_controller'
+            },
+            {
+            name: 'user_administrator.administrator_coordinator',
+            url: '',
+            templateUrl:  'administrator_coordinator.html',
             controller:'administrator_controller'
             },
             // Company routes
@@ -188,7 +206,20 @@
             url: '',
             templateUrl:  'sv_interns.html',
             controller:'sv_controller'
-            },            
+            },
+            {
+            name: 'user_company_SV.interns_grade',
+            url: '',
+            templateUrl:  'interns_grade.html',
+            controller:'sv_controller'
+            },
+            // 
+            {
+            name: 'user_company.company_interns',
+            url: '',
+            templateUrl:  'company_interns.html',
+            controller:'company_interns_controller'
+            },
             // Student routes
             {
             name: 'user_student',
@@ -220,6 +251,12 @@
             url: '',
             templateUrl:  'studentschedule.html',
             controller:'student_sched_controller'
+            },
+            {
+            name: 'user_student.student_grades',
+            url: '',
+            templateUrl:  'student_grades.html',
+            controller:''
             },
 
             //Coordinator routes
@@ -271,7 +308,7 @@
         };
 	});
 
-    internon.controller('login_modal_controller',function(urls,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
+    internon.controller('login_modal_controller',function(urls,ngToast,$http,$state,$scope,$localStorage,$auth,$uibModal,$uibModalInstance){
         $scope.close = function () {
             $uibModalInstance.close();
         };
@@ -283,6 +320,7 @@
             }
             // Use Satellizer's $auth service to login
             $auth.login(credentials).then(function(data) {
+                
                 $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
                     $localStorage.id = response.data.user.id;
                         if(response.data.user.type == "student")
@@ -300,7 +338,9 @@
                 });
                 $uibModalInstance.close();
             }).catch(function(error){
-
+                ngToast.warning({
+                  content: "Invalid Username or Password"
+				}); 
             });
         }
     });

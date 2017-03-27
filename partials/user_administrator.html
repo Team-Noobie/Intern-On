@@ -16,7 +16,7 @@
         <ul class="nav navbar-right top-nav">
 
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-lock"></i><b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user-secret"></i><b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -32,7 +32,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a ui-sref="user_administrator.administrator_module"><i class="fa fa-fw fa-building"></i>Accounts</a>
+                    <a ui-sref="user_administrator.administrator_company"><i class="fa fa-fw fa-building"></i>Company Accounts</a>
+                </li>
+                <li>
+                    <a ui-sref="user_administrator.administrator_coordinator"><i class="fa fa-fw fa-user"></i>Coordinator Accounts</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +49,7 @@
     <!-- /#page-wrapper -->
 </div>
 
-<script type="text/ng-template" id="administrator_module.html">
+<script type="text/ng-template" id="administrator_company.html">
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="row">
@@ -66,12 +69,9 @@
             <div class = "col-md-4">
                 <a ng-click="newCompanyAccount(4)" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Company Account</a> 
             </div>
-            <div class = "col-md-4">
-                <a ng-click="newCoordinatorAccount(4)" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Coordinator Account</a> 
-            </div>
         </div>      
         <div class="row" style="margin-top:10px">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Company Name">                        
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -80,13 +80,38 @@
                         <th>Actions</th>
                     </tr>
                     <tr ng-repeat="account in company">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.company_name}}</a></td>
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCompanyModal(company.id)">{{account.company_name}}</a></td>
                         <td>{{account.created_at}}</td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
                 </table>
             </div>
-            <div class="col-md-6">
+        </div>  
+    </div>         
+</script>
+<script type="text/ng-template" id="administrator_coordinator.html">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Coordinator Accounts
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-users"></i> Coordinator Accounts
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class = "col-md-4">
+                <a ng-click="newCoordinatorAccount(4)" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Coordinator Account</a> 
+            </div>
+        </div>      
+        <div class="row" style="margin-top:10px">
+            <div class="col-md-12">
                 <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Coordinator Name">              
                 <table class="table table-bordered table-hover"> 
                     <tr>
@@ -95,7 +120,7 @@
                         <th>Actions</th>
                     </tr>
                     <tr ng-repeat="account in coordinator">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.coordinator_firstname}} {{account.coordinator_lastname}}</a></td>
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCoordinatorModal(coordinator.id)">{{account.coordinator_firstname}} {{account.coordinator_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
@@ -189,3 +214,76 @@
         </div>
     </div>
 </script>
+
+<script type="text/ng-template" id="view_company.html" >
+    <div class="modal-header">
+        <h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+           <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="border:solid; height: auto ; width: inherit;">
+                            <div class="jumbotron text-center">
+                                <div class="row">
+                                    <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                        <p>IMAGE</p>
+                                        <a href="" style="padding-top:20px;">upload image</a>
+                                    </div>  
+                                    <div class="col-md-8">
+                                        <h1>{{ad.ads_title}}</h1>
+                                        <div ng-bind-html="ad.ads_job_description"></div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                    
+                                    <h3>Company Overview</h3>
+                                    <p>{{company.company_overview}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3>Company Snapshot</h3>
+                                    <p>Industry: {{ad.company.company_industry}}</p>
+                                    <p>Website: {{ad.company.company_website}}</p>
+                                    <p>Spoken Language: {{ad.company.company_spoken_lang}}</p>
+                                    <p>Benefits: {{ad.company.company_benefits}}</p>
+                                </div>
+                            </div>
+                        </div>                           
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3>Company Contacts</h3>
+                                    <p>E-mail Address: <a href="">{{ad.company.company_email}}</a></p> 
+                                    <p>Contact Number: {{ad.company.company_contact_no}}</p>
+                                    <p>Address: {{ad.company.company_address}} </p>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3>Why Join Us?</h3>
+                                    <p>Industry: {{ad.company.company_why_join_us}}</p>
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</script>
+<script type="text/ng-template" id="view_coordinator.html" >
+<h1>Coordinator</h1>
+</script>
+    

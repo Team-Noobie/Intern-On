@@ -8,7 +8,7 @@
         };
 
         $scope.init = function () {
-				$state.go('user_administrator.administrator_module');
+				$state.go('user_administrator.administrator_company');
 		};
         $http({method: 'GET', url: urls.API_HOST + '/company_accounts_list'}).then(function(response){
             $scope.company = response.data;
@@ -44,7 +44,42 @@
                     modalInstance.result.then(function () {
                         return 1;
                     });
-            };         
+            };        
+
+            
+	    $scope.openCompanyModal = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'view_company.html',
+				size: 'lg',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+		};      
+
+         $scope.openCoordinatorModal = function(id){
+			var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: 'view_coordinator.html',
+				size: 'lg',
+				resolve: {
+						id: function () {
+							return id;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+		};      
 
         });
 
@@ -68,7 +103,6 @@
 
         };
     });
-
-        
+   
 
 })();
