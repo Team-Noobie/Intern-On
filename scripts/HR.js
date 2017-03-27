@@ -74,7 +74,7 @@
 			$scope.formdata = response.data;
 		});
 	});
-    internon.controller('application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+    internon.controller('hr_application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
         $scope.choice_status = {
                 'option': {'name': '','value':''},
         };
