@@ -34,15 +34,14 @@
     });
 
 
-    internon.run(function($auth,$http,$rootScope,$state, $stateParams,$localStorage) {
+    internon.run(function($auth,$http,$rootScope,$state,$stateParams,$localStorage) {
         $http.defaults.headers.common.Authorization = 'Bearer: ' + $auth.getToken();
-
-        $rootScope.$on('$stateChangeStart', function($state,event, toState, toParams, fromState, fromParams){
-            // put here codes for security log in first :)
+        $rootScope.$on('$stateChangeStart', function($localStorage,$state,event, toState, toParams, fromState, fromParams){
         });
     });
 
     internon.config(function(urls,ngToastProvider,$httpProvider,$stateProvider,$urlRouterProvider,$authProvider,$qProvider) {
+        
         $authProvider.loginUrl = urls.API_HOST + '/auth';
         $urlRouterProvider.otherwise('index');
         ngToastProvider.configure({
@@ -163,7 +162,6 @@
             templateUrl:  'company_interns.html',
             controller:'company_interns_controller'
             },
-
             // HR 
             { 
             name: 'user_company_HR',
@@ -195,6 +193,7 @@
             templateUrl:  'hr_interns.html',
             controller:'hr_controller'
             },
+            // SV
             { 
             name: 'user_company_SV',
             url: '/sv',
@@ -205,13 +204,13 @@
             name: 'user_company_SV.sv_interns',
             url: '',
             templateUrl:  'sv_interns.html',
-            controller:'sv_controller'
+            controller:'sv_intern_list_controller'
             },
             {
             name: 'user_company_SV.interns_grade',
             url: '',
             templateUrl:  'interns_grade.html',
-            controller:'sv_controller'
+            controller:'sv_grade_controller'
             },
             // Student routes
             {
@@ -242,7 +241,7 @@
             {
             name: 'user_student.student_schedule',
             url: '',
-            templateUrl:  'studentschedule.html',
+            templateUrl:  'student_schedule.html',
             controller:'student_sched_controller'
             },
             {

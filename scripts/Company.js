@@ -344,7 +344,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'company_sched_remarks_modal.html',
-                controller: function(id,$http){
+                controller: function(id,$http,$scope){
                     $scope.save = function(){
                         $http.post(urls.API_HOST + '/interview_result/'+id , {remarks: $scope.remarks}).then(function (response){
                             // $scope.applications = response.data;

@@ -459,9 +459,15 @@
                 <table class="table table-striped table-hover">
                     <tr>
                         <th>Student Name</th>
+                        <th>Department</th>
+                        <th>Timecard</th>
+                        <th>Rendered Hours</th>
                     </tr>
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
+                        <td>{{intern.department.department_name}}</td>
+                        <td><button class="btn btn-info">Update Timecard</button></td>
+                        <td>10:32</td>
                     </tr>
                 </table>
             </div>
