@@ -18,7 +18,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -150,18 +150,12 @@
             url: '',
             templateUrl:  'company_list_application.html',
             controller:'application_controller'
-            },
+            },  
             {
             name: 'user_company.company_schedule',
             url: '',
             templateUrl:  'company_schedules.html',
             controller:'company_schedule_controller'
-            },
-            {
-            name: 'user_company.company_interns',
-            url: '',
-            templateUrl:  'company_interns.html',
-            controller:'company_interns_controller'
             },
 
             // HR 
@@ -249,7 +243,7 @@
             {
             name: 'user_student.student_schedule',
             url: '',
-            templateUrl:  'studentschedule.html',
+            templateUrl:  'student_schedule.html',
             controller:'student_sched_controller'
             },
             {
