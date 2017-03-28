@@ -213,13 +213,6 @@
             templateUrl:  'interns_grade.html',
             controller:'sv_controller'
             },
-            // 
-            {
-            name: 'user_company.company_interns',
-            url: '',
-            templateUrl:  'company_interns.html',
-            controller:'company_interns_controller'
-            },
             // Student routes
             {
             name: 'user_student',
