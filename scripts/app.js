@@ -18,7 +18,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -272,8 +272,20 @@
             {
             name: 'user_coordinator.coordinator_files',
             url: '',
-            templateUrl:  'coordinator_section.html',
-            controller:'coordinator_section_controller'
+            templateUrl:  'coordinator_files.html',
+            controller:''
+            },       
+            {
+            name: 'user_coordinator.coordinator_grades',
+            url: '',
+            templateUrl:  'coordinator_grades.html',
+            controller:''
+            },        
+            {
+            name: 'user_coordinator.coordinator_enroll_students',
+            url: '',
+            templateUrl:  'coordinator_enroll_students.html',
+            controller:'coordinator_enroll_student_controller'
             },        
         ]
 

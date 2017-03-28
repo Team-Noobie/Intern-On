@@ -52,7 +52,7 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'create_student_section.html',
-                    controller: 'create_student_section_controller',
+                    controller: 'coordinator_section_controller',
                     size: 'md',
                     resolve: {
                             id: function () {
@@ -66,6 +66,14 @@
                     });
             };
 
+            $scope.createSection = function () {
+                $http.post(urls.API_HOST + '/create_student_section', $scope.formdata).then(function (response){
+                    $state.go('user_coordinator.coordinator_section');   
+                });
+            };
+
+
+            
             $scope.enrollStudent = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -84,9 +92,28 @@
                     });
             }; 
 
-           $http({method: 'GET', url: urls.API_HOST + '/section_list'}).then(function(response){
-                    $scope.section = response.data;
-                });
+             $scope.viewSectionStudents = function(students){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_section_students.html',
+                    controller: 'view_section_students_controller',
+                    size: 'lg',
+                    resolve: {
+                            students: function () {
+                                return students;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (students) {
+                        return 1;
+                    });
+            }; 
+
+
+           $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+                $scope.section = response.data;
+            });
                      
     });
 
@@ -97,7 +124,7 @@
        }
 
         $scope.enrollStudent = function () {
-            $http.post(urls.API_HOST + '/enroll_student', $scope.formdata).then(function (response){
+            $http.post(urls.API_HOST + '/enroll_student/'+$localStorage.id, $scope.formdata).then(function (response){
                 $state.go('user_coordinator.coordinator_section');   
             });
  
@@ -105,15 +132,26 @@
 
     });
 
-     internon.controller('create_student_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-       
-        $scope.createSection = function () {
-            $http.post(urls.API_HOST + '/create_student_section', $scope.formdata).then(function (response){
-                $state.go('user_coordinator.coordinator_section');   
-            });
-
+     internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        
+        $scope.choice_advertisement = {
+                'option': {'name': '','value':'','strict':false},
         };
-
+        $scope.choices_advertisement = [
+            {'name':'All','value':''},
+        ]
+        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.choices_advertisement.push({'name':response.data[i].section_code,'value':response.data[i].id,'strict':true});
+            }
+        });
     });
+
+     internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $scope.students = students;
+        // console.log(students);
+    });
+    
+    
    
 })();

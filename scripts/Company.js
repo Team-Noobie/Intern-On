@@ -180,6 +180,7 @@
             {'name': 'Pending Applicants','value':'Pending'},
             {'name': 'Rejected Applicants','value':'Failed'},
         ];
+        
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
