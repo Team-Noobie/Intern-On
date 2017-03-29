@@ -106,21 +106,21 @@
 			
 
 			$scope.editPassword = function(id){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'edit_password.html',
-				controller: '',
-				size: 'md',
-				resolve: {
-						id: function () {
-							return id;
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'edit_password.html',
+					controller: '',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
 						}
-					}
-				});
+					});
 
-				modalInstance.result.then(function (id) {
-					return 1;
-				});
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
 			};
 			
 			var uploader = $scope.uploader = new FileUploader({

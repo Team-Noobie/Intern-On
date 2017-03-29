@@ -16,17 +16,21 @@
 			});
 		};
 
+    $scope.students = [
+        {},
+    ]
     $scope.uploadCSV =function () {
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
         if (regex.test($("#fileUpload").val().toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    var table = $("<table />");
+                    var table = $("<table/>");
                     var rows = e.target.result.split("\n");
-                    for (var i = 0; i < rows.length; i++) {
+                    for (var i = 1; i < rows.length-1; i++) {
                         var row = $("<tr />");
-                        var cells = rows[i].split(";");
+                        var cells = rows[i].split(",");
+                        $scope.students.push({'name':cells[0],'school':cells[1],'strict':true});
                         for (var j = 0; j < cells.length; j++) {
                             var cell = $("<td />");
                             cell.html(cells[j]);
@@ -36,6 +40,7 @@
                     }
                     $("#dvCSV").html('');
                     $("#dvCSV").append(table);
+                    console.log($scope.students);
                 }
                 reader.readAsText($("#fileUpload")[0].files[0]);
             } else {

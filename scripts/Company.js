@@ -29,6 +29,7 @@
                     templateUrl: 'company_add_employee_modal.html',
                     controller: function(type,$localStorage,$scope,$http,$uibModalInstance){
                         $scope.type = type;
+                        
                         $scope.dept_id = {
                                 'department_id': {'name': '','value':'','strict':false},
                         };

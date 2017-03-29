@@ -30,10 +30,8 @@
                 $scope.interns = response.data;
             });
         });
-        
     });
     internon.controller('sv_grade_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-
         $scope.choice_status = {
                 'option': {'name': '','value':''},
         };
