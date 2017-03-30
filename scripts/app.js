@@ -11,7 +11,8 @@
         'angularFileUpload',
         'ngSanitize',
         'ngCsvImport',
-        'ngToast'
+        'ngToast',
+        'ngAnimate',
         ]);
 
     internon.constant('urls', (function () {
@@ -48,6 +49,8 @@
             animation: 'slide', // or 'fade',
             compileContent: true,
             combineDuplications: true,
+            horizontalPosition: 'center',
+            maxNumber: 3,
         });
         // $qProvider.errorOnUnhandledRejections(false);
         $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
