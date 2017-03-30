@@ -51,6 +51,7 @@
             combineDuplications: true,
             horizontalPosition: 'center',
             maxNumber: 3,
+            // combineDuplications: false
         });
         // $qProvider.errorOnUnhandledRejections(false);
         $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
@@ -213,6 +214,7 @@
             name: 'user_company_SV.interns_grade',
             url: '',
             templateUrl:  'interns_grade.html',
+            controller:'sv_grade_controller',
             },
             // Student routes
             {
@@ -329,16 +331,23 @@
                 
                 $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
                     $localStorage.id = response.data.user.id;
+                    $localStorage.type = response.data.user.type;
+
                         if(response.data.user.type == "student")
                             $state.go('user_student');
+
                         if(response.data.user.type == "company")
                             $state.go('user_company');
+
                         if(response.data.user.type == "coordinator")
                             $state.go('user_coordinator');
+
                         if(response.data.user.type == "administrator")
                             $state.go('user_administrator'); 
+
                         if(response.data.user.type == "hr")
-                            $state.go('user_company_HR'); 
+                            $state.go('user_company'); 
+
                         if(response.data.user.type == "sv")
                             $state.go('user_company_SV');   
 
@@ -390,7 +399,4 @@
 
         }
     });
-    
-
-
 })();
