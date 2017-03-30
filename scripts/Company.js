@@ -159,6 +159,7 @@
             height:300,
             width:800,
 		} );
+        
 
         $scope.options = {
             language: 'en',
@@ -196,6 +197,7 @@
             {'name': 'Pending Applicants','value':'Pending'},
             {'name': 'Rejected Applicants','value':'Failed'},
         ];
+        
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
