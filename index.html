@@ -51,3 +51,47 @@
     <script src="scripts/sv.js"></script>
 </body>
 </html>
+
+<script type="text/ng-template" id="edit_password.html">
+    <div class="modal-header">
+        <h3 style="position:absolute; margin:auto;">Edit Password</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Old Password</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>New Password</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Confirm Password</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+</script>

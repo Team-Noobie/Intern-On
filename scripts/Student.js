@@ -43,10 +43,17 @@
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
 			});
 
-			$scope.editProfile = function(data){
-			var modalInstance = $uibModal.open({
+			$scope.edit_info = function(data,type){
+				var template;
+				if(type == 1)
+					template = 'edit_profile.html'
+				if(type == 2)
+					template = 'edit_personal.html'
+				if(type ==3)
+					template = 'edit_educational.html'
+				var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'edit_profile.html',
+				templateUrl: template,
 				controller: function(data,$scope){
 					$scope.student = data;
 				},
@@ -61,66 +68,25 @@
 				modalInstance.result.then(function (id) {
 					return 1;
 				});
-			};
-
-			$scope.editPersonal = function(data){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'edit_personal.html',
-				controller: function(data,$scope){
-					$scope.student = data;
-				},
-				size: 'md',
-				resolve: {
-						data: function () {
-							return data;
-						}
-					}
-				});
-
-				modalInstance.result.then(function (id) {
-					return 1;
-				});
-			};
-
-			$scope.editEducational = function(data){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'edit_educational.html',
-				controller: function(data,$scope){
-					$scope.student = data;
-				},
-				size: 'md',
-				resolve: {
-						data: function () {
-							return data;
-						}
-					}
-				});
-
-				modalInstance.result.then(function (data) {
-					return 1;
-				});
-			};
-			
+			}
 			
 
 			$scope.editPassword = function(id){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'edit_password.html',
-				controller: '',
-				size: 'md',
-				resolve: {
-						id: function () {
-							return id;
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'edit_password.html',
+					controller: '',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
 						}
-					}
-				});
+					});
 
-				modalInstance.result.then(function (id) {
-					return 1;
-				});
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
 			};
 			
 			var uploader = $scope.uploader = new FileUploader({

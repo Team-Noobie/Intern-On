@@ -14,7 +14,11 @@
 			});
 		};
     });
-    internon.controller('sv_intern_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('sv_intern_list_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $scope.test = function(){
+            password.open_modal(1);
+        }
+        
         $scope.choice_status = {
                 'option': {'name': '','value':''},
         };
@@ -30,16 +34,32 @@
                 $scope.interns = response.data;
             });
         });
+
+        $scope.addReportModal = function(){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'add_report_modal.html',
+                controller: function($localStorage,$scope,$http,$uibModalInstance){
+                    
+                },
+                size: 'sm',
+                resolve: {
+                    }
+                });
+
+                modalInstance.result.then(function (id) {
+                    return 1;
+                });
+        };
         
     });
     internon.controller('sv_grade_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-
         $scope.choice_status = {
                 'option': {'name': '','value':''},
         };
 
         $scope.choices_status = [
-            {'name': 'All Applicants','value':''},            
+            {'name': 'All Interns','value':''},            
             {'name': 'Active','value':'Active'},
             {'name': 'Done','value':'Done'},
         ];
@@ -49,5 +69,24 @@
                 $scope.interns = response.data;
             });
         });
+        $scope.gradeModal = function(student){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'interns_grade_modal.html',
+                controller: function($localStorage,student,$scope,$http,$uibModalInstance){
+                    $scope.student = student;
+                },
+                size: 'md',
+                resolve: {
+                        student : function(){
+                            return student;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (id) {
+                    return 1;
+                });
+        };
     });
 })();

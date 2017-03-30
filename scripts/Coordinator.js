@@ -1,7 +1,5 @@
 (function (){
 	var internon = angular.module('internon');
-    
-    
     internon.controller('coordinator_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
@@ -16,38 +14,43 @@
 			});
 		};
 
-    $scope.uploadCSV =function () {
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-        if (regex.test($("#fileUpload").val().toLowerCase())) {
-            if (typeof (FileReader) != "undefined") {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var table = $("<table />");
-                    var rows = e.target.result.split("\n");
-                    for (var i = 0; i < rows.length; i++) {
-                        var row = $("<tr />");
-                        var cells = rows[i].split(";");
-                        for (var j = 0; j < cells.length; j++) {
-                            var cell = $("<td />");
-                            cell.html(cells[j]);
-                            row.append(cell);
+        $scope.students = [
+            {},
+        ]
+        $scope.uploadCSV =function () {
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test($("#fileUpload").val().toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var table = $("<table/>");
+                        var rows = e.target.result.split("\n");
+                        for (var i = 1; i < rows.length-1; i++) {
+                            var row = $("<tr />");
+                            var cells = rows[i].split(",");
+                            $scope.students.push({'name':cells[0],'school':cells[1],'strict':true});
+                            for (var j = 0; j < cells.length; j++) {
+                                var cell = $("<td />");
+                                cell.html(cells[j]);
+                                row.append(cell);
+                            }
+                            table.append(row);
                         }
-                        table.append(row);
+                        $("#dvCSV").html('');
+                        $("#dvCSV").append(table);
+                        console.log($scope.students);
                     }
-                    $("#dvCSV").html('');
-                    $("#dvCSV").append(table);
+                    reader.readAsText($("#fileUpload")[0].files[0]);
+                } else {
+                    alert("This browser does not support HTML5.");
                 }
-                reader.readAsText($("#fileUpload")[0].files[0]);
             } else {
-                alert("This browser does not support HTML5.");
+                alert("Please upload a valid CSV file.");
             }
-        } else {
-            alert("Please upload a valid CSV file.");
-        }
-    };
-});
+        };
+    });
 
-     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.newSection = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,

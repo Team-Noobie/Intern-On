@@ -347,4 +347,41 @@
             });
         }
     });
+
+
+    internon.factory('password', function($http,$uibModal) {
+        return{
+            open_modal: function(id){
+                var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'edit_password.html',
+                    controller: function(password,$scope){
+                        $scope.save = function(){
+                            password.edit();
+                        };
+                    },
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+            },
+            reset: function(){
+                console.log('reset');
+            },
+            edit: function(formdata,id){
+                console.log('edit');                
+            }
+
+        }
+    });
+    
+
+
 })();

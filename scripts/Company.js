@@ -27,8 +27,9 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'company_add_employee_modal.html',
-                    controller: function(type,$localStorage,$scope,$http,$uibModalInstance){
+                    controller: function(type,$localStorage,$scope,$http,$uibModalInstance,$state){
                         $scope.type = type;
+                        
                         $scope.dept_id = {
                                 'department_id': {'name': '','value':'','strict':false},
                         };
@@ -45,14 +46,14 @@
                         $scope.add = function(){
                             if(type == 'hr'){
                                 $http.post(urls.API_HOST + '/create_hr/'+$localStorage.id, $scope.formdata).then(function (response){
-                                    $uibModalInstance.close;
+                                    $uibModalInstance.close();
                                 });
                             }
                             if(type == 'sv'){
                                 $scope.formdata.department_id = $scope.dept_id.department_id.value;
                                 if($scope.formdata.department_id != '')
                                     $http.post(urls.API_HOST + '/create_sv/'+$localStorage.id, $scope.formdata).then(function (response){
-                                        $uibModalInstance.close;
+                                        $uibModalInstance.close();
                                     });  
                             }
                         }
@@ -94,7 +95,23 @@
                     modalInstance.result.then(function () {
                         return 1;
                     });
-            };
+        };
+        $scope.viewEmployeesModal = function(){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'company_view_employee_modal.html',
+                    controller: function($scope,$http,$uibModalInstance){
+                        
+                    },
+                    size: 'sm',
+                    resolve: {
+                        }
+                    });
+
+                    modalInstance.result.then(function () {
+                        return 1;
+                    });
+        };
     });
     internon.controller('advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
 
@@ -395,6 +412,22 @@
                 $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
             }
         });
+        $scope.viewTimecardModal = function(){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'intern_timecard_modal.html',
+                controller: function($scope,$http,$uibModalInstance){
+                    
+                },
+                size: 'sm',
+                resolve: {
+                    }
+                });
+
+                modalInstance.result.then(function () {
+                    return 1;
+                });
+        };
     });
     internon.controller('result_modal_Controller',function(id,type,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
         // get department
@@ -420,4 +453,5 @@
             });  
         }
     });
+        
 })();
