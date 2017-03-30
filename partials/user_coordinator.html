@@ -201,7 +201,8 @@
 
     <script type="text/ng-template" id="enroll_student.html">
          <div class="modal-body">
-            <div class="cols-md-8">
+            <div class="cols-md-10">
+                <form action="" method="post">
                 <div class="input-group">
                     <label for="name" class="cols-sm-2 control-label">Student Username</label>
                     <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
@@ -216,7 +217,14 @@
                     <label for="name" class="cols-sm-2 control-label">Student Lastname</label>                                         
                     <input type="text" class="form-control" ng-model="formdata.student_lastname"  placeholder="Lastname" required/>
                 </div>
-                <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
+                 <div class = "input-group">
+                    <label for="name" class="cols-sm-2 control-label">Select Section</label></br>
+                    <div class="btn-group" uib-dropdown>
+                        <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]" ng-options="ads as ads.name for ads in choices_advertisement"></select>
+                    </div>
+                </div></br>
+                <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Student</button> 
+                </form>
             </div>
         </div>        
 
@@ -261,7 +269,7 @@
             <div class="row" style="margin-top:10px">
                
                 <div class="col-md-8" style="left:40%;margin-top:5em;margin-bottom:2em;">
-                    <button style="margin-right:5px;" ng-click="" class="btn btn-info btn-lg"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Single Student</button>
+                    <button style="margin-right:5px;" ng-click="enrollStudentModal()" class="btn btn-info btn-lg"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Single Student</button>
                 </div>
 
                 <div class="col-md-8" style="left:33%">
