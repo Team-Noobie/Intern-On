@@ -66,6 +66,8 @@
             </div>
         </div>
         <!-- /.row -->
+                    <button ng-click="test()">Test</button>
+        
         <div class="row">
             <div class = "col-md-4"> <!-- for active/graduate-->
                 <div class="btn-group" uib-dropdown>
@@ -88,8 +90,8 @@
                     </tr>
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
-                        <td></td>
-                        <td></td>
+                        <td>1</td>
+                        <td><button class="btn btn-info" ng-click="addReportModal()">Add Reports</button></td>
                     </tr>
 
                 </table>
@@ -133,11 +135,44 @@
                     </tr>
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
-                        <td><button class="btn btn-danger">Grade</button></td>
+                        <td><button class="btn btn-danger" ng-click="gradeModal(intern.student)">Grade</button></td>
                     </tr>
                 </table>
             </div>
         </div>   
     </div>
 </script>
+<script type="text/ng-template" id="interns_grade_modal.html">
+    <div class="modal-header">
+        <h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+    </div>
+    <div class="modal-body">
+        <form name="grade_form">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" ng-required="true" required placeholder="Grade">
+                </div>
+                <div class="col-md-6">
+                    <textarea name="" id="" cols="30" rows="10" ng-required="true" required placeholder="Comment">
+                    </textarea>
 
+                    <button class="btn btn-success">
+                        Send Grade
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</script>
+<script type="text/ng-template" id="add_report_modal.html">
+    <div class="modal-body">
+        Add Report
+    </div>
+    <div class="modal-footer"></div>
+</script>

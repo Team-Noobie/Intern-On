@@ -340,11 +340,15 @@
 
     internon.factory('password', function($http,$uibModal) {
         return{
-            open_Modal: function(){
+            open_modal: function(id){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'edit_password.html',
-					controller: '',
+                    controller: function(password,$scope){
+                        $scope.save = function(){
+                            password.edit();
+                        };
+                    },
 					size: 'md',
 					resolve: {
 							id: function () {

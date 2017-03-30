@@ -124,7 +124,7 @@
                                 <a href="" style="padding-top:20px;">upload image</a>
                             </div>
                             <div class="col-md-12">
-                                <button ng-click="editProfile(student)" class="btn btn-info btn-sm">Edit Profile</button> 
+                                <button ng-click="edit_info(student,1)" class="btn btn-info btn-sm">Edit Profile</button> 
                             </div>
                         </div> 
                     </div>
@@ -135,7 +135,7 @@
                                 <h3>Personal Background</h3>
                                 <h4>Birthday: {{student.student_birthday}}</h4>
                                 <h4>Gender: {{student.student_gender}}</h4>
-                                <button ng-click="editPersonal(student)" class="btn btn-info btn-sm">Edit</button> 
+                                <button ng-click="edit_info(student,2)" class="btn btn-info btn-sm">Edit</button> 
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                                 <h4>Department: {{student.student_department}}</h4>
                                 <h4>Intitute: {{student.student_institute}}</h4>
                                 <h4>School: {{student.student_school}}</h4>
-                                <button ng-click="editEducational(student)" class="btn btn-info btn-sm">Edit</button> 
+                                <button ng-click="edit_info(student,3)" class="btn btn-info btn-sm">Edit</button> 
                             </div>
                         </div>
                     </div>       
@@ -157,7 +157,7 @@
         </div>
     </script>
 
-    <script type="text/ng-template" id="edit_profile.html">
+<script type="text/ng-template" id="edit_profile.html">
       <div class="modal-header">
         <h3 style="position:absolute; margin:auto;">Edit Profile</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
     </div>
@@ -431,17 +431,6 @@
             </div>
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-md-4">
-                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
-            </div> 
-        </div>      
-
-        <div class="row" style="margin-top:10px">
-            <div class="col-lg-12">
-                
-            </div>
-        </div>   
     </div>
 </script>
 

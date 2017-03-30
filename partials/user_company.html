@@ -34,22 +34,22 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a ui-sref="user_company.company_accounts"><i class="fa fa-fw fa-user"></i> Accounts</a>
+                    <a ui-sref="user_company.company_accounts"><i class="fa fa-fw fa-users"></i> Accounts</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-user"></i> Departments</a>
+                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
                 </li>
                 <li>
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-table"></i>Applications</a>
+                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-o"></i>Applications</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_schedule"><i class="fa fa-calendar"></i> Schedules</a>
+                    <a ui-sref="user_company.company_schedule"><i class="fa fa-clock-o"></i> Schedules</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_interns"><i class="fa fa-users"></i> Interns</a>
+                    <a ui-sref="user_company.company_interns"><i class="fa fa-graduation-cap"></i> Interns</a>
                 </li>      
             </ul>
         </div>
@@ -215,15 +215,15 @@
                     </tr>
                     <tr ng-repeat="dept in departments">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</a></td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
+                        <td><button style="margin-right:5px;" ng-click="viewEmployeesModal()" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
                         <td>{{dept.created_at}}</td>
                     </tr>
                 </table>
             </div>
         </div>   
-        <div>
-        </script>   
-        <script type="text/ng-template" id="company_create_ads.html">
+    </div>
+</script>   
+<script type="text/ng-template" id="company_create_ads.html">
             <div class="container-fluid">
                 <h4>Create Advertisement</h4>
                 <form class="form-horizontal post-ads" method="post"> 
@@ -466,7 +466,7 @@
                     <tr ng-repeat="intern in interns">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td>{{intern.department.department_name}}</td>
-                        <td><button class="btn btn-info">Update Timecard</button></td>
+                        <td><button class="btn btn-info" ng-click="viewTimecardModal()">Update Timecard</button></td>
                         <td>10:32</td>
                     </tr>
                 </table>
@@ -793,6 +793,20 @@
             </form>
         </div>
     </div>
+</script>
+<script type="text/ng-template" id="company_view_employee_modal.html">
+    <div class="modal-body">
+        Employees
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</script>
+<script type="text/ng-template" id="intern_timecard_modal.html">
+    <div class="modal-body">
+        Timecard
+    </div>
+    <div class="modal-footer"></div>
 </script>
 
 

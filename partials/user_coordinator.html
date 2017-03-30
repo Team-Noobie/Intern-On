@@ -233,51 +233,48 @@
                 </table>
             </div>
         </div>   
-            <input type="file" id="fileUpload" />
-            <input type="button" ng-click="uploadCSV()" value="Upload" />
-            <hr />
-            <div id="dvCSV">
+        <input type="file" id="fileUpload" />
+        <input type="button" ng-click="uploadCSV()" value="Upload" />
+        <hr />
+        <div id="dvCSV">
 
+        </div>
+</script>   
+<script type="text/ng-template" id="create_student_section.html">
+    <div class="modal-body">
+        <label for="name" class="cols-sm-2 control-label">Section Code</label>
+        <div class="cols-sm-6">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" ng-model="formdata.section_code"  placeholder="Section Code" required/>
+            </div>
+            <button class="btn btn-info btn-md" id="add" ng-click="create_section()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
+        </div>
+    </div>        
+</script>
+
+<script type="text/ng-template" id="enroll_student.html">
+    <div class="modal-body">
+        <div class="cols-md-8">
+            <div class="input-group">
+                <label for="name" class="cols-sm-2 control-label">Student Username</label>
+                <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
             </div>
 
-        </script>   
-
-    <script type="text/ng-template" id="create_student_section.html">
-         <div class="modal-body">
-            <label for="name" class="cols-sm-2 control-label">Section Code</label>
-            <div class="cols-sm-6">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" ng-model="formdata.section_code"  placeholder="Section Code" required/>
-                </div>
-                <button class="btn btn-info btn-md" id="add" ng-click="create_section()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
+            <div class="input-group">
+                <label for="name" class="cols-sm-2 control-label">Student Firstname</label>                     
+                <input type="text" class="form-control" ng-model="formdata.student_firstname"  placeholder="Firstname" required/>
             </div>
-        </div>        
 
-    </script>
-
-    <script type="text/ng-template" id="enroll_student.html">
-         <div class="modal-body">
-            <div class="cols-md-8">
-                <div class="input-group">
-                    <label for="name" class="cols-sm-2 control-label">Student Username</label>
-                    <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
-                </div>
-
-                <div class="input-group">
-                    <label for="name" class="cols-sm-2 control-label">Student Firstname</label>                     
-                    <input type="text" class="form-control" ng-model="formdata.student_firstname"  placeholder="Firstname" required/>
-                </div>
-
-                 <div class="input-group">
-                    <label for="name" class="cols-sm-2 control-label">Student Lastname</label>                                         
+            <div class="input-group">
+                <label for="name" class="cols-sm-2 control-label">Student Lastname</label>                                         
                     <input type="text" class="form-control" ng-model="formdata.student_lastname"  placeholder="Lastname" required/>
-                </div>
-                <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
             </div>
-        </div>        
-
-    </script>
-    <script type="text/ng-template" id="section_students">
-        student
-    </script>
+                <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Enroll Student</button> 
+        </div>
+    </div>        
+</script>
+<script type="text/ng-template" id="section_students">
+    <div class="modal-body">students</div>
+    <div class="modal-footer"></div>
+</script>
