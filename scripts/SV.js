@@ -15,10 +15,7 @@
 		};
     });
     internon.controller('sv_intern_list_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-        $scope.test = function(){
-            password.open_modal(1);
-        }
-        
+                
         $scope.choice_status = {
                 'option': {'name': '','value':''},
         };
