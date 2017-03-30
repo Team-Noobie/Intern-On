@@ -344,6 +344,12 @@
                 $uibModalInstance.close();
             }).catch(function(error){
                 
+                ngToast.create({
+                className: 'warning',
+                content: 'Invalid Username or Password',
+                animation: 'slide' 
+                });
+
             });
         }
     });
