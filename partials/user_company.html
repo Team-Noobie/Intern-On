@@ -616,7 +616,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="reason" class="cols-sm-2 control-label">Reason</label>
-                        <input type="text" class="form-control" placeholder="Reason Of Schedule e.g. Interview, Briefing ..." ng-model="reason" ng-required="true" required>
+                        <input type="text" class="form-control" placeholder="Reason Of Schedule e.g. Interview, Briefing ..." ng-model="reason" ng-required="true" required ng-click="$event.preventDefault(); $event.stopPropagation();">
                     </div>
                     <!--<div class="col-md-6"> <label for="name" class="cols-sm-2 control-label">Date and Time</label> <input type="date" class="form-control"></div>-->
                     <div class="col-md-12">
@@ -675,7 +675,7 @@
             <form name="reject">
                 <div class="col-md-6">
                     Comment:
-                    <textarea name="comment" cols="30" rows="10" ng-model="comment" ng-required="true" required></textarea>                
+                    <textarea name="comment" cols="30" rows="10" ng-model="comment" ng-required="true" required ng-click="$event.preventDefault(); $event.stopPropagation();"></textarea>                
                     <div class="row"  style="margin: 0 0 0 0;">
                         <button class="btn btn-danger" ng-click="reject.$valid && reject()"><i class="fa fa-check" aria-hidden="true"></i> Reject</button>                                    
                     </div>
@@ -753,7 +753,7 @@
         <div class="row" ng-if="type == 'hr'">
             <form name="add_HR">
                 <div class="col-lg-12" style="margin-bottom:5px;">
-                    <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Enter HR Firstname">
+                    <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Enter HR Firstname" >
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                
                     <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Enter HR Lastname">
@@ -773,16 +773,16 @@
         <div class="row" ng-if="type == 'sv'">
             <form name="add_SV">
                 <div class="col-lg-12" style="margin-bottom:5px;">
-                    <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Enter SV Firstname">
+                    <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Enter SV Firstname" ng-click="$event.preventDefault(); $event.stopPropagation();">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                
-                    <input class="form-control" type="text" ng-model="formdata.sv_lastname" required ng-required="true" placeholder="Enter SV Lastname">
+                    <input class="form-control" type="text" ng-model="formdata.sv_lastname" required ng-required="true" placeholder="Enter SV Lastname" ng-click="$event.preventDefault(); $event.stopPropagation();">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
-                    <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Enter username">
+                    <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Enter username" ng-click="$event.preventDefault(); $event.stopPropagation();">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
-                    <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
+                    <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="Enter E-Mail Address" ng-click="$event.preventDefault(); $event.stopPropagation();">                                                
                 </div>
                 <div class="btn-group col-lg-12" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>

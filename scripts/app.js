@@ -214,6 +214,7 @@
             name: 'user_company_SV.interns_grade',
             url: '',
             templateUrl:  'interns_grade.html',
+            controller:'sv_grade_controller',
             },
             // Student routes
             {
