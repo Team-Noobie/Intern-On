@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}</a>
+            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}{{hr.hr_firstname}} {{hr.hr_lastname}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -33,13 +33,13 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a ui-sref="user_company.company_accounts"><i class="fa fa-fw fa-users"></i> Accounts</a>
+                <li ng-show="type">
+                    <a ui-sref="user_company.company_accounts" ><i class="fa fa-fw fa-users"></i> Accounts</a>
                 </li>
-                <li>
+                <li ng-show="type">
                     <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
                 </li>
-                <li>
+                <li ng-show="type">
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
@@ -143,7 +143,7 @@
             </div>
         </div>
         <!-- /.row -->
-        <button ng-click="test()">test</button>
+        <!--<button ng-click="test()">test</button>-->
         <div class="row" style="margin-top:10px">
             <div class="col-md-4">
                 <a ng-click="openAddEmployeeModal('hr')" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Human Resource Account</a>                 
@@ -465,7 +465,7 @@
                         <th>Timecard</th>
                         <th>Rendered Hours</th>
                     </tr>
-                    <tr ng-repeat="intern in interns">
+                    <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: {department: {department_name: dept_id.department_id.value}}:dept_id.department_id.strict">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td>{{intern.department.department_name}}</td>
                         <td><button class="btn btn-info" ng-click="viewTimecardModal()">Update Timecard</button></td>

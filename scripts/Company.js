@@ -7,21 +7,34 @@
             $state.go('index');
         };
 
+        
+        
         $scope.init = function () {
-			$http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
-				$scope.company = response.data;
-				$state.go('user_company.company_profile');
-			});
+            if($localStorage.type == 'company'){
+                $http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
+                    $scope.company = response.data;
+                    $state.go('user_company.company_profile');
+                    $scope.type = true;
+                });
+            }if($localStorage.type == 'hr'){
+                $http({method: 'GET', url: urls.API_HOST + '/hr_profile/'+$localStorage.id}).then(function(response){
+                    $scope.hr = response.data;
+                    $localStorage.company = response.data.company_id;
+                    $scope.type = false;                    
+                    // $state.go('user_company.company_profile');
+                });                   
+            }
 		};
+        
     });
     internon.controller('company_accounts_controller',function(ngToast,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         
-        $scope.test = function(){
-            ngToast.create({
-                className: 'warning',
-                content: "test",
-            });     
-        };
+        // $scope.test = function(){
+        //     ngToast.create({
+        //         className: 'warning',
+        //         content: "test",
+        //     });     
+        // };
         
         $http({method: 'GET', url: urls.API_HOST + '/hr_list/'+$localStorage.id}).then(function(response){
                     $scope.hr = response.data;
@@ -212,17 +225,30 @@
         $scope.choices_advertisement = [
             {'name':'All','value':''},
         ]
-
-        $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
-            // console.log(response);
-            for (var i = 0; i < response.data.length; i++) {
-                $scope.choices_advertisement.push({'name':response.data[i].ads_title,'value':response.data[i].ads_title,'strict':true});
-            }
-        });
-
-        $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.id}).then(function(response){
-            $scope.applications = response.data;
-        });
+        if($localStorage.type == 'company'){
+            $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
+                // console.log(response);
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.choices_advertisement.push({'name':response.data[i].ads_title,'value':response.data[i].ads_title,'strict':true});
+                }
+            });
+        }else{
+            $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.company}).then(function(response){
+                // console.log(response);
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.choices_advertisement.push({'name':response.data[i].ads_title,'value':response.data[i].ads_title,'strict':true});
+                }
+            });
+        }
+        if($localStorage.type == 'company'){
+            $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.id}).then(function(response){
+                $scope.applications = response.data;
+            });
+        }else{
+            $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.company}).then(function(response){
+                $scope.applications = response.data;
+            });
+        }
 
         $scope.accept = function($id){
             $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$id}).then(function(response){
@@ -361,10 +387,14 @@
         };
     });
     internon.controller('company_schedule_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){ 
-        $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.id}).then(function(response){
-			$scope.schedules = response.data;
-		});
-
+        if($localStorage.type == 'company')
+            $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.id}).then(function(response){
+                $scope.schedules = response.data;
+            });
+         if($localStorage.type == 'hr')
+            $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.company}).then(function(response){
+                $scope.schedules = response.data;
+            });    
         $scope.remarks;
 
         $scope.remarksModal = function(id){
@@ -393,9 +423,16 @@
 
     });
     internon.controller('company_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
-        $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.id}).then(function(response){
-			$scope.interns = response.data;
-		});
+         if($localStorage.type == 'company'){
+            $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.id}).then(function(response){
+                $scope.interns = response.data;
+            });
+         }
+        if($localStorage.type == 'hr'){
+            $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.company}).then(function(response){
+                $scope.interns = response.data;
+            });
+        }
 
         $scope.dept_id = {
             'department_id': {'name': '','value':'','strict':false},
@@ -413,13 +450,26 @@
             {'name': 'Active','value':'Active'},
             {'name': 'Done','value':'Done'},
         ];
+         if($localStorage.type == 'company'){
+        
+            $http({method: 'GET', url: urls.API_HOST + '/department_list/'+$localStorage.id}).then(function(response){
+                $scope.departments = response.data;
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
+                }
+            });
+         }
+         if($localStorage.type == 'hr'){
 
-        $http({method: 'GET', url: urls.API_HOST + '/department_list/'+$localStorage.id}).then(function(response){
-            $scope.departments = response.data;
-            for (var i = 0; i < response.data.length; i++) {
-                $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
-            }
-        });
+             $http({method: 'GET', url: urls.API_HOST + '/department_list/'+$localStorage.company}).then(function(response){
+                $scope.departments = response.data;
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
+                }
+            });
+
+         }
+
         $scope.viewTimecardModal = function(){
             var modalInstance = $uibModal.open({
                 animation: true,
