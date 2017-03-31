@@ -18,7 +18,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -296,7 +296,7 @@
     });
 
 
-    internon.controller('index_controller',function($http,$state,$scope,$localStorage,$auth,$uibModal){
+    internon.controller('index_controller',function(ngToast,$http,$state,$scope,$localStorage,$auth,$uibModal){
         $scope.openModal = function(){
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -337,13 +337,13 @@
                         if(response.data.user.type == "hr")
                             $state.go('user_company_HR'); 
                         if(response.data.user.type == "sv")
-                            $state.go('user_company_SV');            
+                            $state.go('user_company_SV');   
+
+                            
                 });
                 $uibModalInstance.close();
             }).catch(function(error){
-                ngToast.warning({
-                  content: "Invalid Username or Password"
-				}); 
+                
             });
         }
     });
