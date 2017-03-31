@@ -19,7 +19,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -54,7 +54,7 @@
             // combineDuplications: false
         });
         // $qProvider.errorOnUnhandledRejections(false);
-        $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
+        $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector,ngToast) {
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};
@@ -70,8 +70,13 @@
                     403, forbidden - notAdmin
                     */ 
                     // if(response.status === 401 || response.status === 403) {
-                    if(response.status === 401 || response.status === 400) {
+                    if(response.status === 400) {
                         console.log("app.js: httpInterceptor caught 40x:", response);
+                          ngToast.create({
+                            className: 'info',
+                            content: 'Session Timed Out',
+                            animation: 'fade' 
+                        });
                         $injector.get('$state').go('index');
                     }
                     // Replace reponse with rejected promise to prevent rest of execution
@@ -359,7 +364,7 @@
                 ngToast.create({
                 className: 'warning',
                 content: 'Invalid Username or Password',
-                animation: 'slide' 
+                animation: 'fade' 
                 });
 
             });

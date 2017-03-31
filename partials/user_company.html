@@ -34,12 +34,6 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li ng-show="type">
-                    <a ui-sref="user_company.company_accounts" ><i class="fa fa-fw fa-users"></i> Accounts</a>
-                </li>
-                <li ng-show="type">
-                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
-                </li>
-                <li ng-show="type">
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
@@ -51,6 +45,12 @@
                 <li>
                     <a ui-sref="user_company.company_interns"><i class="fa fa-graduation-cap"></i> Interns</a>
                 </li>      
+                <li ng-show="type">
+                    <a ui-sref="user_company.company_accounts" ><i class="fa fa-fw fa-users"></i> Accounts</a>
+                </li>
+                <li ng-show="type">
+                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

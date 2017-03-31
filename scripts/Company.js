@@ -202,6 +202,7 @@
         $scope.cancel = function () {
             $state.go('user_company.company_ads');  
         };
+        
     });
     internon.controller('company_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
 		$http({method: 'GET', url: urls.API_HOST + '/company_view_advertisement/'+id}).then(function(response){
