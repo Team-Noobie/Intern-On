@@ -14,7 +14,15 @@
 			});
 		};
     });
-    internon.controller('company_accounts_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('company_accounts_controller',function(ngToast,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        
+        $scope.test = function(){
+            ngToast.create({
+                className: 'warning',
+                content: "test",
+            });     
+        };
+        
         $http({method: 'GET', url: urls.API_HOST + '/hr_list/'+$localStorage.id}).then(function(response){
                     $scope.hr = response.data;
         });
