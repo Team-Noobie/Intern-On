@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");/*!
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../../../../assets/fonts/Open_Sanse/OpenSans-Bold.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Light.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Regular.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Italic.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Thin.ttf');    
+}
+/*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
  * Copyright 2012-2016 Thomas Park

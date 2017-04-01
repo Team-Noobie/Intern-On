@@ -89,6 +89,7 @@
         </div>  
     </div>         
 </script>
+
 <script type="text/ng-template" id="administrator_coordinator.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -129,6 +130,7 @@
         </div>  
     </div>         
 </script>
+
 <script type="text/ng-template" id="create_company_accounts.html">
     <div class="modal-body">
         <div class="main-center">
@@ -166,6 +168,7 @@
     </div>
 </div>
 </script>
+
 <script type="text/ng-template" id="create_coordinator_accounts.html">
     <div class="modal-body">
         <div class="main-center">
@@ -228,23 +231,17 @@
                                 <div class="row">
                                     <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
                                         <p>IMAGE</p>
-                                        <a href="" style="padding-top:20px;">upload image</a>
                                     </div>  
-                                    <div class="col-md-8">
-                                        <h1>{{ad.ads_title}}</h1>
-                                        <div ng-bind-html="ad.ads_job_description"></div>
-                                    </div>
                                 </div> 
                             </div>
-                            <div class="container">
+                            <div class="well">
                                 <div class="row">
-                                    <div class="col-md-8">
-                                    
+                                    <div class="col-md-8">                                    
                                     <h3>Company Overview</h3>
                                     <p>{{company.company_overview}}</p>
                                 </div>
                             </div>
-                        <div class="container">
+                        <div class="well">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h3>Company Snapshot</h3>
@@ -255,7 +252,7 @@
                                 </div>
                             </div>
                         </div>                           
-                        <div class="container">
+                        <div class="well">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h3>Company Contacts</h3>
@@ -265,7 +262,7 @@
                                 </div>
                             </div>
                         </div>                       
-                        <div class="container">
+                        <div class="well">
                             <div class="row">
                                 <div class="col-md-8">
                                     <h3>Why Join Us?</h3>
@@ -281,7 +278,47 @@
     <div class="modal-footer">
     </div>
 </script>
+
 <script type="text/ng-template" id="view_coordinator.html" >
-<h1>Coordinator</h1>
+ <div class="modal-header">
+ </div>
+ <div class="modal-body">
+     <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                                <a href="" style="padding-top:20px;">upload image</a>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h1>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
+                                <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
+                                <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
+                                <p>Address: {{coordinator.coordinator_address}} </p>
+                            </div>
+                            
+                        </div> 
+                    </div>
+
+
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-8">
+                                
+                                <h3>School Background</h3>
+                                <p>Department: {{coordinator.coordinator_department}}</p>
+                                <p>Institute: {{coordinator.coordinator_institute}}</p>
+                                <p>School: {{coordinator.coordinator_school}}</p>    
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div> 
+   </div>
+   <div class="modal-footer">
+   </div>
 </script>
     

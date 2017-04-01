@@ -55,7 +55,7 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'create_student_section.html',
-                    controller: 'coordinator_section_controller',
+                    controller: 'create_section_controller',
                     size: 'md',
                     resolve: {
                             id: function () {
@@ -68,12 +68,7 @@
                         return 1;
                     });
             };
-
-            $scope.createSection = function () {
-                $http.post(urls.API_HOST + '/create_student_section/'+$localStorage.id, $scope.formdata).then(function (response){
-                    $state.go('user_coordinator.coordinator_section');   
-                });
-            };
+           
  
 
              $scope.viewSectionStudents = function(students){
@@ -101,16 +96,23 @@
                      
     });
 
-    // internon.controller('enroll_student_controller',function(id,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('create_section_controller',function(ngToast,id,urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
+        
+         $scope.createSection = function () {
+                $http.post(urls.API_HOST + '/create_student_section/'+$localStorage.id, $scope.formdata).then(function (response){
+                    ngToast.create({
+                        className: 'success',
+                        content: 'Section Created',
+                        animation: 'fade' 
+                    });
+                    $uibModalInstance.close();
+                    $state.go('user_coordinator.coordinator_section');   
+                });
+            };
 
-
-    // });
+    });
 
      internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-    
-
-        
-
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
@@ -149,6 +151,7 @@
         $scope.students = students;
         // console.log(students);
     });
+
 
     
    

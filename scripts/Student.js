@@ -89,6 +89,24 @@
 					});
 			};
 			
+			$scope.viewCoordinator = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'view_coordinator.html',
+					controller: '',
+					size: 'lg',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};
+			
 			var uploader = $scope.uploader = new FileUploader({
 				url: urls.API_HOST + '/upload_resume',
 				formData:[{
@@ -144,7 +162,7 @@
 				});
 		};
 	});
-	internon.controller('student_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
+	internon.controller('student_view_advertisement_controller',function(ngToast,id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
 		$scope.ids ={
 			ad_id:id,
 			student_id: $localStorage.id,
@@ -157,6 +175,12 @@
 
 		$scope.apply = function () {
 			$http.post(urls.API_HOST + '/apply', $scope.ids).then(function (response){
+				
+				ngToast.create({
+                className: 'success',
+                content: 'Application Successful',
+                animation: 'fade' 
+			});
 				$uibModalInstance.close();
 			});
 		};
@@ -166,6 +190,35 @@
 		$http({method: 'GET', url: urls.API_HOST + '/application_list/'+$localStorage.id}).then(function(response){
 				$scope.applications = response.data;
 		});
+
+		// 	$scope.ads;
+
+		// $http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
+		// 	$scope.ads = response.data;
+		// });
+
+
+			$scope.viewApplication = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'viewApplication.html',
+					controller: 'student_view_advertisement_controller',
+					size: 'lg',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};
+			
+
+
+
 	});
 	internon.controller('student_sched_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
 		$http({method: 'GET', url: urls.API_HOST + '/student_schedule/'+$localStorage.id}).then(function(response){
