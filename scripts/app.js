@@ -19,7 +19,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost/'+server+ '/api/internon'
+            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -54,7 +54,7 @@
             // combineDuplications: false
         });
         // $qProvider.errorOnUnhandledRejections(false);
-        $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector) {
+        $httpProvider.interceptors.push(function($q, $location, $localStorage, $injector,ngToast) {
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};
@@ -70,8 +70,13 @@
                     403, forbidden - notAdmin
                     */ 
                     // if(response.status === 401 || response.status === 403) {
-                    if(response.status === 401 || response.status === 400) {
+                    if(response.status === 400) {
                         console.log("app.js: httpInterceptor caught 40x:", response);
+                          ngToast.create({
+                            className: 'info',
+                            content: 'Session Timed Out',
+                            animation: 'fade' 
+                        });
                         $injector.get('$state').go('index');
                     }
                     // Replace reponse with rejected promise to prevent rest of execution
@@ -80,37 +85,38 @@
             };
         });
         var states = [
-            {
-            name: 'index',
-            url: '/index',
-            templateUrl:  'partials/index.html',
-            controller:'index_controller'
-            },
-            {
-            name: 'getUser',
-            url: '/index',
-            templateUrl:  '',
-            controller:'user_controller'
-            },
+                {
+                name: 'index',
+                url: '/index',
+                templateUrl:  'partials/index.html',
+                controller:'index_controller'
+                },
+                {
+                name: 'getUser',
+                url: '/index',
+                templateUrl:  '',
+                controller:'user_controller'
+                },
             // Administrator routes
-            {
-            name: 'user_administrator',
-            url: '/administrator',
-            templateUrl:  'partials/user_administrator.html',
-            controller:'administrator_controller'
-            },
-            {
-            name: 'user_administrator.administrator_company',
-            url: '',
-            templateUrl:  'administrator_company.html',
-            controller:'administrator_controller'
-            },
-            {
-            name: 'user_administrator.administrator_coordinator',
-            url: '',
-            templateUrl:  'administrator_coordinator.html',
-            controller:'administrator_controller'
-            },
+                {
+                name: 'user_administrator',
+                url: '/administrator',
+                templateUrl:  'partials/user_administrator.html',
+                controller:'administrator_controller'
+                },
+                {
+                name: 'user_administrator.administrator_company',
+                url: '',
+                templateUrl:  'administrator_company.html',
+                controller:'administrator_controller'
+                },
+                {
+                name: 'user_administrator.administrator_coordinator',
+                url: '',
+                templateUrl:  'administrator_coordinator.html',
+                controller:'administrator_controller'
+                },
+            // Administrator route
             // Company routes
             {
             name: 'user_company',
@@ -215,82 +221,190 @@
             url: '',
             templateUrl:  'interns_grade.html',
             },
+                {
+                name: 'user_company',
+                url: '/company',
+                templateUrl:  'partials/user_company.html',
+                controller:'company_controller'
+                },
+                {
+                name: 'user_company.company_profile',
+                url: '',
+                templateUrl:  'company_profile.html',
+                controller:'company_controller'
+                },
+                {
+                name: 'user_company.company_accounts',
+                url: '',
+                templateUrl:  'company_accounts.html',
+                controller:'company_accounts_controller'
+                },
+                {
+                name: 'user_company.company_departments',
+                url: '',
+                templateUrl:  'company_department.html',
+                controller:'company_departments_controller'
+                },
+                {
+                name: 'user_company.company_ads',
+                url: '',
+                templateUrl:  'company_ads.html',
+                controller:'advertisement_list_controller'
+                },
+                {
+                name: 'user_company.company_create_ads',
+                url: '',
+                templateUrl:  'company_create_ads.html',
+                controller:'create_advertisement_controller'
+                },
+                {
+                name: 'user_company.company_list_application',
+                url: '',
+                templateUrl:  'company_list_application.html',
+                controller:'application_controller'
+                },  
+                {
+                name: 'user_company.company_schedule',
+                url: '',
+                templateUrl:  'company_schedules.html',
+                controller:'company_schedule_controller'
+                },
+                {
+                name: 'user_company.company_interns',
+                url: '',
+                templateUrl:  'company_interns.html',
+                controller:'company_interns_controller'
+                },
+            // Company routes
+            // SV routes
+                { 
+                name: 'user_company_SV',
+                url: '/sv',
+                templateUrl:  'partials/user_company_SV.html',
+                controller:'sv_controller'
+                },
+                {
+                name: 'user_company_SV.sv_interns',
+                url: '',
+                templateUrl:  'sv_interns.html',
+                controller:'sv_intern_list_controller'
+                },
+                {
+                name: 'user_company_SV.interns_grade',
+                url: '',
+                templateUrl:  'interns_grade.html',
+                controller:'sv_grade_controller',
+                },
+            // SV routes
+            // HR routes
+                { 
+                name: 'user_company_HR',
+                url: '/hr',
+                templateUrl:  'partials/user_company_HR.html',
+                controller:'hr_controller'
+                },
+                {
+                name: 'user_company_HR.hr_profile',
+                url: '',
+                templateUrl:  'hr_profile.html',
+                controller:'hr_controller'
+                },
+                {
+                name: 'user_company_HR.hr_list_application',
+                url: '',
+                templateUrl:  'hr_list_application.html',
+                controller:'hr_application_controller'
+                },
+                {
+                name: 'user_company_HR.hr_schedules',
+                url: '',
+                templateUrl:  'hr_schedules.html',
+                controller:'hr_schedule_controller'
+                },
+                {
+                name: 'user_company_HR.hr_interns',
+                url: '',
+                templateUrl:  'hr_interns.html',
+                controller:'hr_interns_controller'
+                },
+            //
             // Student routes
-            {
-            name: 'user_student',
-            url: '/student',
-            templateUrl:  'partials/user_student.html',
-            controller:'students_controller'
-            },
-            {
-            name: 'user_student.student_profile',
-            url: '',
-            templateUrl:  'student_profile.html',
-            controller:'student_profile_controller',
-            params : { student: null},                        
-            },
-            {
-            name: 'user_student.student_search',
-            url: '',
-            templateUrl:  'searchinternship.html',
-            controller:'search_advertisement_controller'
-            },
-            {
-            name: 'user_student.student_application',
-            url: '',
-            templateUrl:  'studentapplication.html',
-            controller:'student_view_application_controller'
-            },
-            {
-            name: 'user_student.student_schedule',
-            url: '',
-            templateUrl:  'student_schedule.html',
-            controller:'student_sched_controller'
-            },
-            {
-            name: 'user_student.student_grades',
-            url: '',
-            templateUrl:  'student_grades.html',
-            controller:''
-            },
-
-            //Coordinator routes
-            {
-            name: 'user_coordinator',
-            url: '/coordinator',
-            templateUrl:  'partials/user_coordinator.html',
-            controller:'coordinator_controller'
-            },
-            {
-            name: 'user_coordinator.coordinator_profile',
-            url: '',
-            templateUrl:  'coordinator_profile.html',
-            controller:'coordinator_controller'
-            },
-            {
-            name: 'user_coordinator.coordinator_section',
-            url: '',
-            templateUrl:  'coordinator_section.html',
-            controller:'coordinator_section_controller'
-            },
-            {
-            name: 'user_coordinator.coordinator_files',
-            url: '',
-            templateUrl:  'coordinator_files.html',
-            controller:''
-            },       
-            {
-            name: 'user_coordinator.coordinator_grades',
-            url: '',
-            templateUrl:  'coordinator_grades.html',
-            controller:''
-            },        
-            {
-            name: 'user_coordinator.coordinator_enroll_students',
-            url: '',
-            templateUrl:  'coordinator_enroll_students.html',
-            controller:'coordinator_enroll_student_controller'
-            },        
+                {
+                name: 'user_student',
+                url: '/student',
+                templateUrl:  'partials/user_student.html',
+                controller:'students_controller'
+                },
+                {
+                name: 'user_student.student_profile',
+                url: '',
+                templateUrl:  'student_profile.html',
+                controller:'student_profile_controller',
+                params : { student: null},                        
+                },
+                {
+                name: 'user_student.student_search',
+                url: '',
+                templateUrl:  'searchinternship.html',
+                controller:'search_advertisement_controller'
+                },
+                {
+                name: 'user_student.student_application',
+                url: '',
+                templateUrl:  'studentapplication.html',
+                controller:'student_view_application_controller'
+                },
+                {
+                name: 'user_student.student_schedule',
+                url: '',
+                templateUrl:  'student_schedule.html',
+                controller:'student_sched_controller'
+                },
+                {
+                name: 'user_student.student_grades',
+                url: '',
+                templateUrl:  'student_grades.html',
+                controller:''
+                },
+            // Student routes
+            // Coordinator routes
+                {
+                name: 'user_coordinator',
+                url: '/coordinator',
+                templateUrl:  'partials/user_coordinator.html',
+                controller:'coordinator_controller'
+                },
+                {
+                name: 'user_coordinator.coordinator_profile',
+                url: '',
+                templateUrl:  'coordinator_profile.html',
+                controller:'coordinator_controller'
+                },
+                {
+                name: 'user_coordinator.coordinator_section',
+                url: '',
+                templateUrl:  'coordinator_section.html',
+                controller:'coordinator_section_controller'
+                },
+                {
+                name: 'user_coordinator.coordinator_files',
+                url: '',
+                templateUrl:  'coordinator_files.html',
+                controller:''
+                },       
+                {
+                name: 'user_coordinator.coordinator_grades',
+                url: '',
+                templateUrl:  'coordinator_grades.html',
+                controller:''
+                },        
+                {
+                name: 'user_coordinator.coordinator_enroll_students',
+                url: '',
+                templateUrl:  'coordinator_enroll_students.html',
+                controller:'coordinator_enroll_student_controller'
+                },       
+            // Coordinator routes
         ]
 
         states.forEach(function(state) {
@@ -330,8 +444,6 @@
                 
                 $http({method: 'GET', url: urls.API_HOST + '/auth'}).then(function(response) {
                     $localStorage.id = response.data.user.id;
-                    $localStorage.type = response.data.user.type;
-
                         if(response.data.user.type == "student")
                             $state.go('user_student');
 
@@ -345,7 +457,7 @@
                             $state.go('user_administrator'); 
 
                         if(response.data.user.type == "hr")
-                            $state.go('user_company'); 
+                            $state.go('user_company_HR'); 
 
                         if(response.data.user.type == "sv")
                             $state.go('user_company_SV');   
@@ -355,14 +467,20 @@
                 $uibModalInstance.close();
             }).catch(function(error){
                 
+                ngToast.create({
+                className: 'warning',
+                content: 'Invalid Username or Password',
+                animation: 'fade' 
+                });
+
             });
         }
     });
 
 
-    internon.factory('password', function($http,$uibModal) {
+    internon.factory('password', function(urls,$http,$uibModal) {
         return{
-            open_modal: function(id){
+            open_edit_modal: function(id){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'edit_password.html',
@@ -383,8 +501,34 @@
 						return 1;
 					});
             },
-            reset: function(){
-                console.log('reset');
+            open_reset_modal: function(id){
+                var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'reset_password.html',
+                    controller: function(id,password,$scope,$uibModalInstance){
+                        $scope.yes = function(){
+                            password.reset(id);
+                            $uibModalInstance.close();                            
+                        };
+                        $scope.no = function(){
+                            $uibModalInstance.close();
+                        };
+                    },
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+            },
+            reset: function(id){
+                $http({method: 'GET', url: urls.API_HOST + '/reset_password/'+id}).then(function(response) {
+                });
             },
             edit: function(formdata,id){
                 console.log('edit');                

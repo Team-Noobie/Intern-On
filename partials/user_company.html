@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}{{hr.hr_firstname}} {{hr.hr_lastname}}</a>
+            <a class="navbar-brand" ui-sref="user_company.company_profile">{{company.company_name}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -42,12 +42,12 @@
                 <li ng-show="type">
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
-                <li>
+                <!--<li>
                     <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-o"></i>Applications</a>
                 </li>
                 <li>
                     <a ui-sref="user_company.company_schedule"><i class="fa fa-clock-o"></i> Schedules</a>
-                </li>
+                </li>-->
                 <li>
                     <a ui-sref="user_company.company_interns"><i class="fa fa-graduation-cap"></i> Interns</a>
                 </li>      
@@ -145,7 +145,7 @@
         <!-- /.row -->
         <!--<button ng-click="test()">test</button>-->
         <div class="row" style="margin-top:10px">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <a ng-click="openAddEmployeeModal('hr')" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Human Resource Account</a>                 
                 <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Human Resource Name">                        
                 <table class="table table-striped table-hover">
@@ -157,25 +157,25 @@
                     <tr ng-repeat="account in hr">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.hr_firstname}} {{account.hr_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button></td>
                     </tr>
                 </table>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <a ng-click="openAddEmployeeModal('sv')" style="cursor:pointer"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Supervisor Account</a>                 
                 <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Supervisor Name">              
                 <table class="table table-striped table-hover"> 
                     <tr>
                         <th>Supervisor</th>
                         <th>Department</th>
-                        <th>Date Created</th>
+                        <!--<th>Date Created</th>-->
                         <th>Actions</th>
                     </tr>
                     <tr ng-repeat="account in sv">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.sv_firstname}} {{account.sv_lastname}}</a></td>
                         <td>{{account.department.department_name}}</td>
-                        <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                        <!--<td>{{account.created_at}}</td>-->
+                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button></td>
                     </tr>
                 </table>
             </div>
@@ -214,7 +214,7 @@
                     </tr>
                     <tr ng-repeat="dept in departments">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</a></td>
-                        <td><button style="margin-right:5px;" ng-click="viewEmployeesModal()" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
+                        <td><button style="margin-right:5px;" ng-click="viewEmployeesModal(dept.employees)" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
                         <td>{{dept.created_at}}</td>
                     </tr>
                 </table>
@@ -465,7 +465,7 @@
                         <th>Timecard</th>
                         <th>Rendered Hours</th>
                     </tr>
-                    <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: {department: {department_name: dept_id.department_id.value}}:dept_id.department_id.strict">
+                    <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td>{{intern.department.department_name}}</td>
                         <td><button class="btn btn-info" ng-click="viewTimecardModal()">Update Timecard</button></td>
@@ -796,18 +796,20 @@
 </script>
 <script type="text/ng-template" id="company_view_employee_modal.html">
     <div class="modal-body">
-        Employees
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Employee Name</th>
+            </tr>
+            <tr ng-repeat = "employee in employees">
+                <th>{{employee.sv_firstname}} {{employee.sv_lastname}}</th>
+            </tr>
+        </table>
     </div>
     <div class="modal-footer">
 
     </div>
 </script>
-<script type="text/ng-template" id="intern_timecard_modal.html">
-    <div class="modal-body">
-        Timecard
-    </div>
-    <div class="modal-footer"></div>
-</script>
+
 
 
 

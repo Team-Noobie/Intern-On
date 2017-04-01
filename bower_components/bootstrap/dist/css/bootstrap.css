@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
 /*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
@@ -16,6 +16,14 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../../../../assets/fonts/Open_Sanse/OpenSans-Bold.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Light.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Regular.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Italic.ttf'),
+       url('../../../../assets/fonts/Open_Sanse/OpenSans-Thin.ttf');
 }
 body {
   margin: 0;
