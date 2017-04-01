@@ -32,25 +32,15 @@
             });
         });
 
-        $scope.addReportModal = function(id){
+        $scope.addReportModal = function(){
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'add_report_modal.html',
-                controller: function(id,urls,$localStorage,$scope,$http,$uibModalInstance){
-                    $scope.formdata = {
-                        sv_id: $localStorage.id,
-                    }
-                    $scope.save = function(){
-                        $http.post(urls.API_HOST + '/sv_report/'+id, $scope.formdata).then(function (response){
-                            // $state.go('user_company.company_ads');   
-                        });
-                    };
+                controller: function($localStorage,$scope,$http,$uibModalInstance){
+                    
                 },
                 size: 'sm',
                 resolve: {
-                    id: function(){
-                        return id;
-                    }
                     }
                 });
 
@@ -58,25 +48,6 @@
                     return 1;
                 });
         };
-        $scope.viewReport = function(report){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'view_report_modal.html',
-                controller: function(report,urls,$localStorage,$scope,$http,$uibModalInstance){
-                    $scope.report = report
-                },
-                size: 'sm',
-                resolve: {
-                    report: function(){
-                        return report;
-                    }
-                }
-            });
-
-                modalInstance.result.then(function (report) {
-                    return 1;
-                });
-        }
         
     });
     internon.controller('sv_grade_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
@@ -85,7 +56,7 @@
         };
 
         $scope.choices_status = [
-            {'name': 'All Applicants','value':''},            
+            {'name': 'All Interns','value':''},            
             {'name': 'Active','value':'Active'},
             {'name': 'Done','value':'Done'},
         ];
@@ -95,7 +66,6 @@
                 $scope.interns = response.data;
             });
         });
-
         $scope.gradeModal = function(student){
             var modalInstance = $uibModal.open({
                 animation: true,
