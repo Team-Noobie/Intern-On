@@ -112,7 +112,7 @@
 
     });
 
-     internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
@@ -150,12 +150,8 @@
 
     });
 
-     internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.students = students;
         // console.log(students);
     });
-
-
-    
-   
 })();
