@@ -112,7 +112,7 @@
 
     });
 
-     internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
@@ -121,6 +121,9 @@
         ]
 
 
+        $scope.formdata = {
+            section_id:'',
+        }
         $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
             for (var i = 0; i < response.data.length; i++) {
                 $scope.choices_advertisement.push({'name':response.data[i].section_code,'value':response.data[i].id,'strict':true});
@@ -129,7 +132,7 @@
 
         $scope.enrollStudent = function () {
             $scope.formdata.section_id = $scope.choice_advertisement.option.value;
-                if($scope.formdata.department_id != 'Select Section'){
+                if($scope.formdata.section_id != ''){
                     $http.post(urls.API_HOST + '/enroll_student/'+$localStorage.id, $scope.formdata).then(function (response){
                         $state.go('user_coordinator.coordinator_enroll_students');   
                     }); 
@@ -147,12 +150,8 @@
 
     });
 
-     internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.students = students;
         // console.log(students);
     });
-
-
-    
-   
 })();

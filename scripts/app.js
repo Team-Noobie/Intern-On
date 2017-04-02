@@ -19,7 +19,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -118,109 +118,6 @@
                 },
             // Administrator route
             // Company routes
-            {
-            name: 'user_company',
-            url: '/company',
-            templateUrl:  'partials/user_company.html',
-            controller:'company_controller'
-            },
-            {
-            name: 'user_company.company_profile',
-            url: '',
-            templateUrl:  'company_profile.html',
-            controller:'company_controller'
-            },
-            {
-            name: 'user_company.company_accounts',
-            url: '',
-            templateUrl:  'company_accounts.html',
-            controller:'company_accounts_controller'
-            },
-            {
-            name: 'user_company.company_departments',
-            url: '',
-            templateUrl:  'company_department.html',
-            controller:'company_departments_controller'
-            },
-            {
-            name: 'user_company.company_ads',
-            url: '',
-            templateUrl:  'company_ads.html',
-            controller:'advertisement_list_controller'
-            },
-            {
-            name: 'user_company.company_create_ads',
-            url: '',
-            templateUrl:  'company_create_ads.html',
-            controller:'create_advertisement_controller'
-            },
-            {
-            name: 'user_company.company_list_application',
-            url: '',
-            templateUrl:  'company_list_application.html',
-            controller:'application_controller'
-            },  
-            {
-            name: 'user_company.company_schedule',
-            url: '',
-            templateUrl:  'company_schedules.html',
-            controller:'company_schedule_controller'
-            },
-            {
-            name: 'user_company.company_interns',
-            url: '',
-            templateUrl:  'company_interns.html',
-            controller:'company_interns_controller'
-            },
-            // HR 
-            { 
-            name: 'user_company_HR',
-            url: '/hr',
-            templateUrl:  'partials/user_company_HR.html',
-            controller:'hr_controller'
-            },
-            {
-            name: 'user_company_HR.hr_profile',
-            url: '',
-            templateUrl:  'hr_profile.html',
-            controller:'hr_controller'
-            },
-            {
-            name: 'user_company_HR.hr_list_application',
-            url: '',
-            templateUrl:  'hr_list_application.html',
-            controller:'hr_application_controller'
-            },
-            {
-            name: 'user_company_HR.hr_schedules',
-            url: '',
-            templateUrl:  'hr_schedules.html',
-            controller:'hr_controller'
-            },
-            {
-            name: 'user_company_HR.hr_interns',
-            url: '',
-            templateUrl:  'hr_interns.html',
-            controller:'hr_controller'
-            },
-            // SV
-            { 
-            name: 'user_company_SV',
-            url: '/sv',
-            templateUrl:  'partials/user_company_SV.html',
-            controller:'sv_controller'
-            },
-            {
-            name: 'user_company_SV.sv_interns',
-            url: '',
-            templateUrl:  'sv_interns.html',
-            controller:'sv_intern_list_controller'
-            },
-            {
-            name: 'user_company_SV.interns_grade',
-            url: '',
-            templateUrl:  'interns_grade.html',
-            },
                 {
                 name: 'user_company',
                 url: '/company',
@@ -275,7 +172,6 @@
                 templateUrl:  'company_interns.html',
                 controller:'company_interns_controller'
                 },
-            // Company routes
             // SV routes
                 { 
                 name: 'user_company_SV',
@@ -327,7 +223,7 @@
                 templateUrl:  'hr_interns.html',
                 controller:'hr_interns_controller'
                 },
-            //
+            // HR routes
             // Student routes
                 {
                 name: 'user_student',
