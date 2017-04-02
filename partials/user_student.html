@@ -11,7 +11,7 @@
 				<span class="icon-bar"></span>
 			</button>
 
-			<a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_firstname}} {{student.student_lastname}}</a>
+			<a class="navbar-brand" ui-sref="user_student.student_profile" style="text-transform:capitalize">{{student.student_firstname}} {{student.student_lastname}}</a>
 		</div>
 		<!-- Top Menu Items -->
 		<ul class="nav navbar-right top-nav">
@@ -594,28 +594,36 @@
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="jumbotron text-center">
-											<div class="row">
-												<div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-													<p>IMAGE</p>
-												</div>  
-												<div class="col-md-8">
+											<div class="row"> 
+												<div class="col-md-12">
 													<h1 style="text-transform: uppercase">{{ad.ads_title}}</h1>
+													Job Description:
 													<div ng-bind-html="ad.ads_job_description"></div>
-													<button style="margin-top:1em;left:50%;" ng-click="apply()" class="btn btn-lg btn-info">Apply</button>                                        
+													Related Industries:
+													<h3 style="text-transform: uppercase">{{ad.ads_related_industries}}</h3>
+													Work Location:
+													<h1 style="text-transform: uppercase">{{ad.ads_work_location}}</h1>
+													Contacts:
+													<h1 style="text-transform: uppercase">{{ad.ads_contact}}</h1>
 												</div>
 											</div> 
 										</div>
 										<div class="well">
 											<div class="row">
-												<div class="col-md-8">
+												<div class="col-md-12">
+													<div class="col-md-4" style="border:solid 1px; height:200px; width:200px;">
+													<p>IMAGE</p>
+													</div> 
+													<div class="col-md-8">
 													<h3>Company Overview</h3>
 													<p>{{ad.company.company_overview}}</p>
+													</div>
 												</div>
 											</div>
 										</div>
 										<div class="well">
 											<div class="row">
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<h3>Company Snapshot</h3>
 													<p>Industry: {{ad.company.company_industry}}</p>
 													<p>Website: {{ad.company.company_website}}</p>
@@ -626,7 +634,7 @@
 										</div>                           
 										<div class="well">
 											<div class="row">
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<h3>Company Contacts</h3>
 													<p>E-mail Address: <a href="">{{ad.company.company_email}}</a></p> 
 													<p>Contact Number: {{ad.company.company_contact_no}}</p>
@@ -636,7 +644,7 @@
 										</div>                       
 										<div class="well">
 											<div class="row">
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<h3>Why Join Us?</h3>
 													<p>Industry: {{ad.company.company_why_join_us}}</p>
 												</div>
@@ -645,5 +653,8 @@
 									</div>
 								</div>    
 							</div>
+						</div>
+						<div class="modal-footer">
+													<button style="margin-top:1em;left:50%;" ng-click="apply()" class="btn btn-lg btn-info">Apply</button>                                        							
 						</div>
 					</script>
