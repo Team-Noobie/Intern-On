@@ -172,25 +172,6 @@
                 templateUrl:  'company_interns.html',
                 controller:'company_interns_controller'
                 },
-            
-                // SV
-                { 
-                name: 'user_company_SV',
-                url: '/sv',
-                templateUrl:  'partials/user_company_SV.html',
-                controller:'sv_controller'
-                },
-                {
-                name: 'user_company_SV.sv_interns',
-                url: '',
-                templateUrl:  'sv_interns.html',
-                controller:'sv_intern_list_controller'
-                },
-                {
-                name: 'user_company_SV.interns_grade',
-                url: '',
-                templateUrl:  'interns_grade.html',
-                },
             // SV routes
                 { 
                 name: 'user_company_SV',
