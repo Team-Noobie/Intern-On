@@ -34,7 +34,7 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'company_add_employee_modal.html',
-                    controller: function(type,$localStorage,$scope,$http,$uibModalInstance,$state){
+                    controller: function(type,$localStorage,$scope,$http,$uibModalInstance,$state,$filter){
                         $scope.type = type;
                         
                         $scope.dept_id = {
@@ -49,18 +49,20 @@
                                 $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
                             }
                         });
-                        $scope.formdata = {};
+                        $scope.formdata = {
+                            department:{}
+                        };
                         $scope.add = function(){
                             if(type == 'hr'){
                                 $http.post(urls.API_HOST + '/create_hr/'+$localStorage.id, $scope.formdata).then(function (response){
-                                    $uibModalInstance.close();
+                                    $uibModalInstance.close("HR");
                                 });
                             }
                             if(type == 'sv'){
                                 $scope.formdata.department_id = $scope.dept_id.department_id.value;
                                 if($scope.formdata.department_id != '')
                                     $http.post(urls.API_HOST + '/create_sv/'+$localStorage.id, $scope.formdata).then(function (response){
-                                        $uibModalInstance.close();
+                                        $uibModalInstance.close("SV");
                                     });  
                             }
                         }
@@ -73,8 +75,19 @@
                         }
                     });
 
-                    modalInstance.result.then(function (type) {
-                        return 1;
+                    modalInstance.result.then(function (data) {
+                        if(data == "HR"){
+                            $http({method: 'GET', url: urls.API_HOST + '/hr_list/'+$localStorage.id}).then(function(response){                                
+                                $scope.hr = {};
+                                $scope.hr = response.data;
+                            });
+                        }
+                        if(data == "SV"){
+                            $http({method: 'GET', url: urls.API_HOST + '/sv_list/'+$localStorage.id}).then(function(response){
+                                $scope.sv = {};
+                                $scope.sv = response.data;
+                            });
+                        }
                     });
             };
         
