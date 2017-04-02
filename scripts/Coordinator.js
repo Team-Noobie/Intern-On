@@ -51,6 +51,10 @@
     });
 
     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+                $scope.section = response.data;
+        });
+
         $scope.newSection = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -65,7 +69,10 @@
                     });
 
                     modalInstance.result.then(function (id) {
-                        return 1;
+                        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+                                $scope.section = {};
+                                $scope.section = response.data;
+                        });
                     });
             };
            
@@ -90,9 +97,7 @@
             }; 
 
 
-           $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
-                $scope.section = response.data;
-            });
+           
                      
     });
 

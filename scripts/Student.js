@@ -89,20 +89,22 @@
 					});
 			};
 			
-			$scope.viewCoordinator = function(id){
+			$scope.viewCoordinator = function(data){
 				var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'view_coordinator.html',
-					controller: '',
+					controller: function($scope,data){
+						$scope.coordinator = data;
+					},
 					size: 'lg',
 					resolve: {
-							id: function () {
-								return id;
+							data: function () {
+								return data;
 							}
 						}
 					});
 
-					modalInstance.result.then(function (id) {
+					modalInstance.result.then(function (data) {
 						return 1;
 					});
 			};
