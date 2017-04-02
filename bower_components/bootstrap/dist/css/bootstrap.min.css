@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Open Sans';
-  src: url('../../../../assets/fonts/Open_Sanse/OpenSans-Bold.ttf'),
-       url('../../../../assets/fonts/Open_Sanse/OpenSans-Light.ttf'),
-       url('../../../../assets/fonts/Open_Sanse/OpenSans-Regular.ttf'),
-       url('../../../../assets/fonts/Open_Sanse/OpenSans-Italic.ttf'),
-       url('../../../../assets/fonts/Open_Sanse/OpenSans-Thin.ttf');    
+  src: url('../../../../assets/fonts/Open_Sans/OpenSans-Bold.ttf'),
+       url('../../../../assets/fonts/Open_Sans/OpenSans-Light.ttf'),
+       url('../../../../assets/fonts/Open_Sans/OpenSans-Regular.ttf'),
+       url('../../../../assets/fonts/Open_Sans/OpenSans-Italic.ttf'),
+       url('../../../../assets/fonts/Open_Sans/OpenSans-Thin.ttf');    
 }
 /*!
  * bootswatch v3.3.7
