@@ -70,7 +70,7 @@
                     403, forbidden - notAdmin
                     */ 
                     // if(response.status === 401 || response.status === 403) {
-                    if(response.status === 400) {
+                    if(response.status === 402) {
                         console.log("app.js: httpInterceptor caught 40x:", response);
                           ngToast.create({
                             className: 'info',

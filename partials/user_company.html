@@ -33,13 +33,13 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li ng-show="type">
+                <li>
                     <a ui-sref="user_company.company_accounts" ><i class="fa fa-fw fa-users"></i> Accounts</a>
                 </li>
-                <li ng-show="type">
+                <li>
                     <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
                 </li>
-                <li ng-show="type">
+                <li>
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <!--<li>
@@ -759,7 +759,8 @@
                     <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Enter HR Lastname">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
-                    <input class="form-control" type="text" ng-model="formdata.hr_username" required ng-required="true" placeholder="Enter username">
+                    <input name="username" class="form-control" type="text" ng-model="formdata.hr_username" required ng-required="true" placeholder="Enter username">
+                    <label for="username">Username: {{symbol}}_{{formdata.hr_username}}</label>
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
                     <input class="form-control" type="text" ng-model="formdata.hr_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                

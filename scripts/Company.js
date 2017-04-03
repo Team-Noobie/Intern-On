@@ -7,13 +7,11 @@
             $state.go('index');
         };
 
-        
-        
         $scope.init = function () {
                 $http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
+                    $localStorage.symbol = response.data.company_symbol;
                     $scope.company = response.data;
                     $state.go('user_company.company_profile');
-                    $scope.type = true;
                 });                 
 		};
         
@@ -29,7 +27,6 @@
         $http({method: 'GET', url: urls.API_HOST + '/sv_list/'+$localStorage.id}).then(function(response){
                     $scope.sv = response.data;
         });
-
         $scope.openAddEmployeeModal = function(type){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -42,7 +39,7 @@
                         };
                         $scope.choices_department = [
                         ]
-
+                        $scope.symbol = $localStorage.symbol;
                         $http({method: 'GET', url: urls.API_HOST + '/department_list/'+$localStorage.id}).then(function(response){
                             $scope.departments = response.data;
                             for (var i = 0; i < response.data.length; i++) {
@@ -54,6 +51,7 @@
                         };
                         $scope.add = function(){
                             if(type == 'hr'){
+                                $scope.formdata.hr_username = $localStorage.symbol+"_"+ $scope.formdata.hr_username;
                                 $http.post(urls.API_HOST + '/create_hr/'+$localStorage.id, $scope.formdata).then(function (response){
                                     $uibModalInstance.close("HR");
                                 });

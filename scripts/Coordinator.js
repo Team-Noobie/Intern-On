@@ -9,7 +9,8 @@
 
         $scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/coordinator_profile/'+$localStorage.id}).then(function(response){
-				$scope.coordinator = response.data;
+				$localStorage.symbol = response.data.coordinator_symbol;
+                $scope.coordinator = response.data;
 				$state.go('user_coordinator.coordinator_profile');
 			});
 		};
@@ -129,6 +130,7 @@
         $scope.formdata = {
             section_id:'',
         }
+        $scope.symbol = $localStorage.symbol;
         $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
             for (var i = 0; i < response.data.length; i++) {
                 $scope.choices_advertisement.push({'name':response.data[i].section_code,'value':response.data[i].id,'strict':true});
@@ -138,6 +140,7 @@
         $scope.enrollStudent = function () {
             $scope.formdata.section_id = $scope.choice_advertisement.option.value;
                 if($scope.formdata.section_id != ''){
+                    $scope.formdata.student_username = $localStorage.symbol+"_"+ $scope.formdata.student_username;
                     $http.post(urls.API_HOST + '/enroll_student/'+$localStorage.id, $scope.formdata).then(function (response){
                         $state.go('user_coordinator.coordinator_enroll_students');   
                     }); 
