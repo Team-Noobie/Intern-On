@@ -292,7 +292,7 @@
                 name: 'user_coordinator.coordinator_grades',
                 url: '',
                 templateUrl:  'coordinator_grades.html',
-                controller:''
+                controller:'coordinator_grades_controller'
                 },        
                 {
                 name: 'user_coordinator.coordinator_enroll_students',

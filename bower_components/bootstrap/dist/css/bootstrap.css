@@ -20,16 +20,16 @@ html {
 @font-face {
   font-family: 'Open Sans';
   src: 
+       url('../../../../assets/fonts/Open_Sans/OpenSans-Light.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-Bold.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-BoldItalic.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-ExtraBold.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf'), 
        url('../../../../assets/fonts/Open_Sans/OpenSans-Italic.ttf'),                    
-       url('../../../../assets/fonts/Open_Sans/OpenSans-Light.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-LightItalic.ttf'),       
        url('../../../../assets/fonts/Open_Sans/OpenSans-Regular.ttf'),
        url('../../../../assets/fonts/Open_Sans/OpenSans-Semibold.ttf'),
-       url('../../../../assets/fonts/Open_Sans/OpenSans-SemiboldItalic.ttf'),
+       url('../../../../assets/fonts/Open_Sans/OpenSans-SemiboldItalic.ttf');
        
 }
 body {
