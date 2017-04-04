@@ -27,7 +27,7 @@
 			});
 
 			$scope.edit_info = function(data,type){
-				var template;
+				varM template;
 				if(type == 1)
 					template = 'edit_profile.html'
 				if(type == 2)
