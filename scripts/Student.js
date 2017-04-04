@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-	internon.controller('students_controller',function(urls,$auth,$http,$state,$scope,$localStorage,$uibModal){
+	internon.controller('students_controller',function(password,urls,$auth,$http,$state,$scope,$localStorage,$uibModal){
 
 		$scope.logout = function(){
 		$auth.logout();
@@ -16,26 +16,9 @@
 			});
 		};
 
-		$scope.studentSetting = function(data){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'student_setting.html',
-				controller: function(){
-
-
-				},
-				size: 'md',
-				resolve: {
-						data: function () {
-							return data;
-						}
-					}
-				});
-
-				modalInstance.result.then(function (data) {
-					return 1;
-				});
-		};
+		$scope.edit = function(){
+			password.open_edit_modal();
+		}
 	});
 	internon.controller('student_profile_controller',function(urls,$auth,FileUploader,$http,$state,$scope,$localStorage,$uibModal){
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
@@ -89,20 +72,22 @@
 					});
 			};
 			
-			$scope.viewCoordinator = function(id){
+			$scope.viewCoordinator = function(data){
 				var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'view_coordinator.html',
-					controller: '',
+					controller: function($scope,data){
+						$scope.coordinator = data;
+					},
 					size: 'lg',
 					resolve: {
-							id: function () {
-								return id;
+							data: function () {
+								return data;
 							}
 						}
 					});
 
-					modalInstance.result.then(function (id) {
+					modalInstance.result.then(function (data) {
 						return 1;
 					});
 			};
@@ -124,7 +109,7 @@
 	});
 	
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
-		$scope.ads;
+		$scope.ads = {};
 		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
 			$scope.ads = response.data;
 			$scope.totalItems = $scope.ads.length;
@@ -158,7 +143,25 @@
 				});
 
 				modalInstance.result.then(function (id) {
-					return 1;
+					$http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
+						$scope.ads = {};
+						$scope.ads = response.data;
+						$scope.totalItems = $scope.ads.length;
+						$scope.currentPage = 1;
+						$scope.itemsPerPage = 10;
+
+						$scope.$watch("currentPage", function(){
+							setPagingData($scope.currentPage);
+						});
+
+						function setPagingData(currentPage){
+							var pageData = $scope.ads.slice(
+								(currentPage-1) * $scope.itemsPerPage,
+								currentPage * $scope.itemsPerPage	
+							);
+							$scope.aAds = pageData;
+						}
+					});
 				});
 		};
 	});

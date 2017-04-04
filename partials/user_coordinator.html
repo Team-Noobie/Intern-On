@@ -42,9 +42,9 @@
                 <li>
                     <a ui-sref="user_coordinator.coordinator_grades"><i class="fa fa-check"></i> Grades</a>
                 </li>   
-                <li>
+                <!--<li>
                     <a ui-sref="user_coordinator.coordinator_files"><i class="fa fa-files-o"></i> Files</a>
-                </li>   
+                </li>   -->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -291,7 +291,7 @@
 </script>
 
 <script type="text/ng-template" id="enroll_student.html">
-<div class="modal-header">
+    <div class="modal-header">
 			</div>
 			<div class="modal-body">
 				<div class="main-center">
@@ -303,8 +303,9 @@
 										<h5>Student Number</h5>
 									</div>
 									<div class="col-md-8">
-										<input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Student Number" ng-model="formdata.student_username" required>
-									</div>
+										<input type="text" name="username" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Student Number" ng-model="formdata.student_username">
+                                        <label for="username">Username: {{symbol}}_{{formdata.student_username}}</label>
+                                    </div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">

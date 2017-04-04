@@ -53,8 +53,6 @@
     </div>
     <!-- /#page-wrapper -->
 </div>
-
-
 <script type="text/ng-template" id="hr_profile.html">
     <div class="container-fluid">
         <div class="row">
@@ -321,8 +319,8 @@
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td style="text-transform:uppercase">{{intern.department.department_name}}</td> 
                         <td><button class="btn btn-info" ng-click="viewTimecardModal()"><i class="fa fa-clock-o" aria-hidden="true"></i> Update Timecard</button></td>
+                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a></td>
                         <td><a ng-click="viewRendered()">{{intern.required_hours}}</a></td>
-                        <td>200</td>
                     </tr>
                 </table>
             </div>
@@ -331,9 +329,9 @@
 </script>
 
 <script type="text/ng-template" id="hr_sched_student_modal.html">
-<div class="modal-header">
-    Schedule
-</div>
+    <div class="modal-header">
+        Schedule
+    </div>
     <div class="modal-body">
         <div class="main-center">
             <div class="container-fluid">
@@ -354,18 +352,16 @@
                             <div class="col-md-12">
                                 <label for="reason" class="cols-sm-2 control-label">Time of Interview (24-hour Format)</label>
                                 <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
-
                             </div>
-
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>     
-<div class="modal-footer">
-     <button class="btn btn-success" ng-click="sched.$valid && set()">Save</button>
-</div>
+    <div class="modal-footer">
+            <button class="btn btn-success" ng-click="sched.$valid && set()">Save</button>
+        </form> 
+    </div>
 </script>
 <script type="text/ng-template" id="remarks_modal.html"> 
     <div class="modal-body">
@@ -380,7 +376,7 @@
             </div>
 
             <div class="col-md-6">
-                <input type="text" class="form-control" ng-model="formdata.required_hours" required>
+                <input type="text" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model = "formdata.required_hours" class="form-control" required>
             </div>
             <div class="col-md-8">
                 Select Department to Appoint: 
@@ -427,13 +423,13 @@
                                 
                             </tr>
                             <!--<tr ng-repeat="sec in section">-->
-                            <tr>
-                                <td>02/28/2017</td>
-                                <td>10:30</td>
-                                <td>18:30</td>
-                                <td>8</td>
+                            <tr ng-repeat="timecard in timecards">
+                                <td>{{timecard.date}}</td>
+                                <td>{{timecard.time_in}}</td>
+                                <td>{{timecard.time_out}}</td>
+                                <td>{{timecard.hours_render}}</td>
                             </tr>
-                            <tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>8</td></tr>
+                            <tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>{{total}}</td></tr>
                                      
                             <!--</tr>-->
                         </table>
@@ -447,7 +443,6 @@
     </div>           
 
 </script>
-
 <script type="text/ng-template" id="intern_timecard_modal.html">
     <div class="modal-header"></div>
     
@@ -473,13 +468,13 @@
     </div>
     
     <div class="modal-footer">
-         <button ng-click="" class="btn btn-success btn-sm">Save</button>
+         <button ng-click="save()" class="btn btn-success btn-sm">Save</button>
     </div>
 </script>
 <script type="text/ng-template" id="hr_sched_remarks_modal.html">
-<div class="modal-header">
-Remarks
-</div>
+    <div class="modal-header">
+    Remarks
+    </div>
     <div class="modal-body">
         <div class="row">
             <form name="remarks_form">
@@ -493,6 +488,57 @@ Remarks
         </div>
     </div>     
     <div class="modal-footer">
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="remarks_form.$valid && save()">Save</button> </div>
+        <div class="col-md-12"> <button class="btn btn-success" ng-click="remarks_form.$valid && save()">Save</button> </div>
     </div>
+</script>
+<script type="text/ng-template" id="student_profile_modal.html"> 
+    <div class="modal-body">    
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron text-center">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+                                <p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
+                                <p>Contact Number: {{student.student_contact_no}}</p>
+                                <p>Address: {{student.student_address}} </p>
+                            </div>
+
+                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                                <p>IMAGE</p>
+                            </div>
+                        </div> 
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+
+                                <h3>Personal Background</h3>
+                                <p>Birthday: {{student.student_birthday}}</p>
+                                <p>Gender: {{student.student_gender}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>Educational Background</h3>
+                                <p>Course: {{student.student_course}}</p>
+                                <p>Department: {{student.student_department}}</p>
+                                <p>Intitute: {{student.student_institute}}</p>
+                                <p>School: {{student.student_school}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <!--</div>-->
+        </div>
+        <div style="margin-top:20px;margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
+    </div>
+</script>
+<script type="text/ng-template" id="advertisement_modal.html"> 
+    <h1>Advertisement</h1>
 </script>

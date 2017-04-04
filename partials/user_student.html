@@ -22,7 +22,7 @@
 						<a ui-sref="user_student.student_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
 					</li>
 					<li>
-						<a ng-click="studentSetting()"><i class="fa fa-fw fa-gear"></i> Settings</a>
+						<a ng-click="edit()"><i class="fa fa-fw fa-gear"></i> Settings</a>
 					</li>
 					<li class="divider"></li>
 					<li>
@@ -151,7 +151,7 @@
 											<h3>Educational Background</h3>
 										</div>
 										<div class="panel-body">
-											<h4>Coordinator: <a ng-click="viewCoordinator()">My Coordinator</a></h4>
+											<h4>Coordinator: <a ng-click="viewCoordinator(student.section.coordinator)">My Coordinator</a></h4>
 											<h4>Course: {{student.student_course}}</h4>
 											<h4>Department: {{student.student_department}}</h4>
 											<h4>Intitute: {{student.student_institute}}</h4>
@@ -417,7 +417,6 @@
 				<div class="modal-footer">
 					<button ng-click="" class="btn btn-sm btn-info">Save</button>
 				</div>
-			
 			</script>
 
 			<script type="text/ng-template" id="studentapplication.html">
