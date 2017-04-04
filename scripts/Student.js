@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-	internon.controller('students_controller',function(urls,$auth,$http,$state,$scope,$localStorage,$uibModal){
+	internon.controller('students_controller',function(password,urls,$auth,$http,$state,$scope,$localStorage,$uibModal){
 
 		$scope.logout = function(){
 		$auth.logout();
@@ -16,26 +16,9 @@
 			});
 		};
 
-		$scope.studentSetting = function(data){
-			var modalInstance = $uibModal.open({
-				animation: true,
-				templateUrl: 'student_setting.html',
-				controller: function(){
-
-
-				},
-				size: 'md',
-				resolve: {
-						data: function () {
-							return data;
-						}
-					}
-				});
-
-				modalInstance.result.then(function (data) {
-					return 1;
-				});
-		};
+		$scope.edit = function(){
+			password.open_edit_modal();
+		}
 	});
 	internon.controller('student_profile_controller',function(urls,$auth,FileUploader,$http,$state,$scope,$localStorage,$uibModal){
 			$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){

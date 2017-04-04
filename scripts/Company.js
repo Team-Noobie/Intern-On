@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('company_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('company_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
@@ -15,6 +15,9 @@
                 });                 
 		};
         
+        $scope.edit = function(){
+            password.open_edit_modal();
+        }
     });
     internon.controller('company_accounts_controller',function(password,ngToast,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.reset = function(id){

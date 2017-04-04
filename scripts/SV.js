@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('sv_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('sv_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
@@ -13,6 +13,9 @@
 				$state.go('user_company_SV.sv_interns');
 			});
 		};
+        $scope.edit = function(){
+            password.open_edit_modal();
+        }
     });
     internon.controller('sv_intern_list_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
                 

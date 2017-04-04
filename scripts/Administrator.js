@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('administrator_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('administrator_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
@@ -19,7 +19,9 @@
             $scope.coordinator = response.data;
         });
         
-
+        $scope.reset = function(id){
+            password.open_reset_modal(id);
+        }
         $scope.newCompanyAccount = function(){
                 var modalInstance = $uibModal.open({
                     animation: true,
