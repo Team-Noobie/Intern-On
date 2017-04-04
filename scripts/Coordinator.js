@@ -118,7 +118,7 @@
 
     });
 
-    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
@@ -142,7 +142,8 @@
                 if($scope.formdata.section_id != ''){
                     $scope.formdata.student_username = $localStorage.symbol+"_"+ $scope.formdata.student_username;
                     $http.post(urls.API_HOST + '/enroll_student/'+$localStorage.id, $scope.formdata).then(function (response){
-                        $state.go('user_coordinator.coordinator_enroll_students');   
+                        $state.go('user_coordinator.coordinator_enroll_students');  
+
                     }); 
                 }
             };
@@ -163,27 +164,27 @@
         // console.log(students);
     });
 
-     internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
       
-       $scope.viewRendered = function(){
+        $scope.viewRendered = function(){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
                     controller: "",
                     size: 'lg',
                     });
-            };
+        };  
 
-      $scope.viewGrade = function(){
+        $scope.viewGrade = function(){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_grade.html',
                     controller: "",
                     size: 'lg',
                     });
-            };      
+        };      
     
-    $scope.viewReports = function(){
+        $scope.viewReports = function(){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_reports.html',
@@ -192,5 +193,5 @@
                     });
             };
             
-            });
+    });
 })();

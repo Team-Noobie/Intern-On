@@ -82,7 +82,9 @@
                     <tr ng-repeat="account in company">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCompanyModal(company.id)">{{account.company_name}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                        <!--<button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>-->
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -123,7 +125,9 @@
                     <tr ng-repeat="account in coordinator">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCoordinatorModal(coordinator.id)">{{account.coordinator_firstname}} {{account.coordinator_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                        <!--<button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>-->
+                        </td>
                     </tr>
                 </table>
             </div>

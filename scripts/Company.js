@@ -33,7 +33,6 @@
                     templateUrl: 'company_add_employee_modal.html',
                     controller: function(type,$localStorage,$scope,$http,$uibModalInstance,$state,$filter){
                         $scope.type = type;
-                        
                         $scope.dept_id = {
                                 'department_id': {'name': '','value':'','strict':false},
                         };
@@ -58,6 +57,8 @@
                             }
                             if(type == 'sv'){
                                 $scope.formdata.department_id = $scope.dept_id.department_id.value;
+                                $scope.formdata.sv_username = $localStorage.symbol+"_"+ $scope.formdata.sv_username;
+
                                 if($scope.formdata.department_id != '')
                                     $http.post(urls.API_HOST + '/create_sv/'+$localStorage.id, $scope.formdata).then(function (response){
                                         $uibModalInstance.close("SV");
@@ -212,150 +213,150 @@
 			$scope.formdata = response.data;
 		});
 	});
-    // internon.controller('application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
-    //     $scope.choice_status = {
-    //             'option': {'name': '','value':''},
-    //     };
+    internon.controller('application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+        $scope.choice_status = {
+                'option': {'name': '','value':''},
+        };
 
-    //     $scope.choices_status = [
-    //         {'name': 'All Applicants','value':''},            
-    //         {'name': 'Pending Applicants','value':'Pending'},
-    //         {'name': 'Rejected Applicants','value':'Failed'},
-    //     ];
+        $scope.choices_status = [
+            {'name': 'All Applicants','value':''},            
+            {'name': 'Pending Applicants','value':'Pending'},
+            {'name': 'Rejected Applicants','value':'Failed'},
+        ];
         
-    //     $scope.choice_advertisement = {
-    //             'option': {'name': '','value':'','strict':false},
-    //     };
-    //     $scope.choices_advertisement = [
-    //         {'name':'All','value':''},
-    //     ]
-    //     $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
-    //         // console.log(response);
-    //         for (var i = 0; i < response.data.length; i++) {
-    //             $scope.choices_advertisement.push({'name':response.data[i].ads_title,'value':response.data[i].ads_title,'strict':true});
-    //         }
-    //     });
-    //     $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.id}).then(function(response){
-    //         $scope.applications = response.data;
-    //     });
+        $scope.choice_advertisement = {
+                'option': {'name': '','value':'','strict':false},
+        };
+        $scope.choices_advertisement = [
+            {'name':'All','value':''},
+        ]
+        $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
+            // console.log(response);
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.choices_advertisement.push({'name':response.data[i].ads_title,'value':response.data[i].ads_title,'strict':true});
+            }
+        });
+        $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.id}).then(function(response){
+            $scope.applications = response.data;
+        });
         
-    //     $scope.accept = function($id){
-    //         $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$id}).then(function(response){
-    //         });
-    //     };
+        $scope.accept = function($id){
+            $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$id}).then(function(response){
+            });
+        };
 
-    //     $scope.reject = function($id){
-    //         $http({method: 'GET', url: urls.API_HOST + '/reject_application/'+$id}).then(function(response){
-    //         });
-    //     };
-    //     // $scope.test = function(){
-    //     //     console.log($scope.strict);
-    //     // }
+        $scope.reject = function($id){
+            $http({method: 'GET', url: urls.API_HOST + '/reject_application/'+$id}).then(function(response){
+            });
+        };
+        // $scope.test = function(){
+        //     console.log($scope.strict);
+        // }
 
-    //     if($scope.choice_advertisement.option.name == 'All'){
-    //         $scope.strict = false;
-    //     }else{
-    //         $scope.strict = true;            
-    //     }
+        if($scope.choice_advertisement.option.name == 'All'){
+            $scope.strict = false;
+        }else{
+            $scope.strict = true;            
+        }
 
-    //     $scope.schedModal = function(id){
-    //         var modalInstance = $uibModal.open({
-    //             animation: true,
-    //             templateUrl: 'company_sched_student_modal.html',
-    //             controller: 'sched_modal_Controller',
-    //             size: 'md',
-    //             resolve: {
-    //                     id: function () {
-    //                         return id;
-    //                     }
-    //                 }
-    //             });
+        $scope.schedModal = function(id){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'company_sched_student_modal.html',
+                controller: 'sched_modal_Controller',
+                size: 'md',
+                resolve: {
+                        id: function () {
+                            return id;
+                        }
+                    }
+                });
 
-    //             modalInstance.result.then(function (id) {
-    //                 return 1;
-    //             });
-    //     };
-    //     $scope.advertisementModal = function(ads){
-    //         var modalInstance = $uibModal.open({
-    //             animation: true,
-    //             templateUrl: 'advertisement_modal.html',
-    //             controller: function(ads,$scope){
-    //                 $scope.ads = ads;
-    //             },
-    //             size: 'md',
-    //             resolve: {
-    //                     ads: function () {
-    //                         return ads;
-    //                     }
-    //                 }
-    //             });
+                modalInstance.result.then(function (id) {
+                    return 1;
+                });
+        };
+        $scope.advertisementModal = function(ads){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'advertisement_modal.html',
+                controller: function(ads,$scope){
+                    $scope.ads = ads;
+                },
+                size: 'md',
+                resolve: {
+                        ads: function () {
+                            return ads;
+                        }
+                    }
+                });
 
-    //             modalInstance.result.then(function (ads) {
-    //                 return 1;
-    //             });
-    //     };
-    //     $scope.profileModal = function(student){
-    //         var modalInstance = $uibModal.open({
-    //             animation: true,
-    //             templateUrl: 'student_profile_modal.html',
-    //             controller: function(student,$scope){
-    //                 $scope.student = student;
-    //             },
-    //             size: 'md',
-    //             resolve: {
-    //                     student: function () {
-    //                         return student;
-    //                     }
-    //                 }
-    //             });
+                modalInstance.result.then(function (ads) {
+                    return 1;
+                });
+        };
+        $scope.profileModal = function(student){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'student_profile_modal.html',
+                controller: function(student,$scope){
+                    $scope.student = student;
+                },
+                size: 'md',
+                resolve: {
+                        student: function () {
+                            return student;
+                        }
+                    }
+                });
 
-    //             modalInstance.result.then(function (student) {
-    //                 return 1;
-    //             });
-    //     };
-    //     $scope.remarksModal = function(remarks){
-    //         var modalInstance = $uibModal.open({
-    //             animation: true,
-    //             templateUrl: 'remarks_modal.html',
-    //             controller: function(remarks,$scope){
-    //                 $scope.remarks = remarks;
-    //                 console.log(remarks);
-    //             },
-    //             size: 'md',
-    //             resolve: {
-    //                     remarks: function () {
-    //                         return remarks;
-    //                     }
-    //                 }
-    //             });
+                modalInstance.result.then(function (student) {
+                    return 1;
+                });
+        };
+        $scope.remarksModal = function(remarks){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'remarks_modal.html',
+                controller: function(remarks,$scope){
+                    $scope.remarks = remarks;
+                    console.log(remarks);
+                },
+                size: 'md',
+                resolve: {
+                        remarks: function () {
+                            return remarks;
+                        }
+                    }
+                });
 
-    //             modalInstance.result.then(function (remarks) {
-    //                 return 1;
-    //             });
-    //     };  
-    //     $scope.resultModal = function(type,id){
-    //         var modalInstance = $uibModal.open({
-    //             animation: true,
-    //             templateUrl: 'result_modal.html',
-    //             controller: 'result_modal_Controller',
-    //             size: 'md',
-    //             resolve: {
-    //                     id: function () {
-    //                         return id;
-    //                     },
-    //                     type:function(){
-    //                         return type;
-    //                     }
-    //                 }
-    //             });
+                modalInstance.result.then(function (remarks) {
+                    return 1;
+                });
+        };  
+        $scope.resultModal = function(type,id){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'result_modal.html',
+                controller: 'result_modal_Controller',
+                size: 'md',
+                resolve: {
+                        id: function () {
+                            return id;
+                        },
+                        type:function(){
+                            return type;
+                        }
+                    }
+                });
 
-    //             modalInstance.result.then(function (id) {
-    //                 return 1;
-    //             });
-    //     };
+                modalInstance.result.then(function (id) {
+                    return 1;
+                });
+        };
 
 
-    // });  
+    });  
     // internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
     //     $scope.today = function() {
     //         $scope.dt = new Date();
@@ -436,12 +437,19 @@
             }
         });
 
-         $scope.viewRendered = function(){
+         $scope.viewRendered = function(timecard){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
-                    controller: "",
+                    controller: function(timecard,$scope,$uibModalInstance){
+                        $scope.timecards = timecard;
+                    },
                     size: 'lg',
+                    resolve:{
+                        timecard: function(){
+                                return timecard;
+                        },
+                    }
                     });
             };
 

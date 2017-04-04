@@ -70,7 +70,8 @@
                     403, forbidden - notAdmin
                     */ 
                     // if(response.status === 401 || response.status === 403) {
-                    if(response.status === 402) {
+                        // console.log(response);
+                    if(response.data.error == "token_expired") {
                         console.log("app.js: httpInterceptor caught 40x:", response);
                           ngToast.create({
                             className: 'info',
@@ -373,6 +374,20 @@
         }
     });
 
+    internon.factory('Utilities', function() {
+        return {
+            convert: function (d) {
+                    d = Number(d);
+
+                    var h = Math.floor(d / 3600);
+                    var m = Math.floor(d % 3600 / 60);
+                    var s = Math.floor(d % 3600 % 60);
+
+                    return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+                }
+
+        }
+    });
 
     internon.factory('password', function(urls,$http,$uibModal) {
         return{
@@ -427,7 +442,8 @@
                 });
             },
             edit: function(formdata,id){
-                console.log('edit');                
+                $http.post(urls.API_HOST + '/edit_password/'+$localStorage.id, formdata).then(function (response){
+                });                
             }
 
         }

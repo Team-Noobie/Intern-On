@@ -126,7 +126,7 @@
 	});
 	
 	internon.controller('search_advertisement_controller',function(urls,$http,$state,$scope,$localStorage,$uibModal){
-		$scope.ads;
+		$scope.ads = {};
 		$http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
 			$scope.ads = response.data;
 			$scope.totalItems = $scope.ads.length;
@@ -160,7 +160,25 @@
 				});
 
 				modalInstance.result.then(function (id) {
-					return 1;
+					$http({method: 'GET', url: urls.API_HOST + '/search_advertisement/'+$localStorage.id}).then(function(response){
+						$scope.ads = {};
+						$scope.ads = response.data;
+						$scope.totalItems = $scope.ads.length;
+						$scope.currentPage = 1;
+						$scope.itemsPerPage = 10;
+
+						$scope.$watch("currentPage", function(){
+							setPagingData($scope.currentPage);
+						});
+
+						function setPagingData(currentPage){
+							var pageData = $scope.ads.slice(
+								(currentPage-1) * $scope.itemsPerPage,
+								currentPage * $scope.itemsPerPage	
+							);
+							$scope.aAds = pageData;
+						}
+					});
 				});
 		};
 	});
