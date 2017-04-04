@@ -389,37 +389,61 @@
         }
     });
 
-    internon.factory('password', function(urls,$http,$uibModal) {
+    internon.factory('password', function(ngToast,urls,$http,$uibModal,$localStorage) {
         return{
-            open_edit_modal: function(id){
+            open_edit_modal: function(){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'edit_password.html',
-                    controller: function(password,$scope){
+                    controller: function(password,$scope,$localStorage,$uibModalInstance){
                         $scope.save = function(){
-                            password.edit();
+                            password.edit($scope.formdata,$uibModalInstance);
                         };
                     },
 					size: 'md',
-					resolve: {
-							id: function () {
-								return id;
-							}
-						}
 					});
-
-					modalInstance.result.then(function (id) {
-						return 1;
-					});
+            }, 
+            edit: function(formdata,$uibModalInstance){
+                if(formdata.new_password == formdata.confirm_password){
+                    $http.post(urls.API_HOST + '/edit_password/'+$localStorage.id, formdata).then(function (response){
+                        // $uibModalInstance.close();
+                        if(response.data     == "Incorrect Old Password"){
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Incorrect Old Password',
+                                animation: 'fade' 
+                            });
+                        }else{
+                            ngToast.create({
+                                className: 'success',
+                                content: 'Password Changed',
+                                animation: 'fade' 
+                            });
+                            $uibModalInstance.close();
+                        }
+                    });
+                }else{
+                    ngToast.create({
+                            className: 'danger',
+                            content: 'Confirm Password did not match',
+                            animation: 'fade' 
+                        });
+                }            
             },
             open_reset_modal: function(id){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'reset_password.html',
-                    controller: function(id,password,$scope,$uibModalInstance){
+                    controller: function(id,password,$scope,$uibModalInstance,ngToast){
                         $scope.yes = function(){
                             password.reset(id);
-                            $uibModalInstance.close();                            
+                            ngToast.create({
+                                className: 'success',
+                                content: 'Password Reset',
+                                animation: 'fade' 
+                            });
+                            $uibModalInstance.close();
+
                         };
                         $scope.no = function(){
                             $uibModalInstance.close();
@@ -441,10 +465,6 @@
                 $http({method: 'GET', url: urls.API_HOST + '/reset_password/'+id}).then(function(response) {
                 });
             },
-            edit: function(formdata,id){
-                $http.post(urls.API_HOST + '/edit_password/'+$localStorage.id, formdata).then(function (response){
-                });                
-            }
 
         }
     });
