@@ -18,10 +18,10 @@
                 <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user"></i><b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
-                        <a><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a ui-sref="user_coordinator.coordinator_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
-                        <a><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a ng-click="editPassword()"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -33,9 +33,6 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a ui-sref="user_coordinator.coordinator_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
-                </li>
                 <li>
                     <a ui-sref="user_coordinator.coordinator_section"><i class="fa fa-fw fa-folder"></i> Sections</a>
                 </li>
@@ -80,32 +77,92 @@
                         </div>
 
                         <div class="col-md-8">
-                            <h1>{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
-                            <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
-                            <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
-                            <p>Address: {{coordinator.coordinator_address}} </p>
+                                    <h1 style="text-transform:capitalize">{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
+                                    <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
+                                    <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
+                                    <p style="text-transform:capitalize">Address: {{coordinator.coordinator_address}} </p>
+                            </div>
+                            <div class="col-md-12">
+									<button ng-click="edit_info(coordinator,1)" class="btn btn-info btn-sm">Edit</button> 
+							</div>
                         </div>
-                        
                     </div> 
                 </div>
 
 
-                <div class="well">
                     <div class="row">
-                        <div class="col-md-8">
-                            
-                            <h3>School Background</h3>
-                            <p>Department: {{coordinator.coordinator_department}}</p>
-                            <p>Institute: {{coordinator.coordinator_institute}}</p>
-                            <p>School: {{coordinator.coordinator_school}}</p>    
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>School Background</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Department: {{coordinator.coordinator_department}}</p>
+                                    <p>Institute: {{coordinator.coordinator_institute}}</p>
+                                    <p>School: {{coordinator.coordinator_school}}</p>   
+                                    <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
             </div>
         </div>    
     </div>
 </script>
+
+
+	<script type="text/ng-template" id="coordinator_setting.html">
+			<div class="modal-header">
+				<h3 style="position:absolute; margin:auto;">Settings</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+			</div>
+			
+			<div class="modal-body">
+				<div class="main-center">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-8">
+										<h3>Edit Password</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Old Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>New Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Confirm Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>    
+				</div>
+              </div>  
+				<div class="modal-footer">
+					<button ng-click="" class="btn btn-sm btn-info">Save</button>
+				</div>
+			
+			</script>
 
 <script type="text/ng-template" id="coordinator_section.html">
     <div class="container-fluid">

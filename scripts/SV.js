@@ -10,9 +10,28 @@
         $scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/sv_profile/'+$localStorage.id}).then(function(response){
 				$scope.sv = response.data;
-				$state.go('user_company_SV.sv_interns');
+				$state.go('user_company_SV.sv_profile');
 			});
 		};
+
+        $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'sv_setting.html',
+					controller: 'sv_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};   
+
     });
     internon.controller('sv_intern_list_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
                 

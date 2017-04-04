@@ -16,7 +16,52 @@
                     $scope.type = true;
                 });                 
 		};
-        
+
+        $scope.edit_info = function(data,type){
+				var template;
+				if(type == 1)
+					template = 'edit_profile.html'
+				if(type == 2)
+					template = 'edit_overview.html'
+				if(type ==3)
+					template = 'edit_snapshot.html'
+				var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: template,
+				controller: function(data,$scope){
+					$scope.company = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			}
+
+       $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'company_setting.html',
+					controller: 'company_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};     
+
     });
     internon.controller('company_accounts_controller',function(password,ngToast,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.reset = function(id){

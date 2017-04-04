@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Hello Admin!</a>
+            <a class="navbar-brand" ui-sref="user_administrator.administrator">Hello Admin!</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -82,7 +82,7 @@
                     <tr ng-repeat="account in company">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCompanyModal(company.id)">{{account.company_name}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
                 </table>
             </div>
@@ -123,12 +123,21 @@
                     <tr ng-repeat="account in coordinator">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openCoordinatorModal(coordinator.id)">{{account.coordinator_firstname}} {{account.coordinator_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                        <td><button style="margin-right:5px;" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
                 </table>
             </div>
         </div>  
     </div>         
+</script>
+
+<script type="text/ng-template" id="administrator.html">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>HELLO ADMINISTRATOR</h1>  
+        </div>
+    </div>
+
 </script>
 
 <script type="text/ng-template" id="create_company_accounts.html">
@@ -187,7 +196,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="firstname" class="cols-sm-2 control-label">First Name</label>
+                                    <label for="firstname" class=" cols-sm-2 control-label">First Name</label>
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
