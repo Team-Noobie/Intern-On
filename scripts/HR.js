@@ -232,7 +232,7 @@
                 controller: function($scope,$http,$uibModalInstance){
                     
                 },
-                size: 'md',
+                size: 'sm',
                 resolve: {
                     }
                 });
@@ -241,15 +241,6 @@
                     return 1;
                 });
         };
-
-         $scope.viewRendered = function(){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_rendered.html',
-                    controller: "",
-                    size: 'lg',
-                    });
-            };
     });
     internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.today = function() {

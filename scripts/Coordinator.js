@@ -154,35 +154,4 @@
         $scope.students = students;
         // console.log(students);
     });
-
-     internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-      
-       $scope.viewRendered = function(){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_rendered.html',
-                    controller: "",
-                    size: 'lg',
-                    });
-            };
-
-      $scope.viewGrade = function(){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_grade.html',
-                    controller: "",
-                    size: 'lg',
-                    });
-            };      
-    
-    $scope.viewReports = function(){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_reports.html',
-                    controller: "",
-                    size: 'lg',
-                    });
-            };
-            
-            });
 })();
