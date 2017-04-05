@@ -58,7 +58,7 @@
 				var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'edit_password.html',
-					controller: '',
+					controller: 'student_profile_controller',
 					size: 'md',
 					resolve: {
 							id: function () {

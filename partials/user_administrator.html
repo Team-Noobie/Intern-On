@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Hello Admin!</a>
+            <a class="navbar-brand" ui-sref="user_administrator.administrator">Hello Admin!</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -135,6 +135,15 @@
     </div>         
 </script>
 
+<script type="text/ng-template" id="administrator.html">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>HELLO ADMINISTRATOR</h1>  
+        </div>
+    </div>
+
+</script>
+
 <script type="text/ng-template" id="create_company_accounts.html">
     <div class="modal-body">
         <div class="main-center">
@@ -201,7 +210,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="firstname" class="cols-sm-2 control-label">First Name</label>
+                                    <label for="firstname" class=" cols-sm-2 control-label">First Name</label>
                                     <div class="cols-sm-10">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>

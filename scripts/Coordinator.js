@@ -51,6 +51,25 @@
                 alert("Please upload a valid CSV file.");
             }
         };
+
+          $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'coordinator_setting.html',
+					controller: 'coordinator_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};   
+
     });
 
     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){

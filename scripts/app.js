@@ -106,6 +106,12 @@
                 controller:'administrator_controller'
                 },
                 {
+                name: 'user_administrator.administrator',
+                url: '',
+                templateUrl:  'administrator.html',
+                controller:'administrator_controller'
+                },
+                {
                 name: 'user_administrator.administrator_company',
                 url: '',
                 templateUrl:  'administrator_company.html',
@@ -173,11 +179,17 @@
                 templateUrl:  'company_interns.html',
                 controller:'company_interns_controller'
                 },
-            // SV routes
+            // SV routes sv_profile
                 { 
                 name: 'user_company_SV',
                 url: '/sv',
                 templateUrl:  'partials/user_company_SV.html',
+                controller:'sv_controller'
+                },
+                {
+                name: 'user_company_SV.sv_profile',
+                url: '',
+                templateUrl:  'sv_profile.html',
                 controller:'sv_controller'
                 },
                 {
@@ -258,9 +270,9 @@
                 controller:'student_sched_controller'
                 },
                 {
-                name: 'user_student.student_grades',
+                name: 'user_student.student_timecard',
                 url: '',
-                templateUrl:  'student_grades.html',
+                templateUrl:  'student_timecard.html',
                 controller:''
                 },
             // Student routes
@@ -293,7 +305,7 @@
                 name: 'user_coordinator.coordinator_grades',
                 url: '',
                 templateUrl:  'coordinator_grades.html',
-                controller:'coordinator_grades_controller'
+                controller:''
                 },        
                 {
                 name: 'user_coordinator.coordinator_enroll_students',

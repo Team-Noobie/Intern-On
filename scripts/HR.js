@@ -18,6 +18,24 @@
                     $state.go('user_company_HR.hr_profile');
                 });                 
 		};
+
+          $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'hr_setting.html',
+					controller: 'hr_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};   
         
     });
     internon.controller('hr_application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
@@ -305,7 +323,7 @@
                     };
 
                 },
-                size: 'md',
+                size: 'sm',
                 resolve: {
                     id:function(){
                         return id;
@@ -326,8 +344,7 @@
                     });
                 });
         };
-
-         $scope.viewRendered = function(timecard,total){
+        $scope.viewRendered = function(timecard,total){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
@@ -345,7 +362,7 @@
                         }
                     }
                     });
-            };
+        };
     });
     internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.today = function() {

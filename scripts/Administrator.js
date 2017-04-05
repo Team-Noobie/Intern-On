@@ -8,7 +8,7 @@
         };
 
         $scope.init = function () {
-				$state.go('user_administrator.administrator_company');
+				$state.go('user_administrator.administrator');
 		};
         
         $http({method: 'GET', url: urls.API_HOST + '/company_accounts_list'}).then(function(response){
