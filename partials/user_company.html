@@ -15,13 +15,13 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown" uib-dropdown>
-                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i> {{name}} <b class="caret"></b></a>
+                <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-building"></i><b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu>
                     <li>
                         <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
-                        <a><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a ng-click="editPassword()"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -33,13 +33,19 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li ng-show="type">
-                    <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
-                </li>
-                <!--<li>
-                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-o"></i>Applications</a>
+                <li>
+                    <a ui-sref="user_company.company_accounts" ><i class="fa fa-fw fa-users"></i> Accounts</a>
                 </li>
                 <li>
+                    <a ui-sref="user_company.company_departments"><i class="fa fa-fw fa-university"></i> Departments</a>
+                </li>
+                <li>
+                    <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
+                </li>
+                <li>
+                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-o"></i>Applications</a>
+                </li>
+                <!--<li>
                     <a ui-sref="user_company.company_schedule"><i class="fa fa-clock-o"></i> Schedules</a>
                 </li>-->
                 <li>
@@ -75,58 +81,128 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
-                        <div class="row">
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                            <p>IMAGE</p>
+                            <a href="" style="padding-top:20px;">upload image</a>
+                        </div>
 
-                            <div class="col-md-8">
-                                <h1>{{company.company_name}}</h1>
-                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
-                                <p>Contact Number: {{company.company_contact_no}}</p>
-                                <p>Address: {{company.company_address}} </p>
-                            </div>
-                            
-                        </div> 
-                    </div>
+                        <div class="col-md-8">
+                            <h1>{{company.company_name}}</h1>
+                            <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
+                            <p>Contact Number: {{company.company_contact_no}}</p>
+                            <p>Address: {{company.company_address}} </p>
+                        </div>
 
+                        <div class="col-md-12">
+                                <button ng-click="edit_info(company,1)" class="btn btn-info btn-sm">Edit</button> 
+                        </div>
+                    </div> 
 
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-8">
-                                
-                                <h3>Company Overview</h3>
-                                <p>{{company.company_overview}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Company Overview</h3>  
+                                </div>
+                                    <div class="panel-body">
+                                    <p>{{company.company_overview}}</p>
+                                    <button ng-click="edit_info(company,2)" class="btn btn-info btn-sm">Edit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Company Snapshot</h3>
-                                <p>Industry: {{company.company_industry}}</p>
-                                <p>Website: {{company.company_website}}</p>
-                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
-                                <p>Benefits: {{company.company_benefits}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Company Snapshot</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Industry: {{company.company_industry}}</p>
+                                    <p>Website: {{company.company_website}}</p>
+                                    <p>Spoken Language: {{company.company_spoken_lang}}</p>
+                                    <p>Benefits: {{company.company_benefits}}</p>
+                                    <button ng-click="edit_info(company,3)" class="btn btn-info btn-sm">Edit</button>
+                                </div>
                             </div>
                         </div>
                     </div>       
 
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Why Join Us?</h3>
-                                <p>Industry: {{company.company_why_join_us}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Why Join Us?</h3>
+                                </div>
+                                <div class="panel-body"> 
+                                    <p>{{company.company_why_join_us}}</p>
+                                    <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                                </div>  
                             </div>
                         </div>
-                    </div>       
-                
-            </div>
-        </div>    
+                    </div>
+                </div>
+            </div>    
+        </div>
     </div>
 </script>
+
+
+			<script type="text/ng-template" id="company_setting.html">
+			
+			<div class="modal-header">
+				<h3 style="position:absolute; margin:auto;">Settings</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+			</div>
+			
+			<div class="modal-body">
+				<div class="main-center">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-8">
+										<h3>Edit Password</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Old Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>New Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Confirm Password</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="password" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>    
+				</div>
+              </div>  
+				<div class="modal-footer">
+					<button ng-click="" class="btn btn-sm btn-info">Save</button>
+				</div>
+			
+			</script>
+
 <script type="text/ng-template" id="company_accounts.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -150,9 +226,9 @@
                 <input type="text" class="form-control" style="margin-bottom:5px" placeholder="Search Human Resource Name">                        
                 <table class="table table-striped table-hover">
                     <tr>
-                        <th>HR Name</th>
-                        <th>Date Created</th>
-                        <th>Actions</th>
+                        <th width="30%">HR Name</th>
+                        <th width="20%">Date Created</th>
+                        <th width="50%">Actions</th>
                     </tr>
                     <tr ng-repeat="account in hr">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.hr_firstname}} {{account.hr_lastname}}</a></td>
@@ -209,12 +285,12 @@
                 <table class="table table-striped table-hover">
                     <tr>
                         <th>Department</th>
-                        <th>Employees</th>
+                        <th>Supervisor</th>
                         <th>Date Publish</th>
                     </tr>
                     <tr ng-repeat="dept in departments">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</a></td>
-                        <td><button style="margin-right:5px;" ng-click="viewEmployeesModal(dept.employees)" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>View Employees</button></td>
+                        <td><button style="margin-right:5px;" ng-click="viewEmployeesModal(dept.employees)" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Supervisor/s</button></td>
                         <td>{{dept.created_at}}</td>
                     </tr>
                 </table>
@@ -467,14 +543,53 @@
                     </tr>
                     <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
-                        <td>{{intern.department.department_name}}</td>
+                        <td style="text-transform:uppercase">{{intern.department.department_name}}</td>
                         <td><button class="btn btn-info" ng-click="viewTimecardModal()">Update Timecard</button></td>
-                        <td>10:32</td>
+                        <td><a ng-click="viewRendered(intern.timecard)">90</a></td>
                     </tr>
                 </table>
             </div>
         </div>   
     </div>
+</script>
+
+<script type="text/ng-template" id="view_rendered.html">    
+   <div class="modal-header">
+       Timecard Summary
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th>Date</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>No. of Hours</th>
+                                
+                            </tr>
+                            <!--<tr ng-repeat="sec in section">-->
+                            <tr ng-repeat="timecard in timecards">
+                                <td>{{timecard.date}}</td>
+                                <td>{{timecard.time_in}}</td>
+                                <td>{{timecard.time_out}}</td>
+                                <td>{{timecard.hours}}</td>
+                            </tr>
+                            <tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>8</td></tr>
+                                     
+                            <!--</tr>-->
+                        </table>
+                    </div>        
+                </div>
+            </div> 
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+    </div>           
+
 </script>
 <script type="text/ng-template" id="company_list_application.html">
     <div class="container-fluid">
@@ -556,7 +671,6 @@
         </div>
     </div>
 </script>
-
 <!--MODALS-->
 <script type="text/ng-template" id="student_profile_modal.html"> 
     <div class="modal-body">    
@@ -686,65 +800,27 @@
 </script>
 <script type="text/ng-template" id="company_ad_modal.html">
     <div class="modal-header">
-        <h1 style="text-transform:capitalize;">Edit Advertisement</h1>
     </div>
     <div class="modal-body">
-        <div>
-            <h4></h4>
-            <form class="form-horizontal post-ads" method="post"> 
-                <div class="form-group">
-                    <label for="adTitle" class="cols-sm-2 control-label">Ad Title</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-title" ng-model="formdata.ads_title"  placeholder="Ad Title" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Job Description</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group" ng-repeat="req in formdata.ads_requirement track by $index">
-                            <span class="input-group-addon"><i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" ng-model="formdata.ads_requirement[$index]"  value="req" placeholder="Requirement" required/>
-                        </div>
-                        <button class="btn btn-info btn-md" id="add" ng-click="addReq()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> 
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Contacts</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group" ng-repeat="cont in formdata.ads_contact track by $index">
-                            <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-contact" ng-model="formdata.ads_contact[$index]" placeholder="Contact" required/>
-                        </div>
-                        <button class="btn btn-info btn-md" id="add" ng-click="addCon()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                    <div class="col-md-4">
-                        <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
-                    </div>
-                     <div class="col-md-4">
-                        <button ng-click="cancel()" class="btn btn-danger btn-md" id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-                    </div>
-                    </div>
-                </div>
-        </div>
-    </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h2 style="text-transform:uppercase">{{formdata.ads_title}}</h2>
+            </div>
+            <div class="panel-body">
+                <h3><b>Job Description:</b></h3><h4 ng-bind-html="formdata.ads_job_description"></h4>   
+                <h3><b>Related Industry:</b></h3><h4 ng-bind-html="formdata.ads_related_industry"></h4>
+            </div>
+        </div>                
+    </div> 
     <div class="modal-footer">
-        <button style="margin:auto" class="btn btn-info btn-sm">Edit</button>
     </div>
 </script>
 <script type="text/ng-template" id="company_add_department_modal.html">
     <div class="modal-body">
         <form name="addDept">
-            <input type="text" class="form-control" ng-required="true" required ng-model="formdata.department_name" placeholder="I.T. Department">
-            <button class="btn btn-success" ng-click="addDept.$valid && add()">Add Department</button>
+            Department Name:
+            <input type="text" class="form-control" ng-required="true" required ng-model="formdata.department_name" placeholder="Department Name">
+            <button style="margin-top:10px;" class="btn btn-success" ng-click="addDept.$valid && add()">Add Department</button>
         </form>
     </div>
 </script>
@@ -752,14 +828,17 @@
     <div class="modal-body">
         <div class="row" ng-if="type == 'hr'">
             <form name="add_HR">
+                  <div class="col-lg-12" style="margin-bottom:5px;">
+                    <label class="control-label">Username</label>                   
+                    <input class="form-control" type="text" ng-model="formdata.hr_username" required ng-required="true" placeholder="Username">
+                    <label for="username">Username: {{symbol}}_{{formdata.hr_username}}</label>                    
+                </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">
                     <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Enter HR Firstname">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                
                     <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Enter HR Lastname">
                 </div>
-                <div class="col-lg-12" style="margin-bottom:5px;">                    
-                    <input class="form-control" type="text" ng-model="formdata.hr_username" required ng-required="true" placeholder="Enter username">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
                     <input class="form-control" type="text" ng-model="formdata.hr_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
@@ -772,6 +851,11 @@
 
         <div class="row" ng-if="type == 'sv'">
             <form name="add_SV">
+                <div class="col-lg-12" style="margin-bottom:5px;">  
+                     <label class="control-label">Username</label>                     
+                    <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Username">
+                    <label for="username">Username: {{symbol}}_{{formdata.sv_username}}</label>                                        
+                </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">
                     <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Enter SV Firstname">
                 </div>
@@ -781,8 +865,9 @@
                 <div class="col-lg-12" style="margin-bottom:5px;">                    
                     <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Enter username">
                 </div>
-                <div class="col-lg-12" style="margin-bottom:5px;">                    
-                    <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
+                <div class="col-lg-12" style="margin-bottom:5px;"> 
+                    <label class="control-label">E-mail Address</label>                                                            
+                    <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="E-mail Address">                                                
                 </div>
                 <div class="btn-group col-lg-12" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
@@ -810,6 +895,143 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="edit_profile.html">
+			<div class="modal-header">
+				<h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+			</div>
+
+			<div class="modal-body">
+				<div class="main-center">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Company Name</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_name}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>E-mail Address</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="email" class="form-control" value="{{company.company_email}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Contact Number</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_contact_no}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Address</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_address}}">
+									</div>
+								</div>         
+							</div>
+						</div>
+					</div>    
+				</div>
+
+				<button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</script> 
+
+<script type="text/ng-template" id="edit_overview.html">
+			<div class="modal-header">
+				<h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+			</div>
+            <div class="modal-body">
+				<div class="main-center">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Company Overview</h5>
+									</div>
+									<div class="col-md-12">
+										<textarea style="width:530px;height:200px">{{company.company_overview}}</textarea>
+									</div>
+								</div>         
+							</div>
+						</div>
+					</div>    
+				</div>
+                <button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
+			</div>
+			
+            <div class="modal-footer">
+			</div>
+
+		</script> 
+    
+    <script type="text/ng-template" id="edit_snapshot.html">
+			<div class="modal-header">
+				<h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+			</div>
+            <div class="modal-body">
+				<div class="main-center">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+                                <div class="row">
+									<div class="col-md-4">
+										<h5>Industry</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_industry}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Website</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_website}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Spoken Language</h5>
+									</div>
+									<div class="col-md-8">
+										<input type="text" class="form-control" value="{{company.company_spoken_lang}}">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<h5>Benefits</h5>
+									</div>
+									<div class="col-md-8">
+										<textarea style="width:342px;height:100px">{{company.company_benefits}}</textarea>
+									</div>
+								</div>         
+							</div>     
+							</div>
+						</div>
+					</div>    
+				</div>
+                <button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
+			</div>
+			
+            <div class="modal-footer">
+			</div>
+
+		</script> 
+
+        
 
 
 

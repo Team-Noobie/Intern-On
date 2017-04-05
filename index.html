@@ -46,7 +46,6 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/ngToast/dist/ngToast.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
     <!-- App Scripts-->
     <script src="scripts/app.js"></script>
     <script src="scripts/student.js"></script>
@@ -67,35 +66,37 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>Old Password</h5>
+                        <form name="password_form">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Old Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.old_password" class="form-control" required ng-required="true">
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>New Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.new_password" class="form-control" required ng-required="true">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>New Password</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Confirm Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.confirm_password" class="form-control" required ng-required="true">
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>Confirm Password</h5>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
+                            <button style="margin-top:1em;position:relative;left:50%;" ng-click="password_form.$valid && save()" class="btn btn-xl btn-info">Save</button>
+                        </form>
                     </div>
                 </div>
             </div>    
         </div>
-        <button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
     </div>
 
     <div class="modal-footer">

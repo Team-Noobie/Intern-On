@@ -1,15 +1,18 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('coordinator_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
             $state.go('index');
         };
-
+        $scope.edit = function(){
+            password.open_edit_modal();
+        }
         $scope.init = function () {
 			$http({method: 'GET', url: urls.API_HOST + '/coordinator_profile/'+$localStorage.id}).then(function(response){
-				$scope.coordinator = response.data;
+				$localStorage.symbol = response.data.coordinator_symbol;
+                $scope.coordinator = response.data;
 				$state.go('user_coordinator.coordinator_profile');
 			});
 		};
@@ -48,9 +51,32 @@
                 alert("Please upload a valid CSV file.");
             }
         };
+
+          $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'coordinator_setting.html',
+					controller: 'coordinator_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};   
+
     });
 
     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+                $scope.section = response.data;
+        });
+
         $scope.newSection = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -65,7 +91,10 @@
                     });
 
                     modalInstance.result.then(function (id) {
-                        return 1;
+                        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+                                $scope.section = {};
+                                $scope.section = response.data;
+                        });
                     });
             };
            
@@ -90,9 +119,7 @@
             }; 
 
 
-           $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
-                $scope.section = response.data;
-            });
+           
                      
     });
 
@@ -112,7 +139,7 @@
 
     });
 
-    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };
@@ -124,6 +151,7 @@
         $scope.formdata = {
             section_id:'',
         }
+        $scope.symbol = $localStorage.symbol;
         $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
             for (var i = 0; i < response.data.length; i++) {
                 $scope.choices_advertisement.push({'name':response.data[i].section_code,'value':response.data[i].id,'strict':true});
@@ -133,8 +161,10 @@
         $scope.enrollStudent = function () {
             $scope.formdata.section_id = $scope.choice_advertisement.option.value;
                 if($scope.formdata.section_id != ''){
+                    $scope.formdata.student_username = $localStorage.symbol+"_"+ $scope.formdata.student_username;
                     $http.post(urls.API_HOST + '/enroll_student/'+$localStorage.id, $scope.formdata).then(function (response){
-                        $state.go('user_coordinator.coordinator_enroll_students');   
+                        $state.go('user_coordinator.coordinator_enroll_students');  
+
                     }); 
                 }
             };
@@ -153,5 +183,36 @@
     internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.students = students;
         // console.log(students);
+    });
+
+    internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+      
+        $scope.viewRendered = function(){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_rendered.html',
+                    controller: "",
+                    size: 'lg',
+                    });
+        };  
+
+        $scope.viewGrade = function(){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_grade.html',
+                    controller: "",
+                    size: 'lg',
+                    });
+        };      
+    
+        $scope.viewReports = function(){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_reports.html',
+                    controller: "",
+                    size: 'lg',
+                    });
+            };
+            
     });
 })();

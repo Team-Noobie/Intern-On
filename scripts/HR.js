@@ -1,13 +1,15 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('hr_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('hr_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
             $state.go('index');
         };
 
-        
+        $scope.edit = function(){
+            password.open_edit_modal();
+        }
         
         $scope.init = function () {
                 $http({method: 'GET', url: urls.API_HOST + '/hr_profile/'+$localStorage.id}).then(function(response){
@@ -16,6 +18,24 @@
                     $state.go('user_company_HR.hr_profile');
                 });                 
 		};
+
+          $scope.editPassword = function(id){
+				var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'hr_setting.html',
+					controller: 'hr_controller',
+					size: 'md',
+					resolve: {
+							id: function () {
+								return id;
+							}
+						}
+					});
+
+					modalInstance.result.then(function (id) {
+						return 1;
+					});
+			};   
         
     });
     internon.controller('hr_application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
@@ -78,7 +98,10 @@
                 });
 
                 modalInstance.result.then(function (id) {
-                    return 1;
+                    $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.company_id}).then(function(response){
+                        $scope.applications = {};                        
+                        $scope.applications = response.data;
+                    });
                 });
         };
         $scope.advertisementModal = function(ads){
@@ -156,7 +179,10 @@
                 });
 
                 modalInstance.result.then(function (id) {
-                    return 1;
+                    $http({method: 'GET', url: urls.API_HOST + '/company_application_list/'+$localStorage.company_id}).then(function(response){
+                        $scope.applications = {};                        
+                        $scope.applications = response.data;
+                    });
                 });
         };
 
@@ -173,10 +199,11 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'hr_sched_remarks_modal.html',
-                controller: function(id,$http,$scope){
+                controller: function(id,$http,$scope,$uibModalInstance){
                     $scope.save = function(){
                         $http.post(urls.API_HOST + '/interview_result/'+id , {remarks: $scope.remarks}).then(function (response){
                             // $scope.applications = response.data;
+                            $uibModalInstance.close();
                         });
                     }
                 },
@@ -189,17 +216,28 @@
                 });
 
                 modalInstance.result.then(function (id) {
-                    return 1;
+                    $http({method: 'GET', url: urls.API_HOST + '/get_schedules/'+$localStorage.company_id}).then(function(response){
+                        $scope.schedules = {};
+                        $scope.schedules = response.data;
+                    });
                 });
         };
 
     });
-    internon.controller('hr_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+    internon.controller('hr_interns_controller',function(Utilities,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+
         $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.company_id}).then(function(response){
             $scope.interns = response.data;
+            for(var i = 0;i<response.data.length;i++){
+                $scope.interns[i].rendered_hours = Utilities.convert($scope.interns[i].rendered_hours); 
+                // console.log(Utilities.convert(response.data[i].rendered_hours));
+                for(var x = 0;x<$scope.interns[i].timecard.length;x++){
+                    $scope.interns[i].timecard[x].hours_render = Utilities.convert($scope.interns[i].timecard[x].hours_render);
+                }    
+            }
         });
-        
 
+        
         $scope.dept_id = {
             'department_id': {'name': '','value':'','strict':false},
         };
@@ -225,21 +263,105 @@
         });
 
 
-        $scope.viewTimecardModal = function(){
+        $scope.viewTimecardModal = function(id){
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'intern_timecard_modal.html',
-                controller: function($scope,$http,$uibModalInstance){
+                controller: function(id,$scope,$http,$uibModalInstance,$localStorage){
+                    $scope.today = function() {
+                        $scope.dt = new Date();
+                    };
+                    $scope.today();
                     
+                    $scope.inMytime = new Date();
+                    $scope.outMytime = new Date(); 
+
+                    $scope.inHstep = 1;
+                    $scope.inMstep = 1;
+
+                    $scope.outHstep = 1;
+                    $scope.outMstep = 1;
+
+                    
+
+
+                    $scope.save = function(){
+                        
+                        $scope.date = ($scope.dt.getYear()+1900)+"-"+($scope.dt.getMonth()+1)+"-"+$scope.dt.getDate();
+                        $scope.Intime = $scope.inMytime.getHours()+":"+$scope.inMytime.getMinutes();
+                        $scope.Outtime = $scope.outMytime.getHours()+":"+$scope.outMytime.getMinutes();
+                        $scope.time = ($scope.outMytime-$scope.inMytime);
+
+                        if($scope.inMytime.getHours() <= 12 && $scope.outMytime.getHours() >= 13){
+                            $scope.diff =  Math.floor(($scope.time/(1000*60*60))-1) + ":" + (Math.floor($scope.time/(1000*60))%60)  + ":" + (Math.floor($scope.time/1000)%60) ;
+                        }else{
+                            $scope.diff =  Math.floor($scope.time/(1000*60*60)) + ":" + (Math.floor($scope.time/(1000*60))%60)  + ":" + (Math.floor($scope.time/1000)%60) ;                            
+                        }
+
+                        var hms = $scope.diff;   // your input string
+                        var a = hms.split(':'); // split it at the colons
+
+                        // minutes are worth 60 seconds. Hours are worth 60 minutes.
+                        var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]); 
+
+                        // console.log(seconds);
+
+                        $scope.formdata = {
+                            company_intern_id:id,
+                            hr_id: $localStorage.id,                            
+                            date :($scope.dt.getYear()+1900)+"-"+($scope.dt.getMonth()+1)+"-"+$scope.dt.getDate(),
+                            time_in :$scope.inMytime.getHours()+":"+$scope.inMytime.getMinutes(),
+                            time_out :$scope.outMytime.getHours()+":"+$scope.outMytime.getMinutes(),
+                            hours_render: seconds,
+                        }
+
+                        
+
+                        $http.post(urls.API_HOST + '/update_timecard' , $scope.formdata).then(function (response){
+                            $uibModalInstance.close();
+                        });
+                    };
+
                 },
                 size: 'sm',
                 resolve: {
+                    id:function(){
+                        return id;
+                        }
                     }
                 });
 
                 modalInstance.result.then(function () {
-                    return 1;
+                    $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.company_id}).then(function(response){
+                        $scope.interns = response.data;
+                        for(var i = 0;i<response.data.length;i++){
+                            $scope.interns[i].rendered_hours = Utilities.convert($scope.interns[i].rendered_hours); 
+                            // console.log(Utilities.convert(response.data[i].rendered_hours));
+                            for(var x = 0;x<$scope.interns[i].timecard.length;x++){
+                                $scope.interns[i].timecard[x].hours_render = Utilities.convert($scope.interns[i].timecard[x].hours_render);
+                            }    
+                        }
+                    });
                 });
+        };
+        $scope.viewRendered = function(timecard,total){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_rendered.html',
+                    controller: function(Utilities,timecard,total,$scope,$uibModalInstance){
+                        $scope.timecards = timecard;
+                        $scope.total = total;
+                    },
+                    size: 'lg',
+                    resolve:{
+                        timecard: function(){
+                                return timecard;
+                        },
+                        total: function(){
+                                return total;
+                        }
+                    }
+                    });
         };
     });
     internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
@@ -247,6 +369,7 @@
             $scope.dt = new Date();
         };
         $scope.today();
+        
         $scope.mytime = new Date();
         $scope.hstep = 1;
         $scope.mstep = 1;
@@ -256,8 +379,7 @@
             $scope.time = $scope.mytime.getHours()+":"+$scope.mytime.getMinutes();            
             console.log($scope.date + " "+$scope.time);
             $http.post(urls.API_HOST + '/set_interview/'+id,{reason:$scope.reason,interview_date:$scope.date,interview_time:$scope.time}).then(function (response){
-                $uibModalInstance.close();
-                $state.go('user_company.company_list_application', {application_id: id,type: $stateParams.type} );            
+                $uibModalInstance.close();         
             });
         };
     });
@@ -277,11 +399,12 @@
                 $scope.choices_department.push({'name':response.data[i].department_name,'value':response.data[i].id,'strict':true});
             }
         });
-
+        $scope.formdata = {};
         $scope.hire = function(){
             // console.log($scope.dept_id.department_id.value);
-            $http.post(urls.API_HOST + '/hire_applicant/'+$scope.id, {department_id:$scope.dept_id.department_id.value}).then(function (response){
-                $uibModalInstance.close;
+            $scope.formdata.department_id = $scope.dept_id.department_id.value;
+            $http.post(urls.API_HOST + '/hire_applicant/'+$scope.id, $scope.formdata).then(function (response){
+                $uibModalInstance.close();
             });  
         }
     });

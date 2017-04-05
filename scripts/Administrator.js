@@ -1,6 +1,6 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('administrator_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('administrator_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
@@ -8,8 +8,9 @@
         };
 
         $scope.init = function () {
-				$state.go('user_administrator.administrator_company');
+				$state.go('user_administrator.administrator');
 		};
+        
         $http({method: 'GET', url: urls.API_HOST + '/company_accounts_list'}).then(function(response){
             $scope.company = response.data;
         });
@@ -18,7 +19,9 @@
             $scope.coordinator = response.data;
         });
         
-
+        $scope.reset = function(id){
+            password.open_reset_modal(id);
+        }
         $scope.newCompanyAccount = function(){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -28,9 +31,12 @@
                     });
 
                     modalInstance.result.then(function () {
-                        return 1;
+                        $http({method: 'GET', url: urls.API_HOST + '/company_accounts_list'}).then(function(response){
+                            $scope.company = {};
+                            $scope.company = response.data;
+                        });
                     });
-            };
+        };
 
     
         $scope.newCoordinatorAccount = function(){
@@ -42,9 +48,12 @@
                     });
 
                     modalInstance.result.then(function () {
-                        return 1;
+                        $http({method: 'GET', url: urls.API_HOST + '/coordinator_accounts_list'}).then(function(response){
+                            $scope.coordinator = {};
+                            $scope.coordinator = response.data;
+                        });
                     });
-            };        
+        };        
 
             
 	    $scope.openCompanyModal = function(id){
@@ -64,7 +73,7 @@
 				});
 		};      
 
-         $scope.openCoordinatorModal = function(id){
+        $scope.openCoordinatorModal = function(id){
 			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'view_coordinator.html',
@@ -81,10 +90,10 @@
 				});
 		};      
 
-        });
+    });
 
         
-     internon.controller('create_company_account_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
+    internon.controller('create_company_account_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.create_company_account = function () {
             $http.post(urls.API_HOST + '/create_company_account', $scope.formdata).then(function (response){
                 $uibModalInstance.close();
@@ -94,7 +103,7 @@
         };
     });
 
-     internon.controller('create_coordinator_account_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
+    internon.controller('create_coordinator_account_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.create_coordinator_account = function () {
             $http.post(urls.API_HOST + '/create_coordinator_account', $scope.formdata).then(function (response){
                 $uibModalInstance.close();

@@ -19,7 +19,7 @@
         // Serve the laravel
         var server = "Intern-On-DB/public";
         return {
-            API_HOST: 'http://localhost:8080/'+server+ '/api/internon'
+            API_HOST: 'http://localhost/'+server+ '/api/internon'
             // FILE_HOST: 'http://' + server + '/caitlyn/api/files',
             // WEBSOCKET_HOST: 'ws://'+ server +':9060',
             // UPLOADED_IMAGES_URL: 'http://' + server + '/Amechania/public/images',
@@ -70,7 +70,8 @@
                     403, forbidden - notAdmin
                     */ 
                     // if(response.status === 401 || response.status === 403) {
-                    if(response.status === 400) {
+                        // console.log(response);
+                    if(response.data.error == "token_expired") {
                         console.log("app.js: httpInterceptor caught 40x:", response);
                           ngToast.create({
                             className: 'info',
@@ -102,6 +103,12 @@
                 name: 'user_administrator',
                 url: '/administrator',
                 templateUrl:  'partials/user_administrator.html',
+                controller:'administrator_controller'
+                },
+                {
+                name: 'user_administrator.administrator',
+                url: '',
+                templateUrl:  'administrator.html',
                 controller:'administrator_controller'
                 },
                 {
@@ -172,11 +179,17 @@
                 templateUrl:  'company_interns.html',
                 controller:'company_interns_controller'
                 },
-            // SV routes
+            // SV routes sv_profile
                 { 
                 name: 'user_company_SV',
                 url: '/sv',
                 templateUrl:  'partials/user_company_SV.html',
+                controller:'sv_controller'
+                },
+                {
+                name: 'user_company_SV.sv_profile',
+                url: '',
+                templateUrl:  'sv_profile.html',
                 controller:'sv_controller'
                 },
                 {
@@ -257,9 +270,9 @@
                 controller:'student_sched_controller'
                 },
                 {
-                name: 'user_student.student_grades',
+                name: 'user_student.student_timecard',
                 url: '',
-                templateUrl:  'student_grades.html',
+                templateUrl:  'student_timecard.html',
                 controller:''
                 },
             // Student routes
@@ -373,38 +386,76 @@
         }
     });
 
+    internon.factory('Utilities', function() {
+        return {
+            convert: function (d) {
+                    d = Number(d);
 
-    internon.factory('password', function(urls,$http,$uibModal) {
+                    var h = Math.floor(d / 3600);
+                    var m = Math.floor(d % 3600 / 60);
+                    var s = Math.floor(d % 3600 % 60);
+
+                    return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+                }
+
+        }
+    });
+
+    internon.factory('password', function(ngToast,urls,$http,$uibModal,$localStorage) {
         return{
-            open_edit_modal: function(id){
+            open_edit_modal: function(){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'edit_password.html',
-                    controller: function(password,$scope){
+                    controller: function(password,$scope,$localStorage,$uibModalInstance){
                         $scope.save = function(){
-                            password.edit();
+                            password.edit($scope.formdata,$uibModalInstance);
                         };
                     },
 					size: 'md',
-					resolve: {
-							id: function () {
-								return id;
-							}
-						}
 					});
-
-					modalInstance.result.then(function (id) {
-						return 1;
-					});
+            }, 
+            edit: function(formdata,$uibModalInstance){
+                if(formdata.new_password == formdata.confirm_password){
+                    $http.post(urls.API_HOST + '/edit_password/'+$localStorage.id, formdata).then(function (response){
+                        // $uibModalInstance.close();
+                        if(response.data     == "Incorrect Old Password"){
+                            ngToast.create({
+                                className: 'danger',
+                                content: 'Incorrect Old Password',
+                                animation: 'fade' 
+                            });
+                        }else{
+                            ngToast.create({
+                                className: 'success',
+                                content: 'Password Changed',
+                                animation: 'fade' 
+                            });
+                            $uibModalInstance.close();
+                        }
+                    });
+                }else{
+                    ngToast.create({
+                            className: 'danger',
+                            content: 'Confirm Password did not match',
+                            animation: 'fade' 
+                        });
+                }            
             },
             open_reset_modal: function(id){
                 var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'reset_password.html',
-                    controller: function(id,password,$scope,$uibModalInstance){
+                    controller: function(id,password,$scope,$uibModalInstance,ngToast){
                         $scope.yes = function(){
                             password.reset(id);
-                            $uibModalInstance.close();                            
+                            ngToast.create({
+                                className: 'success',
+                                content: 'Password Reset',
+                                animation: 'fade' 
+                            });
+                            $uibModalInstance.close();
+
                         };
                         $scope.no = function(){
                             $uibModalInstance.close();
@@ -426,9 +477,6 @@
                 $http({method: 'GET', url: urls.API_HOST + '/reset_password/'+id}).then(function(response) {
                 });
             },
-            edit: function(formdata,id){
-                console.log('edit');                
-            }
 
         }
     });
