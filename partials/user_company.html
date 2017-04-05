@@ -21,7 +21,7 @@
                         <a ui-sref="user_company.company_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
-                        <a ng-click="editPassword()"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a ng-click="edit()"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -43,7 +43,7 @@
                     <a ui-sref="user_company.company_ads"><i class="fa fa-fw fa-newspaper-o"></i> Advertisement</a>
                 </li>
                 <li>
-                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-o"></i>Applications</a>
+                    <a ui-sref="user_company.company_list_application"><i class="fa fa-fw fa-file-text-o"></i>Applications</a>
                 </li>
                 <!--<li>
                     <a ui-sref="user_company.company_schedule"><i class="fa fa-clock-o"></i> Schedules</a>
@@ -149,59 +149,7 @@
 </script>
 
 
-			<script type="text/ng-template" id="company_setting.html">
-			
-			<div class="modal-header">
-				<h3 style="position:absolute; margin:auto;">Settings</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
-			</div>
-			
-			<div class="modal-body">
-				<div class="main-center">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="row">
-									<div class="col-md-8">
-										<h3>Edit Password</h3>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<div class="row">
-									<div class="col-md-4">
-										<h5>Old Password</h5>
-									</div>
-									<div class="col-md-8">
-										<input type="password" class="form-control">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<h5>New Password</h5>
-									</div>
-									<div class="col-md-8">
-										<input type="password" class="form-control">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<h5>Confirm Password</h5>
-									</div>
-									<div class="col-md-8">
-										<input type="password" class="form-control">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>    
-				</div>
-              </div>  
-				<div class="modal-footer">
-					<button ng-click="" class="btn btn-sm btn-info">Save</button>
-				</div>
-			
-			</script>
-
+		
 <script type="text/ng-template" id="company_accounts.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -232,7 +180,10 @@
                     <tr ng-repeat="account in hr">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.hr_firstname}} {{account.hr_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button></td>
+                        <td>
+                        <button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                        <button style="margin-right:5px;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -250,7 +201,10 @@
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.sv_firstname}} {{account.sv_lastname}}</a></td>
                         <td>{{account.department.department_name}}</td>
                         <!--<td>{{account.created_at}}</td>-->
-                        <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button><button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button></td>
+                        <td>
+                        <button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                        <button style="margin-right:5px;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -288,7 +242,7 @@
                         <th>Date Publish</th>
                     </tr>
                     <tr ng-repeat="dept in departments">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</a></td>
+                        <td><h5 style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{dept.department_name}}</h5></td>
                         <td><button style="margin-right:5px;" ng-click="viewEmployeesModal(dept.employees)" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Supervisor/s</button></td>
                         <td>{{dept.created_at}}</td>
                     </tr>
@@ -307,7 +261,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-newspaper-o"></i> Ads
+                        <i class="fa fa-newspaper-o"></i> Advertisement
                     </li>
                 </ol>
             </div>
@@ -336,9 +290,9 @@
                         <th>Date Publish</th>
                     </tr>
                     <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)"><h5>{{ad.ads_title}}</h5></a></td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
-                        <td>{{ad.created_at}}</td>
+                        <td><h5>{{ad.created_at}}</h5></td>
                     </tr>
                 </table>
             </div>
@@ -481,7 +435,7 @@
             <div class = "col-md-4"> <!-- for department-->
              Department: 
                 <div class="btn-group" uib-dropdown>
-                    <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+                    <select style="text-transform:capitalize" class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
                 </div>
                
             </div>  
@@ -497,10 +451,10 @@
                         <th>Required Hours</th>
                     </tr>
                     <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
-                        <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
-                        <td style="text-transform:uppercase">{{intern.department.department_name}}</td>
-                        <td><a ng-click="viewRendered(intern.timecard)">90</a></td>
-                        <td>200</td>
+                        <td><h5>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</h5></td>
+                        <td style="text-transform:uppercase"><h5>{{intern.department.department_name}}</h5></td>
+                        <td><a ng-click="viewRendered(intern.timecard)"><h5>90</h5></a></td>
+                        <td><h5>200</h5></td>
                     </tr>
                 </table>
             </div>
@@ -555,18 +509,20 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-table"></i> Applications
+                        <i class="fa fa-file-text"></i> Applications
                     </li>
                 </ol>
             </div>
         </div>
         <div class="row">
             <div class = "col-md-4">
+                  Status:
                 <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]" ng-options="status as status.name for status in choices_status"></select>                    
                 </div>
             </div> 
             <div class = "col-md-4">
+                    Advertisement: 
                 <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]" ng-options="ads as ads.name for ads in choices_advertisement"></select>
                 </div>
@@ -577,17 +533,16 @@
                 <table class="table table-striped table-hover" style="margin-top:1em;">
                     <tr>
                         <th>Student</th>
-                        <th>Logs</th>
+                        <th>Interview Result</th>
                         <th>Advertisement Title</th>                        
-                        <th>Action</th>
                         <th>Status</th>
                     </tr>
                     <tr ng-repeat="application in applications| filter : choice_status.option.value | filter: {advertisement: {ads_title: choice_advertisement.option.value}}:choice_advertisement.option.strict">
-                        <td><a ng-click="profileModal(application.student)">{{application.student.student_firstname}} {{application.student.student_lastname}}</a></td>
+                        <td><a ng-click="profileModal(application.student)"><h5>{{application.student.student_firstname}} {{application.student.student_lastname}}</h5></a></td>
                         <td>
                             <div class="btn-group" uib-dropdown>
                                 <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                                    Logs <span class="caret"></span>
+                                    Result <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu" uib-dropdown-menu aria-labelledby="btn-append-to-body" style="width:500px; padding:5px;">
                                     <table class="table table-striped table-hover" style="margin-top:1em;">
@@ -610,14 +565,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td><a ng-click="advertisementModal(application.advertisement)">{{application.advertisement.ads_title}}</a></td>
+                        <td><a ng-click="openAdModal(application.id)"><h5>{{application.advertisement.ads_title}}</h5></a></td>
                         <td>
-                            <button ng-click="schedModal(application.id)" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i>Schedule</button>
-                            <button class="btn btn-success" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                            <button class="btn btn-danger" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
-                        </td>
-                        <td>
-                            {{application.status}}                            
+                            <h5>{{application.status}} </h5>                           
                         </td>
                     </tr>
                 </table>
@@ -628,55 +578,61 @@
 <!--MODALS-->
 <script type="text/ng-template" id="student_profile_modal.html"> 
     <div class="modal-body">    
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="jumbotron text-center">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
-                                <p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
-                                <p>Contact Number: {{student.student_contact_no}}</p>
-                                <p>Address: {{student.student_address}} </p>
-                            </div>
+        	<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="jumbotron text-center">
+							<div class="row">
+								<div class="col-md-8">
+									<h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+									<p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
+									<p>Contact Number: {{student.student_contact_no}}</p>
+									<p>Address: {{student.student_address}} </p>
+								</div>
+								<div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+									<p>IMAGE</p>
+								</div>
+							</div> 
+						</div>
 
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                            </div>
-                        </div> 
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h3>Personal Background</h3>
+									</div>
+									<div class="panel-body">
+										<h4>Birthday: {{student.student_birthday}}</h4>
+										<h4>Gender: {{student.student_gender}}</h4>
+									</div> 
+								</div>
+							</div>
+						</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h3>Educational Background</h3>
+										</div>
+										<div class="panel-body">
+											<h4>Coordinator: <a ng-click="viewCoordinator(student.section.coordinator)">My Coordinator</a></h4>
+											<h4>Course: {{student.student_course}}</h4>
+											<h4>Department: {{student.student_department}}</h4>
+											<h4>Intitute: {{student.student_institute}}</h4>
+											<h4>School: {{student.student_school}}</h4>
+										</div>	
+									</div>	
+								</div>
+							</div>       
                     </div>
-
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-
-                                <h3>Personal Background</h3>
-                                <p>Birthday: {{student.student_birthday}}</p>
-                                <p>Gender: {{student.student_gender}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>Educational Background</h3>
-                                <p>Course: {{student.student_course}}</p>
-                                <p>Department: {{student.student_department}}</p>
-                                <p>Intitute: {{student.student_institute}}</p>
-                                <p>School: {{student.student_school}}</p>
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-            <!--</div>-->
-        </div>
-        <div style="margin-top:20px;margin-bottom:20px;"><a ng-href="{{file}}" download><i class="fa fa-download" aria-hidden="true"></i> Download Resume</a></div>
-    </div>
+				</div>    
+			</div>
+    </div
 </script>
-<script type="text/ng-template" id="advertisement_modal.html"> 
+<!--<script type="text/ng-template" id="advertisement_modal.html"> 
     <h1>Advertisement</h1>
-</script>
+</script>-->
 <script type="text/ng-template" id="company_sched_student_modal.html">
     <div class="modal-body">
         <div class="row">

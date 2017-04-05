@@ -139,7 +139,7 @@
 
     });
 
-    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
+    internon.controller('coordinator_enroll_student_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.choice_advertisement = {
                 'option': {'name': '','value':'','strict':false},
         };

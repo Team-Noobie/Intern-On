@@ -6,6 +6,10 @@
             $localStorage.$reset();
             $state.go('index');
         };
+            
+        $scope.edit = function(){
+            password.open_edit_modal();
+        }
 
         $scope.init = function () {
 				$state.go('user_administrator.administrator');
