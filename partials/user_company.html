@@ -81,70 +81,71 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
-                        <div class="row">
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
-                                <a href="" style="padding-top:20px;">upload image</a>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                            <p>IMAGE</p>
+                            <a href="" style="padding-top:20px;">upload image</a>
+                        </div>
 
-                            <div class="col-md-8">
-                                <h1>{{company.company_name}}</h1>
-                                <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
-                                <p>Contact Number: {{company.company_contact_no}}</p>
-                                <p>Address: {{company.company_address}} </p>
+                        <div class="col-md-8">
+                            <h1>{{company.company_name}}</h1>
+                            <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
+                            <p>Contact Number: {{company.company_contact_no}}</p>
+                            <p>Address: {{company.company_address}} </p>
+                        </div>
+
+                        <div class="col-md-12">
+                                <button ng-click="edit_info(company,1)" class="btn btn-info btn-sm">Edit</button> 
+                        </div>
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Company Overview</h3>  
+                                </div>
+                                    <div class="panel-body">
+                                    <p>{{company.company_overview}}</p>
+                                    <button ng-click="edit_info(company,2)" class="btn btn-info btn-sm">Edit</button>
+                                </div>
                             </div>
-                            <div class="col-md-12">
-									<button ng-click="edit_info(company,1)" class="btn btn-info btn-sm">Edit</button> 
-							</div>
-                        </div> 
+                        </div>
                     </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h3>Company Overview</h3>  
-                                    </div>
-                                        <div class="panel-body">
-                                        <p>{{company.company_overview}}</p>
-                                        <button ng-click="edit_info(company,2)" class="btn btn-info btn-sm">Edit</button>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Company Snapshot</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Industry: {{company.company_industry}}</p>
+                                    <p>Website: {{company.company_website}}</p>
+                                    <p>Spoken Language: {{company.company_spoken_lang}}</p>
+                                    <p>Benefits: {{company.company_benefits}}</p>
+                                    <button ng-click="edit_info(company,3)" class="btn btn-info btn-sm">Edit</button>
                                 </div>
                             </div>
                         </div>
+                    </div>       
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h3>Company Snapshot</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Industry: {{company.company_industry}}</p>
-                                        <p>Website: {{company.company_website}}</p>
-                                        <p>Spoken Language: {{company.company_spoken_lang}}</p>
-                                        <p>Benefits: {{company.company_benefits}}</p>
-                                        <button ng-click="edit_info(company,3)" class="btn btn-info btn-sm">Edit</button>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3>Why Join Us?</h3>
                                 </div>
-                            </div>
-                        </div>       
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                       <h3>Why Join Us?</h3>
-                                    </div>
-                                    <div class="panel-body"> 
-                                        <p>{{company.company_why_join_us}}</p>
-                                        <button ng-click="" class="btn btn-info btn-sm">Edit</button>
-                                    </div>  
-                                </div>
+                                <div class="panel-body"> 
+                                    <p>{{company.company_why_join_us}}</p>
+                                    <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                                </div>  
                             </div>
                         </div>
-            </div>
-        </div>    
+                    </div>
+                </div>
+            </div>    
+        </div>
     </div>
 </script>
 
@@ -221,7 +222,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <i class="fa fa-university"></i> Departments
+                        <i class="fa fa-bar-chart-o"></i> Departments
                     </li>
                 </ol>
             </div>
@@ -251,6 +252,60 @@
         </div>   
     </div>
 </script>   
+<script type="text/ng-template" id="company_create_ads.html">
+            <div class="container-fluid">
+                <h4>Create Advertisement</h4>
+                <form class="form-horizontal post-ads" method="post"> 
+                    <div class="form-group">
+                        <label for="adTitle" class="cols-sm-2 control-label">Title</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="ad-title" ng-model="formdata.ad_title"  placeholder="Title" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adTitle" class="cols-sm-2 control-label">Job Description</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                            </div>
+                            <div ckeditor="options" ng-model="formdata.ad_description" ready="onReady()">
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                    <p>watta men</p>
+                                </textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adContacts" class="cols-sm-2 control-label">Contacts</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="ad-contacts" ng-model="formdata.ad_contacts"  placeholder="Contacts" required/>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label for="workLocation" class="cols-sm-2 control-label">Work Location</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="ad-location" ng-model="formdata.ad_location"  placeholder="Work Location" required/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-md" ng-click="cancel()"  id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            </div> 
+        </form>
+    </div>
+</script>
 <script type="text/ng-template" id="company_ads.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -269,7 +324,7 @@
         <!-- /.row -->
         <div class="row">
             <div class = "col-md-4">
-                <a ui-sref="user_company.company_create_ads"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Advertisement</a> 
+                <a ui-sref="user_company.company_create_ads"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Ad</a> 
             </div>
             <div class = "col-md-4">
                 <span uib-dropdown on-toggle="toggled(open)" class="pull-left">
@@ -299,7 +354,7 @@
         </div>   
         <div>
         </script>   
-<script type="text/ng-template" id="company_create_ads.html">
+        <script type="text/ng-template" id="company_create_ads.html">
             <div class="container-fluid">
                  <h1 class="page-header">
                     Create New Advertisement
@@ -326,22 +381,15 @@
 
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="adContacts" class="cols-sm-2 control-label">Related Industries</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="ad-contacts" ng-model="formdata.ad_related_industry"  placeholder="Related Industries" required/>
-                        </div>
-                    </div>
                     
                     <div class="form-group">
                         <label for="adContacts" class="cols-sm-2 control-label">Contacts</label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
                             <input type="text" class="form-control" id="ad-contacts" ng-model="formdata.ad_contacts"  placeholder="Contacts" required/>
                         </div>
                     </div>
+                </div> 
 
                 <div class="form-group">
                     <label for="workLocation" class="cols-sm-2 control-label">Work Location</label>
@@ -350,16 +398,15 @@
                         <input type="text" class="form-control" id="ad-location" ng-model="formdata.ad_location"  placeholder="Work Location" required/>
                     </div>
                 </div>
+            </div> 
 
-            <div class="row">   
-                    <div class="col-md-4">
-                        <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-danger btn-md" ng-click="cancel()"  id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-                    </div> 
-                </form>
+            <div class="form-group">
+                <button class="btn btn-info btn-md" id="add" ng-click="save()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Save</button>
             </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-md" ng-click="cancel()"  id="cancel-ad"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            </div> 
+        </form>
     </div>
 </script>
 <script type="text/ng-template" id="company_schedules.html">
@@ -426,18 +473,16 @@
         <!-- /.row -->
         <div class="row">
             <div class = "col-md-4"> <!-- for active/graduate-->
-            Status: 
                 <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]" ng-options="status as status.name for status in choices_status"></select>                    
                 </div>
-
+                Status
             </div> 
             <div class = "col-md-4"> <!-- for department-->
-             Department: 
                 <div class="btn-group" uib-dropdown>
                     <select style="text-transform:capitalize" class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
                 </div>
-               
+                Department
             </div>  
         </div>   
 
@@ -447,8 +492,8 @@
                     <tr>
                         <th>Student Name</th>
                         <th>Department</th>
-                        <th>Hours Rendered</th>
-                        <th>Required Hours</th>
+                        <th>Timecard</th>
+                        <th>Rendered Hours</th>
                     </tr>
                     <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
                         <td><h5>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</h5></td>
@@ -461,6 +506,7 @@
         </div>   
     </div>
 </script>
+
 <script type="text/ng-template" id="view_rendered.html">    
    <div class="modal-header">
        Timecard Summary
@@ -709,21 +755,21 @@
     </div>
 </script>
 <script type="text/ng-template" id="company_ad_modal.html">
-<div class="modal-header">
-</div>
-        <div class="modal-body">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h2 style="text-transform:uppercase">{{formdata.ads_title}}</h2>
-                </div>
-                <div class="panel-body">
-                    <h3><b>Job Description:</b></h3><h4 ng-bind-html="formdata.ads_job_description"></h4>   
-                    <h3><b>Related Industry:</b></h3><h4 ng-bind-html="formdata.ads_related_industry"></h4>
-                </div>
-            </div>                
-        </div> 
-<div class="modal-footer">
-</div>
+    <div class="modal-header">
+    </div>
+    <div class="modal-body">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h2 style="text-transform:uppercase">{{formdata.ads_title}}</h2>
+            </div>
+            <div class="panel-body">
+                <h3><b>Job Description:</b></h3><h4 ng-bind-html="formdata.ads_job_description"></h4>   
+                <h3><b>Related Industry:</b></h3><h4 ng-bind-html="formdata.ads_related_industry"></h4>
+            </div>
+        </div>                
+    </div> 
+    <div class="modal-footer">
+    </div>
 </script>
 <script type="text/ng-template" id="company_add_department_modal.html">
     <div class="modal-body">
@@ -744,16 +790,14 @@
                     <label for="username">Username: {{symbol}}_{{formdata.hr_username}}</label>                    
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">
-                    <label class="control-label">Firstname</label>
-                    <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Firstname">
+                    <input class="form-control" type="text" ng-model="formdata.hr_firstname" required ng-required="true" placeholder="Enter HR Firstname">
                 </div>
-                <div class="col-lg-12" style="margin-bottom:5px;">
-                    <label class="control-label">Lastname</label>
-                    <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Lastname">
+                <div class="col-lg-12" style="margin-bottom:5px;">                
+                    <input class="form-control" type="text" ng-model="formdata.hr_lastname" required ng-required="true" placeholder="Enter HR Lastname">
                 </div>
-                <div class="col-lg-12" style="margin-bottom:5px;">   
-                    <label class="control-label">E-mail Address</label>                 
-                    <input class="form-control" type="text" ng-model="formdata.hr_email" required ng-required="true" placeholder="E-mail Address">                                                
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.hr_email" required ng-required="true" placeholder="Enter E-Mail Address">                                                
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                                        
                     <button class="btn btn-success" ng-click="add_HR.$valid && add()">Add</button>
@@ -769,20 +813,20 @@
                     <label for="username">Username: {{symbol}}_{{formdata.sv_username}}</label>                                        
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">
-                     <label class="control-label">Firstname</label>                                         
-                    <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Firstname">
+                    <input class="form-control" type="text" ng-model="formdata.sv_firstname" required ng-required="true" placeholder="Enter SV Firstname">
                 </div>
-                <div class="col-lg-12" style="margin-bottom:5px;">    
-                     <label class="control-label">Lastname</label>                                                     
-                    <input class="form-control" type="text" ng-model="formdata.sv_lastname" required ng-required="true" placeholder="Lastname">
+                <div class="col-lg-12" style="margin-bottom:5px;">                
+                    <input class="form-control" type="text" ng-model="formdata.sv_lastname" required ng-required="true" placeholder="Enter SV Lastname">
+                </div>
+                <div class="col-lg-12" style="margin-bottom:5px;">                    
+                    <input class="form-control" type="text" ng-model="formdata.sv_username" required ng-required="true" placeholder="Enter username">
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;"> 
                     <label class="control-label">E-mail Address</label>                                                            
                     <input class="form-control" type="text" ng-model="formdata.sv_email" required ng-required="true" placeholder="E-mail Address">                                                
                 </div>
                 <div class="btn-group col-lg-12" uib-dropdown>
-                     <label class="control-label">Select Department</label>                                         
-                    <select style="text-transform:uppercase" class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+                    <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
                 </div>
                 <div class="col-lg-12" style="margin-bottom:5px;">                                        
                     <button class="btn btn-success" ng-click="add_SV.$valid && add()">Add</button>

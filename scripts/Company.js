@@ -95,7 +95,7 @@
                             }
                         }
                     },
-                    size: 'md',
+                    size: 'sm',
                     resolve: {
                             type: function () {
                                 return type;
@@ -499,6 +499,22 @@
                     });
             };
 
+        $scope.viewTimecardModal = function(){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'intern_timecard_modal.html',
+                controller: function($scope,$http,$uibModalInstance){
+                    
+                },
+                size: 'sm',
+                resolve: {
+                    }
+                });
+
+                modalInstance.result.then(function () {
+                    return 1;
+                });
+        };
     });
     // internon.controller('result_modal_Controller',function(id,type,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
     //     // get department

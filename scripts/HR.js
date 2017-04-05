@@ -352,7 +352,7 @@
                     };
 
                 },
-                size: 'md',
+                size: 'sm',
                 resolve: {
                     id:function(){
                         return id;
@@ -373,8 +373,7 @@
                     });
                 });
         };
-
-         $scope.viewRendered = function(timecard,total){
+        $scope.viewRendered = function(timecard,total){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
@@ -392,7 +391,7 @@
                         }
                     }
                     });
-            };
+        };
     });
     internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.today = function() {
