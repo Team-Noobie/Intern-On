@@ -177,7 +177,7 @@
                 templateUrl: 'remarks_modal.html',
                 controller: function(remarks,$scope){
                     $scope.remarks = remarks;
-                    console.log(remarks);
+                    // console.log(remarks);
                 },
                 size: 'md',
                 resolve: {
@@ -230,7 +230,7 @@
                 templateUrl: 'hr_sched_remarks_modal.html',
                 controller: function(id,$http,$scope,$uibModalInstance){
                     $scope.save = function(){
-                        $http.post(urls.API_HOST + '/interview_result/'+id , {remarks: $scope.remarks}).then(function (response){
+                        $http.post(urls.API_HOST + '/interview_result/'+id , {remarks: $scope.remarks,hr_id:$localStorage.id}).then(function (response){
                             // $scope.applications = response.data;
                             $uibModalInstance.close();
                         });
@@ -406,7 +406,7 @@
         $scope.set = function(){
             $scope.date = ($scope.dt.getYear()+1900)+"-"+($scope.dt.getMonth()+1)+"-"+$scope.dt.getDate();
             $scope.time = $scope.mytime.getHours()+":"+$scope.mytime.getMinutes();            
-            console.log($scope.date + " "+$scope.time);
+            // console.log($scope.date + " "+$scope.time);
             $http.post(urls.API_HOST + '/set_interview/'+id,{reason:$scope.reason,interview_date:$scope.date,interview_time:$scope.time}).then(function (response){
                 $uibModalInstance.close();         
             });

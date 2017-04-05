@@ -180,9 +180,12 @@
 
     });
 
-    internon.controller('view_section_students_controller',function(students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('view_section_students_controller',function(password,students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.students = students;
         // console.log(students);
+        $scope.reset = function(id){
+            password.open_reset_modal(id);
+        }
     });
 
     internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
