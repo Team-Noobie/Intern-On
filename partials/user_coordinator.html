@@ -41,7 +41,7 @@
                 </li>
                 <li>
                     <a ui-sref="user_coordinator.coordinator_grades"><i class="fa fa-check"></i> Grades</a>
-                </li>   
+                </li>
                 <!--<li>
                     <a ui-sref="user_coordinator.coordinator_files"><i class="fa fa-files-o"></i> Files</a>
                 </li>   -->
@@ -50,7 +50,7 @@
         <!-- /.navbar-collapse -->
     </nav>
 
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <ui-view style="width: inherit;">
         </ui-view>
     </div>
@@ -77,37 +77,37 @@
                         </div>
 
                         <div class="col-md-8">
-                                    <h1 style="text-transform:capitalize">{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
-                                    <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
-                                    <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
-                                    <p style="text-transform:capitalize">Address: {{coordinator.coordinator_address}} </p>
-                            </div>
-                            <div class="col-md-12">
-									<button ng-click="edit_info(coordinator,1)" class="btn btn-info btn-sm">Edit</button> 
-							</div>
+                            <h1 style="text-transform:capitalize">{{coordinator.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
+                            <p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p>
+                            <p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
+                            <p style="text-transform:capitalize">Address: {{coordinator.coordinator_address}} </p>
                         </div>
-                    </div> 
-                </div>
-
-
-                    <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3>School Background</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <p>Department: {{coordinator.coordinator_department}}</p>
-                                    <p>Institute: {{coordinator.coordinator_institute}}</p>
-                                    <p>School: {{coordinator.coordinator_school}}</p>   
-                                    <button ng-click="" class="btn btn-info btn-sm">Edit</button>
-                                </div>
-                            </div>
+                            <button ng-click="edit_info(coordinator,1)" class="btn btn-info btn-sm">Edit</button>
                         </div>
                     </div>
-
+                </div>
             </div>
-        </div>    
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3>School Background</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>Department: {{coordinator.coordinator_department}}</p>
+                            <p>Institute: {{coordinator.coordinator_institute}}</p>
+                            <p>School: {{coordinator.coordinator_school}}</p>
+                            <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     </div>
 </script>
 
@@ -128,10 +128,10 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class = "col-md-4">
-                <a style="cursor:pointer;" ng-click="newSection(ad.ID)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create A Section</a> 
+            <div class="col-md-4">
+                <a style="cursor:pointer;" ng-click="newSection(ad.ID)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create A Section</a>
             </div>
-        </div>      
+        </div>
 
         <div class="row" style="margin-top:10px">
             <div class="col-lg-12">
@@ -142,23 +142,27 @@
                         <th>Actions</th>
                     </tr>
                     <tr ng-repeat="sec in section">
-                        <td><h5 style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{sec.section_code}}</h5></td>
-                        
-                        <td><h5>{{sec.created_at}}</h5></td>
+                        <td>
+                            <h5 style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{sec.section_code}}</h5>
+                        </td>
+
+                        <td>
+                            <h5>{{sec.created_at}}</h5>
+                        </td>
                         <td><button style="margin-right:5px;" ng-click="viewSectionStudents(sec.students)" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Students</button>
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
                     </tr>
                 </table>
             </div>
-        </div>   
-            <!--<input type="file" id="fileUpload" />
+        </div>
+        <!--<input type="file" id="fileUpload" />
             <input type="button" ng-click="uploadCSV()" value="Upload" />
             <hr />
             <div id="dvCSV">
 
             </div>-->
 
-        </script>   
+</script>
 
 
 <script type="text/ng-template" id="create_student_section.html">
@@ -167,18 +171,18 @@
         <div class="cols-sm-6">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" ng-model="formdata.section_code"  placeholder="Section Code" required/>
+                <input type="text" class="form-control" ng-model="formdata.section_code" placeholder="Section Code" required/>
             </div>
-            <button style="margin-top:1em;" class="btn btn-info btn-md" id="add" ng-click="createSection()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button> 
+            <button style="margin-top:1em;" class="btn btn-info btn-md" id="add" ng-click="createSection()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Section</button>
         </div>
-    </div>        
+    </div>
 </script>
 
 <script type="text/ng-template" id="view_section_students.html">
     <div class="modal-body" style="height:500px">
         <div class="col-md-4" style="margin-bottom:1em;">
             <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
-        </div> 
+        </div>
         <div class="col-md-12">
             <table class="table table-striped table-hover">
                 <tr>
@@ -189,11 +193,12 @@
                     <td><a style="cursor:pointer;text-transform:capitalize;" ng-click="openAdModal(ad.id)">{{student.student.student_lastname}}, {{student.student.student_firstname}}</a></td>
                     <td>
                         <button style="margin-right:5px;" ng-click="reset(student.student.user_ID)" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
-                        <button class="btn btn-danger btn-sm" ng-click="delete_account(student.student.user_ID)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td></td>
+                        <button class="btn btn-danger btn-sm" ng-click="delete_account(student.student.user_ID)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td>
+                    </td>
                 </tr>
             </table>
         </div>
-        </div>        
+    </div>
 </script>
 
 <script type="text/ng-template" id="">
@@ -207,34 +212,35 @@
                         <form>
                             <div class="input-group">
                                 <label for="name" class="cols-sm-2 control-label">Student Username</label>
-                                <input type="text" class="form-control" ng-model="formdata.student_username"  placeholder="Username" required/>
+                                <input type="text" class="form-control" ng-model="formdata.student_username" placeholder="Username" required/>
                             </div>
                             <div class="input-group">
-                                <label for="name" class="cols-sm-2 control-label">Student Firstname</label>                     
-                                <input type="text" class="form-control" ng-model="formdata.student_firstname"  placeholder="Firstname" required/>
+                                <label for="name" class="cols-sm-2 control-label">Student Firstname</label>
+                                <input type="text" class="form-control" ng-model="formdata.student_firstname" placeholder="Firstname" required/>
                             </div>
 
                             <div class="input-group">
-                                <label for="name" class="cols-sm-2 control-label">Student Lastname</label>                                         
-                                <input type="text" class="form-control" ng-model="formdata.student_lastname"  placeholder="Lastname" required/>
+                                <label for="name" class="cols-sm-2 control-label">Student Lastname</label>
+                                <input type="text" class="form-control" ng-model="formdata.student_lastname" placeholder="Lastname" required/>
                             </div>
-                            <div class = "input-group">
+                            <div class="input-group">
                                 <label for="name" class="cols-sm-2 control-label">Select Section</label></br>
                                 <div class="btn-group" uib-dropdown>
-                                    <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]" ng-options="ads as ads.name for ads in choices_advertisement"></select>
+                                    <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]"
+                                        ng-options="ads as ads.name for ads in choices_advertisement"></select>
                                 </div>
                             </div>
                             </br>
-                            <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Student</button> 
+                            <button class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Student</button>
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
-    
+
     <div class="modal-footer">
-    </div>           
+    </div>
 
 </script>
 
@@ -251,7 +257,8 @@
                                 <h5>Student Number</h5>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" name="username" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Student Number" ng-model="formdata.student_username">
+                                <input type="text" name="username" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Student Number"
+                                    ng-model="formdata.student_username">
                                 <label for="username">Username: {{symbol}}_{{formdata.student_username}}</label>
                             </div>
                         </div>
@@ -260,7 +267,8 @@
                                 <h5>Last Name</h5>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Last Name" ng-model="formdata.student_lastname">
+                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Last Name"
+                                    ng-model="formdata.student_lastname">
                             </div>
                         </div>
                         <div class="row">
@@ -268,7 +276,8 @@
                                 <h5>First Name</h5>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="First Name" ng-model="formdata.student_firstname">
+                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="First Name"
+                                    ng-model="formdata.student_firstname">
                             </div>
                         </div>
                         <div class="row">
@@ -276,30 +285,33 @@
                                 <h5>E-mail Address</h5>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="E-mail Address" ng-model="formdata.student_email">
+                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="E-mail Address"
+                                    ng-model="formdata.student_email">
                             </div>
-                        </div>         
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <h5>Contact No.</h5>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Contact No." ng-model="formdata.student_contact_no">
+                                <input type="text" class="form-control" ng-click="$event.preventDefault(); $event.stopPropagation();" placeholder="Contact No."
+                                    ng-model="formdata.student_contact_no">
                             </div>
                         </div>
-                        <div class = "row">
+                        <div class="row">
                             <div class="col-md-4">
                                 <h5>Select Section</h5>
-                            </div> 
-                            <div class="col-md-8">   
+                            </div>
+                            <div class="col-md-8">
                                 <div class="btn-group" uib-dropdown>
-                                    <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]" ng-options="ads as ads.name for ads in choices_advertisement"></select>
+                                    <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]"
+                                        ng-options="ads as ads.name for ads in choices_advertisement"></select>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
         <button style="margin-top:1em;position:relative;left:50%;" class="btn btn-info btn-md" id="add" ng-click="enrollStudent()"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Student</button>
     </div>
@@ -322,7 +334,7 @@
                         </li>
                     </ol>
                 </div>
-            </div>   
+            </div>
             <div class="row" style="margin-top:10px">
                 <div class="col-md-8" style="left:40%;margin-top:5em;margin-bottom:2em;">
                     <button style="margin-right:5px;" ng-click="enrollStudentModal()" class="btn btn-info btn-lg"><i class="fa fa-sign-in" aria-hidden="true"></i> Enroll Single Student</button>
@@ -332,7 +344,7 @@
                     <button style="margin-right:5px;" ng-click="" class="btn btn-info btn-lg"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Enroll Group of Students (Upload CSV File)</button>
                 </div>
             </div>
-        </div>   
+        </div>
     </div>
 </script>
 
@@ -355,27 +367,38 @@
 
         <div class="row" style="margin-top:10px">
             <div class="col-lg-12">
+                <label for="name" class="cols-sm-2 control-label">Select Section</label></br>
+                <div class="btn-group" uib-dropdown>
+                    <div class="col-md-4">
+                        <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]"
+                        ng-options="ads as ads.name for ads in choices_advertisement"></select>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-info" ng-click="select()">Select</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-warning" ng-click="">Download Report</button>
+                    </div>
+                </div>
                 <table class="table table-striped table-hover">
                     <tr>
-                        <th>Date</th>
+                        <th>Name</th>
                         <th>Time Rendered</th>
                         <th>Required Hours</th>
                         <th>Report</th>
                         <th>Grade</th>
                     </tr>
-                    <!--<tr ng-repeat="sec in section">-->
-                        <tr>
-                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">RIAN KRISTOFFER VILORIA</a></td>
-                        
-                        <td><a ng-click="viewRendered()">90</a></td>
-                        <td>200</td>
+                    <tr ng-repeat="student in students">
+                        <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{student.student.student_firstname}} {{student.student.student_lastname}}</a></td>
+                        <td><a ng-click="viewRendered(student.Intern[0].timecard,student.Intern[0].rendered_hours)">{{convert(student.Intern[0].rendered_hours)}}</a></td>
+                        <td>{{student.Intern[0].required_hours}}</td>
                         <td><button ng-click="viewReports()" class="btn btn-info">Summary</button></td>
                         <td><a ng-click="viewGrade()">100</a></td>
-                        </tr>
+                    </tr>
                     <!--</tr>-->
                 </table>
             </div>
-        </div>   
+        </div>
     </div>
 </script>
 
@@ -398,14 +421,14 @@
         <div class="row">
             <div class="col-md-4">
                 <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
-            </div> 
-        </div>      
+            </div>
+        </div>
 
         <div class="row" style="margin-top:10px">
             <div class="col-lg-12">
-                
+
             </div>
-        </div>   
+        </div>
     </div>
 </script>
 
@@ -418,4 +441,41 @@
         <button ng-click="yes()" class="btn btn-success">Yes</button>
         <button ng-click="no()" class="btn btn-danger">No</button>
     </div>
+</script>
+<script type="text/ng-template" id="view_rendered.html">    
+   <div class="modal-header">
+       Timecard Summary
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th>Date</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>No. of Hours</th>
+                                
+                            </tr>
+                            <tr ng-repeat="timecard in timecards">
+                                <td>{{timecard.date}}</td>
+                                <td>{{timecard.time_in}}</td>
+                                <td>{{timecard.time_out}}</td>
+                                <td>{{convert(timecard.hours_render)}}</td>
+                            </tr>
+                            <tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>{{convert(total)}}</td></tr>
+                                     
+                            <!--</tr>-->
+                        </table>
+                    </div>        
+                </div>
+            </div> 
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+    </div>           
+
 </script>

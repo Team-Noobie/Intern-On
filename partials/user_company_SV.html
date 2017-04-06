@@ -189,7 +189,6 @@
                     </tr>
                     <tr ng-repeat="intern in interns">
                         <td><h5>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</h5></td>
-                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a>{{rendered_hours}}</td>
                         <td>
                             <button class="btn btn-success" ng-click="addReportModal(intern.id)">Add Reports</button>
                             <div class="btn-group col-md-6" uib-dropdown>
@@ -216,7 +215,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><a ng-click="viewRendered()"><h5>90</h5></a></td>
+                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a>{{rendered_hours}}</td>
                         <td><h5>200</h5></td>
                     </tr>
 
