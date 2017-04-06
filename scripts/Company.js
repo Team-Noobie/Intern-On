@@ -25,7 +25,7 @@
 				var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: template,
-				controller: function(data,type,$scope,urls,$localstorage,$http,$uibModalInstance){
+				controller: function(data,type,$scope,urls,$localStorage,$http,$uibModalInstance){
 					$scope.company = data;
                     $scope.save = function(){
                         $http.post(urls.API_HOST + '/edit_company_profile/'+$localStorage.id, $scope.company).then(function (response){
