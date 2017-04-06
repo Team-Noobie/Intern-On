@@ -25,14 +25,22 @@
 				var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: template,
-				controller: function(data,$scope){
+				controller: function(data,type,$scope,urls,$localstorage,$http,$uibModalInstance){
 					$scope.company = data;
+                    $scope.save = function(){
+                        $http.post(urls.API_HOST + '/edit_company_profile/'+$localStorage.id, $scope.company).then(function (response){
+                            $uibModalInstance.close();
+                        });
+                    }
 				},
 				size: 'md',
 				resolve: {
 						data: function () {
 							return data;
-						}
+						},
+                        type:function(){
+                            return type;
+                        }
 					}
 				});
 
@@ -40,26 +48,7 @@
 					return 1;
 				});
 			}
-
-    //    $scope.editPassword = function(id){
-	// 			var modalInstance = $uibModal.open({
-	// 				animation: true,
-	// 				templateUrl: 'company_setting.html',
-	// 				controller: 'company_controller',
-	// 				size: 'md',
-	// 				resolve: {
-	// 						id: function () {
-	// 							return id;
-	// 						}
-	// 					}
-	// 				});
-
-	// 				modalInstance.result.then(function (id) {
-	// 					return 1;
-	// 				});
-	// 		};     
-
-        $scope.edit = function(){
+        $scope.editPassword = function(){
             password.open_edit_modal();
         }
     });
@@ -135,7 +124,46 @@
                             });
                         }
                     });
-            };
+        };
+
+        $scope.delete_account = function(id,account){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'confirm_modal.html',
+                    controller: function(id,account,$scope,$http,$uibModalInstance){
+                        $scope.yes = function(){
+                            $http.post(urls.API_HOST + '/delete_account/'+id, {account_type: account}).then(function (response){
+                                $uibModalInstance.close();
+                            });
+                        };
+                        $scope.no = function(){
+                            $uibModalInstance.close();
+                        };
+                    },
+                    size: 'sm',
+                    resolve: {
+                        id: function(){
+                                return id;
+                            },
+                        account:  function(){
+                            return account;
+                            }
+                        },
+                        
+                    });
+
+                    modalInstance.result.then(function () {
+                        $http({method: 'GET', url: urls.API_HOST + '/hr_list/'+$localStorage.id}).then(function(response){
+                                    $scope.hr = {};
+                                    $scope.hr = response.data;
+                        });
+
+                        $http({method: 'GET', url: urls.API_HOST + '/sv_list/'+$localStorage.id}).then(function(response){
+                                    $scope.sv = {};
+                                    $scope.sv = response.data;
+                        });
+                    });
+        };      
         
     });
     internon.controller('company_departments_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
@@ -186,8 +214,6 @@
         };
     });
     internon.controller('advertisement_list_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-
-        if($state.current.name == 'user_company.company_ads'){
             $scope.choice = {
                 'option': {'name': '','value':''},
             };
@@ -220,7 +246,17 @@
                         return 1;
                     });
             };
-        }
+
+            $scope.toggle = function(id,data){
+                $http.post(urls.API_HOST + '/toggle_ads_visibility/'+id, {toggle:data}).then(function (response){
+                    $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
+                        $scope.ads = {};
+                        $scope.ads = response.data;
+                    });   
+                });
+            }
+            
+
     });
     internon.controller('create_advertisement_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.formdata={ 
@@ -454,9 +490,16 @@
     //     };
 
     // });
-    internon.controller('company_interns_controller',function(urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+    internon.controller('company_interns_controller',function(Utilities,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
         $http({method: 'GET', url: urls.API_HOST + '/intern_list/'+$localStorage.id}).then(function(response){
             $scope.interns = response.data;
+            for(var i = 0;i<response.data.length;i++){
+                $scope.interns[i].rendered_hours = Utilities.convert($scope.interns[i].rendered_hours); 
+                // console.log(Utilities.convert(response.data[i].rendered_hours));
+                for(var x = 0;x<$scope.interns[i].timecard.length;x++){
+                    $scope.interns[i].timecard[x].hours_render = Utilities.convert($scope.interns[i].timecard[x].hours_render);
+                }    
+            }
         });
         
 
@@ -484,21 +527,25 @@
             }
         });
 
-         $scope.viewRendered = function(timecard){
+         $scope.viewRendered = function(timecard,total){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
-                    controller: function(timecard,$scope,$uibModalInstance){
+                    controller: function(Utilities,timecard,total,$scope,$uibModalInstance){
                         $scope.timecards = timecard;
+                        $scope.total = total;
                     },
                     size: 'lg',
                     resolve:{
                         timecard: function(){
                                 return timecard;
                         },
+                        total: function(){
+                                return total;
+                        }
                     }
                     });
-            };
+        };
 
         $scope.viewTimecardModal = function(){
             var modalInstance = $uibModal.open({

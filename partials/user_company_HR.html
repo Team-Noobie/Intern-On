@@ -418,7 +418,7 @@
                     <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td style="text-transform:uppercase">{{intern.department.department_name}}</td> 
-                        <td><button class="btn btn-info" ng-click="viewTimecardModal()"><i class="fa fa-clock-o" aria-hidden="true"></i> Update Timecard</button></td>
+                        <td><button class="btn btn-info" ng-click="viewTimecardModal(intern.id)"><i class="fa fa-clock-o" aria-hidden="true"></i> Update Timecard</button></td>
                         <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a></td>
                     </tr>
                 </table>
@@ -470,33 +470,43 @@
 <script type="text/ng-template" id="result_modal.html"> 
     <div class="modal-body">
         <div class="row" ng-if="type == 'accept'">
-            <div class="col-md-8">
-                Required Hours:
-            </div>
-            <div class="col-md-6">
-                <input type="text" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model = "formdata.required_hours" class="form-control" required>
-            </div>
-            <div class="col-md-8">
-                Select Department to Appoint: 
-            </div>
-            <div class="btn-group col-lg-12" uib-dropdown>
-                <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
-            </div>
-            <div class="col-md-12"> 
-                <button class="btn btn-success" ng-click="hire()"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>                
-            </div>
+            <form name="accept">
+                <div class="col-md-8">
+                    Required Hours:
+                </div>
+                <div class="col-md-6">
+                    <input type="text" ng-required="true" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model = "formdata.required_hours" class="form-control" required>
+                </div>
+                <div class="col-md-8">
+                    Select Department to Appoint: 
+                </div>
+                <div class="btn-group col-lg-12" uib-dropdown>
+                    <select class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
+                </div>
+                <!--<div class="col-md-12"> 
+                    <button class="btn btn-success" ng-click="hire()"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>                
+                </div>-->
         </div> 
         <div class="row" ng-if="type == 'reject'">
             <form name="reject">
                 <div class="col-md-6">
                     Comment:
                     <textarea name="comment" cols="30" rows="10" ng-model="comment" ng-required="true" required ng-click="$event.preventDefault(); $event.stopPropagation();"></textarea>                
-                    <div class="row"  style="margin: 0 0 0 0;">
+                    <!--<div class="row"  style="margin: 0 0 0 0;">
                         <button class="btn btn-danger" ng-click="reject.$valid && reject()"><i class="fa fa-check" aria-hidden="true"></i> Reject</button>                                    
-                    </div>
+                    </div>-->
                 </div>                
-            </form>
         </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row" ng-if="type == 'accept'">
+            <button class="btn btn-success" ng-click="accept.$valid && hire()"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>                            
+        </div>
+
+        <div class="row" ng-if="type == 'reject'">
+            <button class="btn btn-danger" ng-click="reject.$valid && reject()"><i class="fa fa-check" aria-hidden="true"></i> Reject</button>                                    
+        </div>
+        </form>
     </div>
 </script>
 <script type="text/ng-template" id="view_rendered.html">    
@@ -544,15 +554,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="control-label"><b>Date</b></label>
-                        <input type="date" class="form-control" placeholder="Date" required>
+                        <input type="date" ng-model="dt" class="form-control" placeholder="Date" required>
                     </div>
                     <div class="col-md-12">
                         <label class="control-label"><b>Time In (24-hour format)</b></label>
-                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
+                        <div uib-timepicker ng-model="inMytime" ng-change="changed()" hour-step="inHstep" minute-step="inMstep" show-meridian="ismeridian" required></div>
                     </div>
                     <div class="col-md-12">
                         <label class="control-label"><b>Time Out (24-hour format)</b></label>
-                        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></div>
+                        <div uib-timepicker ng-model="outMytime" ng-change="changed()" hour-step="outHstep" minute-step="outMstep" show-meridian="ismeridian" required></div>
                     </div>
                 </div>
             </div>
@@ -578,13 +588,12 @@
                         <label for="remarks" class="cols-sm-2 control-label">Remarks</label>
                         <textarea name="remarks" cols="30" rows="10" ng-model="remarks" ng-required="true" required></textarea>
                     </div>
-                    <div class="col-md-12"> <button class="btn btn-success" ng-click="remarks_form.$valid && save()">Save</button> </div>
                 </div>
-            </form>
         </div>
     </div>     
     <div class="modal-footer">
         <div class="col-md-12"> <button class="btn btn-success" ng-click="remarks_form.$valid && save()">Save</button> </div>
+            </form>
     </div>
 </script>
 <script type="text/ng-template" id="student_profile_modal.html"> 
