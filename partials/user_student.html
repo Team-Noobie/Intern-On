@@ -268,7 +268,6 @@
 	<div class="modal-footer">
 	</div>
 </script>
-
 <script type="text/ng-template" id="edit_personal.html">
 	<div class="modal-header">
 		<h3 style="position:absolute; margin:auto;">Edit Personal Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
@@ -304,7 +303,6 @@
 	<div class="modal-footer">
 	</div>
 </script>
-
 <script type="text/ng-template" id="edit_educational.html">
 	<div class="modal-header">
 		<h3 style="position:absolute; margin:auto;">Edit Educational Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
@@ -604,7 +602,6 @@
 		</div>   
 	</div>
 </script>
-
 <script type="text/ng-template" id="student_timecard.html">
 	<div class="container-fluid">
 		<!-- Page Heading -->
@@ -622,7 +619,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-8">
-							<h3>Required Hours: 200</h3>
+							<h3>Required Hours: {{intern.required_hours}}</h3>
 						</div>
 						<div class="col-lg-12">
 							<table class="table table-striped table-hover">
@@ -633,14 +630,13 @@
 									<th>No. of Hours</th>
 									
 								</tr>
-								<!--<tr ng-repeat="sec in section">-->
-								<tr>
-									<td>02/28/2017</td>
-									<td>10:30</td>
-									<td>18:30</td>
-									<td>8</td>
+								<tr ng-repeat="time in intern.timecard">
+									<td>{{time.date}}</td>
+									<td>{{time.time_in}}</td>
+									<td>{{time.time_out}}</td>
+									<td>{{time.hours_render}}</td>
 								</tr>
-								<tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>8</td></tr>
+								<tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>{{intern.rendered_hours}}</td></tr>
 								
 								<!--</tr>-->
 							</table>
@@ -652,8 +648,6 @@
 		<!-- /.row -->
 	</div>
 </script>
-
-
 <script type="text/ng-template" id="ad.html">
 	<div class="modal-header">
 		<h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>

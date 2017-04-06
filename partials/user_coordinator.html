@@ -21,7 +21,7 @@
                         <a ui-sref="user_coordinator.coordinator_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
-                        <a ng-click="editPassword()"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a ng-click="edit()"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -185,7 +185,9 @@
                 </tr>
                 <tr ng-repeat="student in students">
                     <td><a style="cursor:pointer;text-transform:capitalize;" ng-click="openAdModal(ad.id)">{{student.student.student_lastname}}, {{student.student.student_firstname}}</a></td>
-                    <td><button style="margin-right:5px;" ng-click="reset(student.student.user_ID)" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td></td>
+                    <td>
+                        <button style="margin-right:5px;" ng-click="reset(student.student.user_ID)" class="btn btn-warning btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                        <button class="btn btn-danger btn-sm" ng-click="delete_account(student.student.user_ID)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></td></td>
                 </tr>
             </table>
         </div>
@@ -303,10 +305,6 @@
     </div>
 </script>
 
-    <!--<script type="text/ng-template" id="section_students">
-        student
-    </script>-->
-
 <script type="text/ng-template" id="coordinator_enroll_students.html">
     <div id="page-wrapper" style="height:680px">
         <div class="container-fluid">
@@ -393,5 +391,16 @@
                 
             </div>
         </div>   
+    </div>
+</script>
+
+<script type="text/ng-template" id="confirm_modal.html">
+    <div class="modal-header">
+        <h3>Delete User</h3>
+    </div>
+    <div class="modal-body">
+        <h4>Do you really want to delete this account?</h4>
+        <button ng-click="yes()" class="btn btn-success">Yes</button>
+        <button ng-click="no()" class="btn btn-danger">No</button>
     </div>
 </script>

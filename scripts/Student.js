@@ -228,4 +228,15 @@
 			$scope.schedules = response.data;
 		});
 	});
+
+	internon.controller('student_timecard_controller',function(Utilities,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+		$http({method: 'GET', url: urls.API_HOST + '/student_timecard/'+$localStorage.id}).then(function(response){
+			$scope.intern = response.data[0];
+			$scope.intern.rendered_hours = Utilities.convert($scope.intern.rendered_hours); 
+
+			for(var x = 0;x<$scope.intern.timecard.length;x++){
+				$scope.intern.timecard[x].hours_render = Utilities.convert($scope.intern.timecard[x].hours_render);
+			}    
+        });
+	});
 })();

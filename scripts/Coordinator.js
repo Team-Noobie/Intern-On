@@ -17,9 +17,6 @@
 			});
 		};
 
-        $scope.students = [
-            {},
-        ]
         $scope.uploadCSV =function () {
             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
             if (regex.test($("#fileUpload").val().toLowerCase())) {
@@ -51,24 +48,7 @@
                 alert("Please upload a valid CSV file.");
             }
         };
-
-          $scope.editPassword = function(id){
-				var modalInstance = $uibModal.open({
-					animation: true,
-					templateUrl: 'coordinator_setting.html',
-					controller: 'coordinator_controller',
-					size: 'md',
-					resolve: {
-							id: function () {
-								return id;
-							}
-						}
-					});
-
-					modalInstance.result.then(function (id) {
-						return 1;
-					});
-			};   
+   
 
     });
 
@@ -180,12 +160,39 @@
 
     });
 
-    internon.controller('view_section_students_controller',function(password,students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('view_section_students_controller',function(password,students,urls,$http,$auth,$state,$scope,$localStorage,$uibModal,$uibModalInstance){
         $scope.students = students;
         // console.log(students);
         $scope.reset = function(id){
             password.open_reset_modal(id);
         }
+
+        $scope.delete_account = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'confirm_modal.html',
+                    controller: function(id,urls,$scope,$http,$uibModalInstance){
+                        $scope.yes = function(){
+                            console.log("POWER");
+                        };
+
+                        $scope.no = function(){
+                            $uibModalInstance.dismiss();
+
+                        };
+                    },
+                    size: 'md',
+                    resolve: {
+                        id: function(){
+                            return id;
+                        }
+                    }
+                });
+
+            modalInstance.result.then(function (students) {
+                return 1;
+            });
+        };
     });
 
     internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){

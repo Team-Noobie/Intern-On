@@ -7,10 +7,6 @@
             $state.go('index');
         };
 
-        $scope.edit = function(){
-            password.open_edit_modal();
-        }
-        
         $scope.init = function () {
                 $http({method: 'GET', url: urls.API_HOST + '/hr_profile/'+$localStorage.id}).then(function(response){
                     $scope.hr = response.data;
@@ -20,21 +16,7 @@
 		};
 
           $scope.editPassword = function(id){
-				var modalInstance = $uibModal.open({
-					animation: true,
-					templateUrl: 'hr_setting.html',
-					controller: 'hr_controller',
-					size: 'md',
-					resolve: {
-							id: function () {
-								return id;
-							}
-						}
-					});
-
-					modalInstance.result.then(function (id) {
-						return 1;
-					});
+				password.open_edit_modal();
 			};   
         
     });
@@ -65,15 +47,15 @@
             $scope.applications = response.data;
         });
         
-        $scope.accept = function($id){
-            $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$id}).then(function(response){
-            });
-        };
+        // $scope.accept = function($id){
+        //     $http({method: 'GET', url: urls.API_HOST + '/hire_applicant/'+$id}).then(function(response){
+        //     });
+        // };
 
-        $scope.reject = function($id){
-            $http({method: 'GET', url: urls.API_HOST + '/reject_application/'+$id}).then(function(response){
-            });
-        };
+        // $scope.reject = function($id){
+        //     $http({method: 'GET', url: urls.API_HOST + '/reject_application/'+$id}).then(function(response){
+        //     });
+        // };
         // $scope.test = function(){
         //     console.log($scope.strict);
         // }
@@ -344,6 +326,7 @@
                     });
                 });
         };
+        
         $scope.viewRendered = function(timecard,total){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -406,6 +389,14 @@
             $http.post(urls.API_HOST + '/hire_applicant/'+$scope.id, $scope.formdata).then(function (response){
                 $uibModalInstance.close();
             });  
-        }
+        };
+
+         $scope.reject = function(){
+            // console.log("reject");
+            $http.post(urls.API_HOST + '/reject_application/'+$scope.id, $scope.formdata).then(function (response){
+                $uibModalInstance.close();
+            });  
+        };
+
     });
 })();

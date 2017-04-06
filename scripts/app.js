@@ -273,7 +273,7 @@
                 name: 'user_student.student_timecard',
                 url: '',
                 templateUrl:  'student_timecard.html',
-                controller:''
+                controller:'student_timecard_controller'
                 },
             // Student routes
             // Coordinator routes

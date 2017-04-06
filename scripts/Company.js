@@ -133,11 +133,11 @@
                     controller: function(id,account,$scope,$http,$uibModalInstance){
                         $scope.yes = function(){
                             $http.post(urls.API_HOST + '/delete_account/'+id, {account_type: account}).then(function (response){
-                                $uibModalInstance.close();
+                                $uibModalInstance.close(account);
                             });
                         };
                         $scope.no = function(){
-                            $uibModalInstance.close();
+                            $uibModalInstance.dismiss();
                         };
                     },
                     size: 'sm',
@@ -152,7 +152,7 @@
                         
                     });
 
-                    modalInstance.result.then(function () {
+                    modalInstance.result.then(function (type) {
                         $http({method: 'GET', url: urls.API_HOST + '/hr_list/'+$localStorage.id}).then(function(response){
                                     $scope.hr = {};
                                     $scope.hr = response.data;

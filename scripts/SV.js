@@ -13,29 +13,34 @@
 				$state.go('user_company_SV.sv_profile');
 			});
 		};
-        // $scope.editPassword = function(id){
-		// 		var modalInstance = $uibModal.open({
-		// 			animation: true,
-		// 			templateUrl: 'sv_setting.html',
-		// 			controller: 'sv_controller',
-		// 			size: 'md',
-		// 			resolve: {
-		// 					id: function () {
-		// 						return id;
-		// 					}
-		// 				}
-		// 			});
-
-		// 			modalInstance.result.then(function (id) {
-		// 				return 1;
-		// 			});
-		// 	};   
 
         $scope.edit = function(){
             password.open_edit_modal();
         }
     });
-    internon.controller('sv_intern_list_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('sv_intern_list_controller',function(Utilities,password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+
+        $scope.viewRendered = function(timecard,total){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_rendered.html',
+                    controller: function(Utilities,timecard,total,$scope,$uibModalInstance){
+                        $scope.timecards = timecard;
+                        $scope.total = total;
+                    },
+                    size: 'lg',
+                    resolve:{
+                        timecard: function(){
+                                return timecard;
+                        },
+                        total: function(){
+                                return total;
+                        }
+                    }
+                    });
+        };
+
+
                 
         $scope.choice_status = {
                 'option': {'name': '','value':''},
@@ -50,6 +55,13 @@
         $http({method: 'GET', url: urls.API_HOST + '/sv_profile/'+$localStorage.id}).then(function(response){
             $http({method: 'GET', url: urls.API_HOST + '/sv_intern_list/'+response.data.department_id}).then(function(response){
                 $scope.interns = response.data;
+                for(var i = 0;i<response.data.length;i++){
+                    $scope.interns[i].rendered_hours = Utilities.convert($scope.interns[i].rendered_hours); 
+                    // console.log(Utilities.convert(response.data[i].rendered_hours));
+                    for(var x = 0;x<$scope.interns[i].timecard.length;x++){
+                        $scope.interns[i].timecard[x].hours_render = Utilities.convert($scope.interns[i].timecard[x].hours_render);
+                    }    
+                }
             });
         });
 
@@ -74,10 +86,17 @@
                 animation: true,
                 templateUrl: 'add_report_modal.html',
                 controller: function(id,urls,$localStorage,$scope,$http,$uibModalInstance){
+                    $scope.today = function() {
+                        $scope.dt = new Date();
+                    };
+                    $scope.today();
+
                     $scope.formdata = {
                         sv_id: $localStorage.id,
                     }
                     $scope.save = function(){
+                        $scope.formdata.date = ($scope.dt.getYear()+1900)+"-"+($scope.dt.getMonth()+1)+"-"+$scope.dt.getDate();
+
                         $http.post(urls.API_HOST + '/sv_report/'+id, $scope.formdata).then(function (response){
                             $uibModalInstance.close();  
                         });
