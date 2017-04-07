@@ -110,7 +110,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="jumbotron text-center">
+				<div class="jumbotron text-center panel panel-info">
 					<div class="row">
 						<div class="col-md-8">
 							<h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
@@ -392,10 +392,20 @@
 						<th>Status</th>
 					</tr>
 					<tr ng-repeat="ap in applications">
-						<td><a style="text-transform:uppercase" ng-click="viewApplication(ap.id)"><h5>{{ap.advertisement.ads_title}}</h5></a></td>
-						<td><h5>{{ap.created_at}}</h5></td>
-						<td><h5>{{ap.company.company_name}}</h5></td>
-						<td><h5>{{ap.status}}</h5></td>
+						<td>
+							<a style="text-transform:uppercase" ng-click="viewApplication(ap.id)">
+								<h5>{{ap.advertisement.ads_title}}</h5>
+							</a>
+						</td>
+						<td>
+							<h5>{{ap.created_at}}</h5>
+						</td>
+						<td>
+							<h5>{{ap.company.company_name}}</h5>
+						</td>
+						<td>
+							<h5>{{ap.status}}</h5>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -523,12 +533,24 @@
 						<th>Location</th>
 					</tr>
 					<tr ng-repeat="sched in schedules">
-						<td style="text-transform:uppercase"><h5>{{sched.application.advertisement.ads_title}}</h5></td>
-						<td><h5>{{sched.application.company.company_name}}</h5></td>
-						<td><h5>{{sched.reason}}</h5></td>
-						<td><h5>{{sched.interview_date}}</h5></td>
-						<td><h5>{{sched.interview_time}}</h5></td>
-						<td><h5>{{sched.application.company.company_address}}</h5></td>
+						<td style="text-transform:uppercase">
+							<h5>{{sched.application.advertisement.ads_title}}</h5>
+						</td>
+						<td>
+							<h5>{{sched.application.company.company_name}}</h5>
+						</td>
+						<td>
+							<h5>{{sched.reason}}</h5>
+						</td>
+						<td>
+							<h5>{{sched.interview_date}}</h5>
+						</td>
+						<td>
+							<h5>{{sched.interview_time}}</h5>
+						</td>
+						<td>
+							<h5>{{sched.application.company.company_address}}</h5>
+						</td>
 					</tr>
 
 				</table>

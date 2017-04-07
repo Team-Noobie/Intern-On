@@ -14,10 +14,21 @@
                 $state.go('user_company_HR.hr_profile');
             });
         };
+        
 
         $scope.editPassword = function (id) {
             password.open_edit_modal();
         };
+
+          $scope.myCompany = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'view_reports.html',
+                controller: "",
+                size: 'lg',
+            });
+        };
+
 
         $scope.edit_info = function (data, type) {
             var template;

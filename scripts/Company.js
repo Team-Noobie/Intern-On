@@ -185,6 +185,31 @@
                 }
             });
         };
+        
+            $scope.viewAccount = function (account,type) {
+                var template;
+                if(type==1)
+                     template = 'view_hr.html'
+                if(type==2)
+                      template = 'view_sv.html';
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    controller: function (account,$scope) {
+                        $scope.account = account;
+                    },
+                    templateUrl: template,
+                    size: 'lg',
+                    resolve: {
+                        account: function () {
+                            return account;
+                        },
+                        type: function(){
+                            return type;
+                        },
+
+                    }
+                });
+            };
 
         $scope.delete_account = function (id, account) {
             var modalInstance = $uibModal.open({
@@ -253,6 +278,7 @@
                 });
             });
         };
+
         $scope.viewEmployeesModal = function (employees) {
             var modalInstance = $uibModal.open({
                 animation: true,
