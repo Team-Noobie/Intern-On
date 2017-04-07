@@ -87,12 +87,12 @@
                                 <img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
                             </div>
                             <div style="border:solid 1px; height:50px; width:200px;">
-                                <input type="file" style="width:200px" nv-file-select uploader="uploader" filters="imageFilter"/>
+                                <input type="file" style="width:200px" nv-file-select uploader="uploader" filters="imageFilter" />
                                 <button style="margin-left: -135px;height: 25px;" ng-click="uploader.queue[0].upload()">upload</button>
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="col-md-8">
                             <h1>{{company.company_name}}</h1>
                             <p>E-mail Address: <a href="">{{company.company_email}}</a></p>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="panel-body">
                                 <p>{{company.company_why_join_us}}</p>
-                                <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                                <button ng-click="edit_info(company,4)" class="btn btn-info btn-sm">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -184,8 +184,7 @@
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{account.hr_firstname}} {{account.hr_lastname}}</a></td>
                         <td>{{account.created_at}}</td>
                         <td><button style="margin-right:5px;" class="btn btn-danger btn-sm" ng-click="delete_account(account.user_ID,'HR')"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-                            <button
-                                class="btn btn-warning btn-sm" ng-click="reset(account.user_ID,'HR')"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                            <button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID,'HR')"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
                         </td>
                     </tr>
                 </table>
@@ -205,8 +204,7 @@
                         <td>{{account.department.department_name}}</td>
                         <!--<td>{{account.created_at}}</td>-->
                         <td><button style="margin-right:5px;" class="btn btn-danger btn-sm" ng-click="delete_account(account.user_ID,'SV')"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-                            <button
-                                class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
+                            <button class="btn btn-warning btn-sm" ng-click="reset(account.user_ID)"><i class="fa fa-repeat" aria-hidden="true"></i> Reset Password</button>
                         </td>
                     </tr>
                 </table>
@@ -350,8 +348,7 @@
                     <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search : strict ">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm" ng-click="toggle(ad.id,'Show')"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button>
-                            <button
-                                class="btn btn-danger btn-sm" ng-click="toggle(ad.id,'Hide')"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button>
+                            <button class="btn btn-danger btn-sm" ng-click="toggle(ad.id,'Hide')"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button>
                         </td>
                         <td>{{ad.ads_visibility}}</td>
                         <td>{{ad.created_at}}</td>
@@ -535,6 +532,7 @@
 
                             </tr>
                             <!--<tr ng-repeat="sec in section">-->
+                            .
                             <tr ng-repeat="timecard in timecards">
                                 <td>{{timecard.date}}</td>
                                 <td>{{timecard.time_in}}</td>
@@ -925,7 +923,7 @@
                 </div>
             </div>
 
-            <button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
+            <button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
         </div>
         <div class="modal-footer">
         </div>
@@ -944,7 +942,33 @@
                                     <h5>Company Overview</h5>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea style="width:530px;height:200px">company.company_overview</textarea>
+                                    <textarea style="width:530px;height:200px" ng-model="company.company_overview"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </script>
+     <script type="text/ng-template" id="edit_wju.html">
+        <div class="modal-header">
+            <h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="modal-body">
+            <div class="main-center">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Why Join Us</h5>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea style="width:530px;height:200px" ng-model="company.company_why_join_us"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -970,7 +994,7 @@
                                     <h5>Industry</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" value="{{company.company_industry}}">
+                                    <input type="text" class="form-control" ng-model=company.company_industry>
                                 </div>
                             </div>
                             <div class="row">
@@ -978,7 +1002,7 @@
                                     <h5>Website</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" value="{{company.company_website}}">
+                                    <input type="text" class="form-control" ng-model=company.company_website>
                                 </div>
                             </div>
                             <div class="row">
@@ -986,7 +1010,7 @@
                                     <h5>Spoken Language</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" value="{{company.company_spoken_lang}}">
+                                    <input type="text" class="form-control" ng-model=company.company_spoken_lang>
                                 </div>
                             </div>
                             <div class="row">
@@ -994,7 +1018,7 @@
                                     <h5>Benefits</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea style="width:342px;height:100px">{{company.company_benefits}}</textarea>
+                                    <textarea style="width:342px;height:100px" ng-model="company.company_benefits"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -1002,7 +1026,7 @@
                 </div>
             </div>
         </div>
-        <button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
+        <button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
         </div>
         <div class="modal-footer">
         </div>

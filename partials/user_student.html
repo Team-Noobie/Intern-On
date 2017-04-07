@@ -1,63 +1,63 @@
 <link href="css/sb-admin.css" rel="stylesheet">
-    <div id="wrapper" ng-init="init()">
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#.navbar-ex1-collapse">
+<div id="wrapper" ng-init="init()">
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#.navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_firstname}} {{student.student_lastname}}</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown" uib-dropdown>
-                    <a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user"></i><b class="caret"></b></a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li>
-                            <a ui-sref="user_student.student_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a ng-click="edit()"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a ui-sref="user_student.student_search"><i class="fa fa-search fa" aria-hidden="true"></i> Search Internship</a>
-                    </li>
-                    <li>
-                        <a ui-sref="user_student.student_application"><i class="fa fa-file-text-o fa" aria-hidden="true"></i> Applications</a>
-                    </li>
-                    <li>
-                        <a ui-sref="user_student.student_schedule"><i class="fa fa-calendar fa" aria-hidden="true"></i> Schedules</a>
-                    </li>
-                    <li>
-                        <a ui-sref="user_student.student_timecard"><i class="fa fa-clock-o fa" aria-hidden="true"></i> Timecard</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+			<a class="navbar-brand" ui-sref="user_student.student_profile">{{student.student_firstname}} {{student.student_lastname}}</a>
+		</div>
+		<!-- Top Menu Items -->
+		<ul class="nav navbar-right top-nav">
+			<li class="dropdown" uib-dropdown>
+				<a class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-user"></i><b class="caret"></b></a>
+				<ul class="dropdown-menu" uib-dropdown-menu>
+					<li>
+						<a ui-sref="user_student.student_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+					</li>
+					<li>
+						<a ng-click="edit()"><i class="fa fa-fw fa-gear"></i> Settings</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav side-nav">
+				<li>
+					<a ui-sref="user_student.student_search"><i class="fa fa-search fa" aria-hidden="true"></i> Search Internship</a>
+				</li>
+				<li>
+					<a ui-sref="user_student.student_application"><i class="fa fa-file-text-o fa" aria-hidden="true"></i> Applications</a>
+				</li>
+				<li>
+					<a ui-sref="user_student.student_schedule"><i class="fa fa-calendar fa" aria-hidden="true"></i> Schedules</a>
+				</li>
+				<li>
+					<a ui-sref="user_student.student_timecard"><i class="fa fa-clock-o fa" aria-hidden="true"></i> Timecard</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-        <div id="page-wrapper">
-            <ui-view style="width: inherit;">
-            </ui-view>
-        </div>
-        <!-- /#page-wrapper -->
+	<div id="page-wrapper">
+		<ui-view style="width: inherit;">
+		</ui-view>
+	</div>
+	<!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
 
 <script type="text/ng-template" id="searchinternship.html">
@@ -84,20 +84,20 @@
 			</div>
 		</div>
 	</div>
-	<div style="margin-top:2em;" ng-repeat="ad in aAds">    
+	<div style="margin-top:2em;" ng-repeat="ad in aAds">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title" style="text-transform:uppercase;"><a ng-click= "openAdModal(ad.id)">{{ad.ads_title}}</a></h3>
+				<h3 class="panel-title" style="text-transform:uppercase;"><a ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></h3>
 			</div>
 			<div class="panel-body">
-				<a ng-click= "openAdModal(ad.id)">
+				<a ng-click="openAdModal(ad.id)">
 					<h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
-					<h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h4> 
-				</a>      
+						<h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h4>
+				</a>
 			</div>
 		</div>
-	</div>        
-	<ul uib-pagination class="pagination"  total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
+	</div>
+	<ul uib-pagination class="pagination" total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
 </script>
 <script type="text/ng-template" id="student_profile.html">
 	<div class="container-fluid">
@@ -114,7 +114,7 @@
 					<div class="row">
 						<div class="col-md-8">
 							<h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
-							<p>E-mail Address: <a href="">{{student.student_email}}</a></p> 
+							<p>E-mail Address: <a href="">{{student.student_email}}</a></p>
 							<p>Contact Number: {{student.student_contact_no}}</p>
 							<p>Address: {{student.student_address}} </p>
 						</div>
@@ -123,9 +123,9 @@
 							<a href="" style="padding-top:20px;">upload image</a>
 						</div>
 						<div class="col-md-12">
-							<button ng-click="edit_info(student,1)" class="btn btn-info btn-sm">Edit Profile</button> 
+							<button ng-click="edit_info(student,1)" class="btn btn-info btn-sm">Edit Profile</button>
 						</div>
-					</div> 
+					</div>
 				</div>
 
 				<div class="row">
@@ -138,7 +138,7 @@
 								<h4>Birthday: {{student.student_birthday}}</h4>
 								<h4>Gender: {{student.student_gender}}</h4>
 								<button ng-click="edit_info(student,2)" class="btn btn-info btn-sm">Edit</button>
-							</div> 
+							</div>
 						</div>
 					</div>
 				</div>
@@ -155,9 +155,9 @@
 								<h4>Department: {{student.student_department}}</h4>
 								<h4>Intitute: {{student.student_institute}}</h4>
 								<h4>School: {{student.student_school}}</h4>
-								<button ng-click="edit_info(student,3)" class="btn btn-info btn-sm">Edit</button> 
-							</div>  
-						</div>  
+								<button ng-click="edit_info(student,3)" class="btn btn-info btn-sm">Edit</button>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -168,14 +168,14 @@
 								<h3>Resume</h3>
 							</div>
 							<div class="panel-body">
-								<input type="file" nv-file-select uploader="uploader"/><br/>
+								<input type="file" nv-file-select uploader="uploader" /><br/>
 								<button ng-click="uploader.queue[0].upload()">upload</button>
-							</div>  
-						</div>  
+							</div>
+						</div>
 					</div>
-				</div>         
+				</div>
 			</div>
-		</div>    
+		</div>
 	</div>
 </script>
 <script type="text/ng-template" id="view_coordinator.html">
@@ -194,28 +194,28 @@
 
 								<div class="col-md-8">
 									<h1>{{student.coordinator_firstname}} {{coordinator.coordinator_lastname}}</h1>
-									<p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p> 
+									<p>E-mail Address: <a href="">{{coordinator.coordinator_email}}</a></p>
 									<p>Contact Number: {{coordinator.coordinator_contact_no}}</p>
 									<p>Address: {{coordinator.coordinator_address}} </p>
 								</div>
-								
-							</div> 
+
+							</div>
 						</div>
 
 
 						<div class="well">
 							<div class="row">
 								<div class="col-md-8">
-									
+
 									<h3>School Background</h3>
 									<p>Department: {{coordinator.coordinator_department}}</p>
 									<p>Institute: {{coordinator.coordinator_institute}}</p>
-									<p>School: {{coordinator.coordinator_school}}</p>    
+									<p>School: {{coordinator.coordinator_school}}</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
 			</div>
 		</div>
 	</div>
@@ -224,68 +224,68 @@
 </script>
 <script type="text/ng-template" id="edit_profile.html">
 	<div class="modal-header">
-		<h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+		<h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
 		<div class="main-center">
 			<div class="container-fluid">
-			<form name="editProfile">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-md-4">
-								<h5>First Name</h5>
+				<form name="editProfile">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row">
+								<div class="col-md-4">
+									<h5>First Name</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_firstname">
+								</div>
 							</div>
-							<div class="col-md-8">
-								<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_firstname">
+							<div class="row">
+								<div class="col-md-4">
+									<h5>Last Name</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_lastname">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>E-mail Address</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_email">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>Address</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_address">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>Contact No.</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_contact_no">
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5>Last Name</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_lastname">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5>E-mail Address</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_email">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5>Address</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_address">
-							</div>
-						</div>         
-						<div class="row">
-							<div class="col-md-4">
-								<h5>Contact No.</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="text" class="form-control" ng-required="true" required ng-model="formdata.student_contact_no">
-							</div>
-						</div>    
 					</div>
-				</div>
-			
-			</div>    
+
+			</div>
 		</div>
 		<button style="margin-top:1em;position:relative;left:50%;" ng-click="editProfile.$valid && save()" class="btn btn-xl btn-info">Save</button>
-	</form>
+		</form>
 	</div>
 	<div class="modal-footer">
 	</div>
 </script>
 <script type="text/ng-template" id="edit_personal.html">
 	<div class="modal-header">
-		<h3 style="position:absolute; margin:auto;">Edit Personal Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+		<h3 style="position:absolute; margin:auto;">Edit Personal Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
 		<div class="main-center">
@@ -297,7 +297,8 @@
 								<h5>Birthday</h5>
 							</div>
 							<div class="col-md-8">
-								<input type="date" class="form-control" ng-model="formdata.student_birthday">
+								<!--<input type="date" class="form-control" ng-model="formdata.student_birthday">-->
+								<div uib-datepicker ng-model="formdata.student_birthday" class="well well-sm" datepicker-options="options" required></div>
 							</div>
 						</div>
 						<div class="row">
@@ -310,7 +311,7 @@
 						</div>
 					</div>
 				</div>
-			</div>    
+			</div>
 		</div>
 		<button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
 	</div>
@@ -319,7 +320,7 @@
 </script>
 <script type="text/ng-template" id="edit_educational.html">
 	<div class="modal-header">
-		<h3 style="position:absolute; margin:auto;">Edit Educational Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+		<h3 style="position:absolute; margin:auto;">Edit Educational Background</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
 		<div class="main-center">
@@ -360,7 +361,7 @@
 						</div>
 					</div>
 				</div>
-			</div>    
+			</div>
 		</div>
 		<button style="margin-top:1em;position:relative;left:50%;" ng-click="save()" class="btn btn-xl btn-info">Save</button>
 	</div>
@@ -391,10 +392,10 @@
 						<th>Status</th>
 					</tr>
 					<tr ng-repeat="ap in applications">
-						<td><a style="text-transform:uppercase" ng-click="viewApplication(ap.id)">{{ap.advertisement.ads_title}}</a></td>
-						<td>{{ap.created_at}}</td>
-						<td>{{ap.company.company_name}}</td>
-						<td>{{ap.status}}</td>
+						<td><a style="text-transform:uppercase" ng-click="viewApplication(ap.id)"><h5>{{ap.advertisement.ads_title}}</h5></a></td>
+						<td><h5>{{ap.created_at}}</h5></td>
+						<td><h5>{{ap.company.company_name}}</h5></td>
+						<td><h5>{{ap.status}}</h5></td>
 					</tr>
 				</table>
 			</div>
@@ -403,24 +404,26 @@
 </script>
 <script type="text/ng-template" id="viewApplication.html">
 	<div class="modal-header">
-		<h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+		<h4 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h4><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
-		<div class="row"> 
-			<div class="col-md-12">
-				<div class="panel panel-success">
-					<div class="panel-heading">
-						<h1 style="text-transform: uppercase"><b>{{ad.ads_title}}</b></h1>
-					</div>  
-					<div class="panel-body">
-						<h2><b>Job Description:</b></h2>
-						<h3 ng-bind-html="ad.ads_job_description"></h3>
-						<h2><b>Related Industries:</b></h2>
-						<h3 style="text-transform: uppercase">{{ad.ads_related_industry}}</h3>
-						<h2><b>Work Location:</b></h2>
-						<h3>{{ad.ads_work_location}}</h3>
-						<h2><b>Contacts:</b></h2>
-						<h3>{{ad.ads_contact}}</h3>
+		<div class="text-center">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 style="text-transform: uppercase"><b>{{ad.ads_title}}</b></h3>
+						</div>
+						<div class="panel-body" style="list-style-position:inside">
+							<h4><b>Job Description:</b></h4>
+							<h5 ng-bind-html="ad.ads_job_description"></h5>
+							<h4><b>Related Industries:</b></h4>
+							<h5 style="text-transform: uppercase">{{ad.ads_related_industry}}</h5>
+							<h4><b>Work Location:</b></h4>
+							<h5>{{ad.ads_work_location}}</h5>
+							<h4><b>Contacts:</b></h4>
+							<h5>{{ad.ads_contact}}</h5>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -428,14 +431,14 @@
 		<div class="main-center">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">                             
+					<div class="col-lg-12">
 						<div class="row">
-							<div class="col-md-12"> 
+							<div class="col-md-12">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3>Company Overview</h3>
+										<h4>Company Overview</h4>
 									</div>
-									<div class="panel-body">                                                        
+									<div class="panel-body">
 										<div class="col-md-4" style="border:solid 1px; height:200px; width:200px;">
 											<p>IMAGE</p>
 										</div>
@@ -446,13 +449,14 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3>Company Snapshot</h3>
+										<h4>Company Snapshot</h4>
 									</div>
-									<div class="panel-body">                                                                                                                
+									<div class="panel-body">
 										<p>Industry: {{ad.company.company_industry}}</p>
 										<p>Website: {{ad.company.company_website}}</p>
 										<p>Spoken Language: {{ad.company.company_spoken_lang}}</p>
@@ -461,23 +465,27 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<h3>Why Join Us?</h3>
-								</div>
-								<div class="panel-body">
-									<p>Industry: {{ad.company.company_why_join_us}}</p>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h4>Why Join Us?</h4>
+									</div>
+									<div class="panel-body">
+										<p>Industry: {{ad.company.company_why_join_us}}</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>       
+
+					</div>
+
 				</div>
-			</div>    
-		</div> 
+			</div>
+		</div>
 	</div>
+
 	<div class="modal-footer">
 	</div>
 </script>
@@ -500,8 +508,8 @@
 		<div class="row">
 			<div class="col-md-4">
 				<input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
-			</div> 
-		</div>      
+			</div>
+		</div>
 
 		<div class="row" style="margin-top:10px">
 			<div class="col-lg-12">
@@ -511,21 +519,21 @@
 						<th>Company</th>
 						<th>Reason</th>
 						<th>Date</th>
-						<th>Time</th>   
+						<th>Time</th>
 						<th>Location</th>
 					</tr>
 					<tr ng-repeat="sched in schedules">
-						<td style="text-transform:uppercase">{{sched.application.advertisement.ads_title}}</td>
-						<td>{{sched.application.company.company_name}}</td>
-						<td>{{sched.reason}}</td>
-						<td>{{sched.interview_date}}</td>
-						<td>{{sched.interview_time}}</td> 
-						<td>{{sched.application.company.company_address}}</td>
+						<td style="text-transform:uppercase"><h5>{{sched.application.advertisement.ads_title}}</h5></td>
+						<td><h5>{{sched.application.company.company_name}}</h5></td>
+						<td><h5>{{sched.reason}}</h5></td>
+						<td><h5>{{sched.interview_date}}</h5></td>
+						<td><h5>{{sched.interview_time}}</h5></td>
+						<td><h5>{{sched.application.company.company_address}}</h5></td>
 					</tr>
 
 				</table>
 			</div>
-		</div>   
+		</div>
 	</div>
 </script>
 <script type="text/ng-template" id="student_timecard.html">
@@ -553,7 +561,7 @@
 									<th>Time In</th>
 									<th>Time Out</th>
 									<th>No. of Hours</th>
-									
+
 								</tr>
 								<tr ng-repeat="time in intern.timecard">
 									<td>{{time.date}}</td>
@@ -561,8 +569,12 @@
 									<td>{{time.time_out}}</td>
 									<td>{{time.hours_render}}</td>
 								</tr>
-								<tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>{{intern.rendered_hours}}</td></tr>
-								
+								<tr>
+									<td colspan="2"></td>
+									<th>Total Rendered Hours:</th>
+									<td>{{intern.rendered_hours}}</td>
+								</tr>
+
 								<!--</tr>-->
 							</table>
 						</div>
@@ -575,39 +587,41 @@
 </script>
 <script type="text/ng-template" id="ad.html">
 	<div class="modal-header">
-		<h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+		<h4 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h4><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
-		<div class="row"> 
-			<div class="col-md-12">
-				<div class="panel panel-success">
-					<div class="panel-heading">
-						<h1 style="text-transform: uppercase"><b>{{ad.ads_title}}</b></h1>
-					</div>  
-					<div class="panel-body">
-						<h2><b>Job Description:</b></h2>
-						<h3 ng-bind-html="ad.ads_job_description"></h3>
-						<h2><b>Related Industries:</b></h2>
-						<h3 style="text-transform: uppercase">{{ad.ads_related_industry}}</h3>
-						<h2><b>Work Location:</b></h2>
-						<h3>{{ad.ads_work_location}}</h3>
-						<h2><b>Contacts:</b></h2>
-						<h3>{{ad.ads_contact}}</h3>
+		<div class="text-center">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 style="text-transform: uppercase"><b>{{ad.ads_title}}</b></h3>
+						</div>
+						<div class="panel-body" style="list-style-position:inside">
+							<h4><b>Job Description:</b></h4>
+							<h5 ng-bind-html="ad.ads_job_description"></h5>
+							<h4><b>Related Industries:</b></h4>
+							<h5 style="text-transform: uppercase">{{ad.ads_related_industry}}</h5>
+							<h4><b>Work Location:</b></h4>
+							<h5>{{ad.ads_work_location}}</h5>
+							<h4><b>Contacts:</b></h4>
+							<h5>{{ad.ads_contact}}</h5>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
 		<div class="main-center">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">                             
+					<div class="col-lg-12">
 						<div class="row">
-							<div class="col-md-12"> 
+							<div class="col-md-12">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3>Company Overview</h3>
+										<h4>Company Overview</h4>
 									</div>
-									<div class="panel-body">                                                        
+									<div class="panel-body">
 										<div class="col-md-4" style="border:solid 1px; height:200px; width:200px;">
 											<p>IMAGE</p>
 										</div>
@@ -618,13 +632,14 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3>Company Snapshot</h3>
+										<h4>Company Snapshot</h4>
 									</div>
-									<div class="panel-body">                                                                                                                
+									<div class="panel-body">
 										<p>Industry: {{ad.company.company_industry}}</p>
 										<p>Website: {{ad.company.company_website}}</p>
 										<p>Spoken Language: {{ad.company.company_spoken_lang}}</p>
@@ -633,71 +648,78 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<h3>Why Join Us?</h3>
-								</div>
-								<div class="panel-body">
-									<p>Industry: {{ad.company.company_why_join_us}}</p>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h4>Why Join Us?</h4>
+									</div>
+									<div class="panel-body">
+										<p>Industry: {{ad.company.company_why_join_us}}</p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>       
+
+					</div>
+
 				</div>
-			</div>    
+			</div>
 		</div>
 	</div>
-		
+
 	<div class="modal-footer">
-		<button style="margin-top:1em;" ng-click="apply()" class="btn btn-lg btn-success btn-block">APPLY</button>                                                                  
-	</div>		
+		<button style="margin-top:1em;" ng-click="apply()" class="btn btn-lg btn-success btn-block">APPLY</button>
+	</div>
 </script>
 
 <script type="text/ng-template" id="student_timecard.html">
 	<div class="container-fluid">
-					<!-- Page Heading -->
-					<div class="row">
-						<div class="col-lg-12">
-							<h1 class="page-header">
-								Timecard
-							</h1>
-							<ol class="breadcrumb">
-								<li class="active">
-									<i class="fa fa-clock-o"></i> Timecard
-								</li>
-							</ol>
+		<!-- Page Heading -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">
+					Timecard
+				</h1>
+				<ol class="breadcrumb">
+					<li class="active">
+						<i class="fa fa-clock-o"></i> Timecard
+					</li>
+				</ol>
 
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-8">
-										<h3>Required Hours: 200</h3>
-									</div>
-									<div class="col-lg-12">
-										<table class="table table-striped table-hover">
-											<tr>
-												<th>Date</th>
-												<th>Time In</th>
-												<th>Time Out</th>
-												<th>No. of Hours</th>
-												
-											</tr>
-											<!--<tr ng-repeat="sec in section">-->
-											<tr>
-												<td>02/28/2017</td>
-												<td>10:30</td>
-												<td>18:30</td>
-												<td>8</td>
-											</tr>
-											<tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>8</td></tr>
-													
-											<!--</tr>-->
-										</table>
-									</div>
-								</div>
-							</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<h3>Required Hours: 200</h3>
+						</div>
+						<div class="col-lg-12">
+							<table class="table table-striped table-hover">
+								<tr>
+									<th>Date</th>
+									<th>Time In</th>
+									<th>Time Out</th>
+									<th>No. of Hours</th>
+
+								</tr>
+								<!--<tr ng-repeat="sec in section">-->
+								<tr>
+									<td>02/28/2017</td>
+									<td>10:30</td>
+									<td>18:30</td>
+									<td>8</td>
+								</tr>
+								<tr>
+									<td colspan="2"></td>
+									<th>Total Rendered Hours:</th>
+									<td>8</td>
+								</tr>
+
+								<!--</tr>-->
+							</table>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
 </script>

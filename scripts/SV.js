@@ -22,28 +22,48 @@
             var template;
             if (type == 1)
                 template = 'edit_profile.html'
-            if (type == 2)
-                template = 'edit_overview.html'
-            if (type == 3)
-                template = 'edit_snapshot.html'
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: template,
-                controller: function (data, $scope) {
+                controller: function (ngToast, data, type, $scope, urls, $localStorage, $http, $uibModalInstance) {
                     $scope.sv = data;
+                    $scope.save = function () {
+                        $http.post(urls.API_HOST + '/edit_sv_profile/' + $localStorage.id, $scope.sv).then(function (response) {
+                            ngToast.create({
+                                className: 'success',
+                                content: 'Profile Updated',
+                                animation: 'fade'
+                            });
+                            $uibModalInstance.close();
+                        });
+                    }
+                    $scope.close = function () {
+                        $uibModalInstance.dismiss();
+                    };
                 },
                 size: 'md',
                 resolve: {
                     data: function () {
                         return data;
+                    },
+                    type: function () {
+                        return type;
                     }
                 }
             });
 
             modalInstance.result.then(function (id) {
-                return 1;
+                $http({ method: 'GET', url: urls.API_HOST + '/sv_profile/' + $localStorage.id }).then(function (response) {
+                    $scope.sv = {};
+                    $scope.sv = response.data;
+                });
+            }, function () {
+                $http({ method: 'GET', url: urls.API_HOST + '/sv_profile/' + $localStorage.id }).then(function (response) {
+                    $scope.sv = {};
+                    $scope.sv = response.data;
+                });
             });
-        }
+        };
     });
     internon.controller('sv_intern_list_controller', function (Utilities, password, urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
 
