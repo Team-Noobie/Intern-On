@@ -197,6 +197,7 @@
                 controller: function (urls, student, $scope) {
                     $scope.student = student;
                     $scope.file = 'http://localhost/Intern-On-DB/storage/app/resume/' + $scope.student.user_ID + "/" + $scope.student.resume;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
                 },
                 size: 'lg',
                 resolve: {

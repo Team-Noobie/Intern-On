@@ -26,6 +26,42 @@
 			$scope.file = '../Intern-On-DB/storage/app/resume/' + response.data.user_ID + '/' + response.data.resume;
 		});
 
+		var uploader_pic = $scope.uploader_pic = new FileUploader({
+            url: urls.API_HOST + '/upload_student_pic',
+            formData: [{
+                id: $localStorage.id,
+            }],
+            headers: {
+                'Authorization': 'Bearer: ' + $auth.getToken()
+            }
+        });
+
+        uploader_pic.onCompleteAll = function (fileItem) {
+			$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
+				$scope.student = {};
+				$scope.student = response.data;
+                uploader_pic.clearQueue();
+                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
+            });
+        };
+
+        uploader_pic.onWhenAddingFileFailed = function (item, filter, options) {
+            ngToast.create({
+                className: 'warning',
+                content: 'Invalid File Format',
+                animation: 'fade'
+            });
+        };
+
+
+        uploader_pic.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|'.indexOf(type) !== -1;
+            }
+        });
+
 		$scope.edit_info = function (data, type) {
 			var template;
 			if (type == 1)
@@ -115,6 +151,14 @@
 			console.info('onAfterAddingFile', fileItem);
 		};
 
+		uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|doc|docx|'.indexOf(type) !== -1;
+            }
+        });
+
 	});
 
 	internon.controller('search_advertisement_controller', function (urls, $http, $state, $scope, $localStorage, $uibModal) {
@@ -183,6 +227,8 @@
 		$http({ method: 'GET', url: urls.API_HOST + '/student_view_advertisement/' + id }).then(function (response) {
 			$scope.ad = response.data;
 			$scope.ids.company_id = response.data.company_id;
+			$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.ad.company_id + "/" + $scope.ad.company.company_logo;
+			console.log($scope.logo);
 		});
 
 		$scope.apply = function () {

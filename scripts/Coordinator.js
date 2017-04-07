@@ -65,8 +65,6 @@
                 });
             });
         };
-
-      
     });
 
     internon.controller('coordinator_section_controller', function (urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
@@ -223,6 +221,29 @@
             password.open_reset_modal(id);
         }
 
+        $scope.profileModal = function (student) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'student_profile_modal.html',
+                controller: function (student, $scope) {
+                    $scope.student = student;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    console.log(student);
+                },
+                size: 'lg',
+                resolve: {
+                    student: function () {
+                        return student;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (student) {
+                return 1;
+            });
+        };
+
+ 
         $scope.delete_account = function (id) {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -265,17 +286,22 @@
             }
         });
 
-
-
-        $scope.class_grade = [];
-        $scope.toggled = function (open) {
-            if ($scope.choice_advertisement.option.value != "") {
-                $http({ method: 'GET', url: urls.API_HOST + '/view_section_students/' + $scope.choice_advertisement.option.value }).then(function (response) {
+        $scope.class_grade=[];
+        $scope.toggled = function(open) {
+            if($scope.choice_advertisement.option.value != ""){
+                $http({method: 'GET', url: urls.API_HOST + '/view_section_students/'+$scope.choice_advertisement.option.value}).then(function(response){
                     $scope.students = {};
                     $scope.students = response.data;
-                    $scope.class_grade = [];
+                    $scope.class_grade=[];
                     for (var i = 0; i < response.data.length; i++) {
-                        $scope.class_grade.push({ 'name': response.data[i].student.student_lastname + "," + response.data[i].student.student_firstname, 'grade': '100', 'strict': true });
+                        var grade;
+                        if(response.data[i].student.grade == null){
+                            grade = 0;
+                        }else{
+                            grade = response.data[i].student.grade.grade;     
+                        }
+                            
+                        $scope.class_grade.push({'Lastname':response.data[i].student.student_lastname,'Firstname':response.data[i].student.student_firstname,'grade':grade});
                     }
                 });
             } else {
@@ -332,6 +358,36 @@
             });
         };
 
+        $scope.viewGrade = function(grade,tot){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_grade.html',
+                    controller:function(grade,tot,$scope){
+                        $scope.grade = grade;
+                        $scope.tot = tot;
+                    },
+                    size: 'lg',
+                    resolve: {
+                        grade: function(){
+                            return grade;
+                        },
+                        tot: function(){
+                          return tot;  
+                        }
+                    }
+                    });
+        };      
+    
+        $scope.viewReports = function(){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_reports.html',
+                    controller: function(){
+                        
+                    },
+                    size: 'lg',
+                    });
+            };
     });
 
 })();

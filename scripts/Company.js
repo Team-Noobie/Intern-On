@@ -42,7 +42,7 @@
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/, options) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                return '|jpg|png|jpeg|'.indexOf(type) !== -1;
             }
         });
 
@@ -477,6 +477,7 @@
                 templateUrl: 'student_profile_modal.html',
                 controller: function (student, $scope) {
                     $scope.student = student;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
                 },
                 size: 'lg',
                 resolve: {
