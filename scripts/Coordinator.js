@@ -16,6 +16,55 @@
 				$state.go('user_coordinator.coordinator_profile');
 			});
 		};
+          $scope.edit_info = function(data,type){
+				var template;
+				if(type == 1)
+					template = 'edit_profile.html'
+				if(type == 2)
+					template = 'edit_school_background.html'
+				var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: template,
+				controller: function(ngToast,data,type,$scope,urls,$localStorage,$http,$uibModalInstance){
+					$scope.coordinator = data;
+                    $scope.save = function(){
+                        $http.post(urls.API_HOST + '/edit_coordinator_profile/'+$localStorage.id, $scope.coordinator).then(function (response){
+                            ngToast.create({	
+							className: 'success',
+							content: 'Profile Updated',
+							animation: 'fade' 
+						});
+                            $uibModalInstance.close(); 
+                        });
+                    };
+                    $scope.close = function(){
+                         $uibModalInstance.dismiss(); 
+                    };
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						},
+                        type:function(){
+                            return type;
+                        }
+					}
+				});
+
+				
+				modalInstance.result.then(function (id) {
+					$http({method: 'GET', url: urls.API_HOST + '/coordinator_profile/'+$localStorage.id}).then(function(response){
+						$scope.coordinator = {};
+						$scope.coordinator = response.data;
+					});
+				},function(){
+					$http({method: 'GET', url: urls.API_HOST + '/coordinator_profile/'+$localStorage.id}).then(function(response){
+						$scope.coordinator = {};
+						$scope.coordinator = response.data;
+					});
+				});
+			};
 
         $scope.uploadCSV =function () {
             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;

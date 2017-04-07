@@ -230,3 +230,8 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+.center{
+    width:200px;
+    margin:0 auto;
+    text-align:left;
+}
