@@ -52,7 +52,6 @@
                 }
             });
 
-
             modalInstance.result.then(function (id) {
                 $http({ method: 'GET', url: urls.API_HOST + '/sv_profile/' + $localStorage.id }).then(function (response) {
                     $scope.sv = {};
@@ -212,6 +211,28 @@
                 templateUrl: 'interns_grade_modal.html',
                 controller: function ($localStorage, student, $scope, $http, $uibModalInstance) {
                     $scope.student = student;
+                    $scope.PR = 0;
+                    $scope.effectiveness = 0;
+                    $scope.punctuality = 0;
+                    $scope.competence = 0;
+                    $scope.cooperation = 0;
+                    $scope.parseFloat = function (value) {
+                        return parseFloat(value);
+                    }
+                    $scope.formdata = {};
+                    $scope.save = function () {
+                        $scope.formdata.sv_id = $localStorage.id;
+                        $scope.formdata.student_id = student.user_ID;
+                        $scope.formdata.grade = $scope.parseFloat($scope.PR)+$scope.parseFloat($scope.effectiveness)+$scope.parseFloat($scope.punctuality)+$scope.parseFloat($scope.competence)+$scope.parseFloat($scope.cooperation);
+                        $scope.formdata.punctuality = $scope.parseFloat($scope.punctuality);
+                        $scope.formdata.competence = $scope.parseFloat($scope.competence);
+                        $scope.formdata.effectiveness = $scope.parseFloat($scope.effectiveness);
+                        $scope.formdata.cooperation = $scope.parseFloat($scope.cooperation);
+                        $scope.formdata.pr = $scope.parseFloat($scope.PR);
+                        $http.post(urls.API_HOST + '/grade_intern', $scope.formdata).then(function (response) {
+                            $uibModalInstance.close();
+                        });
+                    }
                 },
                 size: 'md',
                 resolve: {

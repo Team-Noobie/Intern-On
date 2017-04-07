@@ -258,21 +258,30 @@
             }
         });
 
-        $scope.select = function(){
-            // console.log($scope.choice_advertisement);
+
+
+        $scope.class_grade=[];
+        $scope.toggled = function(open) {
             if($scope.choice_advertisement.option.value != ""){
                 $http({method: 'GET', url: urls.API_HOST + '/view_section_students/'+$scope.choice_advertisement.option.value}).then(function(response){
                 $scope.students = {};
                 $scope.students = response.data;
-                // console.log($scope.students);            
+                $scope.class_grade=[];
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.class_grade.push({'name':response.data[i].student.student_lastname+","+response.data[i].student.student_firstname,'grade':'100','strict':true});
+                }
                 });
+            }else{
+                $scope.students = {};                
             }
             $scope.convert = function(hours){
                 return Utilities.convert(hours)
             }
-        }
+        };
         
-
+        $scope.download_report=function(){
+            console.log($scope.class_grade);                        
+        }
         $scope.viewRendered = function(timecard,total){
                         console.log(timecard+" "+total);
             
