@@ -48,6 +48,7 @@
 					return 1;
 				});
 			}
+
         $scope.editPassword = function(){
             password.open_edit_modal();
         }
@@ -385,7 +386,7 @@
                 controller: function(student,$scope){
                     $scope.student = student;
                 },
-                size: 'md',
+                size: 'lg',
                 resolve: {
                         student: function () {
                             return student;
@@ -438,6 +439,23 @@
                 });
         };
 
+          $scope.openAdModal = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'company_ad_modal.html',
+                    controller: 'company_view_advertisement_controller',
+                    size: 'lg',
+                    resolve: {
+                            id: function () {
+                                return id;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (id) {
+                        return 1;
+                    });
+            };
 
     });  
     // internon.controller('sched_modal_Controller',function(id,urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal,$uibModalInstance){

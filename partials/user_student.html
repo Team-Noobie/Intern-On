@@ -164,7 +164,6 @@
 		</div>    
 	</div>
 </script>
-
 <script type="text/ng-template" id="view_coordinator.html">
 	<div class="modal-header">
 	</div>
@@ -201,7 +200,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div> 
 			</div>
@@ -299,7 +297,6 @@
 		</div>
 		<button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
 	</div>
-
 	<div class="modal-footer">
 	</div>
 </script>
@@ -358,64 +355,9 @@
 		</div>
 		<button style="margin-top:1em;position:relative;left:50%;" ng-click="" class="btn btn-xl btn-info">Save</button>
 	</div>
-
 	<div class="modal-footer">
 	</div>
 </script>
-
-
-<script type="text/ng-template" id="student_setting.html">
-	
-	<div class="modal-header">
-		<h3 style="position:absolute; margin:auto;">Settings</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
-	</div>
-	
-	<div class="modal-body">
-		<div class="main-center">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-md-8">
-								<h3>Edit Password</h3>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-md-4">
-								<h5>Old Password</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="password" class="form-control">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5>New Password</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="password" class="form-control">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<h5>Confirm Password</h5>
-							</div>
-							<div class="col-md-8">
-								<input type="password" class="form-control">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>    
-		</div>
-	</div>  
-	<div class="modal-footer">
-		<button ng-click="" class="btn btn-sm btn-info">Save</button>
-	</div>
-</script>
-
 <script type="text/ng-template" id="studentapplication.html">
 	<div class="container-fluid">
 		<div class="row">
@@ -455,7 +397,6 @@
 		<h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
-		<!--<div class="well">-->
 		<div class="row"> 
 			<div class="col-md-12">
 				<div class="panel panel-success">
@@ -474,13 +415,11 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		<!--</div>-->
+		</div>
 		<div class="main-center">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">                             
-						<!--<div class="well">-->
 						<div class="row">
 							<div class="col-md-12"> 
 								<div class="panel panel-info">
@@ -498,8 +437,6 @@
 								</div>
 							</div>
 						</div>
-						<!--</div>-->
-						<!--<div class="well">-->
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-info">
@@ -515,42 +452,22 @@
 								</div>
 							</div>
 						</div>
-						<!--</div>              -->
-						
-						<!--<div class="well">-->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3>Company Contacts</h3>
-									</div>
-									<div class="panel-body">                                                                                                                                                                        
-										<p>E-mail Address: <a href="">{{ad.company.company_email}}</a></p> 
-										<p>Contact Number: {{ad.company.company_contact_no}}</p>
-										<p>Address: {{ad.company.company_address}} </p>
-									</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3>Why Join Us?</h3>
+								</div>
+								<div class="panel-body">
+									<p>Industry: {{ad.company.company_why_join_us}}</p>
 								</div>
 							</div>
 						</div>
-						<!--</div>                       -->
-						<!--<div class="well">-->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3>Why Join Us?</h3>
-									</div>
-									<div class="panel-body">
-										<p>Industry: {{ad.company.company_why_join_us}}</p>
-									</div>
-								</div>
-							</div>
-							<!--</div>-->
-						</div>       
-					</div>
-				</div>    
-			</div>
-		</div>
+					</div>       
+				</div>
+			</div>    
+		</div> 
 	</div>
 	<div class="modal-footer">
 	</div>
@@ -615,7 +532,6 @@
 						<i class="fa fa-clock-o"></i> Timecard
 					</li>
 				</ol>
-
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-8">
@@ -653,7 +569,6 @@
 		<h2 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h2><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
-		<!--<div class="well">-->
 		<div class="row"> 
 			<div class="col-md-12">
 				<div class="panel panel-success">
@@ -673,13 +588,10 @@
 				</div>
 			</div>
 		</div> 
-		<!--</div>-->
-		
 		<div class="main-center">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">                             
-						<!--<div class="well">-->
 						<div class="row">
 							<div class="col-md-12"> 
 								<div class="panel panel-info">
@@ -697,8 +609,6 @@
 								</div>
 							</div>
 						</div>
-						<!--</div>-->
-						<!--<div class="well">-->
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-info">
@@ -714,43 +624,71 @@
 								</div>
 							</div>
 						</div>
-						<!--</div>              -->
-						
-						<!--<div class="well">-->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3>Company Contacts</h3>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3>Why Join Us?</h3>
+								</div>
+								<div class="panel-body">
+									<p>Industry: {{ad.company.company_why_join_us}}</p>
+								</div>
+							</div>
+						</div>
+					</div>       
+				</div>
+			</div>    
+		</div>
+	</div>
+		
+	<div class="modal-footer">
+		<button style="margin-top:1em;" ng-click="apply()" class="btn btn-lg btn-success btn-block">APPLY</button>                                                                  
+	</div>		
+</script>
+
+<script type="text/ng-template" id="student_timecard.html">
+	<div class="container-fluid">
+					<!-- Page Heading -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="page-header">
+								Timecard
+							</h1>
+							<ol class="breadcrumb">
+								<li class="active">
+									<i class="fa fa-clock-o"></i> Timecard
+								</li>
+							</ol>
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-8">
+										<h3>Required Hours: 200</h3>
 									</div>
-									<div class="panel-body">                                                                                                                                                                        
-										<p>E-mail Address: <a href="">{{ad.company.company_email}}</a></p> 
-										<p>Contact Number: {{ad.company.company_contact_no}}</p>
-										<p>Address: {{ad.company.company_address}} </p>
+									<div class="col-lg-12">
+										<table class="table table-striped table-hover">
+											<tr>
+												<th>Date</th>
+												<th>Time In</th>
+												<th>Time Out</th>
+												<th>No. of Hours</th>
+												
+											</tr>
+											<!--<tr ng-repeat="sec in section">-->
+											<tr>
+												<td>02/28/2017</td>
+												<td>10:30</td>
+												<td>18:30</td>
+												<td>8</td>
+											</tr>
+											<tr><td colspan="2"></td><th>Total Rendered Hours:</th><td>8</td></tr>
+													
+											<!--</tr>-->
+										</table>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!--</div>                       -->
-						<!--<div class="well">-->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3>Why Join Us?</h3>
-									</div>
-									<div class="panel-body">
-										<p>Industry: {{ad.company.company_why_join_us}}</p>
-									</div>
-								</div>
-							</div>
-							<!--</div>-->
-						</div>       
 					</div>
-				</div>    
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button style="margin-top:1em;" ng-click="apply()" class="btn btn-lg btn-success btn-block">APPLY</button>                                                                  
-		</div>
 </script>

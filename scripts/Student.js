@@ -25,7 +25,7 @@
 				$scope.student = response.data;
                 $scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
 			});
-
+					
 			$scope.edit_info = function(data,type){
 				var template;
 				if(type == 1)
@@ -37,8 +37,24 @@
 				var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: template,
-				controller: function(data,$scope){
-					$scope.student = data;
+				// backdrop: 'static',
+				controller: function(ngToast,urls,$http,$uibModalInstance,$localStorage,data,$scope){
+					$scope.formdata = data;
+					
+					$scope.save = function(){
+							$http.post(urls.API_HOST + '/edit_student_profile/'+$localStorage.id,$scope.formdata).then(function (response){
+							ngToast.create({	
+							className: 'success',
+							content: 'Profile Updated',
+							animation: 'fade' 
+							// console.log($scope.formdata);
+						});
+							$uibModalInstance.close();
+						});
+					};
+					$scope.close = function(){
+						$uibModalInstance.close();
+					}
 				},
 				size: 'md',
 				resolve: {
@@ -49,28 +65,21 @@
 				});
 
 				modalInstance.result.then(function (id) {
-					return 1;
+					$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
+						$scope.student = {};
+						$scope.student = response.data;
+						$scope.file = {};
+						$scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
+					});
+				},function(){
+					$http({method: 'GET', url: urls.API_HOST + '/student_profile/'+$localStorage.id}).then(function(response){
+						$scope.student = {};
+						$scope.student = response.data;
+						$scope.file = {};
+						$scope.file = '../Intern-On-DB/storage/app/resume/'+response.data.user_ID+'/'+response.data.resume;
+					});
 				});
 			}
-			
-
-			$scope.editPassword = function(id){
-				var modalInstance = $uibModal.open({
-					animation: true,
-					templateUrl: 'edit_password.html',
-					controller: 'student_profile_controller',
-					size: 'md',
-					resolve: {
-							id: function () {
-								return id;
-							}
-						}
-					});
-
-					modalInstance.result.then(function (id) {
-						return 1;
-					});
-			};
 			
 			$scope.viewCoordinator = function(data){
 				var modalInstance = $uibModal.open({

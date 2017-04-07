@@ -15,10 +15,37 @@
                 });                 
 		};
 
-          $scope.editPassword = function(id){
-				password.open_edit_modal();
-			};   
-        
+        $scope.editPassword = function(id){
+            password.open_edit_modal();
+        };   
+            
+        $scope.edit_info = function(data,type){
+				var template;
+				if(type == 1)
+					template = 'edit_profile.html'
+				if(type == 2)
+					template = 'edit_overview.html'
+				if(type ==3)
+					template = 'edit_snapshot.html'
+				var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: template,
+				controller: function(data,$scope){
+					$scope.hr = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			}
+
     });
     internon.controller('hr_application_controller',function(urls,$stateParams,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
         $scope.choice_status = {
@@ -86,25 +113,45 @@
                     });
                 });
         };
-        $scope.advertisementModal = function(ads){
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'advertisement_modal.html',
-                controller: function(ads,$scope){
-                    $scope.ads = ads;
-                },
-                size: 'md',
-                resolve: {
-                        ads: function () {
-                            return ads;
-                        }
-                    }
-                });
 
-                modalInstance.result.then(function (ads) {
-                    return 1;
-                });
-        };
+        // $scope.advertisementModal = function(ads){
+        //     var modalInstance = $uibModal.open({
+        //         animation: true,
+        //         templateUrl: 'advertisement_modal.html',
+        //         controller: function(ads,$scope){
+        //             $scope.ads = ads;
+        //         },
+        //         size: 'md',
+        //         resolve: {
+        //                 ads: function () {
+        //                     return ads;
+        //                 }
+        //             }
+        //         });
+
+        //         modalInstance.result.then(function (ads) {
+        //             return 1;
+        //         });
+        // };
+        
+          $scope.openAdModal = function(id){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'company_ad_modal.html',
+                    controller: 'company_view_advertisement_controller',
+                    size: 'lg',
+                    resolve: {
+                            id: function () {
+                                return id;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (id) {
+                        return 1;
+                    });
+            };
+
         $scope.profileModal = function(student){
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -112,7 +159,7 @@
                 controller: function(student,$scope){
                     $scope.student = student;
                 },
-                size: 'md',
+                size: 'lg',
                 resolve: {
                         student: function () {
                             return student;
@@ -399,4 +446,10 @@
         };
 
     });
+
+      internon.controller('company_view_advertisement_controller',function(id,urls,$http,$auth,$state,$rootScope,$scope,$localStorage,$uibModal){
+		$http({method: 'GET', url: urls.API_HOST + '/company_view_advertisement/'+id}).then(function(response){
+			$scope.formdata = response.data;
+		});
+	});
 })();

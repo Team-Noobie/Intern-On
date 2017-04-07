@@ -17,6 +17,33 @@
         $scope.edit = function(){
             password.open_edit_modal();
         }
+
+        $scope.edit_info = function(data,type){
+				var template;
+				if(type == 1)
+					template = 'edit_profile.html'
+				if(type == 2)
+					template = 'edit_overview.html'
+				if(type ==3)
+					template = 'edit_snapshot.html'
+				var modalInstance = $uibModal.open({
+				animation: true,
+				templateUrl: template,
+				controller: function(data,$scope){
+					$scope.sv = data;
+				},
+				size: 'md',
+				resolve: {
+						data: function () {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (id) {
+					return 1;
+				});
+			}
     });
     internon.controller('sv_intern_list_controller',function(Utilities,password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
 
@@ -120,6 +147,26 @@
 
                 });
         };
+
+        $scope.viewRendered = function(timecard,total){
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'view_rendered.html',
+                    controller: function(Utilities,timecard,total,$scope,$uibModalInstance){
+                        $scope.timecards = timecard;
+                        $scope.total = total;
+                    },
+                    size: 'lg',
+                    resolve:{
+                        timecard: function(){
+                                return timecard;
+                        },
+                        total: function(){
+                                return total;
+                        }
+                    }
+                    });
+            };
         
     });
     internon.controller('sv_grade_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){

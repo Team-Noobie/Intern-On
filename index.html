@@ -91,7 +91,6 @@
                                     <input type="password" ng-model="formdata.confirm_password" class="form-control" required ng-required="true">
                                 </div>
                             </div>
-                            <button style="margin-top:1em;position:relative;left:50%;" ng-click="password_form.$valid && save()" class="btn btn-xl btn-info">Save</button>
                         </form>
                     </div>
                 </div>
@@ -100,15 +99,16 @@
     </div>
 
     <div class="modal-footer">
+                            <button style="" ng-click="password_form.$valid && save()" class="btn btn-xl btn-info">Save</button>
     </div>
 </script>
 <script type="text/ng-template" id="reset_password.html">
     <div class="modal-header">
-        <h3>Reset Password</h3>
+        Reset Password
     </div>
     <div class="modal-body">
         <h4>Do you really want to reset the password?</h4>
-        <button ng-click="yes()" class="btn btn-success">Yes</button>
+        <button ng-click="yes()" class="btn btn-primary">Yes</button>
         <button ng-click="no()" class="btn btn-danger">No</button>
         
     </div>

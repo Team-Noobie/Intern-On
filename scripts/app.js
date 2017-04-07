@@ -461,7 +461,7 @@
                             $uibModalInstance.close();
                         };
                     },
-					size: 'md',
+					size: 'sm',
 					resolve: {
 							id: function () {
 								return id;
