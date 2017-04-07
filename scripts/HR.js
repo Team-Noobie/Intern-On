@@ -156,8 +156,9 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'student_profile_modal.html',
-                controller: function(student,$scope){
+                controller: function(urls,student,$scope){
                     $scope.student = student;
+                    $scope.file = 'http://localhost/Intern-On-DB/storage/app/resume/'+$scope.student.user_ID+"/"+$scope.student.resume;
                 },
                 size: 'lg',
                 resolve: {

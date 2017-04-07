@@ -1,16 +1,57 @@
 (function (){
 	var internon = angular.module('internon');
-    internon.controller('company_controller',function(password,urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
+    internon.controller('company_controller',function(password,urls,$http,ngToast,FileUploader,$auth,$state,$scope,$localStorage,$uibModal){
         $scope.logout = function(){
             $auth.logout();
             $localStorage.$reset();
             $state.go('index');
         };
 
+
+
+        var uploader = $scope.uploader = new FileUploader({
+				url: urls.API_HOST + '/upload_pic',
+				formData:[{
+					id:$localStorage.id,
+				}],
+				headers: {
+					'Authorization': 'Bearer: ' + $auth.getToken()
+				}
+			});
+
+        uploader.onCompleteAll = function(fileItem) {
+            $http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
+                $scope.company = {};
+                uploader.clearQueue();
+                $scope.company = response.data;
+                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/'+$localStorage.id+"/"+response.data.company_logo;
+                $state.go('user_company.company_profile');
+            }); 
+        };
+
+        uploader.onWhenAddingFileFailed = function(item, filter, options) {
+            ngToast.create({
+                className: 'warning',
+                content: 'Invalid File Format',
+                animation: 'fade' 
+            });
+        };
+
+        
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function(item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        });
+
+
         $scope.init = function () {
                 $http({method: 'GET', url: urls.API_HOST + '/company_profile/'+$localStorage.id}).then(function(response){
                     $localStorage.symbol = response.data.company_symbol;
                     $scope.company = response.data;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/'+$localStorage.id+"/"+response.data.company_logo;
                     $state.go('user_company.company_profile');
                 });                 
 		};

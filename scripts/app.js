@@ -305,7 +305,7 @@
                 name: 'user_coordinator.coordinator_grades',
                 url: '',
                 templateUrl:  'coordinator_grades.html',
-                controller:''
+                controller:'coordinator_grades_controller'
                 },        
                 {
                 name: 'user_coordinator.coordinator_enroll_students',
@@ -389,13 +389,17 @@
     internon.factory('Utilities', function() {
         return {
             convert: function (d) {
-                    d = Number(d);
+                    if(d == undefined){
+                        return " ";
+                    }else{             
+                        d = Number(d);
 
-                    var h = Math.floor(d / 3600);
-                    var m = Math.floor(d % 3600 / 60);
-                    var s = Math.floor(d % 3600 % 60);
+                        var h = Math.floor(d / 3600);
+                        var m = Math.floor(d % 3600 / 60);
+                        var s = Math.floor(d % 3600 % 60);
 
-                    return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+                        return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+                    }
                 }
 
         }

@@ -195,16 +195,59 @@
         };
     });
 
-    internon.controller('coordinator_grades_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
-      
-        $scope.viewRendered = function(){
+    internon.controller('coordinator_grades_controller',function(urls,Utilities,$http,$auth,$state,$scope,$localStorage,$uibModal){
+        $scope.choice_advertisement = {
+                'option': {'name': '','value':'','strict':false},
+        };
+        $scope.choices_advertisement = [
+            {'name':'Select Section','value':''},
+        ]
+
+        $http({method: 'GET', url: urls.API_HOST + '/section_list/'+$localStorage.id}).then(function(response){
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.choices_advertisement.push({'name':response.data[i].section_code,'value':response.data[i].id,'strict':true});
+            }
+        });
+
+        $scope.select = function(){
+            // console.log($scope.choice_advertisement);
+            if($scope.choice_advertisement.option.value != ""){
+                $http({method: 'GET', url: urls.API_HOST + '/view_section_students/'+$scope.choice_advertisement.option.value}).then(function(response){
+                $scope.students = {};
+                $scope.students = response.data;
+                // console.log($scope.students);            
+                });
+            }
+            $scope.convert = function(hours){
+                return Utilities.convert(hours)
+            }
+        }
+        
+
+        $scope.viewRendered = function(timecard,total){
+                        console.log(timecard+" "+total);
+            
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_rendered.html',
-                    controller: "",
+                    controller: function(Utilities,timecard,total,$scope,$uibModalInstance){
+                        $scope.timecards = timecard;
+                        $scope.total = total;
+                        $scope.convert = function(hours){
+                            return Utilities.convert(hours)
+                        }
+                    },
                     size: 'lg',
-                    });
-        };  
+                    resolve:{
+                        timecard: function(){
+                                return timecard;
+                        },
+                        total: function(){
+                                return total;
+                        }
+                    }
+                });
+        };
 
         $scope.viewGrade = function(){
                 var modalInstance = $uibModal.open({
@@ -225,4 +268,5 @@
             };
             
     });
+
 })();
