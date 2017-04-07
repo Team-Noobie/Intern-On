@@ -79,12 +79,15 @@
                     </div>
                 </div>
 
-                <div class="well">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h3>My Company</h3>
-                            <p>Company: <a href="">My Company</a></p>
-                            <button ng-click="" class="btn btn-info btn-sm">Edit</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3>My Company</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Company: <a ng-click="myCompany(sv.company)">{{sv.company.company_name}}</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -274,7 +277,71 @@
     </div>
 
 </script>
+<script type="text/ng-template" id="my_company.html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron text-center">
+                    <div class="row">
+                        <div class="col-md-2" class="panel panel-warning" style="padding:0 0 0 0;margin-top:10px; height:200px; width:200px; ">
+                            <div class="panel panel-info" style="width:210px">
+                                <img src="{{logo}}" style="height:150px; width:200px;" alt="">
+                            </div>
+                        </div>
 
+                        <div class="col-md-8">
+                            <h1>{{sv.company_name}}</h1>
+                            <p>E-mail Address: <a href="">{{sv.company_email}}</a></p>
+                            <p>Contact Number: {{sv.company_contact_no}}</p>
+                            <p>Address: {{sv.company_address}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3>Company Overview</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>{{sv.company_overview}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3>Company Snapshot</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Industry: {{sv.company_industry}}</p>
+                                <p>Website: {{sv.company_website}}</p>
+                                <p>Spoken Language: {{sv.company_spoken_lang}}</p>
+                                <p>Benefits: {{sv.company_benefits}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3>Why Join Us?</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>{{sv.company_why_join_us}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 
 <script type="text/ng-template" id="interns_grade.html">
     <div class="container-fluid">
@@ -296,7 +363,7 @@
             <div class="col-md-4">
                 <!-- for active/graduate-->
                 Status
-                    <div class="btn-group" uib-dropdown>
+                <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]"
                         ng-options="status as status.name for status in choices_status"></select>
                 </div>
@@ -332,13 +399,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-3">                        
-                            <label for="Punctuality" class="cols-sm-2 control-label">Punctuality</label>    
+                        <div class="col-md-3">
+                            <label for="Punctuality" class="cols-sm-2 control-label">Punctuality</label>
                         </div>
-                        <div class="col-md-6">        
+                        <div class="col-md-6">
                             <input type="number" ng-min="0" ng-max="30" name="Punctuality" ng-model="punctuality" ng-required="true" required placeholder="Eg. 30">
-                            <p style="font-size:10px;">report of duty, time completion of  task assigned, affected by absenteeism and tardiness(Max 30pts)</p>                            
-                        </div>                            
+                            <p style="font-size:10px;">report of duty, time completion of task assigned, affected by absenteeism and tardiness(Max 30pts)</p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
@@ -347,43 +414,45 @@
                         <div class="col-md-6">
                             <input type="number" ng-min="0" ng-max="20" name="Competence" ng-model="competence" ng-required="true" required placeholder="Eg. 20">
                             <p style="font-size:10px;">students ability to perform a job properly(Max 20pts)</p>
-                            
-                        </div>                            
+
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">                    
+                        <div class="col-md-3">
                             <label for="Effetiveness" class="cols-sm-2 control-label">Effetiveness</label>
                         </div>
                         <div class="col-md-6">
                             <input type="number" ng-min="0" ng-max="15" name="Effetiveness" ng-model="effectiveness" ng-required="true" required placeholder="Eg. 15">
-                            <p style="font-size:10px;">students’ ability to produce the intended or expected result: Evidence of effective performance of laboratory skills or effective in following orders from superiors(Max 15pts)</p>                            
-                        </div>                            
+                            <p style="font-size:10px;">students’ ability to produce the intended or expected result: Evidence of effective performance
+                                of laboratory skills or effective in following orders from superiors(Max 15pts)</p>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">                        
-                           <label for="Cooperation" class="cols-sm-2 control-label">Cooperation</label>
+                        <div class="col-md-3">
+                            <label for="Cooperation" class="cols-sm-2 control-label">Cooperation</label>
                         </div>
-                        <div class="col-md-6">                    
+                        <div class="col-md-6">
                             <input type="number" ng-min="0" ng-max="20" name="Cooperation" ng-model="cooperation" ng-required="true" required placeholder="Eg. 20">
                             <p style="font-size:10px;">students ability to willingly work together with superiors and group or team members(Max 20pts.)</p>
-                        </div>                            
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">                        
+                        <div class="col-md-3">
                             <label for="PR" class="cols-sm-2 control-label">PR</label>
                         </div>
-                        <div class="col-md-6">                    
+                        <div class="col-md-6">
                             <input type="number" ng-min="0" ng-max="15" name="PR" ng-model="PR" ng-required="true" required placeholder="Eg. 15">
-                            <p style="font-size:10px;">students ability to behave properly in area of assignment, has own initiative to reach out others to accomplish a certain task(Max 15pts)</p>
+                            <p style="font-size:10px;">students ability to behave properly in area of assignment, has own initiative to reach out others
+                                to accomplish a certain task(Max 15pts)</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="comment" class="cols-sm-2 control-label">Comment</label>                    
+                    <label for="comment" class="cols-sm-2 control-label">Comment</label>
                     <textarea name="comment" ng-model="formdata.comment" id="" cols="30" rows="10" ng-required="true" required placeholder="Comment">
                     </textarea>
                     <div class="row">
-                        <h3>Total Grade:{{parseFloat(punctuality)+parseFloat(competence) +parseFloat(cooperation) +parseFloat(effectiveness)+parseFloat(PR)}}</h3>                          
+                        <h3>Total Grade:{{parseFloat(punctuality)+parseFloat(competence) +parseFloat(cooperation) +parseFloat(effectiveness)+parseFloat(PR)}}</h3>
                     </div>
                     <button class="btn btn-success" ng-click="grade_form.$valid && save()">
                         Save

@@ -90,7 +90,7 @@
                             <h3>My Company</h3>
                             </div>
                             <div class="panel-body">
-                            <p>Company: <a ng-click="">{{hr.company.company_name}}</a></p>
+                            <p>Company: <a ng-click="myCompany(hr.company)">{{hr.company.company_name}}</a></p>
                             </div>
                             </div>
                         </div>
@@ -101,15 +101,8 @@
         </div>
     </div>
 </script>
-<script type="text/ng-template" id="company_profile.html">
+<script type="text/ng-template" id="my_company.html">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    My Profile
-                </h1>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
@@ -118,20 +111,13 @@
                             <div class="panel panel-info" style="width:210px">
                                 <img src="{{logo}}" style="height:150px; width:200px;" alt="">
                             </div>
-                            <input type="file" style="width:200px" nv-file-select uploader="uploader" filters="imageFilter" />
-                            <button style="margin-right:200px" ng-click="uploader.queue[0].upload()">upload</button>
-
                         </div>
 
                         <div class="col-md-8">
-                            <h1>{{company.company_name}}</h1>
-                            <p>E-mail Address: <a href="">{{company.company_email}}</a></p>
-                            <p>Contact Number: {{company.company_contact_no}}</p>
-                            <p>Address: {{company.company_address}} </p>
-                        </div>
-
-                        <div class="col-md-12">
-                            <button ng-click="edit_info(company,1)" class="btn btn-info btn-sm">Edit</button>
+                            <h1>{{hr.company_name}}</h1>
+                            <p>E-mail Address: <a href="">{{hr.company_email}}</a></p>
+                            <p>Contact Number: {{hr.company_contact_no}}</p>
+                            <p>Address: {{hr.company_address}} </p>
                         </div>
                     </div>
                 </div>
@@ -142,8 +128,7 @@
                                 <h3>Company Overview</h3>
                             </div>
                             <div class="panel-body">
-                                <p>{{company.company_overview}}</p>
-                                <button ng-click="edit_info(company,2)" class="btn btn-info btn-sm">Edit</button>
+                                <p>{{hr.company_overview}}</p>
                             </div>
                         </div>
                     </div>
@@ -156,11 +141,10 @@
                                 <h3>Company Snapshot</h3>
                             </div>
                             <div class="panel-body">
-                                <p>Industry: {{company.company_industry}}</p>
-                                <p>Website: {{company.company_website}}</p>
-                                <p>Spoken Language: {{company.company_spoken_lang}}</p>
-                                <p>Benefits: {{company.company_benefits}}</p>
-                                <button ng-click="edit_info(company,3)" class="btn btn-info btn-sm">Edit</button>
+                                <p>Industry: {{hr.company_industry}}</p>
+                                <p>Website: {{hr.company_website}}</p>
+                                <p>Spoken Language: {{hr.company_spoken_lang}}</p>
+                                <p>Benefits: {{hr.company_benefits}}</p>
                             </div>
                         </div>
                     </div>
@@ -173,8 +157,7 @@
                                 <h3>Why Join Us?</h3>
                             </div>
                             <div class="panel-body">
-                                <p>{{company.company_why_join_us}}</p>
-                                <button ng-click="edit_info(company,4)" class="btn btn-info btn-sm">Edit</button>
+                                <p>{{hr.company_why_join_us}}</p>
                             </div>
                         </div>
                     </div>

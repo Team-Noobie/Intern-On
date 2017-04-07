@@ -20,12 +20,19 @@
             password.open_edit_modal();
         };
 
-          $scope.myCompany = function () {
+          $scope.myCompany = function (hr) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'view_reports.html',
-                controller: "",
+                templateUrl: 'my_company.html',
+                controller: function (hr,$scope) {
+                    $scope.hr = hr;
+                },
                 size: 'lg',
+                resolve: {
+                    hr: function () {
+                        return hr;
+                    }
+                }
             });
         };
 

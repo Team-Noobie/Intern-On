@@ -16,7 +16,23 @@
 
         $scope.edit = function () {
             password.open_edit_modal();
-        }
+        };
+
+          $scope.myCompany = function (sv) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'my_company.html',
+                controller: function (sv,$scope) {
+                    $scope.sv = sv;
+                },
+                size: 'lg',
+                resolve: {
+                    sv: function () {
+                        return sv;
+                    }
+                }
+            });
+        };
 
         $scope.edit_info = function (data, type) {
             var template;
