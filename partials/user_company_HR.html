@@ -366,13 +366,12 @@
                 <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]" ng-options="status as status.name for status in choices_status"></select>                    
                 </div>
-                Status
             </div> 
             <div class = "col-md-4"> <!-- for department-->
             Department:
+                <div class="btn-group" uib-dropdown>
                     <select style="text-transform:capitalize" class="form-control" uib-dropdown-toggle ng-model="dept_id.department_id" ng-init="dept_id.department_id = choices_department[0]" ng-options="dept as dept.name for dept in choices_department"></select>
                 </div>
-                Department
             </div>  
         </div>   
 

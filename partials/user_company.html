@@ -148,12 +148,6 @@
         </div>
     </div>
 </script>
-<<<<<<< HEAD
-
-
-		
-=======
->>>>>>> refs/remotes/origin/Alex
 <script type="text/ng-template" id="company_accounts.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -341,7 +335,7 @@
                         <th>Status</th>
                         <th>Date Publish</th>
                     </tr>
-                    <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search ">
+                    <tr ng-repeat="ad in ads  | toArray:false | orderBy: choice.option.value | filter : search : strict ">
                         <td><a style="cursor:pointer;text-transform:uppercase;" ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></td>
                         <td><button style="margin-right:5px;" class="btn btn-info btn-sm" ng-click="toggle(ad.id,'Show')"><i class="fa fa-eye" aria-hidden="true"></i> Show Ad</button><button class="btn btn-danger btn-sm" ng-click="toggle(ad.id,'Hide')"><i class="fa fa-eye-slash" aria-hidden="true"></i> Hide Ad</button></td>
                         <td>{{ad.ads_visibility}}</td>

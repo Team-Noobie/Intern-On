@@ -247,7 +247,14 @@
                         return 1;
                     });
             };
-
+            $scope.strict = function(){
+                if($scope.search != ""){
+                    return true;
+                }else{
+                    return false;
+                }
+                
+            }
             $scope.toggle = function(id,data){
                 $http.post(urls.API_HOST + '/toggle_ads_visibility/'+id, {toggle:data}).then(function (response){
                     $http({method: 'GET', url: urls.API_HOST + '/company_advertisement_list/'+$localStorage.id}).then(function(response){
