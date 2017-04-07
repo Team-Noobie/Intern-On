@@ -82,22 +82,29 @@
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
                     <div class="row">
-                        <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                            <p>IMAGE</p>
-                            <a href="" style="padding-top:20px;">upload image</a>
+                        <div class="col-md-2" style="padding:0 0 0 0;margin-top:10px; border:solid 1px; height:200px; width:200px;">
+                            <div style="border:solid 1px; height:150px; width:200px;">
+                                <img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
+                            </div>
+                            <div style="border:solid 1px; height:50px; width:200px;">
+                                <input type="file" style="width:200px" nv-file-select uploader="uploader" filters="imageFilter"/>
+                                <button style="margin-left: -135px;height: 25px;" ng-click="uploader.queue[0].upload()">upload</button>
+                            </div>
+                            
                         </div>
-
+                        
                         <div class="col-md-8">
                             <h1>{{company.company_name}}</h1>
                             <p>E-mail Address: <a href="">{{company.company_email}}</a></p> 
                             <p>Contact Number: {{company.company_contact_no}}</p>
                             <p>Address: {{company.company_address}} </p>
                         </div>
-
-                        <div class="col-md-12">
+                    </div> 
+                    <div class="row">
+                         <div class="col-md-12">
                                 <button ng-click="edit_info(company,1)" class="btn btn-info btn-sm">Edit</button> 
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">
