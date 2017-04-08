@@ -97,8 +97,6 @@
                 alert("Please upload a valid CSV file.");
             }
         };
-   
-
     });
 
     internon.controller('coordinator_section_controller',function(urls,$http,$auth,$state,$scope,$localStorage,$uibModal){
@@ -216,6 +214,28 @@
             password.open_reset_modal(id);
         }
 
+        $scope.profileModal = function (student) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'student_profile_modal.html',
+                controller: function (student, $scope) {
+                    $scope.student = student;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    console.log(student);
+                },
+                size: 'lg',
+                resolve: {
+                    student: function () {
+                        return student;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (student) {
+                return 1;
+            });
+        };
+
         $scope.delete_account = function(id){
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -307,12 +327,23 @@
                 });
         };
 
-        $scope.viewGrade = function(){
+        $scope.viewGrade = function(grade,tot){
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_grade.html',
-                    controller: "",
+                    controller:function(grade,tot,$scope){
+                        $scope.grade = grade;
+                        $scope.tot = tot;
+                    },
                     size: 'lg',
+                    resolve: {
+                        grade: function(){
+                            return grade;
+                        },
+                        tot: function(){
+                          return tot;  
+                        }
+                    }
                     });
         };      
     
@@ -320,7 +351,9 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'view_reports.html',
-                    controller: "",
+                    controller: function(){
+                        
+                    },
                     size: 'lg',
                     });
             };

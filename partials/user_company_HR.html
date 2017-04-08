@@ -186,6 +186,7 @@
                                     </table>
                                 </div>
                             </div>
+                             <button ng-click="schedModal(application.id)" ng-disabled="application.status == 'Failed' || application.hasSched" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</button>
                         </td>
                         <td>
                             <a ng-click="openAdModal(application.id)" style="text-transform:uppercase">
@@ -193,7 +194,6 @@
                             </a>
                         </td>
                         <td>
-                            <button ng-click="schedModal(application.id)" ng-disabled="application.status == 'Failed'" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</button>
                             <button class="btn btn-success" ng-disabled="application.status == 'Failed'" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
                             <button class="btn btn-danger" ng-disabled="application.status == 'Failed'" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
                         </td>
@@ -573,8 +573,10 @@
                                 <p>Contact Number: {{student.student_contact_no}}</p>
                                 <p>Address: {{student.student_address}} </p>
                             </div>
-                            <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                                <p>IMAGE</p>
+                            <div class="col-md-2" style="margin-top:10px;padding: 0 0 0 0; border:solid 1px; height:200px; width:200px;">
+                                <div style="border:solid 1px; height:inherit; width:inherit;">
+                                    <img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
