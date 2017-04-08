@@ -16,7 +16,25 @@
 
         $scope.edit = function () {
             password.open_edit_modal();
-        }
+        };
+
+          $scope.myCompany = function (sv) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'my_company.html',
+                controller: function (sv,$scope) {
+                    $scope.sv = sv;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.sv.user_ID + "/" + $scope.sv.company_logo;
+
+                },
+                size: 'lg',
+                resolve: {
+                    sv: function () {
+                        return sv;
+                    }
+                }
+            });
+        };
 
         $scope.edit_info = function (data, type) {
             var template;

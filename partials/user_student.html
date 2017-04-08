@@ -91,8 +91,8 @@
 			</div>
 			<div class="panel-body">
 				<a ng-click="openAdModal(ad.id)">
-					<h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
-						<h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h4>
+					<h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h4>
+						<h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h5>
 				</a>
 			</div>
 		</div>
@@ -113,19 +113,19 @@
 				<div class="jumbotron text-center panel panel-info">
 					<div class="row">
 						<div class="col-md-8">
-							<h1>{{student.student_firstname}} {{student.student_lastname}}</h1>
+							<h1 style="text-transform:capitalize">{{student.student_firstname}} {{student.student_lastname}}</h1>
 							<p>E-mail Address: <a href="">{{student.student_email}}</a></p>
 							<p>Contact Number: {{student.student_contact_no}}</p>
 							<p>Address: {{student.student_address}} </p>
 						</div>
-						<div class="col-md-2" style="margin-top:10px;padding:0 0 0 0; border:solid 1px; height:200px; width:200px;">
-							<div style="height:150px; width:200px;">
-                                <img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
-                            </div>
-                            <div style="border:solid 1px; height:50px; width:200px;">
-                                <input type="file" style="width:200px" nv-file-select uploader="uploader_pic" filters="imageFilter" />
-                                <button style="margin-left: -135px;height: 25px;" ng-click="uploader_pic.queue[0].upload()">upload</button>
-                            </div>
+						<div class="col-md-2" style="margin-top:10px;padding:0 0 0 0; height:200px; width:200px;">
+							<div style="height:150px; width:200px;" class="panel panel-info">
+								<img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
+							</div>
+							<div style="height:50px; width:200px;">
+								<input type="file" style="width:200px" nv-file-select uploader="uploader_pic" filters="imageFilter" />
+								<button style="margin-left: -135px;height: 25px;" ng-click="uploader_pic.queue[0].upload()">upload</button>
+							</div>
 						</div>
 						<div class="col-md-12">
 							<button ng-click="edit_info(student,1)" class="btn btn-info btn-sm">Edit Profile</button>
@@ -155,7 +155,7 @@
 								<h3>Educational Background</h3>
 							</div>
 							<div class="panel-body">
-								<h4>Coordinator: <a ng-click="viewCoordinator(student.section.coordinator)">My Coordinator</a></h4>
+								<h4>My Coordinator: <a style="text-transform:capitalize" ng-click="viewCoordinator(student.section.coordinator)">{{student.section.coordinator.coordinator_firstname}} {{student.section.coordinator.coordinator_lastname}}</a></h4>
 								<h4>Course: {{student.student_course}}</h4>
 								<h4>Department: {{student.student_department}}</h4>
 								<h4>Intitute: {{student.student_institute}}</h4>
@@ -193,8 +193,8 @@
 					<div class="col-lg-12">
 						<div class="jumbotron text-center">
 							<div class="row">
-								<div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-									<p>IMAGE</p>
+								<div class="col-md-4" style="padding:0 0 0 0; border:solid 1px; height:200px; width:200px;">
+											<img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
 								</div>
 
 								<div class="col-md-8">
@@ -454,9 +454,8 @@
 										<h4>Company Overview</h4>
 									</div>
 									<div class="panel-body">
-										<div class="col-md-4" style="border:solid 1px; height:200px; width:200px;">
+										<div class="col-md-4" style="padding:0 0 0 0; border:solid 1px; height:200px; width:200px;">
 											<img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
-
 										</div>
 										<div class="col-md-8">
 											<p>{{ad.company.company_overview}}</p>
@@ -617,14 +616,13 @@
 		<h4 style="position:absolute; margin:auto;text-transform:capitalize;">{{ad.company.company_name}}</h4><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
 	</div>
 	<div class="modal-body">
-		<div class="text-center">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-success">
-						<div class="panel-heading">
+						<div class="panel-heading text-center">
 							<h3 style="text-transform: uppercase"><b>{{ad.ads_title}}</b></h3>
 						</div>
-						<div class="panel-body" style="list-style-position:inside">
+						<div class="panel-body">
 							<h4><b>Job Description:</b></h4>
 							<h5 ng-bind-html="ad.ads_job_description"></h5>
 							<h4><b>Related Industries:</b></h4>
@@ -637,7 +635,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		<div class="main-center">
 			<div class="container-fluid">
 				<div class="row">
