@@ -82,7 +82,7 @@
                 <div class="well">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3>Company Background</h3>
+                            <h3>My Company</h3>
                             <p>Company: <a href="">My Company</a></p>
                             <button ng-click="" class="btn btn-info btn-sm">Edit</button>
                         </div>
@@ -295,11 +295,11 @@
         <div class="row">
             <div class="col-md-4">
                 <!-- for active/graduate-->
-                <div class="btn-group" uib-dropdown>
+                Status
+                    <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-disabled="disabled" ng-model="choice_status.option" ng-init="choice_status.option = choices_status[0]"
                         ng-options="status as status.name for status in choices_status"></select>
                 </div>
-                Status
             </div>
             <div class="col-md-4">
                 <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
