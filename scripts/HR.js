@@ -26,6 +26,7 @@
                 templateUrl: 'my_company.html',
                 controller: function (hr,$scope) {
                     $scope.hr = hr;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.hr.user_ID + "/" + $scope.hr.company_logo;
                 },
                 size: 'lg',
                 resolve: {
@@ -293,7 +294,7 @@
         };
 
     });
-    internon.controller('hr_interns_controller', function (Utilities, urls, $http, $auth, $state, $rootScope, $scope, $localStorage, $uibModal) {
+    internon.controller('hr_interns_controller', function (ngToast, Utilities, urls, $http, $auth, $state, $rootScope, $scope, $localStorage, $uibModal) {
 
         $http({ method: 'GET', url: urls.API_HOST + '/intern_list/' + $localStorage.company_id }).then(function (response) {
             $scope.interns = response.data;
@@ -305,6 +306,28 @@
                 }
             }
         });
+
+         $scope.profileModal = function (student) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'student_profile_modal.html',
+                controller: function (urls, student, $scope) {
+                    $scope.student = student;
+                    $scope.file = 'http://localhost/Intern-On-DB/storage/app/resume/' + $scope.student.user_ID + "/" + $scope.student.resume;
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                },
+                size: 'lg',
+                resolve: {
+                    student: function () {
+                        return student;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (student) {
+                return 1;
+            });
+        };
 
 
         $scope.dept_id = {
@@ -387,6 +410,11 @@
 
 
                         $http.post(urls.API_HOST + '/update_timecard', $scope.formdata).then(function (response) {
+                             ngToast.create({
+                                className: 'success',
+                                content: 'Timecard Updated',
+                                animation: 'fade'
+                            });
                             $uibModalInstance.close();
                         });
                     };

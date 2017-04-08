@@ -1,6 +1,6 @@
 (function () {
     var internon = angular.module('internon');
-    internon.controller('coordinator_controller', function (password, urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
+    internon.controller('coordinator_controller', function (FileUploader,password, urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
         $scope.logout = function () {
             $auth.logout();
             $localStorage.$reset();
@@ -13,6 +13,7 @@
             $http({ method: 'GET', url: urls.API_HOST + '/coordinator_profile/' + $localStorage.id }).then(function (response) {
                 $localStorage.symbol = response.data.coordinator_symbol;
                 $scope.coordinator = response.data;
+                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.coordinator_pic;
                 $state.go('user_coordinator.coordinator_profile');
             });
         };
@@ -65,6 +66,46 @@
                 });
             });
         };
+    
+       
+        var uploader = $scope.uploader = new FileUploader({
+            url: urls.API_HOST + '/upload_coordinator_pic',
+            formData: [{
+                id: $localStorage.id,
+            }],
+            headers: {
+                'Authorization': 'Bearer: ' + $auth.getToken()
+            }
+        });
+
+        uploader.onCompleteAll = function (fileItem) {
+            $http({ method: 'GET', url: urls.API_HOST + '/coordinator_profile/' + $localStorage.id }).then(function (response) {
+                $scope.coordinator = {};
+                uploader.clearQueue();
+                $scope.coordinator = response.data;
+                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.coordinator_pic;
+                $state.go('user_coordinator.coordinator_profile');
+            });
+        };
+
+        uploader.onWhenAddingFileFailed = function (item, filter, options) {
+            ngToast.create({
+                className: 'warning',
+                content: 'Invalid File Format',
+                animation: 'fade'
+            });
+        };
+
+
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|'.indexOf(type) !== -1;
+            }
+        });
+
+
     });
 
     internon.controller('coordinator_section_controller', function (urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {

@@ -24,43 +24,45 @@
 		$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
 			$scope.student = response.data;
 			$scope.file = '../Intern-On-DB/storage/app/resume/' + response.data.user_ID + '/' + response.data.resume;
+			$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
+
 		});
 
 		var uploader_pic = $scope.uploader_pic = new FileUploader({
-            url: urls.API_HOST + '/upload_student_pic',
-            formData: [{
-                id: $localStorage.id,
-            }],
-            headers: {
-                'Authorization': 'Bearer: ' + $auth.getToken()
-            }
-        });
+			url: urls.API_HOST + '/upload_student_pic',
+			formData: [{
+				id: $localStorage.id,
+			}],
+			headers: {
+				'Authorization': 'Bearer: ' + $auth.getToken()
+			}
+		});
 
-        uploader_pic.onCompleteAll = function (fileItem) {
+		uploader_pic.onCompleteAll = function (fileItem) {
 			$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
 				$scope.student = {};
 				$scope.student = response.data;
-                uploader_pic.clearQueue();
-                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
-            });
-        };
+				uploader_pic.clearQueue();
+				$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
+			});
+		};
 
-        uploader_pic.onWhenAddingFileFailed = function (item, filter, options) {
-            ngToast.create({
-                className: 'warning',
-                content: 'Invalid File Format',
-                animation: 'fade'
-            });
-        };
+		uploader_pic.onWhenAddingFileFailed = function (item, filter, options) {
+			ngToast.create({
+				className: 'warning',
+				content: 'Invalid File Format',
+				animation: 'fade'
+			});
+		};
 
 
-        uploader_pic.filters.push({
-            name: 'imageFilter',
-            fn: function (item /*{File|FileLikeObject}*/, options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|'.indexOf(type) !== -1;
-            }
-        });
+		uploader_pic.filters.push({
+			name: 'imageFilter',
+			fn: function (item /*{File|FileLikeObject}*/, options) {
+				var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+				return '|jpg|png|jpeg|'.indexOf(type) !== -1;
+			}
+		});
 
 		$scope.edit_info = function (data, type) {
 			var template;
@@ -123,6 +125,7 @@
 				templateUrl: 'view_coordinator.html',
 				controller: function ($scope, data) {
 					$scope.coordinator = data;
+					$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + data.user_ID + "/" + data.coordinator_pic;
 				},
 				size: 'lg',
 				resolve: {
@@ -152,12 +155,12 @@
 		};
 
 		uploader.filters.push({
-            name: 'imageFilter',
-            fn: function (item /*{File|FileLikeObject}*/, options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|doc|docx|'.indexOf(type) !== -1;
-            }
-        });
+			name: 'imageFilter',
+			fn: function (item /*{File|FileLikeObject}*/, options) {
+				var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+				return '|doc|docx|'.indexOf(type) !== -1;
+			}
+		});
 
 	});
 

@@ -63,13 +63,8 @@
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
                     <div class="row">
-                        <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                            <p>IMAGE</p>
-                            <a href="" style="padding-top:20px;">upload image</a>
-                        </div>
-
-                        <div class="col-md-8">
-                            <h1>{{sv.sv_firstname}} {{sv.sv_lastname}}</h1>
+                        <div class="col-md-12">
+                            <h1 style="text-transform:capitalize;">{{sv.sv_firstname}} {{sv.sv_lastname}}</h1>
                             <p>E-mail Address: <a>{{sv.sv_email}}</a></p>
                             <p>Contact Number: {{sv.sv_contact_no}}</p>
                             <p>Address: {{sv.sv_address}}</p>
@@ -216,7 +211,7 @@
                                             <td>{{report.supervisor.sv_firstname}} {{report.supervisor.sv_lastname}}</td>
                                             <td>
                                                 <button class="btn btn-primary" ng-click="viewReport(report)"><i class="fa fa-eye"></i> View</button>
-                                                <button class="btn btn-danger" ng-click=""><i class="fa fa-trash"></i> Delete</button>
+                                                <!--<button class="btn btn-danger" ng-click=""><i class="fa fa-trash"></i> Delete</button>-->
                                             </td>
                                         </tr>
                                     </table>
@@ -225,7 +220,7 @@
                         </td>
                         <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a>{{rendered_hours}}</td>
                         <td>
-                            <h5>200</h5>
+                            <h5>{{intern.required_hours}}</h5>
                         </td>
                     </tr>
 
@@ -257,12 +252,12 @@
                                 <td>{{timecard.date}}</td>
                                 <td>{{timecard.time_in}}</td>
                                 <td>{{timecard.time_out}}</td>
-                                <td>{{timecard.hours_render}}</td>
+                                <td>{{timecard.hours_render|number:2}} Hours</td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
                                 <th>Total Rendered Hours:</th>
-                                <td>{{total}}</td>
+                                <td>{{total|number:2}} Hours</td>
                             </tr>
 
                             <!--</tr>-->
@@ -285,7 +280,7 @@
                     <div class="row">
                         <div class="col-md-2" class="panel panel-warning" style="padding:0 0 0 0;margin-top:10px; height:200px; width:200px; ">
                             <div class="panel panel-info" style="width:210px">
-                                <img src="{{logo}}" style="height:150px; width:200px;" alt="">
+                                <img src="{{logo}}" style="height:200px; width:200px;" alt="">
                             </div>
                         </div>
 

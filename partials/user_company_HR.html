@@ -66,13 +66,8 @@
             <div class="col-lg-12">
                 <div class="jumbotron text-center">
                     <div class="row">
-                        <div class="col-md-2" style="margin-top:10px; border:solid 1px; height:200px; width:200px;">
-                            <p>IMAGE</p>
-                            <a href="" style="padding-top:20px;">upload image</a>
-                        </div>
-
-                        <div class="col-md-8">
-                            <h1>{{hr.hr_firstname}} {{hr.hr_lastname}}</h1>
+                        <div class="col-md-12">
+                            <h1 style="text-transform:capitalize;">{{hr.hr_firstname}} {{hr.hr_lastname}}</h1>
                             <p>E-mail Address: <a href="">{{hr.hr_email}}</a></p>
                             <p>Contact Number: {{hr.hr_contact_no}}</p>
                             <p>Address: {{hr.hr_address}}</p>
@@ -109,7 +104,7 @@
                     <div class="row">
                         <div class="col-md-2" class="panel panel-warning" style="padding:0 0 0 0;margin-top:10px; height:200px; width:200px; ">
                             <div class="panel panel-info" style="width:210px">
-                                <img src="{{logo}}" style="height:150px; width:200px;" alt="">
+                                <img src="{{logo}}" style="height:200px; width:200px;" alt="">
                             </div>
                         </div>
 
@@ -185,7 +180,6 @@
     <div class="modal-footer">
     </div>
 </script>
-
 <script type="text/ng-template" id="hr_list_application.html">
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -209,7 +203,7 @@
                         ng-options="status as status.name for status in choices_status"></select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 Advertisement:
                 <div class="btn-group" uib-dropdown>
                     <select class="form-control" uib-dropdown-toggle ng-model="choice_advertisement.option" ng-init="choice_advertisement.option = choices_advertisement[0]"
@@ -374,20 +368,21 @@
                         <th>Student Name</th>
                         <th>Department</th>
                         <th>Timecard</th>
+                        <th>Required Hours</th>
                         <th>Rendered Hours</th>
                     </tr>
                     <tr ng-repeat="intern in interns | filter : choice_status.option.value | filter: dept_id.department_id.value:dept_id.department_id.strict">
-                        <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
-                        <td style="text-transform:uppercase">{{intern.department.department_name}}</td>
+                        <td><a ng-click="profileModal(intern.student)"><h5>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</h5></a></td>
+                        <td style="text-transform:uppercase"><h5>{{intern.department.department_name}}</h5></td>
                         <td><button class="btn btn-info" ng-click="viewTimecardModal(intern.id)"><i class="fa fa-clock-o" aria-hidden="true"></i> Update Timecard</button></td>
-                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a></td>
+                        <td><h5>{{intern.required_hours}}</h5></td>
+                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)"><h5>{{intern.rendered_hours}} Hours</h5></a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </script>
-
 <script type="text/ng-template" id="edit_profile.html">
     <div class="modal-header">
         <h3 style="position:absolute; margin:auto;">Edit</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
@@ -448,8 +443,6 @@
     <div class="modal-footer">
     </div>
 </script>
-
-
 <script type="text/ng-template" id="hr_sched_student_modal.html">
     <div class="modal-header">
         Schedule
@@ -560,12 +553,12 @@
                                 <td>{{timecard.date}}</td>
                                 <td>{{timecard.time_in}}</td>
                                 <td>{{timecard.time_out}}</td>
-                                <td>{{timecard.hours_render}}</td>
+                                <td>{{timecard.hours_render}} Hours</td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
                                 <th>Total Rendered Hours:</th>
-                                <td>{{total}}</td>
+                                <td>{{total}} Hours</td>
                             </tr>
 
                             <!--</tr>-->
@@ -645,8 +638,8 @@
                                 <p>Contact Number: {{student.student_contact_no}}</p>
                                 <p>Address: {{student.student_address}} </p>
                             </div>
-                            <div class="col-md-2" style="margin-top:10px;padding: 0 0 0 0; border:solid 1px; height:200px; width:200px;">
-                                <div style="border:solid 1px; height:inherit; width:inherit;">
+                            <div class="col-md-2" style="margin-top:10px;padding: 0 0 0 0; height:200px; width:200px;">
+                                <div style="height:inherit; width:inherit;" class="panel panel-info">
                                     <img src="{{logo}}" style="width:inherit;height:inherit;" alt="">
                                 </div>
                             </div>
