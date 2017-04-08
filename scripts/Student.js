@@ -26,7 +26,7 @@
 			password.open_edit_modal();
 		}
 	});
-	internon.controller('student_profile_controller', function (urls, $auth, FileUploader, $http, $state, $scope, $localStorage, $uibModal) {
+	internon.controller('student_profile_controller', function (urls, $auth, FileUploader, $http, ngToast,$state, $scope, $localStorage, $uibModal) {
 		$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
 			$scope.student = response.data;
 			$scope.file = '../Intern-On-DB/storage/app/resume/' + response.data.user_ID + '/' + response.data.resume;
@@ -165,6 +165,12 @@
 					$localStorage.hasResume = false;
 				if(response.data.resume == null)
 					$localStorage.hasResume = true;
+
+					ngToast.create({
+						className: 'success',
+						content: 'Uploaded Resume',
+						animation: 'fade'
+					});
             });
         };
 

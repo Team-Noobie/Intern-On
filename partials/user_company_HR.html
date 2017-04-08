@@ -252,7 +252,7 @@
                                     </table>
                                 </div>
                             </div>
-                             <button ng-click="schedModal(application.id)" ng-disabled="application.status == 'Failed' || application.hasSched" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</button>
+                             <button ng-click="schedModal(application.id)" ng-disabled="application.status == 'Failed' || application.hasSched  || application.status == 'Already Hired'" class="btn btn-info"><i class="fa fa-calendar" aria-hidden="true"></i> Schedule</button>
                         </td>
                         <td>
                             <a ng-click="openAdModal(application.id)" style="text-transform:uppercase">
@@ -260,8 +260,8 @@
                             </a>
                         </td>
                         <td>
-                            <button class="btn btn-success" ng-disabled="application.status == 'Failed' || application.hasSched" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                            <button class="btn btn-danger" ng-disabled="application.status == 'Failed' || application.hasSched" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
+                            <button class="btn btn-success" ng-disabled="application.status == 'Failed' || application.hasSched || application.status == 'Already Hired'" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                            <button class="btn btn-danger" ng-disabled="application.status == 'Failed' || application.hasSched || application.status == 'Already Hired'" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
                         </td>
                         <td>
                             <h5>{{application.status}}</h5>
@@ -493,7 +493,7 @@
                     Required Hours:
                 </div>
                 <div class="col-md-6">
-                    <input type="text" ng-required="true" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model="formdata.required_hours"
+                    <input type="number" ng-required="true" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model="formdata.required_hours"
                         class="form-control" required>
                 </div>
                 <div class="col-md-8">
