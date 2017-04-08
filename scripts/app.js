@@ -13,6 +13,7 @@
         'ngCsvImport',
         'ngToast',
         'ngAnimate',
+        'ngCsv',
     ]);
 
     internon.constant('urls', (function () {

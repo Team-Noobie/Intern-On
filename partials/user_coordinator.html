@@ -462,7 +462,7 @@
                             ng-options="ads as ads.name for ads in choices_advertisement"></select>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-warning" ng-click="download_report()">Download Report</button>
+                        <button class="btn btn-warning" ng-csv="class_grade" csv-header="['Lastname', 'Firstname', 'Grade']" filename="grade.csv">Download Report</button>
                     </div>
                 </div>
                 <table class="table table-striped table-hover">

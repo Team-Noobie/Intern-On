@@ -288,7 +288,14 @@
                 $scope.students = response.data;
                 $scope.class_grade=[];
                 for (var i = 0; i < response.data.length; i++) {
-                    $scope.class_grade.push({'name':response.data[i].student.student_lastname+","+response.data[i].student.student_firstname,'grade':'100','strict':true});
+                    var grade;
+                    if(response.data[i].student.grade == null){
+                        grade = 0;
+                    }else{
+                        grade = response.data[i].student.grade.grade;     
+                    }
+                        
+                    $scope.class_grade.push({'Lastname':response.data[i].student.student_lastname,'Firstname':response.data[i].student.student_firstname,'grade':grade});
                 }
                 });
             }else{
