@@ -107,12 +107,6 @@
                 templateUrl: 'partials/user_guest.html',
                 controller: 'guest_controller'
             },
-            {
-                name: 'user_guest.search_internship',
-                url: '',
-                templateUrl: 'search_internship.html',
-                controller: 'search_advertisement_controller'
-            },
             // Administrator routes
             {
                 name: 'user_administrator',
@@ -353,6 +347,7 @@
             });
         };
         $scope.search = function () {
+            $localStorage.search = $scope.search_;
             $state.go('user_guest');
         };
     });

@@ -164,7 +164,7 @@
             }
         };
 
-        
+
         $scope.enrollStudentCSV = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -173,7 +173,8 @@
                 size: 'md',
             });
         };
-          $scope.uploadCSV = function() {
+        $scope.uploadCSV = function () {
+            $scope.students = [];
             var fileUpload = document.getElementById("fileUpload");
             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
             if (regex.test(fileUpload.value.toLowerCase())) {
@@ -185,6 +186,8 @@
                         for (var i = 0; i < rows.length; i++) {
                             var row = table.insertRow(-1);
                             var cells = rows[i].split(",");
+                            if(i >= 1 && i < rows.length-1)
+                                $scope.students.push({'username': cells[0], 'firstname': cells[1], 'lastname': cells[2], 'email': cells[3], 'contact_no': cells[4]});
                             for (var j = 0; j < cells.length; j++) {
                                 var cell = row.insertCell(-1);
                                 cell.innerHTML = cells[j];
@@ -201,6 +204,15 @@
             } else {
                 alert("Please upload a valid CSV file.");
             }
+
+            console.log($scope.students);
+        }
+
+        $scope.enrollBatchStudent = function () {
+            $http.post(urls.API_HOST + '/enroll_batch_student/' + $localStorage.id, {students:$scope.students,section_id:$scope.choice_advertisement.option.value}).then(function (response) {
+                // console.log(response);
+                $uibModalInstance.close();
+           });
         }
 
         $scope.enrollStudentModal = function () {
@@ -243,7 +255,7 @@
             });
         };
 
- 
+
         $scope.delete_account = function (id) {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -286,22 +298,22 @@
             }
         });
 
-        $scope.class_grade=[];
-        $scope.toggled = function(open) {
-            if($scope.choice_advertisement.option.value != ""){
-                $http({method: 'GET', url: urls.API_HOST + '/view_section_students/'+$scope.choice_advertisement.option.value}).then(function(response){
+        $scope.class_grade = [];
+        $scope.toggled = function (open) {
+            if ($scope.choice_advertisement.option.value != "") {
+                $http({ method: 'GET', url: urls.API_HOST + '/view_section_students/' + $scope.choice_advertisement.option.value }).then(function (response) {
                     $scope.students = {};
                     $scope.students = response.data;
-                    $scope.class_grade=[];
+                    $scope.class_grade = [];
                     for (var i = 0; i < response.data.length; i++) {
                         var grade;
-                        if(response.data[i].student.grade == null){
+                        if (response.data[i].student.grade == null) {
                             grade = 0;
-                        }else{
-                            grade = response.data[i].student.grade.grade;     
+                        } else {
+                            grade = response.data[i].student.grade.grade;
                         }
-                            
-                        $scope.class_grade.push({'Lastname':response.data[i].student.student_lastname,'Firstname':response.data[i].student.student_firstname,'grade':grade});
+
+                        $scope.class_grade.push({ 'Lastname': response.data[i].student.student_lastname, 'Firstname': response.data[i].student.student_firstname, 'grade': grade });
                     }
                 });
             } else {
@@ -358,36 +370,36 @@
             });
         };
 
-        $scope.viewGrade = function(grade,tot){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_grade.html',
-                    controller:function(grade,tot,$scope){
-                        $scope.grade = grade;
-                        $scope.tot = tot;
+        $scope.viewGrade = function (grade, tot) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'view_grade.html',
+                controller: function (grade, tot, $scope) {
+                    $scope.grade = grade;
+                    $scope.tot = tot;
+                },
+                size: 'lg',
+                resolve: {
+                    grade: function () {
+                        return grade;
                     },
-                    size: 'lg',
-                    resolve: {
-                        grade: function(){
-                            return grade;
-                        },
-                        tot: function(){
-                          return tot;  
-                        }
+                    tot: function () {
+                        return tot;
                     }
-                    });
-        };      
-    
-        $scope.viewReports = function(){
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    templateUrl: 'view_reports.html',
-                    controller: function(){
-                        
-                    },
-                    size: 'lg',
-                    });
-            };
+                }
+            });
+        };
+
+        $scope.viewReports = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'view_reports.html',
+                controller: function () {
+
+                },
+                size: 'lg',
+            });
+        };
     });
 
 })();

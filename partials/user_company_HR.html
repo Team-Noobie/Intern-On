@@ -283,8 +283,8 @@
                             </a>
                         </td>
                         <td>
-                            <button class="btn btn-success" ng-disabled="application.status == 'Failed'" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
-                            <button class="btn btn-danger" ng-disabled="application.status == 'Failed'" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
+                            <button class="btn btn-success" ng-disabled="application.status == 'Failed' || application.hasSched" ng-click="resultModal('accept',application.id)"><i class="fa fa-check" aria-hidden="true"></i> Accept</button>
+                            <button class="btn btn-danger" ng-disabled="application.status == 'Failed' || application.hasSched" ng-click="resultModal('reject',application.id)"><i class="fa fa-ban" aria-hidden="true"></i> Reject</button>
                         </td>
                         <td>
                             <h5>{{application.status}}</h5>
@@ -397,7 +397,7 @@
                         <td>{{intern.student.student_firstname}} {{intern.student.student_lastname}}</td>
                         <td style="text-transform:uppercase">{{intern.department.department_name}}</td>
                         <td><button class="btn btn-info" ng-click="viewTimecardModal(intern.id)"><i class="fa fa-clock-o" aria-hidden="true"></i> Update Timecard</button></td>
-                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours}}</a></td>
+                        <td><a ng-click="viewRendered(intern.timecard,intern.rendered_hours)">{{intern.rendered_hours | number}} Hours</a></td>
                     </tr>
                 </table>
             </div>
@@ -577,12 +577,12 @@
                                 <td>{{timecard.date}}</td>
                                 <td>{{timecard.time_in}}</td>
                                 <td>{{timecard.time_out}}</td>
-                                <td>{{timecard.hours_render}}</td>
+                                <td>{{timecard.hours_render | number}} Hours</td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
                                 <th>Total Rendered Hours:</th>
-                                <td>{{total}}</td>
+                                <td>{{total | number}} Hours</td>
                             </tr>
 
                             <!--</tr>-->

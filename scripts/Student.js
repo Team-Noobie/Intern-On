@@ -13,6 +13,12 @@
 			$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
 				$scope.student = response.data;
 				$state.go('user_student.student_profile');
+				if(response.data.resume != "")
+					$localStorage.hasResume = false;
+				if(response.data.resume == null)
+					$localStorage.hasResume = true;
+					
+					console.log($localStorage.hasResume);
 			});
 		};
 
@@ -147,17 +153,29 @@
 			}
 		});
 
+		uploader.onCompleteAll = function (fileItem) {
+			$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
+				$scope.student = {};				
+				$scope.student = response.data;
+				$state.go('user_student.student_profile');
+				if(response.data.resume != "")
+					$localStorage.hasResume = false;
+				if(response.data.resume == null)
+					$localStorage.hasResume = true;
+            });
+        };
+
 		uploader.onAfterAddingFile = function (fileItem) {
 			console.info('onAfterAddingFile', fileItem);
 		};
 
-		uploader.filters.push({
-            name: 'imageFilter',
-            fn: function (item /*{File|FileLikeObject}*/, options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|doc|docx|'.indexOf(type) !== -1;
-            }
-        });
+		// uploader.filters.push({
+        //     name: 'imageFilter',
+        //     fn: function (item /*{File|FileLikeObject}*/, options) {
+        //         var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        //         return '|docx|'.indexOf(type) !== -1;
+        //     }
+        // });
 
 	});
 
@@ -230,7 +248,7 @@
 			$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.ad.company_id + "/" + $scope.ad.company.company_logo;
 			console.log($scope.logo);
 		});
-
+		$scope.hasResume = $localStorage.hasResume;
 		$scope.apply = function () {
 			$http.post(urls.API_HOST + '/apply', $scope.ids).then(function (response) {
 

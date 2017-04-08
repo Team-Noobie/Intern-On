@@ -51,54 +51,46 @@
     </nav>
 
     <div id="page-wrapper">
-        <ui-view style="width: inherit;">
-        </ui-view>
-    </div>
-    <!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
-
-
-<script type="text/ng-template" id="search_internship.html">
-    <div class="search-box">
-        <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
-                <div class="input-group">
-                    <div class="input-group-btn search-panel">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <div class="search-box">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="input-group">
+                        <div class="input-group-btn search-panel">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 							<span id="search_concept">Filter by</span> <span class="caret"></span>
 						</button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#course">All</a></li>
-                            <li><a href="#company">Company</a></li>
-                            <li><a href="#location">Location</a></li>
-                        </ul>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#course">All</a></li>
+                                <li><a href="#company">Company</a></li>
+                                <li><a href="#location">Location</a></li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control" ng-model="search_" placeholder="Search for Internship" autofocus/>
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" ng-click="search()" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
                     </div>
-                    <input type="hidden" name="search_param" value="all" id="search_param">
-                    <input type="text" class="form-control" placeholder="Search for Internship" autofocus/>
-                    <span class="input-group-btn">
-						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="margin-top:2em;" ng-repeat="ad in aAds">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title" style="text-transform:uppercase;"><a ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></h3>
-            </div>
-            <div class="panel-body">
-                <a ng-click="openAdModal(ad.id)">
-                    <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
-                        <h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h4>
-                </a>
+        <div style="margin-top:2em;" ng-repeat="ad in aAds">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-transform:uppercase;"><a ng-click="openAdModal(ad.id)">{{ad.ads_title}}</a></h3>
+                </div>
+                <div class="panel-body">
+                    <a ng-click="openAdModal(ad.id)">
+                        <h4 style="text-transform:capitalize;">Company: {{ad.company.company_name}}</h5>
+                            <h5 style="text-transform:capitalize;">Work Location: {{ad.ads_work_location}}</h4>
+                    </a>
+                </div>
             </div>
         </div>
+        <ul uib-pagination class="pagination" total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
     </div>
-    <ul uib-pagination class="pagination" total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"> </ul>
-</script>
+</div>
+<!-- /#wrapper -->
 <script type="text/ng-template" id="student_profile.html">
     <div class="container-fluid">
         <div class="row">
