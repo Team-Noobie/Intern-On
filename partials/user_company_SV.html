@@ -280,7 +280,7 @@
                     <div class="row">
                         <div class="col-md-2" class="panel panel-warning" style="padding:0 0 0 0;margin-top:10px; height:200px; width:200px; ">
                             <div class="panel panel-info" style="width:210px">
-                                <img src="{{logo}}" style="height:200px; width:200px;" alt="">
+                                <img src="{{logo}}" style="height: inherit;width: inherit;margin-left:-1px;margin-top: -1px;" alt="">
                             </div>
                         </div>
 
@@ -364,7 +364,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <input type="text" ng-model="search" class="form-control" placeholder="Search" autofocus/>
+                <input type="text" ng-model="search" class="form-control" placeholder="Search" ng-click="$event.preventDefault(); $event.stopPropagation();" autofocus/>
             </div>
         </div>
         <div class="row" style="margin-top:10px">
@@ -398,7 +398,7 @@
                             <label for="Punctuality" class="cols-sm-2 control-label">Punctuality</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-min="0" ng-max="30" name="Punctuality" ng-model="punctuality" ng-required="true" required placeholder="Eg. 30">
+                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="30" name="Punctuality" ng-model="punctuality" ng-required="true" required placeholder="Eg. 30">
                             <p style="font-size:10px;">report of duty, time completion of task assigned, affected by absenteeism and tardiness(Max 30pts)</p>
                         </div>
                     </div>
@@ -407,7 +407,7 @@
                             <label for="Competence" class="cols-sm-2 control-label">Competence</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-min="0" ng-max="20" name="Competence" ng-model="competence" ng-required="true" required placeholder="Eg. 20">
+                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="20" name="Competence" ng-model="competence" ng-required="true" required placeholder="Eg. 20">
                             <p style="font-size:10px;">students ability to perform a job properly(Max 20pts)</p>
 
                         </div>
@@ -417,7 +417,7 @@
                             <label for="Effetiveness" class="cols-sm-2 control-label">Effetiveness</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-min="0" ng-max="15" name="Effetiveness" ng-model="effectiveness" ng-required="true" required placeholder="Eg. 15">
+                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="Effetiveness" ng-model="effectiveness" ng-required="true" required placeholder="Eg. 15">
                             <p style="font-size:10px;">students’ ability to produce the intended or expected result: Evidence of effective performance
                                 of laboratory skills or effective in following orders from superiors(Max 15pts)</p>
                         </div>
@@ -427,7 +427,7 @@
                             <label for="Cooperation" class="cols-sm-2 control-label">Cooperation</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-min="0" ng-max="20" name="Cooperation" ng-model="cooperation" ng-required="true" required placeholder="Eg. 20">
+                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();"ng-min="0" ng-max="20" name="Cooperation" ng-model="cooperation" ng-required="true" required placeholder="Eg. 20">
                             <p style="font-size:10px;">students ability to willingly work together with superiors and group or team members(Max 20pts.)</p>
                         </div>
                     </div>
@@ -436,7 +436,7 @@
                             <label for="PR" class="cols-sm-2 control-label">PR</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-min="0" ng-max="15" name="PR" ng-model="PR" ng-required="true" required placeholder="Eg. 15">
+                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="PR" ng-model="PR" ng-required="true" required placeholder="Eg. 15">
                             <p style="font-size:10px;">students ability to behave properly in area of assignment, has own initiative to reach out others
                                 to accomplish a certain task(Max 15pts)</p>
                         </div>
@@ -444,7 +444,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="comment" class="cols-sm-2 control-label">Comment</label>
-                    <textarea name="comment" ng-model="formdata.comment" id="" cols="30" rows="10" ng-required="true" required placeholder="Comment">
+                    <textarea name="comment" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-model="formdata.comment" id="" cols="30" rows="10" ng-required="true" required placeholder="Comment">
                     </textarea>
                     <div class="row">
                         <h3>Total Grade:{{parseFloat(punctuality)+parseFloat(competence) +parseFloat(cooperation) +parseFloat(effectiveness)+parseFloat(PR)}}</h3>
@@ -470,7 +470,7 @@
         <form name="report">
             <div class="row">
                 Report Date:
-                <input type="date" ng-model="dt" class="form-control" placeholder="Date" required> Reports:
+                <input type="date" ng-model="dt" class="form-control" placeholder="Date" required ng-click="$event.preventDefault(); $event.stopPropagation();"> Reports:
                 <textarea name="remarks" cols="34" rows="10" ng-model="formdata.report" ng-required="true" required ng-click="$event.preventDefault(); $event.stopPropagation();"></textarea>
             </div>
         </form>

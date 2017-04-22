@@ -18,7 +18,7 @@
 				if(response.data.resume == null)
 					$localStorage.hasResume = true;
 					
-					console.log($localStorage.hasResume);
+					// console.log($localStorage.hasResume);
 			});
 		};
 
@@ -30,7 +30,12 @@
 		$http({ method: 'GET', url: urls.API_HOST + '/student_profile/' + $localStorage.id }).then(function (response) {
 			$scope.student = response.data;
 			$scope.file = '../Intern-On-DB/storage/app/resume/' + response.data.user_ID + '/' + response.data.resume;
-			$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
+
+			if(response.data.student_pic == null)
+				$scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+			else{
+				$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.student_pic;
+			}
 
 		});
 
@@ -131,7 +136,11 @@
 				templateUrl: 'view_coordinator.html',
 				controller: function ($scope, data) {
 					$scope.coordinator = data;
-					$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + data.user_ID + "/" + data.coordinator_pic;
+					if(data.coordinator_pic == null)
+				    	$scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+					else{
+						$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' +  data.user_ID + "/" + data.coordinator_pic;
+					}
 				},
 				size: 'lg',
 				resolve: {
@@ -255,8 +264,12 @@
 		$http({ method: 'GET', url: urls.API_HOST + '/student_view_advertisement/' + id }).then(function (response) {
 			$scope.ad = response.data;
 			$scope.ids.company_id = response.data.company_id;
-			$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.ad.company_id + "/" + $scope.ad.company.company_logo;
-			console.log($scope.logo);
+			if($scope.ad.company.company_logo == '')
+				$scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+			else{
+				$scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.ad.company_id + "/" + $scope.ad.company.company_logo;
+			}
+			// console.log($scope.logo);
 		});
 		$scope.hasResume = $localStorage.hasResume;
 		$scope.apply = function () {

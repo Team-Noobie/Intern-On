@@ -13,7 +13,12 @@
             $http({ method: 'GET', url: urls.API_HOST + '/coordinator_profile/' + $localStorage.id }).then(function (response) {
                 $localStorage.symbol = response.data.coordinator_symbol;
                 $scope.coordinator = response.data;
-                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.coordinator_pic;
+                if(response.data.coordinator_pic == null)
+				    $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+			    else{
+				    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.coordinator_pic;
+			    }
+                
                 $state.go('user_coordinator.coordinator_profile');
             });
         };
@@ -280,8 +285,13 @@
                 templateUrl: 'student_profile_modal.html',
                 controller: function (student, $scope) {
                     $scope.student = student;
-                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
-                    console.log(student);
+                    if(student.student_pic == null)
+				        $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                    else{
+                        $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    }
+                    // console.log(student);
+                    
                 },
                 size: 'lg',
                 resolve: {

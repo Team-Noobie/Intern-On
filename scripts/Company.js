@@ -51,7 +51,13 @@
             $http({ method: 'GET', url: urls.API_HOST + '/company_profile/' + $localStorage.id }).then(function (response) {
                 $localStorage.symbol = response.data.company_symbol;
                 $scope.company = response.data;
-                $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.company_logo;
+
+                if(response.data.company_logo == '')
+				    $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                else{
+                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.company_logo;
+                }
+
                 $state.go('user_company.company_profile');
             });
         };
@@ -477,7 +483,11 @@
                 templateUrl: 'student_profile_modal.html',
                 controller: function (student, $scope) {
                     $scope.student = student;
-                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    if(student.student_pic == null)
+				        $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                    else{
+                        $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    }
                 },
                 size: 'lg',
                 resolve: {

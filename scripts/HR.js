@@ -26,7 +26,13 @@
                 templateUrl: 'my_company.html',
                 controller: function (hr,$scope) {
                     $scope.hr = hr;
-                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.hr.user_ID + "/" + $scope.hr.company_logo;
+                    
+                    if($scope.hr.company_logo == '')
+				        $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                    else{
+                        $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $scope.hr.user_ID + "/" + $scope.hr.company_logo;
+                    }
+
                 },
                 size: 'lg',
                 resolve: {
@@ -198,7 +204,11 @@
                 controller: function (urls, student, $scope) {
                     $scope.student = student;
                     $scope.file = 'http://localhost/Intern-On-DB/storage/app/resume/' + $scope.student.user_ID + "/" + $scope.student.resume;
-                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    if(student.student_pic == null)
+				        $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                    else{
+                        $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    }
                 },
                 size: 'lg',
                 resolve: {
@@ -314,7 +324,12 @@
                 controller: function (urls, student, $scope) {
                     $scope.student = student;
                     $scope.file = 'http://localhost/Intern-On-DB/storage/app/resume/' + $scope.student.user_ID + "/" + $scope.student.resume;
-                    $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+
+                    if(student.student_pic == null)
+				        $scope.logo = 'http://localhost/Intern-On/assets/default-medium.png';
+                    else{
+                        $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + student.user_ID + "/" + student.student_pic;
+                    }
                 },
                 size: 'lg',
                 resolve: {
