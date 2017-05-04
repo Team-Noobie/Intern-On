@@ -29,6 +29,12 @@
     "font-awesome": "^4.7.0",
     "ngstorage": "^0.3.11",
     "satellizer": "^0.15.5",
-    "angular-toArrayFilter": "^1.0.1"
+    "angular-toArrayFilter": "^1.0.1",
+    "angular-file-upload": "^2.5.0",
+    "angular-ckeditor": "^1.0.3",
+    "angular-sanitize": "^1.6.3",
+    "ngToast": "ngtoast#^2.0.0",
+    "angular-animate": "^1.6.3",
+    "ng-csv": "^0.3.6"
   }
 }

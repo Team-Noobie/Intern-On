@@ -1,5 +1,5 @@
 <link href="css/agency.css" rel="stylesheet">
-<link href="css/modal.css" rel="stylesheet" >
+<link href="css/modal.css" rel="stylesheet">
 <!-- Navigation -->
 <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container">
@@ -10,6 +10,7 @@
             </button>
             <a class="navbar-brand page-scroll" href="#page-top">Intern-On</a>
         </div>
+        <!--<button ng-click="test()">test</button>-->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,18 +21,18 @@
                 <li>
                     <a class="page-scroll" href="#services">Services</a>
                 </li>
-                <li>
+                <!--<li>
                     <a class="page-scroll" href="#about">About</a>
-                </li>
-                <li>
+                </li>-->
+                <!--<li>
                     <a class="page-scroll" href="#team">Team</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
-                </li>
-                <!-- <a style="margin-left:5px;margin-top:10px;" ng-click="openModal(2)" class="btn btn-primary">Register</a> -->
-                
-                <a style="margin-top:10px; margin-left:10px;" ng-click="openModal(1)" class="btn btn-primary">Login</a>
+                </li>-->
+                <!--<a style="margin-left:5px;margin-top:10px;" ng-click="openModal(2)" class="btn btn-primary">Register</a> -->
+
+                <a style="margin-top:5px; margin-left:10px;" ng-click="openModal(1)" class="btn btn-primary">Login</a>
                 <!--<a style="margin-top:10px;" ng-click="openModal(3)" class="btn btn-success">Company</a>-->
             </ul>
         </div>
@@ -43,34 +44,34 @@
 <header>
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Intern - <i class="fa fa-power-off" aria-hidden="true"></i>n</div>
-            <div class="intro-heading">Switching Your Future On</div>
-            <h4>Search for Internship</h4>
+            <div class="intro-lead-in"></div>
+            <div class="intro-heading"></div>
+            <h4></h4>
             <div class="search-box">
-                            <div class="row">
-                                <div class="col-xs-8 col-xs-offset-2">
-                                    <div class="input-group">
-                                        <div class="input-group-btn search-panel">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                <span id="search_concept">Filter by</span> <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#course">Course</a></li>
-                                                <li><a href="#company">Company</a></li>
-                                                <li><a href="#location">Location</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#all">Anything</a></li>
-                                            </ul>
-                                        </div>
-                                        <input type="hidden" name="search_param" value="all" id="search_param">
-                                        <input type="text" class="form-control" placeholder="Search for Internship" autofocus/>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                        </span>
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <div class="input-group">
+                            <div class="input-group-btn search-panel">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span id="search_concept">Filter by</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#course">Course</a></li>
+                                    <li><a href="#company">Company</a></li>
+                                    <li><a href="#location">Location</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#all">Anything</a></li>
+                                </ul>
                             </div>
+                            <input type="hidden" name="search_param" value="all" id="search_param">
+                            <input type="text" class="form-control" ng-model="search_" placeholder="Search for Internship" autofocus/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" ng-click="search()" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -82,46 +83,61 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Services</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h3 class="section-subheading text-muted">What can Intern-On do for you?</h3>
             </div>
         </div>
         <div class="row text-center">
             <div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-users fa-stack-1x fa-inverse"></i>
                 </span>
-                <h4 class="service-heading">E-Commerce</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                <h4 class="service-heading">Students</h4>
+                <p class="text-muted">Search and Apply to Companies of your choice</p>
             </div>
             <div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-building fa-stack-1x fa-inverse"></i>
                 </span>
-                <h4 class="service-heading">Responsive Design</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                <h4 class="service-heading">Company</h4>
+                <p class="text-muted">Create and Post Internship Advertisement</p>
             </div>
             <div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                 </span>
-                <h4 class="service-heading">Web Security</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                <h4 class="service-heading">Coordinator</h4>
+                <p class="text-muted">Manage and Track Students Easily</p>
             </div>
+            <div class="col-md-6 text-center">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-building fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Company Human Resources</h4>
+                <p class="text-muted">Manage Interns in a better way</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-building fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Company Supervisor</h4>
+                <p class="text-muted">Evaluate Interns more conveniently </p>
+            </div>
+
         </div>
     </div>
 </section>
-
-
-<!-- About Section -->
-<section id="about">
+<!--About Section -->
+<!--<section id="about">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">About</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h3 class="section-subheading text-muted"></h3>
             </div>
         </div>
         <div class="row">
@@ -190,13 +206,13 @@
                                 <br>Story!</h4>
                             </div>
                         </li>
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>-->
 
-    <!-- Team Section -->
+<!--Team Section 
     <section id="team" class="bg-light-gray">
         <div class="container">
             <div class="row">
@@ -291,9 +307,9 @@
             </div>
         </div>
     </section>
+-->
 
-
-    <!-- Contact Section -->
+<!--Contact Section 
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -337,14 +353,17 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2016</span>
-                </div>
-                <div class="col-md-4">
+-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy;Intern-On 2016</span>
+            </div>
+            <div style="left:15em" class="col-md-8">
+                <span  class="copyright"> Team Noobie | AMIT | Far Eastern University</span>
+            </div>
+            <!--<div class="col-md-4">
                     <ul class="list-inline social-buttons">
                         <li><a href="#"><i class="fa fa-twitter"></i></a>
                         </li>
@@ -361,132 +380,24 @@
                         <li><a href="#">Terms of Use</a>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </div>-->
         </div>
-    </footer>
-    <script src="js/agency.js"></script>
-    <script type="text/ng-template" id="Login.html">       
- 
-        <div class="modal-header">
-            <a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="modal-body">
-            <div class="main-center">
-                <form class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label">Username</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" ng-model="email"  placeholder="Enter your Username" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="cols-sm-2 control-label">Password</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" ng-model="password"  placeholder="Enter your Password" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" ng-click="login()">Login</button>
-                    </div>
-
-                    <div class="login-register">
-                        <a href="" ng-click="create_account()">Register</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-
-        </div>
-    </script>
-    <script type="text/ng-template" id="CompanyLogin.html">       
- 
-        <div class="modal-header">
-            <a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="modal-body">
-            <div class="main-center">
-                <form class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label">Company Username</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" ng-model="text"  placeholder="Enter your Company Username" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="cols-sm-2 control-label">Password</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" ng-model="password"  placeholder="Enter your Password" required/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button" ng-click="login()">Login</button>
-                    </div>
-
-                    <div class="login-register">
-                        <a href="" ng-click="create_account()">Register</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-footer">
-
-        </div>
-    </script>
-    <script type="text/ng-template" id="Register.html">
-        <div class="modal-header">
-            <a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
-        </div>
-        <div class="modal-header">
-            <h4 class="modal-header-create">Create an Account</h4>
-        </div>
+    </div>
+</footer>
+<script src="js/agency.js"></script>
+<script type="text/ng-template" id="Login.html">
+    <div class="modal-header">
+        <a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>
+    </div>
+    <div class="modal-body">
         <div class="main-center">
-            <div class="form-horizontal">
-
+            <form class="form-horizontal" method="post">
                 <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">E-mail Address</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="email" class="form-control" ng-model="formdata.email"  placeholder="Enter your Email" required/>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Firstname</label>
+                    <label for="username" class="cols-sm-2 control-label">Username</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control input-name" ng-model="formdata.firstname"  placeholder="Enter your Firstname" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Lastname</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control input-name" ng-model="formdata.lastname"  placeholder="Enter your Lastname" required/>
+                            <input type="text" class="form-control" ng-model="username" placeholder="Enter your Username" autofocus required/>
                         </div>
                     </div>
                 </div>
@@ -496,24 +407,18 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" id="password" class="form-control" ng-model="formdata.password"  placeholder="Enter your Password" required/>
+                            <input type="password" class="form-control" ng-model="password" placeholder="Enter your Password" required/>
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="form-group">
-                    <button class="btn btn-warning btn-lg btn-block login-button" ng-click="register()">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button" ng-click="login()">Login</button>
                 </div>
-                <div class="login-register">
-                    <a href="" ng-click="login()">Login</a>
-                </div>
-            </div>
+            </form>
         </div>
-        <div class="modal-footer">
+    </div>
+    <div class="modal-footer">
 
-        </div>
+    </div>
 </script>
-
-
-
-

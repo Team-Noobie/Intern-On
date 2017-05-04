@@ -6,10 +6,13 @@
     <title>Intern-On</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/ngtoast/dist/ngToast.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/ngtoast/dist/ngToast-animations.min.css" rel="stylesheet" type="text/css">
+
 
     <!-- Theme CSS -->
 
@@ -21,11 +24,12 @@
     <![endif]-->
 
 </head>
-
 <body id="page-top" class="index">
+    <toast></toast>
     <ui-view></ui-view>
 
      <!-- Dependencies Scripts-->
+    <script src="bower_components/ckeditor/ckeditor.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -36,11 +40,79 @@
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
     <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
+    <script src="bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
+    <script src="bower_components/angular-csv-import/dist/angular-csv-import.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/ngToast/dist/ngToast.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
     
     <!-- App Scripts-->
     <script src="scripts/app.js"></script>
-    <script src="scripts/user_controller.js"></script>
-    <script src="scripts/transaction_controller.js"></script>
+    <script src="scripts/student.js"></script>
+    <script src="scripts/company.js"></script>
+    <script src="scripts/coordinator.js"></script>
+    <script src="scripts/administrator.js"></script>
+    <script src="scripts/hr.js"></script>
+    <script src="scripts/sv.js"></script>    
+    <script src="scripts/guest.js"></script>    
 </body>
-
 </html>
+
+<script type="text/ng-template" id="edit_password.html">
+    <div class="modal-header">
+        <h3 style="position:absolute; margin:auto;">Edit Password</h3><a ng-click="close()"><i class="fa fa-window-close fa-2x pull-right" aria-hidden="true"></i></a>       
+    </div>
+    <div class="modal-body">
+        <div class="main-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form name="password_form">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Old Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.old_password" class="form-control" required ng-required="true">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>New Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.new_password" class="form-control" required ng-required="true">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Confirm Password</h5>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" ng-model="formdata.confirm_password" class="form-control" required ng-required="true">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <div class="modal-footer">
+                            <button style="" ng-click="password_form.$valid && save()" class="btn btn-xl btn-info">Save</button>
+    </div>
+</script>
+<script type="text/ng-template" id="reset_password.html">
+    <div class="modal-header">
+        Reset Password
+    </div>
+    <div class="modal-body">
+        <h4>Do you really want to reset the password?</h4>
+        <button ng-click="yes()" class="btn btn-primary">Yes</button>
+        <button ng-click="no()" class="btn btn-danger">No</button>
+        
+    </div>
+</script>
