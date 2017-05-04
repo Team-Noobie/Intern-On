@@ -231,7 +231,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'interns_grade_modal.html',
-                controller: function ($localStorage, student, $scope, $http, $uibModalInstance) {
+                controller: function (ngToast,$localStorage, student, $scope, $http, $uibModalInstance) {
                     $scope.student = student;
                     $scope.PR = 0;
                     $scope.effectiveness = 0;
@@ -252,6 +252,11 @@
                         $scope.formdata.cooperation = $scope.parseFloat($scope.cooperation);
                         $scope.formdata.pr = $scope.parseFloat($scope.PR);
                         $http.post(urls.API_HOST + '/grade_intern', $scope.formdata).then(function (response) {
+                            ngToast.create({
+                            className: 'warning',
+                            content: 'Grading Success',
+                            animation: 'fade'
+                            });
                             $uibModalInstance.close();
                         });
                     }

@@ -398,12 +398,8 @@
                         $scope.Intime = $scope.inMytime.getHours() + ":" + $scope.inMytime.getMinutes();
                         $scope.Outtime = $scope.outMytime.getHours() + ":" + $scope.outMytime.getMinutes();
                         $scope.time = ($scope.outMytime - $scope.inMytime);
-
-                        if ($scope.inMytime.getHours() <= 12 && $scope.outMytime.getHours() >= 13) {
-                            $scope.diff = Math.floor(($scope.time / (1000 * 60 * 60)) - 1) + ":" + (Math.floor($scope.time / (1000 * 60)) % 60) + ":" + (Math.floor($scope.time / 1000) % 60);
-                        } else {
-                            $scope.diff = Math.floor($scope.time / (1000 * 60 * 60)) + ":" + (Math.floor($scope.time / (1000 * 60)) % 60) + ":" + (Math.floor($scope.time / 1000) % 60);
-                        }
+                        $scope.diff = Math.floor($scope.time / (1000 * 60 * 60)) + ":" + (Math.floor($scope.time / (1000 * 60)) % 60) + ":" + (Math.floor($scope.time / 1000) % 60);
+                        
 
                         var hms = $scope.diff;   // your input string
                         var a = hms.split(':'); // split it at the colons

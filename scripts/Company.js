@@ -25,7 +25,6 @@
                 uploader.clearQueue();
                 $scope.company = response.data;
                 $scope.logo = 'http://localhost/Intern-On-DB/storage/app/pictures/' + $localStorage.id + "/" + response.data.company_logo;
-                $state.go('user_company.company_profile');
             });
         };
 
@@ -133,7 +132,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'company_add_employee_modal.html',
-                controller: function (type, $localStorage, $scope, $http, $uibModalInstance, $state, $filter) {
+                controller: function (ngToast,type, $localStorage, $scope, $http, $uibModalInstance, $state, $filter) {
                     $scope.type = type;
                     $scope.dept_id = {
                         'department_id': { 'name': '', 'value': '', 'strict': false },
@@ -154,7 +153,21 @@
                         if (type == 'hr') {
                             $scope.formdata.hr_username = $localStorage.symbol + "_" + $scope.formdata.hr_username;
                             $http.post(urls.API_HOST + '/create_hr/' + $localStorage.id, $scope.formdata).then(function (response) {
-                                $uibModalInstance.close("HR");
+                                if(response.data == "Username Not Available"){
+                                    $scope.formdata.hr_username = "";
+                                     ngToast.create({
+                                        className: 'danger',
+                                        content: response.data,
+                                        animation: 'fade'
+                                    });
+                                }else{
+                                    ngToast.create({
+                                        className: 'success',
+                                        content: 'Human Resource Account Created',
+                                        animation: 'fade'
+                                    });
+                                    $uibModalInstance.close("HR");
+                                }
                             });
                         }
                         if (type == 'sv') {
@@ -163,7 +176,21 @@
 
                             if ($scope.formdata.department_id != '')
                                 $http.post(urls.API_HOST + '/create_sv/' + $localStorage.id, $scope.formdata).then(function (response) {
-                                    $uibModalInstance.close("SV");
+                                    if(response.data == "Username Not Available"){
+                                        $scope.formdata.sv_username = "";
+                                        ngToast.create({
+                                            className: 'danger',
+                                            content: response.data,
+                                            animation: 'fade'   
+                                            });
+                                    }else{
+                                        ngToast.create({
+                                            className: 'success',
+                                            content: 'Supervisor Account Created',
+                                            animation: 'fade'
+                                        });
+                                        $uibModalInstance.close("SV");
+                                    }
                                 });
                         }
                     }
@@ -257,7 +284,7 @@
         };
 
     });
-    internon.controller('company_departments_controller', function (urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
+    internon.controller('company_departments_controller', function (urls, $http, $auth, $state, $scope, $localStorage, $uibModal,ngToast) {
         $http({ method: 'GET', url: urls.API_HOST + '/department_list/' + $localStorage.id }).then(function (response) {
             $scope.departments = response.data;
         });
@@ -268,6 +295,11 @@
                 controller: function ($scope, $http, $uibModalInstance) {
                     $scope.add = function () {
                         $http.post(urls.API_HOST + '/create_department/' + $localStorage.id, $scope.formdata).then(function (response) {
+                             ngToast.create({
+                                className: 'success',
+                                content: 'Department Created',
+                                animation: 'fade'
+                            });
                             $uibModalInstance.close();
                         });
                     }

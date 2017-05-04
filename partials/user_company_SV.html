@@ -398,8 +398,7 @@
                             <label for="Punctuality" class="cols-sm-2 control-label">Punctuality</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="30" name="Punctuality" ng-model="punctuality" ng-required="true" required placeholder="Eg. 30">
-                            <p style="font-size:10px;">report of duty, time completion of task assigned, affected by absenteeism and tardiness(Max 30pts)</p>
+                            <input tooltip-placement="top-right" style="margin-bottom:10px;" class="form-control" uib-tooltip="report of duty, time completion of task assigned, affected by absenteeism and tardiness (Max 30pts.)" type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="30" name="Punctuality" ng-model="punctuality" ng-required="true" required placeholder="Eg. 30">
                         </div>
                     </div>
                     <div class="row">
@@ -407,19 +406,16 @@
                             <label for="Competence" class="cols-sm-2 control-label">Competence</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="20" name="Competence" ng-model="competence" ng-required="true" required placeholder="Eg. 20">
-                            <p style="font-size:10px;">students ability to perform a job properly(Max 20pts)</p>
-
+                            <input tooltip-placement="top-right" style="margin-bottom:10px;" class="form-control" uib-tooltip="students ability to perform a job properly (Max 20pts.)" type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="20" name="Competence" ng-model="competence" ng-required="true" required placeholder="Eg. 20">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="Effetiveness" class="cols-sm-2 control-label">Effetiveness</label>
+                            <label for="Effectiveness" class="cols-sm-2 control-label">Effectiveness</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="Effetiveness" ng-model="effectiveness" ng-required="true" required placeholder="Eg. 15">
-                            <p style="font-size:10px;">students’ ability to produce the intended or expected result: Evidence of effective performance
-                                of laboratory skills or effective in following orders from superiors(Max 15pts)</p>
+                            <input tooltip-placement="top-right" style="margin-bottom:10px;" class="form-control" uib-tooltip="students ability to produce the intended or expected result: Evidence of effective performance
+                                of laboratory skills or effective in following orders from superiors(Max 15pts)" type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="Effetiveness" ng-model="effectiveness" ng-required="true" required placeholder="Eg. 15">
                         </div>
                     </div>
                     <div class="row">
@@ -427,18 +423,16 @@
                             <label for="Cooperation" class="cols-sm-2 control-label">Cooperation</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();"ng-min="0" ng-max="20" name="Cooperation" ng-model="cooperation" ng-required="true" required placeholder="Eg. 20">
-                            <p style="font-size:10px;">students ability to willingly work together with superiors and group or team members(Max 20pts.)</p>
+                            <input tooltip-placement="top-right" style="margin-bottom:10px;" class="form-control" uib-tooltip="students ability to willingly work together with superiors and group or team members (Max 20pts.)" type="number" ng-click="$event.preventDefault(); $event.stopPropagation();"ng-min="0" ng-max="20" name="Cooperation" ng-model="cooperation" ng-required="true" required placeholder="Eg. 20">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="PR" class="cols-sm-2 control-label">PR</label>
+                            <label for="Personal Relationship" class="cols-sm-2 control-label">Personal Relationship</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="PR" ng-model="PR" ng-required="true" required placeholder="Eg. 15">
-                            <p style="font-size:10px;">students ability to behave properly in area of assignment, has own initiative to reach out others
-                                to accomplish a certain task(Max 15pts)</p>
+                            <input tooltip-placement="top-right" style="margin-bottom:10px;" class="form-control" uib-tooltip="students ability to behave properly in area of assignment, has own initiative to reach out others
+                                to accomplish a certain task (Max 15pts.)" type="number" ng-click="$event.preventDefault(); $event.stopPropagation();" ng-min="0" ng-max="15" name="PR" ng-model="PR" ng-required="true" required placeholder="Eg. 15">
                         </div>
                     </div>
                 </div>
@@ -449,7 +443,7 @@
                     <div class="row">
                         <h3>Total Grade:{{parseFloat(punctuality)+parseFloat(competence) +parseFloat(cooperation) +parseFloat(effectiveness)+parseFloat(PR)}}</h3>
                     </div>
-                    <button class="btn btn-success" ng-click="grade_form.$valid && save()">
+                    <button tooltip-placement="right" uib-tooltip="Cannot Edit Grades After Saving" class="btn btn-success" ng-click="grade_form.$valid && save()">
                         Save
                     </button>
                 </div>

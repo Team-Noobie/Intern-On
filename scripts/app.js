@@ -54,8 +54,8 @@
             maxNumber: 3,
             // combineDuplications: false
         });
-        $qProvider.errorOnUnhandledRejections(false);
         $httpProvider.interceptors.push(function ($q, $location, $localStorage, $injector, ngToast) {
+        $qProvider.errorOnUnhandledRejections(false);
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};

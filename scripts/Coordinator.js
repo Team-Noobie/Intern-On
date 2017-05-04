@@ -181,91 +181,135 @@
     });
 
     internon.controller('coordinator_enroll_student_controller', function (urls, $http, $auth, $state, $scope, $localStorage, $uibModal) {
-        $scope.choice_advertisement = {
-            'option': { 'name': '', 'value': '', 'strict': false },
-        };
-        $scope.choices_advertisement = [
-            { 'name': 'Select Section', 'value': '' },
-        ]
-
-
-        $scope.formdata = {
-            section_id: '',
-        }
-        $scope.symbol = $localStorage.symbol;
-        $http({ method: 'GET', url: urls.API_HOST + '/section_list/' + $localStorage.id }).then(function (response) {
-            for (var i = 0; i < response.data.length; i++) {
-                $scope.choices_advertisement.push({ 'name': response.data[i].section_code, 'value': response.data[i].id, 'strict': true });
-            }
-        });
-
-        $scope.enrollStudent = function () {
-            $scope.formdata.section_id = $scope.choice_advertisement.option.value;
-            if ($scope.formdata.section_id != '') {
-                $scope.formdata.student_username = $localStorage.symbol + "_" + $scope.formdata.student_username;
-                $http.post(urls.API_HOST + '/enroll_student/' + $localStorage.id, $scope.formdata).then(function (response) {
-                    $state.go('user_coordinator.coordinator_enroll_students');
-
-                });
-            }
-        };
 
 
         $scope.enrollStudentCSV = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'enroll_csv.html',
-                controller: "coordinator_enroll_student_controller",
+                controller: function(urls, $http, $auth, $state, $scope, $localStorage,$uibModalInstance,ngToast){
+                    $http({ method: 'GET', url: urls.API_HOST + '/section_list/' + $localStorage.id }).then(function (response) {
+                        for (var i = 0; i < response.data.length; i++) {
+                            $scope.choices_advertisement.push({ 'name': response.data[i].section_code, 'value': response.data[i].id, 'strict': true });
+                        }
+                    });
+
+                    $scope.choice_advertisement = {
+                        'option': { 'name': '', 'value': '', 'strict': false },
+                    };
+                    $scope.choices_advertisement = [
+                        { 'name': 'Select Section', 'value': '' },
+                    ]
+                    $scope.uploadCSV = function () {
+                        $scope.students = [];
+                        var fileUpload = document.getElementById("fileUpload");
+                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                        if (regex.test(fileUpload.value.toLowerCase())) {
+                            if (typeof (FileReader) != "undefined") {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    var table = document.createElement("table");
+                                    var rows = e.target.result.split("\n");
+                                    for (var i = 0; i < rows.length; i++) {
+                                        var row = table.insertRow(-1);
+                                        var cells = rows[i].split(",");
+                                        if(i >= 1 && i < rows.length-1)
+                                            $scope.students.push({'username': $localStorage.symbol + "_" +cells[0], 'firstname': cells[1], 'lastname': cells[2], 'email': cells[3], 'contact_no': cells[4]});
+                                        for (var j = 0; j < cells.length; j++) {
+                                            var cell = row.insertCell(-1);
+                                            cell.innerHTML = cells[j];
+                                        }
+                                    }
+                                    var dvCSV = document.getElementById("dvCSV");
+                                    dvCSV.innerHTML = "";
+                                    dvCSV.appendChild(table);
+                                }
+                                reader.readAsText(fileUpload.files[0]);
+                            } else {
+                                alert("This browser does not support HTML5.");
+                            }
+                        } else {
+                            alert("Please upload a valid CSV file.");
+                        }
+
+                        console.log($scope.students);
+                    }
+
+                    $scope.enrollBatchStudent = function () {
+                        $http.post(urls.API_HOST + '/enroll_batch_student/' + $localStorage.id, {students:$scope.students,section_id:$scope.choice_advertisement.option.value}).then(function (response) {
+                            console.log(response.data);
+                            // $uibModalInstance.close();
+                            if(response.data != "Uploaded"){
+                                ngToast.create({
+                                    className: 'danger',
+                                    content: response.data,
+                                    animation: 'fade'
+                                });
+                            }else{
+                                ngToast.create({
+                                    className: 'success',
+                                    content: response.data,
+                                    animation: 'fade'
+                                });
+                                $uibModalInstance.close();                            
+                            }
+                    });
+                    }
+                },
                 size: 'md',
             });
         };
-        $scope.uploadCSV = function () {
-            $scope.students = [];
-            var fileUpload = document.getElementById("fileUpload");
-            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-            if (regex.test(fileUpload.value.toLowerCase())) {
-                if (typeof (FileReader) != "undefined") {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var table = document.createElement("table");
-                        var rows = e.target.result.split("\n");
-                        for (var i = 0; i < rows.length; i++) {
-                            var row = table.insertRow(-1);
-                            var cells = rows[i].split(",");
-                            if(i >= 1 && i < rows.length-1)
-                                $scope.students.push({'username': cells[0], 'firstname': cells[1], 'lastname': cells[2], 'email': cells[3], 'contact_no': cells[4]});
-                            for (var j = 0; j < cells.length; j++) {
-                                var cell = row.insertCell(-1);
-                                cell.innerHTML = cells[j];
-                            }
-                        }
-                        var dvCSV = document.getElementById("dvCSV");
-                        dvCSV.innerHTML = "";
-                        dvCSV.appendChild(table);
-                    }
-                    reader.readAsText(fileUpload.files[0]);
-                } else {
-                    alert("This browser does not support HTML5.");
-                }
-            } else {
-                alert("Please upload a valid CSV file.");
-            }
 
-            console.log($scope.students);
-        }
-
-        $scope.enrollBatchStudent = function () {
-            $http.post(urls.API_HOST + '/enroll_batch_student/' + $localStorage.id, {students:$scope.students,section_id:$scope.choice_advertisement.option.value}).then(function (response) {
-                // console.log(response);
-                $uibModalInstance.close();
-           });
-        }
+        
 
         $scope.enrollStudentModal = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'enroll_student.html',
-                controller: "coordinator_enroll_student_controller",
+                controller: function(urls, $http, $auth, $state, $scope, $localStorage,$uibModalInstance,ngToast){
+                    $scope.choice_advertisement = {
+                        'option': { 'name': '', 'value': '', 'strict': false },
+                    };
+                    $scope.choices_advertisement = [
+                        { 'name': 'Select Section', 'value': '' },
+                    ]
+
+
+                    $scope.formdata = {
+                        section_id: '',
+                    }
+                    $scope.symbol = $localStorage.symbol;
+                    $http({ method: 'GET', url: urls.API_HOST + '/section_list/' + $localStorage.id }).then(function (response) {
+                        for (var i = 0; i < response.data.length; i++) {
+                            $scope.choices_advertisement.push({ 'name': response.data[i].section_code, 'value': response.data[i].id, 'strict': true });
+                        }
+                    });
+
+                    $scope.enrollStudent = function () {
+                        $scope.formdata.section_id = $scope.choice_advertisement.option.value;
+                        if ($scope.formdata.section_id != '') {
+                            $scope.formdata.student_username = $localStorage.symbol + "_" + $scope.formdata.student_username;
+                            $http.post(urls.API_HOST + '/enroll_student/' + $localStorage.id, $scope.formdata).then(function (response) {
+                                console.log(response.data);
+                                if(response.data != "Enrolled"){
+                                    $scope.formdata.student_username = "";
+                                    ngToast.create({
+                                        className: 'danger',
+                                        content: response.data,
+                                        animation: 'fade'
+                                    });
+                                }else{
+                                    ngToast.create({
+                                        className: 'success',
+                                        content: response.data,
+                                        animation: 'fade'
+                                    });
+                                    $uibModalInstance.close();                            
+                                }
+                            });
+                        }
+                    };
+                },
                 size: 'lg',
             });
         };
